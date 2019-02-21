@@ -1,6 +1,6 @@
-const express = require('express');
-const app = express();
-const router = express.Router();
+const express = require('express')
+const app = express()
+const router = express.Router()
 const User = require('../models/users')
 
 router.get('/',function(request,response){
@@ -14,6 +14,10 @@ router.get('/login',function(request,response){
 router.get('/signup',function(request,response){
    return response.render('signup.ejs',{titlePage:'Signup - Blogging Blogs'})
 });
+
+router.get('/createPost',(request,response) =>{
+   return response.render('createPost.ejs',{titlePage:'Create Post - Blogging Blogs'})
+})
 
 router.post('/validate',(request,response) => {
    inputUsername = request.body.inputUsername
@@ -45,4 +49,4 @@ router.post('/validate',(request,response) => {
    })
 })
 
-module.exports = router;
+module.exports = router
