@@ -1,0 +1,36 @@
+<title><%= titlePage %></title>
+<link rel="stylesheet" href="/css/signup.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<% include partials/nav.ejs %>
+<body ng-app="">
+   <%- messages('partials/message', locals) %>
+   <div class="signup-form">
+      <form name="registerForm" class="form-signup" method='post' action='/validate'>
+         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign In</h1>
+         <div class="social-login">
+            <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
+            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+         </div>
+         <p style="text-align:center"> OR  </p>
+
+         <span ng-show="registerForm.inputUsername.$touched && registerForm.inputUsername.$invalid" style="font-size:12px; color:red;">* Username is required</span>
+         <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" ng-model="inputUsername" required>
+
+         <span ng-show="registerForm.inputEmail.$touched  && registerForm.inputEmail.$invalid" style="font-size:12px; color:red;">* Required Email ID</span>
+         <span ng-show="registerForm.inputEmail.$error.pattern" style="font-size:12px; color:red;">* Invalid Email ID</span>
+         <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email Address" ng-model="inputEmail" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required>
+
+         <span ng-show="registerForm.inputPassword.$touched && registerForm.inputPassword.$invalid" style="font-size:12px; color:red;">* Required Password</span>
+         <p><span style="font-size:12px; color:red;" ng-show="!registerForm.inputPassword.$error.required && (registerForm.inputPassword.$error.minlength || registerForm.inputPassword.$error.maxlength) && registerForm.inputPassword.$dirty">* Password must be between 8 and 20 characters.</span></p>
+         <p><span style="font-size:12px; color:red;" ng-show="!registerForm.inputPassword.$error.required && !registerForm.inputPassword.$error.minlength && !registerForm.inputPassword.$error.maxlength && registerForm.inputPassword.$error.pattern && registerForm.inputPassword.$dirty">* Must contain one lower &amp; uppercase letter and one non-alpha character</span></p>
+         <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" ng-model="inputPassword" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
+
+         <span style="font-size:12px; color:red;" ng-show="registerForm.confirmPassword.$error.pattern">* Passwords do not match.</span>
+         <span style="font-size:12px; color:green;" ng-show="registerForm.confirmPassword.$valid" style="color:green;">Password Matched</span>
+         <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder=" Confirm Password" ng-model="confirmPassword" ng-pattern="inputPassword" required>
+         <a href="#" id="forgot_pswd">Forgot password?</a>
+         <hr>
+         <button class="btn btn-primary btn-block" type="submit" id="btn-signup" ng-disabled="registerForm.$invalid"><i class="fas fa-user-plus"></i> Sign up New Account</button>
+      </form>
+   </div>
+</body>
