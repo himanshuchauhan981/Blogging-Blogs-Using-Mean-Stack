@@ -23,3 +23,12 @@ module.exports.getExistingEmail = (inputEmail,callback) =>{
    query = {email:inputEmail}
    User.findOne(query,callback)
 }
+
+module.exports.getPassword = (inputPassword,callback) =>{
+   query = {password:inputPassword}
+   User.findOne(query,callback)
+}
+
+module.exports.getByID  = (id,callback) =>{
+   User.findById(id, callback)
+}
