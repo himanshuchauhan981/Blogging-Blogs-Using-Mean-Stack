@@ -11,7 +11,7 @@
    font-family:'Sofia';
    font-size:45px;
 }
-input[type=email],input[type=password]{
+input[type=text],input[type=password]{
    width:100%;
    padding: 10px 30px;
    margin-bottom:20px;
@@ -19,7 +19,7 @@ input[type=email],input[type=password]{
    outline:none;
 }
 
-input[type=email]:focus, input[type=password]:focus{
+input[type=text]:focus, input[type=password]:focus{
    border: 3px solid #4CAF50;
    outline:none;
 }
