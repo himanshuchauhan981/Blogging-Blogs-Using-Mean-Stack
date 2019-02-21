@@ -1,0 +1,15 @@
+<div style="margin:0 auto; width:350px;">
+   <% Object.keys(messages).forEach(function (type) { %>
+         <% messages[type].forEach(function (message) { %>
+            <% if(message=='Invalid Username or password'){ %>
+               <div class="alert alert-danger">
+                  <p class="text-center"><%= message %></p>
+               </div>
+            <% } else { %>
+               <div class="alert alert-<%= type %>">
+                  <p class="text-center"><%= message %></p>
+               </div>
+            <% } %>
+         <% }) %>
+   <% }) %>
+</div>
