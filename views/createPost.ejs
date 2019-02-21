@@ -1,0 +1,40 @@
+<title><%= titlePage %></title>
+<% include partials/nav.ejs %>
+<div class="container">
+   <div class="row">
+      <div class="col-md-8 w3-margin-top">
+         <form method="post" action="/savePosts">
+            <div class="w3-container">
+               <div class="w3-card-4" style="width:100%">
+                  <header class="w3-container w3-light-grey">
+                     <h3>New Post</h3>
+                  </header>
+                  <div class="w3-container">
+                     <p><label>Post Title</label><input type="text" class="w3-input" name="postTitle"></p>
+                     <p><label>Post Content</label><textarea class="w3-input" name="postContent"></textarea></p>
+                     <div class="w3-section">
+                        <button class="w3-button w3-green" type="submit">Post</button>
+                        <button class="w3-button w3-red">Cancel</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+      <div class="col-md-4 w3-margin-top">
+         <div class="w3-card-4" style="width:100%">
+            <header class="w3-container w3-light-grey">
+               <h3>Our Sidebar</h3>
+            </header>
+            <div class="w3-container">
+               <p>You can put any information here you'd like</p>
+               <table class="w3-table w3-striped">
+                  <tr><td>Latest Posts</td></tr>
+                  <tr><td>Announcements</td></tr>
+                  <tr><td>Calendars</td></tr>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
