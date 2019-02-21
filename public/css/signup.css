@@ -1,0 +1,47 @@
+body{
+    background: -webkit-linear-gradient(0deg, #3c96ff 0%, #2dfbff 100%);
+}
+.signup-form{
+   margin: 0 auto;
+   width:390px;
+   box-shadow: 0 7px 7px rgba(0, 0, 0, 0.12), 0 12px 40px rgba(0,0,0,0.24);
+   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.signup-form form{
+   width:100%;
+   max-width: 410px;
+   padding: 15px;
+   margin: auto;
+}
+
+.social-login{
+   margin: 0 auto;
+   align-items: center;
+   margin-bottom: 15px;
+}
+
+.social-btn{
+   font-size: 1.3rem;
+   font-weight: 100;
+   color:white;
+   height: 50px;
+}
+
+.facebook-btn{
+   background-color:#3C589C;
+}
+
+.google-btn{
+   background-color: #DF4B3B;
+}
+
+#inputEmail, #inputPassword, #inputPassword, #confirmPassword, #inputNumber, #inputUsername{
+   width:100%;
+   padding:20px;
+   margin-bottom: 15px;
+}
+
+#inputEmail:focus, #inputPassword:focus, #inputPassword:focus, #confirmPassword:focus, #inputNumber:focus, #inputUsername:focus{
+   border-radius: 15px;
+   border: 2px solid #4CAF50;
+}
