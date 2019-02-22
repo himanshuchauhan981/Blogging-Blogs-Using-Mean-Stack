@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const expressValidator = require('express-validator')
 const expressMessages = require('express-messages')
+const date = require('date-and-time')
 
 const app = express()
 
@@ -49,8 +50,26 @@ app.use(bodyParser.urlencoded({extended:false}))
 //Setting Routes
 const route = require('./routes/route')
 const loginAuthenication = require('./login-authentication')
+const Post = require('./models/posts')
 app.use('/',route)
 app.use('/',loginAuthenication)
+
+app.post('/savePosts',(request,response) => {
+   postTitle = request.body.postTitle
+   postContent = request.body.postContent
+   const nowDate = new Date()
+   postDate = date.format(nowDate,'DD-MM-YYYY')
+   postAuthor = request.session.currentUser
+   const postData = new Post({
+      postTitle:postTitle,
+      postContent:postContent,
+      postDate: postDate,
+      postAuthor:postAuthor
+   })
+   Post.saveNewPosts(postData,()=>{
+      return response.render('index.ejs',{titlePage:'Home - Blogging Blogs'})
+   })
+})
 
 //Setting EJS Template
 app.set('view engine','ejs')
