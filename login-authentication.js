@@ -11,8 +11,10 @@ app.use(session({
    resave:true
 }))
 
-var passport = require('passport')
-var LocalStrategy = require('passport-local').Strategy
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const GoogleStrategy = require('passport-google-oauth')
+
 router.use(passport.initialize());
 router.use(passport.session());
 
@@ -58,5 +60,13 @@ router.get('/logout', (request,response) =>{
    request.session.destroy()
    response.redirect('/login')
 })
+
+passport.use(
+   new GoogleStrategy({
+
+   }).() =>{
+      
+   }
+)
 
 module.exports = router
