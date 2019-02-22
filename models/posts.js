@@ -11,3 +11,7 @@ const postSchema = mongoose.Schema({
 module.exports = mongoose.model('posts',postSchema)
 const Post = mongoose.model('posts',postSchema)
 module.exports.Posts = Post;
+
+module.exports.saveNewPosts = function(postData,callback){
+   postData.save(postData,callback)
+}
