@@ -32,3 +32,5 @@ module.exports.getPassword = (inputPassword,callback) =>{
 module.exports.getByID  = (id,callback) =>{
    User.findById(id, callback)
 }
+
+module.exports.getAllPostData
