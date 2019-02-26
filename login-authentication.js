@@ -13,7 +13,6 @@ app.use(session({
 
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const GoogleStrategy = require('passport-google-oauth')
 
 router.use(passport.initialize());
 router.use(passport.session());
@@ -61,12 +60,6 @@ router.get('/logout', (request,response) =>{
    response.redirect('/login')
 })
 
-passport.use(
-   new GoogleStrategy({
 
-   }).() =>{
-      
-   }
-)
 
 module.exports = router
