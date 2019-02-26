@@ -21,7 +21,7 @@
     "mongoose": "^5.4.14",
     "nodemon": "^1.18.10",
     "passport": "^0.4.0",
-    "passport-google-oauth": "^1.0.0",
+    "passport-facebook-token": "^3.3.0",
     "passport-local": "^1.0.0"
   }
 }
