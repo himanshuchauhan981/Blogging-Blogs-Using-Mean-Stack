@@ -2,9 +2,16 @@ const express = require('express')
 const app = express()
 const router = express.Router()
 const User = require('../models/users')
-
+const Post = require('../models/posts')
 router.get('/',function(request,response){
-   return response.render('index.ejs',{titlePage:'Home - Blogging Blogs'})
+   Post.getAllPostData((err,post_data) =>{
+      len = post_data.length
+      return response.render('index.ejs',{
+         titlePage:'Home - Blogging Blogs',
+         post_data:post_data,
+         len:len
+      })
+   });
 });
 
 router.get('/login',function(request,response){
@@ -48,5 +55,6 @@ router.post('/validate',(request,response) => {
       }
    })
 })
+
 
 module.exports = router
