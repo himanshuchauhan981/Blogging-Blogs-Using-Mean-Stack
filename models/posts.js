@@ -15,3 +15,7 @@ module.exports.Posts = Post;
 module.exports.saveNewPosts = function(postData,callback){
    postData.save(postData,callback)
 }
+
+module.exports.getAllPostData = (callback) =>{
+   Post.find(callback)
+}
