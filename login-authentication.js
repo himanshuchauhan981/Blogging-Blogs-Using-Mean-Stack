@@ -3,9 +3,9 @@ const router = express.Router()
 const app = express()
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
-const expressRouter = require('express-promise-router')
+const cookieSession = require('cookie-session')
 
-const GooglePlusTokenStrategy = require('passport-google-plus-token')
+const keys = require('./keys')
 
 app.use(cookieParser())
 app.use(session({
@@ -13,36 +13,49 @@ app.use(session({
    saveUninitialized: true,
    resave:true
 }))
+app.use(cookieSession({
+   maxAge:24*60*60*1000,
+   keys:[keys.session.cookieKey]
+}))
 
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const GoogleStrategy =  require('passport-google-oauth20')
 
-router.use(passport.initialize());
-router.use(passport.session());
+router.use(passport.initialize())
+router.use(passport.session())
 
 //Setting routes
 const User = require('./models/users')
 
-//Google OAuth Strategy
-passport.use('googleToken',new GooglePlusTokenStrategy({
-   clientID :'192284820445-68v42tsa08bptglg5330ol75f3oc2v4o.apps.googleusercontent.com',
-   clientSecret : 'q4WHioSJTPlsIuNkDXI6e6df'
-}, async (accessToken, refreshToken, profile, done) =>{
-   console.log('Access Token : ',accessToken);
-   console.log('Refresh Token : ',refreshToken);
-   console.log('Profile : ',profile);
-   const newUser = new User({
-      method:'google',
-      google:{
-         id:profile.id,
-         email:profile.emails[0].value
-      }
-   })
-   User.createNewUser(newUser,()=>{
-      console.log('User created')
-   })
 
-}));
+//Passport Google Strategy
+passport.use(
+   new GoogleStrategy({
+      callbackURL:'/auth/google/redirect',
+      clientID:keys.google.clientID,
+      clientSecret:keys.google.clientSecret
+   }, (accessToken, refreshToken, profile, done) =>{
+      User.getUsersFromGoogleSignUp(profile.id,(err,currentUser) =>{
+         if(currentUser){
+            console.log('user already existed')
+            done(null,currentUser);
+         }
+         else{
+            const newUser = new User({
+               method:'google',
+               google:{
+                  id:profile.id,
+                  username:profile.displayName
+               }
+            }).save().then((newUser) => {
+               console.log('New User Created : '+newUser)
+               return done(null,newUser);
+            })
+         }
+      })
+   })
+)
 
 passport.use(new LocalStrategy(
    function(username, password, done){
@@ -84,7 +97,5 @@ router.get('/logout', (request,response) =>{
    request.session.destroy()
    response.redirect('/login')
 })
-
-
 
 module.exports = router
