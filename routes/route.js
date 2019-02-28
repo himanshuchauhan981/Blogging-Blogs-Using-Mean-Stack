@@ -5,7 +5,7 @@ const User = require('../models/users')
 const Post = require('../models/posts')
 
 const passport = require('passport')
-const expressRouter = require('express-promise-router')();
+const passportSetup = require('.././login-authentication')
 
 router.get('/',function(request,response){
    Post.getAllPostData((err,post_data) =>{
@@ -30,8 +30,12 @@ router.get('/createPost',(request,response) =>{
    return response.render('createPost.ejs',{titlePage:'Create Post - Blogging Blogs'})
 })
 
-router.route('/oauth/google').post(passport.authenticate('googleToken',{session:false}))
+router.get('/google',passport.authenticate('google',{
+   scope:['profile']
+}))
 
-
+router.get('/auth/google/redirect',passport.authenticate('google'), (request,response) =>{
+   response.send('Hey! You reached back here')
+})
 
 module.exports = router
