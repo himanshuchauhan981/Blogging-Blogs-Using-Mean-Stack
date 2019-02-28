@@ -5,7 +5,7 @@ const User = require('../models/users')
 const Post = require('../models/posts')
 
 const passport = require('passport')
-const passportSetup = require('.././login-authentication')
+//const passportSetup = require('.././login-authentication')
 
 router.get('/',function(request,response){
    Post.getAllPostData((err,post_data) =>{
@@ -34,8 +34,7 @@ router.get('/google',passport.authenticate('google',{
    scope:['profile']
 }))
 
-router.get('/auth/google/redirect',passport.authenticate('google'), (request,response) =>{
-   response.send('Hey! You reached back here')
+router.get('/auth/google/redirect',passport.authenticate('google'),(req,res) =>{
+   res.redirect('/')
 })
-
 module.exports = router
