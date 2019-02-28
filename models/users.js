@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
    },
    google:{
       id:String,
-      email:String
+      username:String
    },
    facebook:{
       id:String,
@@ -45,4 +45,9 @@ module.exports.getPassword = (inputPassword,callback) =>{
 
 module.exports.getByID  = (id,callback) =>{
    User.findById(id, callback)
+}
+
+module.exports.getUsersFromGoogleSignUp = (googleID,callback) =>{
+   query = {"google.id":googleID}
+   User.findOne(query,callback)
 }
