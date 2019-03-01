@@ -1,38 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const app = express()
-// const session = require('express-session')
-// const cookieParser = require('cookie-parser')
-// const cookieSession = require('cookie-session')
-
 const keys = require('./keys')
-
-// app.use(cookieParser())
-// app.use(session({
-//    secret:'blogging_blogs',
-//    saveUninitialized: true,
-//    resave:true
-// }))
-// app.use(cookieSession({
-//    maxAge:24*60*60*1000,
-//    keys:[keys.session.cookieKey]
-// }))
 
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const GoogleStrategy =  require('passport-google-oauth20')
-
-router.use(passport.initialize())
-router.use(passport.session())
-
-// app.use(passport.initialize())
-// app.use(passport.session())
 
 //Setting routes
 const User = require('./models/users')
 
 passport.serializeUser(function(request,user, done) {
    request.session.currentUser = request.body.username
+   if(!request.session.currentUser) request.session.currentUser = user.google.username
    done(null, user.id);
 });
 
@@ -42,7 +22,7 @@ passport.deserializeUser(function(id, done) {
    });
 });
 
-//Passport Google Strategy
+d//Passport Google Strategy
 passport.use(
    new GoogleStrategy({
       callbackURL:'/auth/google/redirect',
