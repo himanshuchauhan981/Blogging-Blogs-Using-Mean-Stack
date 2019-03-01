@@ -30,6 +30,10 @@ router.get('/createPost',(request,response) =>{
    return response.render('createPost.ejs',{titlePage:'Create Post - Blogging Blogs'})
 })
 
+router.get('/viewPost',(request,response) =>{
+   return response.render('viewPost.ejs',{titlePage:'View Post - Blogging Blogs'})
+})
+
 router.get('/google',passport.authenticate('google',{
    scope:['profile']
 }))
