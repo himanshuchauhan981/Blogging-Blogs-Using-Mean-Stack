@@ -6,11 +6,12 @@ const flash = require('connect-flash')
 const expressValidator = require('express-validator')
 const expressMessages = require('express-messages')
 const date = require('date-and-time')
-
+const passport = require('passport')
 const app = express()
 
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(cookieParser())
-
 //Express Session Middleware
 app.use(session({
    secret:'blogging_blogs',
