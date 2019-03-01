@@ -19,3 +19,8 @@ module.exports.saveNewPosts = function(postData,callback){
 module.exports.getAllPostData = (callback) =>{
    Post.find(callback)
 }
+
+module.exports.ifPostExisted = (checkPostTitle, checkPostContent, callback) =>{
+   query = {postTitle:checkPostTitle}
+   Post.findOne(query,callback)
+}
