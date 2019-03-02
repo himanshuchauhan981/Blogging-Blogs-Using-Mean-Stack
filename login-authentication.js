@@ -22,7 +22,8 @@ passport.deserializeUser(function(id, done) {
    });
 });
 
-d//Passport Google Strategy
+
+//Passport Google Strategy
 passport.use(
    new GoogleStrategy({
       callbackURL:'/auth/google/redirect',
@@ -31,7 +32,6 @@ passport.use(
    },(accessToken, refreshToken, profile, done) =>{
       User.getUsersFromGoogleSignUp(profile.id,(err,currentUser) =>{
          if(currentUser){
-            console.log('user already existed')
             return done(null,currentUser)
          }
          else{
@@ -52,7 +52,6 @@ passport.use(
 passport.use(new LocalStrategy(
    function(username, password, done){
       User.getExistingUsername(username, (err,user) => {
-         console.log(user)
          if(err) throw err;
          if(!user){
             return done(null,false,{message:'Invalid Username'});
@@ -81,3 +80,6 @@ router.get('/logout', (request,response) =>{
 })
 
 module.exports = router
+
+
+// http://localhost:5000/auth/facebook/redirect
