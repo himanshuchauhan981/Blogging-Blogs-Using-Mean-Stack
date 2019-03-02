@@ -1,15 +1,38 @@
+<title><%= titlePage %></title>
+<link rel="stylesheet" href="/css/viewPost.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<% include partials/nav.ejs %>
 <body>
-   <div class="w3-container">
-      <div class="w3-card-4 w3-margin-bottom">
-         <header class="w3-container w3-light-grey">
-            <h3 style="margin-top:0 !important;padding:5px;">Smarty</h3>
-         </header>
-         <div class="w3-container">
-            <h3>Post Title</h3>
-            <hr style="margin:10px !important">
-            <img src="https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png" alt="Avatar" class="w3-left w3-circle w3-margin-right w3-margin-bottom" style="width:60px">
-            <p>Post Content</p><br>
+   <div class="w3-container cont">
+      <div class="w3-card-4">
+         <div class="row">
+            <div class="w3-container">
+               <div class="card-box">
+                  <img src="https://accounts.learninghub.phsa.ca/Content/Images/profile-default.png" width="80px" height="80px">
+                  <h3><%= data.postTitle %></h3>
+                  <p><%= data.postDate %></p>
+                  <% if(postUser == data.postAuthor) {%>
+                     <div class="button-group">
+                        <form method="post">
+                           <button type="submit" class="updateButton" formaction="/updatePost" name="<%= data.postTitle %>">Update</button>
+                           <button type="submit" class="deleteButton" formaction="/deletePost" name="<%= data.postTitle %>">Delete</button>
+                        </form>
+                     </div>
+                     <% } %>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <img src="https://www.thebetterindia.com/wp-content/uploads/2019/01/dr-carson-.jpg" style="width:100%">
+               </div>
+               <div class="col-md-6">
+                  <div class="card-heading">
+                     <p><%= data.postTitle %></p>
+                  </div>
+                  <div class="card-details">
+                     <p><%= data.postContent %></p>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
-   </div>
-</body>
+   </body>
