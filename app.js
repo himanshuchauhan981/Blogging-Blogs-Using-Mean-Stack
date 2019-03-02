@@ -12,6 +12,7 @@ const app = express()
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(cookieParser())
+
 //Express Session Middleware
 app.use(session({
    secret:'blogging_blogs',
@@ -70,7 +71,7 @@ app.post('/savePosts',(request,response) => {
       postAuthor:postAuthor
    })
    Post.saveNewPosts(postData,()=>{
-      return response.render('index.ejs',{titlePage:'Home - Blogging Blogs'})
+      return response.redirect('/')
    })
 })
 
@@ -107,6 +108,19 @@ app.post('/validate',(request,response) => {
    })
 })
 
+app.post('/deletePost',(request,response) =>{
+   data = request.body
+   const keys = Object.keys(data)
+   Post.deleteSelectedPost(keys[0], (err,user) =>{
+      return response.redirect('/')
+   })
+
+})
+
+app.post('/updatePost', (request,response) =>{
+   data = request.body
+   const keys = Object.keys(data)
+})
 //Setting EJS Template
 app.set('view engine','ejs')
 
