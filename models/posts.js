@@ -12,7 +12,7 @@ module.exports = mongoose.model('posts',postSchema)
 const Post = mongoose.model('posts',postSchema)
 module.exports.Posts = Post;
 
-module.exports.saveNewPosts = function(postData,callback){
+module.exports.saveNewPosts = (postData,callback) =>{
    postData.save(postData,callback)
 }
 
@@ -23,4 +23,14 @@ module.exports.getAllPostData = (callback) =>{
 module.exports.ifPostExisted = (checkPostTitle, checkPostContent, callback) =>{
    query = {postTitle:checkPostTitle}
    Post.findOne(query,callback)
+}
+
+module.exports.getPostData = (title,callback) =>{
+   query = {postTitle:title}
+   Post.findOne(query,callback)
+}
+
+module.exports.deleteSelectedPost = (title,callback) =>{
+   query = {postTitle:title}
+   Post.deleteOne(query,callback)
 }
