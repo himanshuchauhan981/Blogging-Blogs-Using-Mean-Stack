@@ -1,0 +1,175 @@
+
+.card{
+   width:350px;
+   margin:0 auto;
+   box-shadow: 0px 0px 34px -7px rgba(99,88,99,1);
+   border-top-left-radius: 7px;
+   border-top-right-radius: 7px;
+}
+.container .card{
+   borde -radius:20px;
+}
+
+.card-header img{
+   border-top-left-radius: 7px;
+   border-top-right-radius: 7px;
+   width:100%;
+}
+
+.user-image{
+   margin-top:-60px;
+   padding: 5px;
+   background-color: #E9E7E6;
+   border-bottom: 0px;
+}
+
+.author-name{
+   font-family: 'ABeeZee';
+   font-size:30px;
+   margin-top:-10px;
+}
+
+.user-image img{
+   height:120px;
+   width:120px;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   transform: rotate(0deg);
+}
+.card-body{
+   padding:0px 10px;
+   background-color: #E9E7E6;
+}
+
+.img-border{
+   border-radius: 50%;
+   border: 5px solid rgba(255,255,255,0.5);
+   transform: rotate(-45deg);
+}
+
+.author-email,.author-password{
+   display: inline;
+}
+
+
+.email1, .pwd1{
+   font-family: 'ABeeZee';
+   font-size:22px;
+}
+
+.email2{
+   font-family: 'ABeeZee';
+   font-size:16px;
+   margin-top:5px;
+}
+.author-email .email2, .author-password .pwd2{
+   display:inline-block;
+   float:right;
+}
+
+.pwd2{
+   text-align: center;
+}
+.card-footer{
+   width: 100%;
+   padding:15px 10px;
+   border-bottom-left-radius: 7px;
+   border-bottom-right-radius: 7px;
+   background-color: #D1D1D1;
+}
+.card-connect{
+   padding:10px 20px;
+   background-color: #E9E7E6;
+}
+
+.btn-facebook{
+   background-color:#3B5998;
+   border: none;
+   color:white;
+   padding:10px 16px;
+   font-size: 26px;
+   text-align: center;
+   text-decoration: none;
+   border-radius:22px;
+   cursor: pointer;
+}
+
+.btn-google{
+   background-color: #CC3333;
+   border: none;
+   color:white;
+   padding:10px 14px;
+   font-size: 26px;
+   text-align: center;
+   text-decoration: none;
+   border-radius:26px;
+   cursor:pointer;
+   outline:none;
+}
+
+.btn-twitter{
+   background-color: #1DA1F2;
+   border: none;
+   color:white;
+   padding:10px 10px;
+   font-size: 28px;
+   text-align: center;
+   text-decoration: none;
+   border-radius:24px;
+   cursor: pointer;
+   outline:none;
+}
+
+.btn-linkedin{
+   background-color: #0077B5;
+   border: none;
+   color:white;
+   padding:10px 11px;
+   font-size: 28px;
+   text-align: center;
+   text-decoration: none;
+   border-radius:24px;
+   cursor: pointer;
+   outline:none;
+}
+
+#changePasswordButton{
+   float:right;
+}
+.modal-header, .modal-footer{
+   background-color: #D974E5;
+}
+
+.modal-body {
+    position: relative;
+    padding: 20px 70px !important;
+    background-color: #AEEAE9;
+}
+.oldPassword, .newPassword, .confirmPassword{
+   width:100%;
+   padding:10px 20px;
+   border:2px solid grey;
+   box-shadow: 1px 1px 99px -30px rgba(77,73,77,1);
+}
+
+.oldPassword:focus, .newPassword:focus, .confirmPassword:focus{
+   border-radius:16px;
+   outline:none;
+   border:3px solid #4CAF50;
+   background-color:#AAFCAD;
+}
+
+.newPassword, .confirmPassword{
+   margin-top:10px;
+}
+
+.modal-header h4{
+   font-family: 'Aclonica';
+   font-size:30px;
+   margin-top:15px;
+}
+
+.close{
+   outline: none;
+}
