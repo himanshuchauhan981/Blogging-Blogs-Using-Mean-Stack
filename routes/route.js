@@ -9,7 +9,7 @@ const passport = require('passport')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
-router.get('/',function(request,response){
+router.get('/',(request,response) =>{
    Post.getAllPostData((err,post_data) =>{
       len = post_data.length
       return response.render('index.ejs',{
@@ -20,11 +20,11 @@ router.get('/',function(request,response){
    });
 });
 
-router.get('/login',function(request,response){
+router.get('/login',(request,response) =>{
    return response.render('login.ejs',{titlePage:'Login - Blogging Blogs'})
 });
 
-router.get('/signup',function(request,response){
+router.get('/signup',(request,response) =>{
    return response.render('signup.ejs',{titlePage:'Signup - Blogging Blogs'})
 });
 
@@ -48,5 +48,8 @@ router.get('/auth/google/redirect',passport.authenticate('google'),(req,res) =>{
    res.redirect('/')
 })
 
+router.get('/profile',(request,response) =>{
+   return response.render('profile.ejs',{titlePage:'Profile - Blogging Blogs'})
+})
 
 module.exports = router
