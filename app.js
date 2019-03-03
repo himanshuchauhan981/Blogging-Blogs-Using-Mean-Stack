@@ -120,6 +120,13 @@ app.post('/deletePost',(request,response) =>{
 app.post('/updatePost', (request,response) =>{
    data = request.body
    const keys = Object.keys(data)
+   Post.getPostData(keys[0], (err,user) =>{
+      return response.render('createPost.ejs',{titlePage:'Update Post - Blogging Blogs',data:user})
+   })
+})
+
+app.post('/updatingPosts',(request, response) =>{
+   console.log(request.body)
 })
 //Setting EJS Template
 app.set('view engine','ejs')
