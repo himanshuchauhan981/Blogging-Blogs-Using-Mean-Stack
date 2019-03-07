@@ -5,7 +5,8 @@ const postSchema = mongoose.Schema({
    postTitle : String,
    postContent : String,
    postDate : String,
-   postAuthor : String
+   postAuthor : String,
+   postImage:String
 })
 
 module.exports = mongoose.model('posts',postSchema)
