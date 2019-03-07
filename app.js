@@ -25,6 +25,7 @@ app.use(flash());
 app.use(function (request, response, next) {
    response.locals.messages = expressMessages(request, response);
    response.locals.currentUser = request.session.currentUser
+   response.locals.postImageDetail = request.session.postImageDetail
    next();
 });
 
@@ -54,11 +55,12 @@ const route = require('./routes/route')
 const loginAuthenication = require('./login-authentication')
 const Post = require('./models/posts')
 const User = require('./models/users')
+const StoreImage = require('./imageStorage')
 
 app.use('/',route)
 app.use('/',loginAuthenication)
 
-app.post('/savePosts',(request,response) => {
+app.post('/upload',upload.single('file'),(request,response) => {
    postTitle = request.body.postTitle
    postContent = request.body.postContent
    const nowDate = new Date()
@@ -68,7 +70,8 @@ app.post('/savePosts',(request,response) => {
       postTitle:postTitle,
       postContent:postContent,
       postDate: postDate,
-      postAuthor:postAuthor
+      postAuthor:postAuthor,
+      postImage:request.file.filename
    })
    Post.saveNewPosts(postData,()=>{
       return response.redirect('/')
@@ -114,7 +117,6 @@ app.post('/deletePost',(request,response) =>{
    Post.deleteSelectedPost(keys[0], (err,user) =>{
       return response.redirect('/')
    })
-
 })
 
 app.post('/updatePost', (request,response) =>{
@@ -123,6 +125,37 @@ app.post('/updatePost', (request,response) =>{
    Post.getPostData(keys[0], (err,user) =>{
       return response.render('createPost.ejs',{titlePage:'Update Post - Blogging Blogs',data:user})
    })
+})
+
+app.post('/updateEmailAddress', (request,response) =>{
+   newEmailAddress = request.body.newEmailAddress
+   User.getEmailUpdated(request.session.currentUser, newEmailAddress, (err,user) =>{
+      if(user){
+         request.flash('success','Email Address Updated')
+         return response.redirect('/profile')
+      }
+   })
+})
+
+app.post('/updatePassword',(request,response) =>{
+   oldPassword = request.body.old_password
+   newPassword = request.body.new_password
+   currentuser = request.session.currentUser
+   User.checkOldPassword(request.session.currentUser,oldPassword,(err,passwordCheck) =>{
+      if(passwordCheck){
+         User.updatePassword(currentuser,newPassword, (err,user) =>{
+            if(user){
+               request.flash('success','Password updated successfully')
+               return response.redirect('/profile')
+            }
+         })
+      }
+      else{
+         request.flash('danger','Incorrect Old Password')
+         return response.redirect('/profile')
+      }
+   })
+
 })
 
 app.post('/updatingPosts',(request, response) =>{
