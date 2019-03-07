@@ -45,9 +45,26 @@ button{
 .button{
    text-align: right;
 }
+
 button:focus{
    outline:none;
 }
+
 button:hover {
    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.inputWithIcon{
+   position: relative;
+   cursor: pointer;
+}
+
+.inputWithIcon i{
+   position:absolute;
+   top:8px;
+   left:300px;
+   text-align: right;
+   padding:9px 8px;
+   color:#aaa;
+   transition:0.3s;
 }
