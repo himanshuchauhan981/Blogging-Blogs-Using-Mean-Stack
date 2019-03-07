@@ -4,6 +4,7 @@ const app = express()
 const router = express.Router()
 const User = require('../models/users')
 const Post = require('../models/posts')
+const StoreImage = require('../imageStorage')
 const passport = require('passport')
 
 app.use(bodyParser.json())
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 router.get('/',(request,response) =>{
    Post.getAllPostData((err,post_data) =>{
       len = post_data.length
+      console.log(post_data)
       return response.render('index.ejs',{
          titlePage:'Home - Blogging Blogs',
          post_data:post_data,
