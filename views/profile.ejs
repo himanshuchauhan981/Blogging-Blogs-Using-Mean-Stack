@@ -1,74 +1,112 @@
 <title><%= titlePage %></title>
-<% include partials/nav.ejs %>
+<% include partials/header.ejs %>
 <link rel="stylesheet" href="/css/profile.css">
-<div class="container">
-   <div class="card">
-      <div class="card-header">
-         <img src="https://digitalsynopsis.com/wp-content/uploads/2017/07/beautiful-color-ui-gradients-backgrounds-relay.png">
-      </div>
-      <div class="user-image">
-         <img class="img-circle img-border center" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkf1fPtGCX-bHemZlhOvWKRtYw1d9F2kb1Inc1zOgbcBaYpVC8">
-      </div>
-      <div class="card-body">
-         <p class=" author-name text-center">Smarty</p>
-         <div class="row">
-            <div class="col-md-6">
-               <p class="email1">Email</p>
-            </div>
-            <div class="col-md-6">
-               <p class="email2">smarty@gmail.com</p>
-            </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body ng-app="">
+   <div class="container">
+      <%- messages('partials/message', locals) %>
+      <div class="card">
+         <div class="card-header">
+            <img src="https://digitalsynopsis.com/wp-content/uploads/2017/07/beautiful-color-ui-gradients-backgrounds-relay.png">
          </div>
-         <div class="row">
-            <div class="col-md-6">
-               <p class="pwd1">Password</p>
-            </div>
-            <div class="col-md-6">
-               <p class="pwd2">&#8226 &#8226 &#8226 &#8226 &#8226 &#8226 &#8226 &#8226 &#8226</p>
-            </div>
+         <div class="user-image">
+            <img class="img-circle img-border center" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkf1fPtGCX-bHemZlhOvWKRtYw1d9F2kb1Inc1zOgbcBaYpVC8">
          </div>
-      </div>
-      <div class="card-connect">
-         <div class="row">
-            <div class="col-md-3">
-               <button type="button" class="btn-facebook"><i class="fa fa-facebook"></i></button>
-            </div>
-            <div class="col-md-3">
-               <button type="button" class="btn-google"><i class="fa fa-google"></i></button>
-            </div>
-            <div class="col-md-3">
-               <button type="button" class="btn-twitter"><i class="fa fa-twitter"></i></button>
-            </div>
-            <div class="col-md-3">
-               <button type="button" class="btn-linkedin"><i class="fa fa-linkedin"></i></button>
-            </div>
-         </div>
-      </div>
-      <div class="card-footer">
-         <button type="button" class="btn btn-md btn-success" id="changeEmailButton" data-toggle="modal" data-target="#updateEmail">Change Email</button>
-         <button type="button" class="btn btn-md btn-primary" id="changePasswordButton">Change Password</button>
-      </div>
-   </div>
-</div>
-<div class="container">
-   <div class="modal fade" id="updateEmail" role="dialog">
-      <div class="modal-dialog modal-md">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h4 class="text-center">Update Password
-                  <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+         <div class="card-body">
+            <p class=" author-name text-center"><%= data.local.username %></p>
+            <div class="row">
+               <div class="col-md-6">
+                  <p class="email1">Email</p>
                </div>
-               <div class="modal-body">
-                  <input type="text" placeholder="Old Password" class="oldPassword">
-                  <input type="text" placeholder="New Password" class="newPassword">
-                  <input type="text" placeholder="Confirm Password" class="confirmPassword">
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-success">Update</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+               <div class="col-md-6">
+                  <p class="email2"><%= data.local.email %></p>
                </div>
             </div>
+            <div class="row">
+               <div class="col-md-6">
+                  <p class="pwd1">Password</p>
+               </div>
+               <div class="col-md-6">
+                  <p class="pwd2">&#8226 &#8226 &#8226 &#8226 &#8226 &#8226 &#8226 &#8226 &#8226</p>
+               </div>
+            </div>
+         </div>
+         <div class="card-connect">
+            <div class="row">
+               <div class="col-md-3">
+                  <button type="button" class="btn-facebook"><i class="fa fa-facebook"></i></button>
+               </div>
+               <div class="col-md-3">
+                  <button type="button" class="btn-google"><i class="fa fa-google"></i></button>
+               </div>
+               <div class="col-md-3">
+                  <button type="button" class="btn-twitter"><i class="fa fa-twitter"></i></button>
+               </div>
+               <div class="col-md-3">
+                  <button type="button" class="btn-linkedin"><i class="fa fa-linkedin"></i></button>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <button type="button" class="btn btn-md btn-success" id="changeEmailButton" data-toggle="modal" data-target="#updateEmail">Change Email</button>
+            <button type="button" class="btn btn-md btn-primary" id="changePasswordButton" data-toggle="modal" data-target="#updatePassword">Change Password</button>
          </div>
       </div>
    </div>
-</div>
+   <div class="container">
+      <div class="modal fade" id="updatePassword" role="dialog">
+         <form action="/updatePassword" method="post" name="updatePasswordForm">
+            <div class="modal-dialog modal-md">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h4 class="text-center">Update Password
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     </h4>
+                  </div>
+                  <div class="modal-body">
+                     <span ng-show="updatePasswordForm.old_password.$touched && updatePasswordForm.old_password.$invalid" style="font-size:12px;color:red;">* Required Old Password</span>
+                     <input type="password" placeholder="Old Password" class="oldPassword form-control" name="old_password" ng-model="old_password" required><br>
+
+                     <span ng-show="updatePasswordForm.new_password.$touched && updatePasswordForm.new_password.$invalid" style="font-size:12px; color:red;">* Required New Password</span>
+                     <span style="font-size:12px; color:red;" ng-show="!updatePasswordForm.new_password.$error.required && (updatePasswordForm.new_password.$error.minlength || updatePasswordForm.new_password.$error.maxlength) && updatePasswordForm.new_password.$dirty">* Password must be between 8 and 20 characters.</span>
+                     <span style="font-size:12px; color:red;" ng-show="!updatePasswordForm.new_password.$error.required && !updatePasswordForm.new_password.$error.minlength && !updatePasswordForm.new_password.$error.maxlength && updatePasswordForm.new_password.$error.pattern && updatePasswordForm.new_password.$dirty">* Must contain one lower &amp; uppercase letter and one non-alpha character</span>
+                     <input type="password" placeholder="New Password" class="newPassword form-control" name="new_password" ng-model="new_password" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required><br>
+
+                     <span style="font-size:12px; color:red;" ng-show="updatePasswordForm.confirm_password.$error.pattern">* Passwords do not match.</span>
+                     <span style="font-size:12px; color:green;" ng-show="updatePasswordForm.confirm_password.$valid">Password Matched</span>
+                     <input type="password" placeholder="Confirm Password" class="confirmPassword form-control" name="confirm_password" ng-model="confirm_password" ng-pattern="new_password" required>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-success" ng-disabled="updatePasswordForm.$invalid">Update</button>
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div class="container">
+      <div class="modal fade" id="updateEmail" role="dialog">
+         <form action="/updateEmailAddress" method="post" name="updateEmailForm">
+            <div class="modal-dialog modal-md">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h4 class="text-center">Update Email
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     </h4>
+                  </div>
+                  <div class="modal-body">
+                     <span ng-show="updateEmailForm.newEmail.$touched && updateEmailForm.newEmail.$invalid" style="font-size:12px;color:red;">* Required Email</span>
+                     <span ng-show="updateEmailForm.newEmail.$error.pattern" style="font-size:12px; color:red;">* Invalid Email ID</span>
+                     <input type="email" placeholder="New Email Address" class="newEmail" name="newEmailAddress" ng-model="newEmail" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-success" ng-disabled="updateEmailForm.$invalid">Update</button>
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</body>
