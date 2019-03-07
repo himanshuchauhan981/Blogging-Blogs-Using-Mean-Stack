@@ -59,6 +59,7 @@ const StoreImage = require('./imageStorage')
 
 app.use('/',route)
 app.use('/',loginAuthenication)
+app.use('/',StoreImage)
 
 app.post('/upload',upload.single('file'),(request,response) => {
    postTitle = request.body.postTitle
