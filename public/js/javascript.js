@@ -9,3 +9,13 @@ function changeLikeMode(){
       checkColor.style.backgroundColor = "#4CAF50";
    }
 }
+
+function showpassword(){
+   var click = document.getElementById('showpasswordClick')
+   if(click.type=="password"){
+      click.type="text";
+   }
+   else{
+      click.type="password";
+   }
+}
