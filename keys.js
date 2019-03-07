@@ -5,5 +5,8 @@ module.exports = {
    },
    session:{
       cookieKey:'qwertyuiopasdfghjklzxcvbnm'
+   },
+   mongoURI:{
+      mongokey:'mongodb://blogging_blogs:bloggingAdmin0018@ds161024.mlab.com:61024/blogging_blogs'
    }
 }
