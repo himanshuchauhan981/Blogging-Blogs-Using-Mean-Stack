@@ -158,6 +158,7 @@ app.post('/updatePassword',(request,response) =>{
 
 })
 
+
 app.post('/updatingPosts',(request, response) =>{
    console.log(request.body)
 })
