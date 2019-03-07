@@ -2,7 +2,7 @@
 <title><%= titlePage %></title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <% include partials/header.ejs %>
-<body ng-app="myApp">
+<body ng-app="">
    <%- messages('partials/message', locals) %>
    <div class="container">
       <div class="row">
@@ -13,15 +13,18 @@
                      <div class="w3-card-4" style="width:100%">
                         <header class="w3-container w3-light-grey">
                            <h3>New Post</h3>
-                           <input type="file" id="file" name="file">
                         </header>
                         <div class="w3-container">
                            <label>Post Title</label><br>
-                           <span ng-show="myForm.postTitle.$touched && myForm.postTitle.$invalid">* Required Field</span>
+                           <span ng-show="myForm.postTitle.$touched && myForm.postTitle.$invalid" style="color:red;font-size:12px">* Required Field</span>
                            <input type="text" class="w3-input" name="postTitle" ng-model="postTitle" required>
                            <label>Post Content</label><br>
-                           <span ng-show="myForm.postContent.$touched && myForm.postContent.$invalid">* Required Field</span>
-                           <textarea type="text" class="w3-input" name="postContent" ng-model="postContent" required></textarea>
+                           <span ng-show="myForm.postContent.$touched && myForm.postContent.$invalid" style="color:red;font-size:12px">* Required Field</span>
+                           <textarea type="text" class="w3-input w3-margin-bottom " name="postContent" ng-model="postContent" required></textarea>
+                           <div class="custom-file">
+                              <input type="file" id="file" name="file" class="custom-file-input"  id="validatedCustomFile" required>
+                              <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                           </div>
                            <div class="w3-section">
                               <button class="w3-button w3-green" type="submit" ng-disabled="myForm.$invalid">Post</button>
                               <button class="w3-button w3-red">Cancel</button>
@@ -30,43 +33,43 @@
                      </div>
                   </div>
                </form>
-            <% } else{ %>
-               <form method="post" action="/updatingPosts" name="myForm">
-                  <div class="w3-container">
-                     <div class="w3-card-4" style="width:100%">
-                        <header class="w3-container w3-light-grey">
-                           <h3>Update Post</h3>
-                        </header>
-                        <div class="w3-container">
-                           <label>Post Title</label><br>
-                           <input type="text" class="w3-input" name="updatePostTitle" value="<%= data.postTitle%>">
-                           <label>Post Content</label><br>
-                           <textarea type="text" class="w3-input" name="updatePostContent"><%= data.postContent%></textarea>
-                           <div class="w3-section">
-                              <button class="w3-button w3-green" type="submit" name="<%= data.postTitle %>">Update</button>
-                              <button class="w3-button w3-red">Cancel</button>
+               <% } else{ %>
+                  <form method="post" action="/updatingPosts" name="myForm">
+                     <div class="w3-container">
+                        <div class="w3-card-4" style="width:100%">
+                           <header class="w3-container w3-light-grey">
+                              <h3>Update Post</h3>
+                           </header>
+                           <div class="w3-container">
+                              <label>Post Title</label><br>
+                              <input type="text" class="w3-input" name="updatePostTitle" value="<%= data.postTitle%>">
+                              <label>Post Content</label><br>
+                              <textarea type="text" class="w3-input" name="updatePostContent"><%= data.postContent%></textarea>
+                              <div class="w3-section">
+                                 <button class="w3-button w3-green" type="submit" name="<%= data.postTitle %>">Update</button>
+                                 <button class="w3-button w3-red">Cancel</button>
+                              </div>
                            </div>
                         </div>
                      </div>
+                  </form>
+                  <% } %>
+               </div>
+               <div class="col-md-4 w3-margin-top">
+                  <div class="w3-card-4" style="width:100%">
+                     <header class="w3-container w3-light-grey">
+                        <h3>Our Sidebar</h3>
+                     </header>
+                     <div class="w3-container">
+                        <p>You can put any information here you'd like</p>
+                        <table class="w3-table w3-striped">
+                           <tr><td>Latest Posts</td></tr>
+                           <tr><td>Announcements</td></tr>
+                           <tr><td>Calendars</td></tr>
+                        </table>
+                     </div>
                   </div>
-               </form>
-            <% } %>
-         </div>
-         <div class="col-md-4 w3-margin-top">
-            <div class="w3-card-4" style="width:100%">
-               <header class="w3-container w3-light-grey">
-                  <h3>Our Sidebar</h3>
-               </header>
-               <div class="w3-container">
-                  <p>You can put any information here you'd like</p>
-                  <table class="w3-table w3-striped">
-                     <tr><td>Latest Posts</td></tr>
-                     <tr><td>Announcements</td></tr>
-                     <tr><td>Calendars</td></tr>
-                  </table>
                </div>
             </div>
          </div>
-      </div>
-   </div>
-</body>
+      </body>
