@@ -1,25 +1,16 @@
-.cont{
-   margin:0 auto;
-   width:800px;
-   margin-top:150px;
+.view-container{
+   margin-top:50px;
 }
-.card-heading{
-   font-family: 'Muli', sans-serif;
-   font-weight: bold;
-   align-items: baseline;
-   font-size:25px;
+.card{
+   width:900px;
+   margin: 0 auto;
 }
-
-.card-details{
-   font-family: 'Muli', sans-serif;
-   font-size:17px;
+.card-header img{
+   height:70px;
+   width:70px;
 }
 
-.card-box{
-   background-color:#E2DBDA;
-   padding:5px;
-}
-.card-box h3 {
+.card-header h3{
    font-family: 'Slabo 27px';
    display: inline;
    white-space: nowrap;
@@ -28,40 +19,11 @@
    font-size:30px;
 }
 
-.card-box p{
+.card-header p{
    display: inline;
 }
 
 .button-group{
    float:right;
    margin-top:20px;
-}
-
-.updateButton, .deleteButton{
-   border: none;
-   color:white;
-   padding:10px 20px;
-   text-align:center;
-   text-decoration: none;
-   display:inline-block;
-   font-size:16px;
-   border-radius: 6px;
-}
-
-.updateButton{
-   background-color: #4CAF50;
-}
-
-.deleteButton{
-   background-color: #F9482E;
-}
-
-.updateButton:hover{
-   background-color: #5FD464;
-   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-
-.deleteButton:hover{
-   background-color: #FA6F5A;
-   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
