@@ -49,7 +49,11 @@ router.get('/auth/google/redirect',passport.authenticate('google'),(req,res) =>{
 })
 
 router.get('/profile',(request,response) =>{
-   return response.render('profile.ejs',{titlePage:'Profile - Blogging Blogs'})
+   User.getExistingUsername(request.session.currentUser,(err,data) =>{
+      console.log(data)
+      return response.render('profile.ejs',{titlePage:'Profile - Blogging Blogs',data:data})
+   })
+
 })
 
 module.exports = router
