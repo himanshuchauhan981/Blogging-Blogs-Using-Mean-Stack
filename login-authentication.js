@@ -80,6 +80,3 @@ router.get('/logout', (request,response) =>{
 })
 
 module.exports = router
-
-
-// http://localhost:5000/auth/facebook/redirect
