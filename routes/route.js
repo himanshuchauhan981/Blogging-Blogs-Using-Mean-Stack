@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({extended:false}))
 router.get('/',(request,response) =>{
    Post.getAllPostData((err,post_data) =>{
       len = post_data.length
-      console.log(post_data)
       return response.render('index.ejs',{
          titlePage:'Home - Blogging Blogs',
          post_data:post_data,
