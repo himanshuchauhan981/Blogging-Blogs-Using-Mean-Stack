@@ -1,6 +1,7 @@
 <title><%= titlePage %></title>
-<% include partials/nav.ejs %>
+<% include partials/header.ejs %>
 <link rel="stylesheet" href="/css/login.css">
+<script src="/js/javascript.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
 <div class="container">
    <div class="login">
@@ -8,7 +9,10 @@
       <form method="post" action="/login">
          <p class="text-center login-heading">Login</p>
          <input type="text" placeholder="Username" name="username">
-         <input type="password" placeholder = "Password" name="password">
+         <div class="inputWithIcon">
+            <input type="password" placeholder = "Password" id="showpasswordClick" name="password">
+            <a onclick="showpassword()"><i class="fa fa-eye fa-lg"></i></a>
+         </div>
          <input type="checkbox"> Remember Me
          <div class="button">
             <button type="submit">Submit</button>
