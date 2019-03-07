@@ -47,7 +47,6 @@ module.exports =  upload = multer({ storage })
 
 //Output Image to Page
 router.get('/image/:filename', (request,response) =>{
-   console.log('hello smarty')
    gfs.files.findOne({filename:request.params.filename},(err,file) =>{
       const readstream = gfs.createReadStream(file.filename);
       readstream.pipe(response)
