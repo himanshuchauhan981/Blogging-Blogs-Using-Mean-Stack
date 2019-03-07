@@ -146,22 +146,18 @@
     padding: 20px 70px !important;
     background-color: #AEEAE9;
 }
-.oldPassword, .newPassword, .confirmPassword{
+.oldPassword, .newPassword, .confirmPassword, .newEmail{
    width:100%;
    padding:10px 20px;
    border:2px solid grey;
    box-shadow: 1px 1px 99px -30px rgba(77,73,77,1);
 }
 
-.oldPassword:focus, .newPassword:focus, .confirmPassword:focus{
+.oldPassword:focus, .newPassword:focus, .confirmPassword:focus, .newEmail:focus{
    border-radius:16px;
    outline:none;
    border:3px solid #4CAF50;
    background-color:#AAFCAD;
-}
-
-.newPassword, .confirmPassword{
-   margin-top:10px;
 }
 
 .modal-header h4{
