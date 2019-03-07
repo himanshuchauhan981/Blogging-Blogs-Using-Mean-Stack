@@ -51,3 +51,20 @@ module.exports.getUsersFromGoogleSignUp = (googleID,callback) =>{
    query = {"google.id":googleID}
    User.findOne(query,callback)
 }
+
+module.exports.getEmailUpdated = (currentuser,newEmail,callback) =>{
+   query = {'local.username':currentuser}
+   toUpdate = {'local.email':newEmail}
+   User.updateOne(query,{$set:toUpdate},callback)
+}
+
+module.exports.checkOldPassword = (currentuser,oldPassword,callback) =>{
+   query = {$and : [{'local.username':currentuser,'local.password':oldPassword}]}
+   User.findOne(query,callback)
+}
+
+module.exports.updatePassword = (currentuser,newPassword,callback) =>{
+   query = {'local.username':currentuser}
+   toUpdate = {$set:{'local.password':newPassword}}
+   User.update(query,toUpdate,callback)
+}
