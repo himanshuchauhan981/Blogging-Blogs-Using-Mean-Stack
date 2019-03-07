@@ -1,17 +1,19 @@
+
 <title><%= titlePage %></title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<% include partials/nav.ejs %>
+<% include partials/header.ejs %>
 <body ng-app="myApp">
    <%- messages('partials/message', locals) %>
    <div class="container">
       <div class="row">
          <div class="col-md-8 w3-margin-top">
             <% if(titlePage == 'Create Post - Blogging Blogs'){ %>
-               <form method="post" action="/savePosts" name="myForm">
+               <form method="post" action="/upload" name="myForm" enctype="multipart/form-data">
                   <div class="w3-container">
                      <div class="w3-card-4" style="width:100%">
                         <header class="w3-container w3-light-grey">
                            <h3>New Post</h3>
+                           <input type="file" id="file" name="file">
                         </header>
                         <div class="w3-container">
                            <label>Post Title</label><br>
