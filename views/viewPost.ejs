@@ -5,7 +5,7 @@
    <div class="card">
       <div class="card-header">
          <img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE8KtKj_zXIxHEt7KjVWuUdjfq_WNbfMf5x3AGaPfkW6iSplZI">
-         <h3><%= data.postTitle %></h3>
+         <h3 style="font-family:'ABeeZee'"><%= data.postTitle %></h3>
          <p><%= data.postDate %></p>
          <% if((currentUser) && (postUser == data.postAuthor)) {%>
          <div class="button-group">
@@ -16,9 +16,10 @@
          </div>
          <% } %>
       </div>
-      <img class="card-img-top" height="400px" src="https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?cs=srgb&dl=beautiful-blur-bright-326055.jpg&fm=jpg">
+      <img class="card-img-top" height="400px" src="image/<%= data.postImage %>" style="width:100%; height:500px;">
+      <!-- <img class="card-img-top" height="400px" src="https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?cs=srgb&dl=beautiful-blur-bright-326055.jpg&fm=jpg"> -->
       <div class="card-body">
-         <p>Post Content</p>
+         <p style="font-family:'Acme'; font-size:17px; text-align:justify"><%= data.postContent %></p>
       </div>
    </div>
 </div>
