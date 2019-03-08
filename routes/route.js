@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 router.get('/',(request,response) =>{
    Post.getAllPostData((err,post_data) =>{
       len = post_data.length
+      post_data[0].postContent = post_data[0].postContent.substring(0,300)+'......'
       return response.render('index.ejs',{
          titlePage:'Home - Blogging Blogs',
          post_data:post_data,
@@ -38,6 +39,14 @@ router.post('/viewPost',(request,response) =>{
    const keys = Object.keys(data)
    Post.getPostData(keys[0],(err,user)=>{
       return response.render('viewPost.ejs',{titlePage:'View Post - Blogging Blogs',data:user,postUser:request.session.currentUser})
+   })
+})
+
+router.post('/updatePost', (request,response) =>{
+   data = request.body
+   const keys = Object.keys(data)
+   Post.getPostData(keys[0], (err,user) =>{
+      return response.render('createPost.ejs',{titlePage:'Update Post - Blogging Blogs',data:user})
    })
 })
 
