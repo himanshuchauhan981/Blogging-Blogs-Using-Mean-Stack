@@ -65,7 +65,7 @@ app.post('/upload',upload.single('file'),(request,response) => {
    postTitle = request.body.postTitle
    postContent = request.body.postContent
    const nowDate = new Date()
-   postDate = date.format(nowDate,'DD-MM-YYYY')
+   postDate = date.format(nowDate,'MMMM DD, YYYY')
    postAuthor = request.session.currentUser
    const postData = new Post({
       postTitle:postTitle,
@@ -120,13 +120,6 @@ app.post('/deletePost',(request,response) =>{
    })
 })
 
-app.post('/updatePost', (request,response) =>{
-   data = request.body
-   const keys = Object.keys(data)
-   Post.getPostData(keys[0], (err,user) =>{
-      return response.render('createPost.ejs',{titlePage:'Update Post - Blogging Blogs',data:user})
-   })
-})
 
 app.post('/updateEmailAddress', (request,response) =>{
    newEmailAddress = request.body.newEmailAddress
