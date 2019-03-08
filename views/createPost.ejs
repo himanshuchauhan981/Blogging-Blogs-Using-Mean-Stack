@@ -35,19 +35,25 @@
                </form>
                <% } else{ %>
                   <form method="post" action="/updatingPosts" name="myForm">
-                     <div class="w3-container">
-                        <div class="w3-card-4" style="width:100%">
-                           <header class="w3-container w3-light-grey">
-                              <h3>Update Post</h3>
-                           </header>
-                           <div class="w3-container">
-                              <label>Post Title</label><br>
-                              <input type="text" class="w3-input" name="updatePostTitle" value="<%= data.postTitle%>">
-                              <label>Post Content</label><br>
-                              <textarea type="text" class="w3-input" name="updatePostContent"><%= data.postContent%></textarea>
-                              <div class="w3-section">
-                                 <button class="w3-button w3-green" type="submit" name="<%= data.postTitle %>">Update</button>
-                                 <button class="w3-button w3-red">Cancel</button>
+                     <div class="container">
+                        <div class="card">
+                           <div class="card-header">
+                              <h2>Update Post</h2>
+                           </div>
+                           <div class="card-body">
+                              <div class="form-group">
+                                 <label>Post Title</label>
+                                 <input type="text" class="form-control form-control-lg" name="updatePostTitle" value="<%= data.postTitle%>">
+                              </div>
+                              <div class="form-group">
+                                 <label>Post Content</label>
+                                 <textarea  class="form-control" rows="12" cols="80" name="updatePostContent" value="<%= data.postContent %>"><%= data.postContent %></textarea>
+                              </div>
+                           </div>
+                           <div class="card-footer">
+                              <div class="form-group">
+                                 <button class="btn btn-outline-success" name="button" type="submit" name="<%= data.postTitle %>">Update</button>
+                                 <button class="btn btn-outline-danger" type="button" name="button">Cancel</button>
                               </div>
                            </div>
                         </div>
