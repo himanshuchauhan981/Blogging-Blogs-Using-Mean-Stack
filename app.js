@@ -153,9 +153,18 @@ app.post('/updatePassword',(request,response) =>{
 })
 
 
-app.post('/updatingPosts',(request, response) =>{
-   console.log(request.body)
+app.post('/updatingPosts/:postTitle',(request, response) =>{
+   oldPostTitle = request.params.postTitle
+   updatePostTitle = request.body.updatePostTitle
+   updatePostContent = request.body.updatePostContent
+   Post.updatePostData(oldPostTitle, updatePostTitle, updatePostContent, (err,updateDone) =>{
+      if(updateDone){
+         request.flash('success','Post is Updated successfully')
+         return response.redirect('/')
+      }
+   })
 })
+
 //Setting EJS Template
 app.set('view engine','ejs')
 
