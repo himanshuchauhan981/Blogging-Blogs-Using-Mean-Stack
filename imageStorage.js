@@ -16,12 +16,16 @@ const conn = mongoose.createConnection(keys.mongoURI.mongokey)
 
 //Initialize gfs
 let gfs
+let profileImage
 
 conn.once('open', () =>{
    //Initialize the Stream
    gfs = Grid(conn.db,mongoose.mongo)
    gfs.collection('uploads')
+   profileImage = Grid(conn.db, mongoose.mongo)
+   profileImage.collection('profile_image')
 })
+
 
 //Create Storage engine
 const storage = new GridFsStorage({
@@ -44,6 +48,25 @@ const storage = new GridFsStorage({
 });
 module.exports =  upload = multer({ storage })
 
+var imageStorage = new GridFsStorage({
+   url:keys.mongoURI.mongokey,
+   file:(req,file) =>{
+      return new Promise((resolve,reject) =>{
+         crypto.randomBytes(16,(err,buf) =>{
+            if(err){
+               return reject(err);
+            }
+            const filename = buf.toString('hex')+path.extname(file.originalname)
+            const fileInfo = {
+               filename: filename,
+               bucketName:'profile_image'
+            };
+            resolve(fileInfo)
+         });
+      });
+   }
+});
+module.exports = imageStorage = multer({ imageStorage })
 
 //Output Image to Page
 router.get('/image/:filename', (request,response) =>{
