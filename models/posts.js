@@ -35,3 +35,7 @@ module.exports.deleteSelectedPost = (title,callback) =>{
    query = {postTitle:title}
    Post.deleteOne(query,callback)
 }
+
+module.exports.updatePostData = (title,newPostTitle,newPostContent,callback) =>{
+   Post.updateOne({postTitle:title}, {$set:{'postTitle':newPostTitle, 'postContent':newPostContent}}, callback)
+}
