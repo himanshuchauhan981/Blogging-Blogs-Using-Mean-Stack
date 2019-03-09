@@ -2,8 +2,8 @@
 <% include partials/header.ejs %>
 <body class="w3-light-grey">
    <div class="w3-container">
+      <%- messages('partials/message', locals) %>
       <div class="w3-row">
-
          <div class="w3-col l8 s12">
             <% for(i=len-1;i>=0;i--){ %>
             <div class="w3-card-4 w3-margin w3-white">
