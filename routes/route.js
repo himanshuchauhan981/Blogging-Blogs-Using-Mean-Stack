@@ -13,25 +13,32 @@ app.use(bodyParser.urlencoded({extended:false}))
 router.get('/',(request,response) =>{
    Post.getAllPostData((err,post_data) =>{
       len = post_data.length
-      post_data[0].postContent = post_data[0].postContent.substring(0,300)+'......'
+      for(var i=0;i<len;i++){
+         post_data[i].postContent = post_data[i].postContent.substring(0,300)+'.....'
+      }
       return response.render('index.ejs',{
          titlePage:'Home - Blogging Blogs',
          post_data:post_data,
          len:len
       })
-   });
-});
+   })
+})
 
 router.get('/login',(request,response) =>{
    return response.render('login.ejs',{titlePage:'Login - Blogging Blogs'})
-});
+})
 
 router.get('/signup',(request,response) =>{
    return response.render('signup.ejs',{titlePage:'Signup - Blogging Blogs'})
-});
+})
 
 router.get('/createPost',(request,response) =>{
-   return response.render('createPost.ejs',{titlePage:'Create Post - Blogging Blogs'})
+   if(request.session.currentUser){
+      return response.render('createPost.ejs',{titlePage:'Create Post - Blogging Blogs'})
+   }
+   else{
+      return response.redirect('/')
+   }
 })
 
 router.post('/viewPost',(request,response) =>{
@@ -46,7 +53,12 @@ router.post('/updatePost', (request,response) =>{
    data = request.body
    const keys = Object.keys(data)
    Post.getPostData(keys[0], (err,user) =>{
-      return response.render('createPost.ejs',{titlePage:'Update Post - Blogging Blogs',data:user})
+      if(request.session.currentUser){
+         return response.render('createPost.ejs',{titlePage:'Update Post - Blogging Blogs',data:user})
+      }
+      else{
+         return response.redirect('/')
+      }
    })
 })
 
@@ -60,7 +72,6 @@ router.get('/auth/google/redirect',passport.authenticate('google'),(req,res) =>{
 
 router.get('/profile',(request,response) =>{
    User.getExistingUsername(request.session.currentUser,(err,data) =>{
-      console.log(data)
       return response.render('profile.ejs',{titlePage:'Profile - Blogging Blogs',data:data})
    })
 
