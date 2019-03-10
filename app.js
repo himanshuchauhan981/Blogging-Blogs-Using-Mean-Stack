@@ -88,7 +88,11 @@ app.post('/validate',(request,response) => {
       local:{
          username:inputUsername,
          email:inputEmail,
-         password:inputPassword
+         password:inputPassword,
+         defaultProfilePic:true,
+         userProfilePic:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkf1fPtGCX-bHemZlhOvWKRtYw1d9F2kb1Inc1zOgbcBaYpVC8',
+         defaultCoverPic:true,
+         userCoverPic:'https://digitalsynopsis.com/wp-content/uploads/2017/07/beautiful-color-ui-gradients-backgrounds-relay.png'
       }
    })
    User.getExistingUsername(inputUsername, (err,userName) => {
@@ -165,6 +169,13 @@ app.post('/updatingPosts/:postTitle',(request, response) =>{
    })
 })
 
+app.post('/updateCoverPhoto',upload.single('file'), (request,response) =>{
+   currentuser = request.session.currentUser
+   imageDetail = request.file.filename
+   User.updateCoverPhotoStatus(currentuser,imageDetail,(err,user) =>{
+      response.redirect('/profile')
+   })
+})
 //Setting EJS Template
 app.set('view engine','ejs')
 
