@@ -6,9 +6,11 @@
    <div class="container">
       <%- messages('partials/message', locals) %>
       <div class="card">
-         <img class="card-img-top" src="https://digitalsynopsis.com/wp-content/uploads/2017/07/beautiful-color-ui-gradients-backgrounds-relay.png" alt="">
+         <img class="card-img-top" src="<%= data.local.userCoverPic %>" alt="">
+         <div class="update-box" data-toggle="modal" data-target="#updateCoverPic">Update</div>
          <div class="user-image">
-            <img class="rounded-circle img-border" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkf1fPtGCX-bHemZlhOvWKRtYw1d9F2kb1Inc1zOgbcBaYpVC8" >
+            <img class="rounded-circle img-border" src="<%= data.local.userProfilePic %>">
+            <div class="profile-update-box" data-toggle="modal" data-target="#updateProfilePic">Update</div>
          </div>
          <div class="author-name">
             <h3><%= data.local.username %></h3>
@@ -88,6 +90,46 @@
                   </div>
                   <div class="modal-footer">
                      <button type="submit" class="btn btn-success" ng-disabled="updateEmailForm.$invalid">Update</button>
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div class="container">
+      <div class="modal fade" id="updateCoverPic" role="dialog">
+         <form action="/updateCoverPhoto" method="post" name="updateEmailForm" enctype="multipart/form-data">
+            <div class="modal-dialog modal-md">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h4 class="text-center">Update Cover Photo</h4>
+                  </div>
+                  <div class="modal-body">
+                     <input type="file" id="file" name="file">
+                  </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-success">Update</button>
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div class="container">
+      <div class="modal fade" id="updateProfilePic" role="dialog">
+         <form action="/updateEmailAddress" method="post" name="updateEmailForm" enctype="multipart/form-data">
+            <div class="modal-dialog modal-md">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h4 class="text-center">Update Profile Photo</h4>
+                  </div>
+                  <div class="modal-body">
+                     <input type="file">
+                  </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-success">Update</button>
                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                   </div>
                </div>
