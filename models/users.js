@@ -9,7 +9,11 @@ const userSchema = mongoose.Schema({
    local:{
       username:String,
       email:String,
-      password:String
+      password:String,
+      defaultProfilePic:String,
+      userProfilePic:String,
+      defaultCoverPic:String,
+      userCoverPic:String
    },
    google:{
       id:String,
@@ -67,4 +71,11 @@ module.exports.updatePassword = (currentuser,newPassword,callback) =>{
    query = {'local.username':currentuser}
    toUpdate = {$set:{'local.password':newPassword}}
    User.update(query,toUpdate,callback)
+}
+
+module.exports.updateCoverPhotoStatus = (currentuser,imageName,callback) =>{
+   query = {'local.username':currentuser}
+   toUpdate = {'local.defaultCoverPic':'false','local.userCoverPic':imageName}
+   User.update(query,toUpdate,callback)
+
 }
