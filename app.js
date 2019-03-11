@@ -173,6 +173,16 @@ app.post('/updateCoverPhoto',upload.single('file'), (request,response) =>{
    currentuser = request.session.currentUser
    imageDetail = request.file.filename
    User.updateCoverPhotoStatus(currentuser,imageDetail,(err,user) =>{
+      request.flash('success','Cover photo is updated successfully')
+      response.redirect('/profile')
+   })
+})
+
+app.post('/updateProfilePhoto',upload.single('file'),(request,response) =>{
+   currentuser = request.session.currentUser
+   imageDetail = request.file.filename
+   User.updateProfilePhotoStatus(currentuser,imageDetail,(err,user) =>{
+      request.flash('success','Profile Photo is updated successfully')
       response.redirect('/profile')
    })
 })
