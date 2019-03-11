@@ -45,7 +45,11 @@ router.post('/viewPost',(request,response) =>{
    data = request.body
    const keys = Object.keys(data)
    Post.getPostData(keys[0],(err,user)=>{
-      return response.render('viewPost.ejs',{titlePage:'View Post - Blogging Blogs',data:user,postUser:request.session.currentUser})
+      // console.log(user.postAuthor)
+      User.getExistingUsername(user.postAuthor, (err,currentuser) =>{
+         console.log(currentuser)
+         return response.render('viewPost.ejs',{titlePage:'View Post - Blogging Blogs',data:user,postUser:request.session.currentUser,picURL:currentuser.local.userProfilePic})
+      })
    })
 })
 
