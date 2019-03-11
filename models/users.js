@@ -77,5 +77,10 @@ module.exports.updateCoverPhotoStatus = (currentuser,imageName,callback) =>{
    query = {'local.username':currentuser}
    toUpdate = {'local.defaultCoverPic':'false','local.userCoverPic':imageName}
    User.update(query,toUpdate,callback)
+}
 
+module.exports.updateProfilePhotoStatus = (currentuser,imageName,callback) =>{
+   query = {'local.username':currentuser}
+   toUpdate = {'local.defaultProfilePic':'false','local.userProfilePic':imageName}
+   User.update(query,toUpdate,callback)
 }
