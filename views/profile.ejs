@@ -6,10 +6,18 @@
    <div class="container">
       <%- messages('partials/message', locals) %>
       <div class="card">
-         <img class="card-img-top" src="<%= data.local.userCoverPic %>" alt="">
+         <% if(data.local.defaultCoverPic  == 'false') {%>
+            <img class="card-img-top" src="image/<%= data.local.userCoverPic %>" alt="">
+         <% } else{ %>
+            <img class="card-img-top" src="<%= data.local.userCoverPic %>" alt="">
+         <% } %>
          <div class="update-box" data-toggle="modal" data-target="#updateCoverPic">Update</div>
          <div class="user-image">
-            <img class="rounded-circle img-border" src="<%= data.local.userProfilePic %>">
+            <% if(data.local.defaultProfilePic  == 'false') {%>
+               <img class="rounded-circle img-border" src="image/<%= data.local.userProfilePic %>">
+            <% } else{ %>
+               <img class="rounded-circle img-border" src="<%= data.local.userProfilePic %>">
+            <% } %>
             <div class="profile-update-box" data-toggle="modal" data-target="#updateProfilePic">Update</div>
          </div>
          <div class="author-name">
@@ -119,14 +127,14 @@
    </div>
    <div class="container">
       <div class="modal fade" id="updateProfilePic" role="dialog">
-         <form action="/updateEmailAddress" method="post" name="updateEmailForm" enctype="multipart/form-data">
+         <form action="/updateProfilePhoto" method="post" name="updateEmailForm" enctype="multipart/form-data">
             <div class="modal-dialog modal-md">
                <div class="modal-content">
                   <div class="modal-header">
                      <h4 class="text-center">Update Profile Photo</h4>
                   </div>
                   <div class="modal-body">
-                     <input type="file">
+                     <input type="file" id="file" name="file">
                   </div>
                   <div class="modal-footer">
                      <button type="submit" class="btn btn-success">Update</button>
