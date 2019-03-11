@@ -1,0 +1,88 @@
+.footer-container{
+   background-color: #E572F1;
+   height:200px;
+   margin-top:20px;
+}
+
+.about-us, .newsletter, .instagram-feeds, .follow-us{
+   padding:20px;
+}
+
+.about-us h4, .newsletter h4 , .instagram-feeds h4{
+   font-family:'Roboto Mono';
+   text-align: center;
+}
+.follow-us h4{
+   font-family:'Roboto Mono';
+}
+
+.about-us p{
+   font-family:'Roboto Slab';
+   text-align: justify;
+}
+
+.newsletter p{
+   font-family:'Roboto Slab';
+   text-align:center;
+}
+.follow-us p{
+   font-family: 'Roboto Slab';
+}
+
+.newsletter{
+   text-align: center;
+}
+.newsletter input[type="email"]{
+   border-radius:10px;
+   outline:none;
+   padding:5px;
+}
+
+.newsletter input[type="text"]:focus{
+   border: 2px solid #E115F6;
+   border-radius:10px;
+   outline:none;
+   box-shadow: 0px 0px 15px 4px #DF31F1;
+}
+
+.newsletter button{
+   border:none;
+   color:white;
+   background-color:#4CAF50;
+   text-align: center;
+   text-decoration: none;
+   font-size:19px;
+   padding:9px 15px;
+   outline:none;
+}
+
+.instagram-feeds div{
+   margin-bottom:4px;
+}
+
+.instagram-feeds div img:hover{
+   border:2px solid #E20CF8;
+   box-shadow: 0px 0px 15px 4px #DF31F1;
+}
+
+ ul{
+   list-style-type:none;
+   margin: 0;
+   padding:0;
+   overflow: hidden;
+}
+li{
+   float:left;
+}
+li a{
+   display:block;
+   padding: 8px;
+   cursor:pointer;
+}
+
+li a i{
+   text-align: center;
+}
+li a i:hover{
+   color:white;
+}
