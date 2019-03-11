@@ -1,6 +1,7 @@
 .card{
    width:400px;
    margin: 0 auto;
+   margin-top:10px;
 }
 .user-image{
    margin: 0 auto;
