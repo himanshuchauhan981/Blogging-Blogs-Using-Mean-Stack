@@ -70,9 +70,24 @@ router.get('/google',passport.authenticate('google',{
    scope:['profile']
 }))
 
+
 router.get('/auth/google/redirect',passport.authenticate('google'),(req,res) =>{
    res.redirect('/')
 })
+
+router.get('/auth/linkedin',
+  passport.authenticate('linkedin', { state: 'SOME STATE' }),
+  function(req, res){
+     console.log('its working')
+    // The request will be redirected to Linkedin for authentication, so this
+    // function will not be called.
+  });
+
+router.get('/auth/linkedin/redirect',passport.authenticate('linkedin', { failureRedirect: '/login' }),
+   function(req, res){
+      res.redirect('/');
+   }
+);
 
 router.get('/profile',(request,response) =>{
    User.getExistingUsername(request.session.currentUser,(err,data) =>{
