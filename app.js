@@ -124,7 +124,7 @@ app.post('/deletePost',(request,response) =>{
    })
 })
 
-
+// Updating Email Address
 app.post('/updateEmailAddress', (request,response) =>{
    newEmailAddress = request.body.newEmailAddress
    User.getEmailUpdated(request.session.currentUser, newEmailAddress, (err,user) =>{
@@ -135,6 +135,8 @@ app.post('/updateEmailAddress', (request,response) =>{
    })
 })
 
+
+//Updating User Password
 app.post('/updatePassword',(request,response) =>{
    oldPassword = request.body.old_password
    newPassword = request.body.new_password
@@ -156,7 +158,7 @@ app.post('/updatePassword',(request,response) =>{
 
 })
 
-
+//Updating Posts
 app.post('/updatingPosts/:postTitle',(request, response) =>{
    oldPostTitle = request.params.postTitle
    updatePostTitle = request.body.updatePostTitle
@@ -194,5 +196,5 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'))
 
 //Creating Server
-app.listen(process.env.PORT);
+app.listen(5000);
 console.log('Server is running at Port - 5000')
