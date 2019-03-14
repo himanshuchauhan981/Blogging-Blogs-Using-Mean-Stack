@@ -6,13 +6,21 @@ const keys = require('./keys')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const GoogleStrategy =  require('passport-google-oauth20')
+const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
 //Setting routes
 const User = require('./models/users')
 
 passport.serializeUser(function(request,user, done) {
-   request.session.currentUser = request.body.username
-   if(!request.session.currentUser) request.session.currentUser = user.google.username
+   if(user.local){
+      request.session.currentUser = user.local.username
+   }
+   else if(user.google){
+      request.session.currentUser = user.google.username
+   }
+   else if(user._json){
+      request.session.currentUser = user._json.formattedName
+   }
    done(null, user.id);
 });
 
@@ -49,6 +57,7 @@ passport.use(
       })
    })
 )
+
 passport.use(new LocalStrategy(
    function(username, password, done){
       User.getExistingUsername(username, (err,user) => {
@@ -66,6 +75,21 @@ passport.use(new LocalStrategy(
    }
 ));
 
+//Passport Linkedin Strategy
+passport.use(
+   new LinkedInStrategy({
+      clientID : keys.linkedin.clientID,
+      clientSecret : keys.linkedin.clientSecret,
+      callbackURL : '/auth/linkedin/redirect',
+      scope:['r_emailaddress,r_basicprofile'],
+      passReqToCallback: true
+   },(req,accessToken,refreshToken,profile,done) =>{
+      req.session.accessToken = accessToken;
+      process.nextTick(function(){
+         return done(null,profile);
+      })
+   }
+))
 
 router.post('/login',
 passport.authenticate('local',{successRedirect:'/', failureRedirect:'/login', failureFlash: true}),
