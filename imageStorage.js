@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const multer = require('multer')
 const GridFsStorage = require('multer-gridfs-storage')
 const Grid = require('gridfs-stream')
-const methodOverride = require('method-override')
 const crypto = require('crypto')
 const router = express.Router()
 
@@ -32,25 +31,24 @@ const storage = new GridFsStorage({
       return new Promise((resolve, reject) => {
          crypto.randomBytes(16, (err, buf) => {
             if (err) {
-               return reject(err);
+               return reject(err)
             }
-            const filename = buf.toString('hex') + path.extname(file.originalname);
+            const filename = buf.toString('hex') + path.extname(file.originalname)
             const fileInfo = {
                filename: filename,
                bucketName: 'uploads'
-            };
-            resolve(fileInfo);
-         });
-      });
+            }
+            resolve(fileInfo)
+         })
+      })
    }
-});
+})
 module.exports =  upload = multer({ storage })
-
 
 //Output Image to Page
 router.get('/image/:filename', (request,response) =>{
    gfs.files.findOne({filename:request.params.filename},(err,file) =>{
-      const readstream = gfs.createReadStream(file.filename);
+      const readstream = gfs.createReadStream(file.filename)
       readstream.pipe(response)
    })
 })
