@@ -12,6 +12,7 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const User = require('./models/users')
 
 passport.serializeUser(function(request,user, done) {
+   // console.log(user)
    if(user.local){
       request.session.currentUser = user.local.username
    }
@@ -29,7 +30,6 @@ passport.deserializeUser(function(id, done) {
       done(err, user);
    });
 });
-
 
 //Passport Google Strategy
 passport.use(
@@ -58,6 +58,40 @@ passport.use(
    })
 )
 
+//Passport Linkedin Strategy
+passport.use(
+   new LinkedInStrategy({
+      clientID : keys.linkedin.clientID,
+      clientSecret : keys.linkedin.clientSecret,
+      callbackURL : '/auth/linkedin/redirect',
+      scope:['r_emailaddress,r_basicprofile'],
+      passReqToCallback: true
+   },(req,accessToken,refreshToken,profile,done) =>{
+      console.log(profile._json.formattedName)
+      User.getUsersFromLinkedinSignUp(profile._json.id,(err,currentuser) =>{
+         if(currentuser){
+            return done(null,currentuser)
+         }
+         else{
+            req.session.accessToken = accessToken;
+            process.nextTick(function(){
+               new User({
+                  method:'linkedin',
+                  linkedin:{
+                     id:profile._json.id,
+                     username:profile._json.formattedName
+                  }
+               }).save().then((newUser) =>{
+                  console.log('New User created : '+newUser);
+                  return done(null,profile);
+               })
+            })
+         }
+      })
+   }
+))
+
+//Passport Local Strategy
 passport.use(new LocalStrategy(
    function(username, password, done){
       User.getExistingUsername(username, (err,user) => {
@@ -74,22 +108,6 @@ passport.use(new LocalStrategy(
       })
    }
 ));
-
-//Passport Linkedin Strategy
-passport.use(
-   new LinkedInStrategy({
-      clientID : keys.linkedin.clientID,
-      clientSecret : keys.linkedin.clientSecret,
-      callbackURL : '/auth/linkedin/redirect',
-      scope:['r_emailaddress,r_basicprofile'],
-      passReqToCallback: true
-   },(req,accessToken,refreshToken,profile,done) =>{
-      req.session.accessToken = accessToken;
-      process.nextTick(function(){
-         return done(null,profile);
-      })
-   }
-))
 
 router.post('/login',
 passport.authenticate('local',{successRedirect:'/', failureRedirect:'/login', failureFlash: true}),
