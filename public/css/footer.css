@@ -1,44 +1,28 @@
-.footer-container{
+.fluid-container{
    background-color: #E572F1;
-   height:200px;
-   margin-top:20px;
+   overflow-x: hidden;
 }
 
-.about-us, .newsletter, .instagram-feeds, .follow-us{
-   padding:20px;
+.about-us , .newsletter, .instagram-feeds, .follow-us{
+   padding:20px 30px !important;
 }
-
-.about-us h4, .newsletter h4 , .instagram-feeds h4{
+.about-heading, .newsletter-heading, .instagram-feeds-heading, .follow-us-heading{
    font-family:'Roboto Mono';
-   text-align: center;
+   font-size:25px;
 }
-.follow-us h4{
-   font-family:'Roboto Mono';
-}
-
-.about-us p{
+.about-text, .newsletter-text, .follow-us-text{
    font-family:'Roboto Slab';
+   font-size: 17px;
    text-align: justify;
 }
 
-.newsletter p{
-   font-family:'Roboto Slab';
-   text-align:center;
-}
-.follow-us p{
-   font-family: 'Roboto Slab';
-}
-
-.newsletter{
-   text-align: center;
-}
-.newsletter input[type="email"]{
+input[type="email"]{
    border-radius:10px;
    outline:none;
    padding:5px;
 }
 
-.newsletter input[type="text"]:focus{
+input[type="email"]:focus{
    border: 2px solid #E115F6;
    border-radius:10px;
    outline:none;
@@ -50,10 +34,12 @@
    color:white;
    background-color:#4CAF50;
    text-align: center;
-   text-decoration: none;
-   font-size:19px;
+   /*text-decoration: none;*/
+/*   font-size:21px;*/
    padding:9px 15px;
    outline:none;
+   border-top-right-radius:4px;
+   border-bottom-right-radius:4px;
 }
 
 .instagram-feeds div{
@@ -65,24 +51,68 @@
    box-shadow: 0px 0px 15px 4px #DF31F1;
 }
 
- ul{
+.follow-us-list{
    list-style-type:none;
    margin: 0;
    padding:0;
    overflow: hidden;
 }
-li{
+
+.follow-list{
    float:left;
 }
-li a{
+.follow-list a{
    display:block;
    padding: 8px;
    cursor:pointer;
+    font-size: 23px;
 }
 
-li a i{
+.follow-list a i{
    text-align: center;
 }
-li a i:hover{
+.follow-list a i:hover{
    color:white;
+}
+
+@media only screen and (max-width:992px){
+   .about-heading, .newsletter-heading, .instagram-feeds-heading,.follow-us-heading{
+      font-size:45px;
+      font-weight: bold;
+      text-align: center;
+   }
+   .about-text{
+       font-size:30px;
+       text-align:justify;
+   }
+   .newsletter-text, .follow-us-text{
+       font-size:30px;
+       text-align:center;
+   }
+   input[type="email"]{
+       padding:15px;
+       font-size:35px;
+   }
+   .instagram-pics div img{
+        height:200px;
+        width:280px;
+        display:block;
+        margin-left: auto;
+        margin-right: auto;
+        padding : 5px;
+   }
+   .follow-us-list{
+       font-size:60px;
+   }
+   .menu{
+       text-align:center;
+   }
+   .menu ul{
+       display:inline-table;
+
+   }
+   .menu-li{
+       display:inline;
+   }
+
 }
