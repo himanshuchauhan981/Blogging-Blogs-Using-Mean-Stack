@@ -135,7 +135,6 @@ app.post('/updateEmailAddress', (request,response) =>{
    })
 })
 
-
 //Updating User Password
 app.post('/updatePassword',(request,response) =>{
    oldPassword = request.body.old_password
