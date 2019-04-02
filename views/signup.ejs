@@ -1,36 +1,63 @@
 <title><%= titlePage %></title>
 <link rel="stylesheet" href="/css/signup.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <% include partials/header.ejs %>
 <body ng-app="">
-   <%- messages('partials/message', locals) %>
-   <div class="signup-form">
-      <form name="registerForm" class="form-signup" method='post' action='/validate'>
-         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign In</h1>
-         <div class="social-login">
-            <a href="/auth/linkedin"><button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-linkedin-f"></i> Sign in with Linkedin</span></button></a>
-            <a href="/google"><button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span></button></a>
-         </div>
-         <p style="text-align:center"> OR  </p>
-
-         <span ng-show="registerForm.inputUsername.$touched && registerForm.inputUsername.$invalid" style="font-size:12px; color:red;">* Username is required</span>
-         <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" ng-model="inputUsername" required>
-
-         <span ng-show="registerForm.inputEmail.$touched  && registerForm.inputEmail.$invalid" style="font-size:12px; color:red;">* Required Email ID</span>
-         <span ng-show="registerForm.inputEmail.$error.pattern" style="font-size:12px; color:red;">* Invalid Email ID</span>
-         <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email Address" ng-model="inputEmail" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required>
-
-         <span ng-show="registerForm.inputPassword.$touched && registerForm.inputPassword.$invalid" style="font-size:12px; color:red;">* Required Password</span>
-         <p><span style="font-size:12px; color:red;" ng-show="!registerForm.inputPassword.$error.required && (registerForm.inputPassword.$error.minlength || registerForm.inputPassword.$error.maxlength) && registerForm.inputPassword.$dirty">* Password must be between 8 and 20 characters.</span></p>
-         <p><span style="font-size:12px; color:red;" ng-show="!registerForm.inputPassword.$error.required && !registerForm.inputPassword.$error.minlength && !registerForm.inputPassword.$error.maxlength && registerForm.inputPassword.$error.pattern && registerForm.inputPassword.$dirty">* Must contain one lower &amp; uppercase letter and one non-alpha character</span></p>
-         <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" ng-model="inputPassword" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
-
-         <span style="font-size:12px; color:red;" ng-show="registerForm.confirmPassword.$error.pattern">* Passwords do not match.</span>
-         <span style="font-size:12px; color:green;" ng-show="registerForm.confirmPassword.$valid" style="color:green;">Password Matched</span>
-         <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder=" Confirm Password" ng-model="confirmPassword" ng-pattern="inputPassword" required>
-         <a href="#" id="forgot_pswd">Forgot password?</a>
-         <hr>
-         <button class="btn btn-primary btn-block" type="submit" id="btn-signup" ng-disabled="registerForm.$invalid"><i class="fas fa-user-plus"></i> Sign up New Account</button>
-      </form>
-   </div>
+    <div class="fluid-container signup-container">
+        <div class="row">
+            <div class="col-lg-7 signup-background"></div>
+            <div class="col-lg-5">
+                <div class="signup-form">
+                    <h4 class="signup-heading">Sign Up</h4>
+                    <%- messages('partials/message', locals) %>
+                    <div class="signup-content">
+                        <form name="registerForm" method='post' action='/validate'>
+                            <div class="form-group">
+                                <label class="highlight">Username</label>
+                                <input type="text" placeholder="Enter Username" class="input-highlight" id="inputUsername" name="inputUsername" ng-model="inputUsername" required>
+                                <span ng-show="registerForm.inputUsername.$touched && registerForm.inputUsername.$invalid" class="red-error">* Username is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="highlight">Email ID</label>
+                                <input type="email" placeholder="Enter Email" class="input-highlight" id="inputEmail" name="inputEmail" ng-model="inputEmail" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required>
+                                <span class="red-error" ng-show="registerForm.inputEmail.$touched  && registerForm.inputEmail.$invalid" clas="red-eror">* Required Email ID</span>
+                                <p><span ng-show="registerForm.inputEmail.$error.pattern" class="red-error">* Invalid Email ID</span></p>
+                            </div>
+                            <div class="form-group">
+                                <label class="highlight">Password</label>
+                                <input type="password" placeholder="Enter Password" class="input-highlight" id="inputPassword" name="inputPassword" ng-model="inputPassword" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
+                                <span ng-show="registerForm.inputPassword.$touched && registerForm.inputPassword.$invalid" class="red-error">* Required Password</span>
+                                <p><span class="red-error" ng-show="!registerForm.inputPassword.$error.required && (registerForm.inputPassword.$error.minlength || registerForm.inputPassword.$error.maxlength) && registerForm.inputPassword.$dirty">* Password must be between 8 and 20 characters.</span></p>
+                                <p><span class="red-error" ng-show="!registerForm.inputPassword.$error.required && !registerForm.inputPassword.$error.minlength && !registerForm.inputPassword.$error.maxlength && registerForm.inputPassword.$error.pattern && registerForm.inputPassword.$dirty">* Must contain one lower &amp; uppercase letter and one non-alpha character</span></p>
+                            </div>
+                            <div class="form-group">
+                                <label class="highlight">Repeat Password</label>
+                                <input type="password" placeholder="Re enter Password" class="input-highlight" id="confirmPassword" name="confirmPassword" ng-model="confirmPassword" ng-pattern="inputPassword" required>
+                                <span class="red-error" ng-show="registerForm.confirmPassword.$error.pattern">* Passwords do not match.</span>
+                                <span class="green-error" ng-show="registerForm.confirmPassword.$valid" style="color:green;">Password Matched</span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-input-check" type="checkbox">
+                                <label class="form-check-label">I agree to the <b>Terms of User</b></label>
+                            </div>
+                            <div class="submit-button">
+                                <button type="submit" class="btn signup-button" ng-disabled="registerForm.$invalid">Sign Up</button>
+                            </div>
+                            <div class="signup-methods">
+                                <p>Or Sign up using</p>
+                                <div class="button-group">
+                                    <a href="/auth/linkedin"><button type="button" class="linkedin-button"><i class="fa fa-linkedin fa-fw"></i> Linkedin</button></a>
+                                    <a href="/google"><button type="button" class="google-button"><i class="fa fa-google fa-fw"></i>Google</button></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/jquery.js"></script>
 </body>
