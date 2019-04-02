@@ -12,50 +12,51 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const User = require('./models/users')
 
 passport.serializeUser(function(request,user, done) {
-   // console.log(user)
-   if(user.local){
-      request.session.currentUser = user.local.username
-   }
-   else if(user.google){
-      request.session.currentUser = user.google.username
-   }
-   else if(user._json){
-      request.session.currentUser = user._json.formattedName
-   }
-   done(null, user.id);
+    console.log('user : '+user)
+    if(user.method =='local'){
+        request.session.currentUser = user.local.username
+    }
+    else if(user.method == 'google'){
+        request.session.currentUser = user.google.username
+    }
+    else if(user._json){
+        console.log('Linkedin User')
+        request.session.currentUser = user._json.formattedName
+    }
+    done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-   User.getByID(id, function(err, user) {
-      done(err, user);
-   });
+    User.getByID(id, function(err, user) {
+        done(err, user);
+    });
 });
 
 //Passport Google Strategy
 passport.use(
-   new GoogleStrategy({
-      callbackURL:'/auth/google/redirect',
-      clientID:keys.google.clientID,
-      clientSecret:keys.google.clientSecret
-   },(accessToken, refreshToken, profile, done) =>{
-      User.getUsersFromGoogleSignUp(profile.id,(err,currentUser) =>{
-         if(currentUser){
-            return done(null,currentUser)
-         }
-         else{
-            new User({
-               method:'google',
-               google:{
-                  id:profile.id,
-                  username:profile.displayName
-               }
-            }).save().then((newUser) =>{
-               console.log('New User Created : '+newUser)
-               return done(null, newUser)
-            })
-         }
-      })
-   })
+    new GoogleStrategy({
+        callbackURL:'/auth/google/redirect',
+        clientID:keys.google.clientID,
+        clientSecret:keys.google.clientSecret
+    },(accessToken, refreshToken, profile, done) =>{
+        User.getUsersFromGoogleSignUp(profile.id,(err,currentUser) =>{
+            if(currentUser){
+                return done(null,currentUser)
+            }
+            else{
+                new User({
+                    method:'google',
+                    google:{
+                        id:profile.id,
+                        username:profile.displayName
+                    }
+                }).save().then((newUser) =>{
+                    console.log('New User Created : '+newUser)
+                    return done(null, newUser)
+                })
+            }
+        })
+    })
 )
 
 //Passport Linkedin Strategy
@@ -112,13 +113,13 @@ passport.use(new LocalStrategy(
 router.post('/login',
 passport.authenticate('local',{successRedirect:'/', failureRedirect:'/login', failureFlash: true}),
 function(request,response){
-   response.redirect('/')
+    response.redirect('/')
 })
 
 router.get('/logout', (request,response) =>{
-   request.logout()
-   request.session.destroy()
-   response.redirect('/login')
+    request.logout()
+    request.session.destroy()
+    response.redirect('/login')
 })
 
 module.exports = router
