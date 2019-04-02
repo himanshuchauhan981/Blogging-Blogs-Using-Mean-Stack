@@ -1,70 +1,62 @@
-.login{
-   width:400px;
-   margin: 0 auto;
-   margin-top:35px;
-   background-color: #F4F1F1;
-   padding: 10px 30px;
-   border-radius: 4px;
+.login-background{
+    background-image: url('/images/20.jpg');
+    background-repeat: none;
+    background-size: cover;
+}
+.login-background .container{
+    padding: 30px;
+}
+.login-card{
+    width: 380px;
+    margin: 0 auto;
 }
 
 .login-heading{
-   font-family:'Sofia';
-   font-size:45px;
-}
-input[type=text],input[type=password]{
-   width:100%;
-   padding: 10px 30px;
-   margin-bottom:20px;
-   border-radius: 20px;
-   outline:none;
+    text-align: center;
+    font-family:'Sofia';
+    margin-top:50px;
+    font-size:45px;
 }
 
-input[type=text]:focus, input[type=password]:focus{
-   border: 3px solid #4CAF50;
-   outline:none;
+.centered{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-input[type=checkbox]{
-   width:15px;
-   height:15px;
-   margin-left:5px;
+.username-input, .password-input{
+    width:100%;
+    border:none;
+    border-bottom: 3px solid #3EB2E8;
+    padding:5px 10px;
+    border-radius:16px;
+    outline: none;
+}
+.username-input:focus, .password-input:focus{
+    border: 2px solid #3EB2E8;
+    box-shadow: 2px 2px 12px -1px rgba(24,173,242,1);
 }
 
-button{
-   background-color: #4CAF50;
-   border:none;
-   color:white;
-   padding:15px 32px;
-   text-align:center;
-   text-decoration: none;
-   font-size:16px;
-   margin:4px 2px;
-   cursor:pointer;
-   border-radius: 25px;
-}
-.button{
-   text-align: right;
+label{
+    padding-left:7px;
+    font-size:15px;
+    font-family: 'Titillium Web', sans-serif;
 }
 
-button:focus{
-   outline:none;
+.login-button{
+    padding-bottom:32px;
 }
-
-button:hover {
-   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+.login-button button{
+    padding:5px 20px;
+    border-radius:6px;
+    border: 2px solid #4CAF50;
+    background-color:#4CAF50;
+    outline: none;
+    cursor:pointer;
+    color:white;
 }
-
-.inputWithIcon{
-   position: relative;
-   cursor: pointer;
-}
-
-.inputWithIcon i{
-   position:absolute;
-   top:8px;
-   left:300px;
-   text-align: right;
-   padding:9px 8px;
-   color:#aaa;
-   transition:0.3s;
+.login-button button:hover{
+    background-color:#71D475;
+    box-shadow: 2px 2px 12px 1px rgba(76,175,80,1);
 }
