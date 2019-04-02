@@ -45,7 +45,6 @@ router.post('/viewPost',(request,response) =>{
    data = request.body
    const keys = Object.keys(data)
    Post.getPostData(keys[0],(err,user)=>{
-      // console.log(user.postAuthor)
       User.getExistingUsername(user.postAuthor, (err,currentuser) =>{
          console.log(currentuser)
          return response.render('viewPost.ejs',{titlePage:'View Post - Blogging Blogs',data:user,postUser:request.session.currentUser,picURL:currentuser.local.userProfilePic})
@@ -79,8 +78,6 @@ router.get('/auth/linkedin',
   passport.authenticate('linkedin', { state: 'SOME STATE' }),
   function(req, res){
      console.log('its working')
-    // The request will be redirected to Linkedin for authentication, so this
-    // function will not be called.
   });
 
 router.get('/auth/linkedin/redirect',passport.authenticate('linkedin', { failureRedirect: '/login' }),
