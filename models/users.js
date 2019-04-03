@@ -4,7 +4,7 @@ mongoose.connect('mongodb://blogging_blogs:bloggingAdmin0018@ds161024.mlab.com:6
 const userSchema = mongoose.Schema({
    method:{
       type:String,
-      enum:['local','google','facebook']
+      enum:['local','google','linkedin']
    },
    local:{
       username:String,
@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
       id:String,
       username:String
    },
-   facebook:{
+   linkedin:{
       id:String,
       email:String
    }
@@ -54,6 +54,11 @@ module.exports.getByID  = (id,callback) =>{
 module.exports.getUsersFromGoogleSignUp = (googleID,callback) =>{
    query = {"google.id":googleID}
    User.findOne(query,callback)
+}
+
+module.exports.getUsersFromLinkedinSignUp = (linkedinID,callback) =>{
+    query = {"linkedin.id":linkedinID}
+    User.findOne(query,callback)
 }
 
 module.exports.getEmailUpdated = (currentuser,newEmail,callback) =>{
