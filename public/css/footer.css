@@ -1,5 +1,5 @@
 .fluid-container{
-   background-color: #E572F1;
+   background-color: #5EECE5;
    overflow-x: hidden;
 }
 
@@ -109,11 +109,10 @@ input[type="email"]:focus{
    }
    .menu ul{
        display:inline-table;
-       
+
    }
    .menu-li{
        display:inline;
    }
-   
-}
 
+}
