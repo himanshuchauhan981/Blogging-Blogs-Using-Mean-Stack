@@ -19,3 +19,7 @@ function showpassword(){
       click.type="password";
    }
 }
+
+function getFocus(){
+    document.getElementById("comment").focus();
+}
