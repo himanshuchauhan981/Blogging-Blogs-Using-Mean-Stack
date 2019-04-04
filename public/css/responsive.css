@@ -3,3 +3,16 @@
       padding:0px 5px;
    }
 }
+
+.nav-items{
+    font-family:'Aclonica';
+    font-size:19px;
+}
+
+.nav-items:hover{
+    border-bottom: 2px solid black;
+    -webkit-transition:border 0.5s ease;
+    -moz-transition:border 0.5s ease;
+    -o-transition:border 0.5s ease;
+    transition:border 0.5s ease;
+}
