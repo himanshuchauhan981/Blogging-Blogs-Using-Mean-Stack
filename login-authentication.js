@@ -12,7 +12,6 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const User = require('./models/users')
 
 passport.serializeUser(function(request,user, done) {
-    console.log('user : '+user)
     if(user.method =='local'){
         request.session.currentUser = user.local.username
     }
