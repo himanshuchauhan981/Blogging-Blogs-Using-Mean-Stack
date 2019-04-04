@@ -28,3 +28,52 @@
    float:right;
    margin-top:20px;
 }
+
+.like-button, .comment-button, .share-button{
+    cursor:pointer;
+    font-size:18px;
+}
+
+.like-button:hover, .comment-button:hover, .share-button:hover{
+    background-color: #ECE9E9;
+    border-radius:20px;
+}
+
+.comment-section{
+    padding:5px;
+}
+
+.comment-box{
+    padding:15px;
+}
+
+.user-image{
+    width: 60px;
+    height: 60px;
+}
+
+.comment{
+    width:100%;
+    outline:none;
+    padding:10px 26px;
+    border-radius:20px;
+    background-color: #ECE9E9;
+    border: none;
+}
+
+.comment:focus{
+    background-color: #E8E0E0;
+}
+
+.comment-box .row .col-lg-11{
+    padding-top: 9px;
+}
+.fa-paper-plane{
+    position: absolute;
+    right: 20px;
+    top:12px;
+}
+
+.input-group-addon span{
+    font-size: 18px;
+}
