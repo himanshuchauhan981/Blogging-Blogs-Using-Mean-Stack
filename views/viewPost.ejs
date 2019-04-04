@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/viewPost.css">
 <% include partials/header.ejs %>
 <div class="container view-container">
-   <div class="card">
+   <div class="w3-card view-card">
       <div class="card-header">
          <img class="rounded-circle" src="image/<%= picURL %>">
          <h3 style="font-family:'ABeeZee'"><%= data.postTitle %></h3>
@@ -17,9 +17,14 @@
          <% } %>
       </div>
       <img class="card-img-top" height="400px" src="image/<%= data.postImage %>" style="width:100%; height:500px;">
-      <!-- <img class="card-img-top" height="400px" src="https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?cs=srgb&dl=beautiful-blur-bright-326055.jpg&fm=jpg"> -->
       <div class="card-body">
          <p style="font-family:'Acme'; font-size:17px; text-align:justify"><%= data.postContent %></p>
+      </div>
+      <div class="card-footer">
+          <div class="w3-row">
+              <p><i class="fa fa-thumbs-o-up"></i> Like</p>
+              <p><i class="fa fa-comments"></i> Comment</p>
+          </div>
       </div>
    </div>
 </div>
