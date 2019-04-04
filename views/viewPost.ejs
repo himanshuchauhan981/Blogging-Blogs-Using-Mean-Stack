@@ -1,5 +1,6 @@
 <title><%= titlePage %></title>
 <link rel="stylesheet" href="/css/viewPost.css">
+<script src="/js/javascript.js"></script>
 <% include partials/header.ejs %>
 <div class="container view-container">
    <div class="w3-card view-card">
@@ -21,9 +22,25 @@
          <p style="font-family:'Acme'; font-size:17px; text-align:justify"><%= data.postContent %></p>
       </div>
       <div class="card-footer">
-          <div class="w3-row">
-              <p><i class="fa fa-thumbs-o-up"></i> Like</p>
-              <p><i class="fa fa-comments"></i> Comment</p>
+          <div class="comment-section">
+              <span class="like-button w3-padding"><i class="fa fa-thumbs-up"></i> Like</span>
+              <span class="comment-button w3-padding" onclick="getFocus()"><i class="fa fa-comments"></i> Comment</span>
+              <span class="share-button w3-padding"><i class="fa fa-share-alt"></i> Share</span>
+          </div>
+          <div class="comment-box">
+              <div class="row">
+                  <div class="col-lg-1 col-md-1">
+                      <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="W3-circle user-image w3-border">
+                  </div>
+                  <div class="col-lg-11 col-md-11">
+                      <div class="input-group">
+                          <div class="input-group-addon">
+                              <span class="fa fa-paper-plane"></span>
+                          </div>
+                          <input type="text" class="comment" placeholder="Write a comment" id="comment">
+                      </div>
+                  </div>
+              </div>
           </div>
       </div>
    </div>
