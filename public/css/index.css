@@ -1,13 +1,23 @@
-.likebutton{
-   display:inline-block;
-   color:#444;
-   box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-   cursor:pointer;
-   vertical-align: middle;
-   width: 100px;
-   padding:7px;
-   text-align:center;
-   background-color:white;
-   font-size:18px;
-   border-radius: 25px;
+.post-author{
+    font-size:16px;
+}
+
+.post-content p{
+    font-family:'Acme';
+    font-size:19px;
+    text-align:justify;
+}
+
+.information-heading h4, .another-heading h4{
+    font-family: 'ABeeZee';
+    font-size:19px;
+}
+
+.information-list-item{
+    font-family: 'ABeeZee';
+    font-size:16px;
+}
+
+.another-heading{
+    background-color:#5EECE5;
 }
