@@ -42,13 +42,13 @@ router.get('/createPost',(request,response) =>{
 })
 
 router.post('/viewPost',(request,response) =>{
-   data = request.body
-   const keys = Object.keys(data)
-   Post.getPostData(keys[0],(err,user)=>{
-      User.getExistingUsername(user.postAuthor, (err,currentuser) =>{
-         return response.render('viewPost.ejs',{titlePage:'View Post - Blogging Blogs',data:user,postUser:request.session.currentUser,picURL:currentuser.local.userProfilePic})
-      })
-   })
+    data = request.body
+    const keys = Object.keys(data)
+    Post.getPostData(keys[0],(err,user)=>{
+        User.getExistingUsername(user.postAuthor, (err,currentuser) =>{
+            return response.render('viewPost.ejs',{titlePage:'View Post - Blogging Blogs',data:user,postUser:request.session.currentUser,picURL:currentuser.local.userProfilePic})
+        })
+    })
 })
 
 router.post('/updatePost', (request,response) =>{
