@@ -16,3 +16,7 @@
     -o-transition:border 0.5s ease;
     transition:border 0.5s ease;
 }
+
+.overflowXY{
+    overflow: hidden;
+}
