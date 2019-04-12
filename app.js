@@ -1,4 +1,3 @@
-//Edited from Ubuntu
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
@@ -47,7 +46,6 @@ app.use(expressValidator({
    }
 }))
 
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
@@ -73,7 +71,11 @@ app.post('/upload',upload.single('file'),(request,response) => {
       postContent:postContent,
       postDate: postDate,
       postAuthor:postAuthor,
-      postImage:request.file.filename
+      postImage:request.file.filename,
+      postComment : {
+          postCommentName: "",
+          postCommentContent: ""
+      }
    })
    Post.saveNewPosts(postData,()=>{
       return response.redirect('/')
@@ -188,6 +190,45 @@ app.post('/updateProfilePhoto',upload.single('file'),(request,response) =>{
       response.redirect('/profile')
    })
 })
+
+//Saving Post Comments
+app.post('/saveComment/:postTitle',(request,response)=>{
+    currentuser = request.session.currentUser
+
+    postComment = request.body.postcomment
+    commentObject = {
+        postCommentName: request.session.currentUser,
+        postCommentContent: request.body.postcomment
+    }
+    Post.savePostComments(commentObject,request.params,(err,postdetails)=>{
+        if(postdetails){
+            Post.getPostData(request.params.postTitle,(err,user)=>{
+                console.log(user)
+                User.getExistingUsername(user.postAuthor, (err, currentuser) =>{
+                    return response.render('viewPost.ejs',{
+                        titlePage:'View Post - Blogging Blogs',
+                        data:user,postUser:request.session.currentUser,
+                        picURL:currentuser.local.userProfilePic
+                    })
+                })
+            })
+        }
+    })
+    // if(currentuser){
+    //     postComment = request.body.postcomment
+    //     commentObject = {
+    //         postCommentName: request.session.currentUser,
+    //         postCommentContent: request.body.postcomment
+    //     }
+    //     Post.savePostComments(commentObject,request.params,(err,postdetails)=>{
+    //
+    //     })
+    // }
+    // else{
+    //     response.redirect('/login')
+    // }
+})
+
 //Setting EJS Template
 app.set('view engine','ejs')
 
