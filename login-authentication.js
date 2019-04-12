@@ -19,7 +19,6 @@ passport.serializeUser(function(request,user, done) {
         request.session.currentUser = user.google.username
     }
     else if(user._json){
-        console.log('Linkedin User')
         request.session.currentUser = user._json.formattedName
     }
     done(null, user.id);
@@ -50,7 +49,6 @@ passport.use(
                         username:profile.displayName
                     }
                 }).save().then((newUser) =>{
-                    console.log('New User Created : '+newUser)
                     return done(null, newUser)
                 })
             }
@@ -67,7 +65,6 @@ passport.use(
       scope:['r_emailaddress,r_basicprofile'],
       passReqToCallback: true
    },(req,accessToken,refreshToken,profile,done) =>{
-      console.log(profile._json.formattedName)
       User.getUsersFromLinkedinSignUp(profile._json.id,(err,currentuser) =>{
          if(currentuser){
             return done(null,currentuser)
@@ -82,7 +79,6 @@ passport.use(
                      username:profile._json.formattedName
                   }
                }).save().then((newUser) =>{
-                  console.log('New User created : '+newUser);
                   return done(null,profile);
                })
             })
