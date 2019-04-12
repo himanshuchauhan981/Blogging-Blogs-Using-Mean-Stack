@@ -11,7 +11,7 @@ const router = express.Router()
 const keys = require('./keys')
 const app = express()
 
-const conn = mongoose.createConnection(keys.mongoURI.mongokey)
+const conn = mongoose.createConnection(keys.mongoURI.mongokey, {useNewUrlParser: true})
 
 //Initialize gfs
 let gfs
