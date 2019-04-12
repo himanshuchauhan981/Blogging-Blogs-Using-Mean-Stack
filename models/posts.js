@@ -6,7 +6,8 @@ const postSchema = mongoose.Schema({
    postContent : String,
    postDate : String,
    postAuthor : String,
-   postImage:String
+   postImage:String,
+   postComment: []
 })
 
 module.exports = mongoose.model('posts',postSchema)
@@ -38,4 +39,14 @@ module.exports.deleteSelectedPost = (title,callback) =>{
 
 module.exports.updatePostData = (title,newPostTitle,newPostContent,callback) =>{
    Post.updateOne({postTitle:title}, {$set:{'postTitle':newPostTitle, 'postContent':newPostContent}}, callback)
+}
+
+module.exports.savePostComments = (commentObject, title, callback)=>{
+    query = {postTitle:title.postTitle}
+
+    Post.findOne(query,(err,docs)=>{
+        copyDocs = docs.postComment
+        copyDocs.push({postCommentName: commentObject.postCommentName, postCommentContent: commentObject.postCommentContent})
+        Post.updateOne(query,{$set:{'postComment':copyDocs}}, callback)
+    })
 }
