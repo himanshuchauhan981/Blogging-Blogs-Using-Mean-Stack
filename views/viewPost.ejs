@@ -23,8 +23,8 @@
       </div>
       <div class="card-footer">
           <div class="comment-section">
-              <span class="like-button w3-padding"><i class="fa fa-thumbs-up"></i> Like</span>
-              <span class="comment-button w3-padding" onclick="getFocus()"><i class="fa fa-comments"></i> Comment</span>
+              <span class="like-button w3-padding" onclick="changeLikeMode()"><i class="fa fa-thumbs-up" id="likebutton"> Like</i></span>
+              <span class="comment-button w3-padding" onclick="getFocus()"><i class="fa fa-comments"> Comment</i></span>
               <span class="share-button w3-padding"><i class="fa fa-share-alt"></i> Share</span>
           </div>
           <div class="comment-box">
@@ -33,12 +33,14 @@
                       <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="W3-circle user-image w3-border">
                   </div>
                   <div class="col-lg-11 col-md-11">
-                      <div class="input-group">
-                          <div class="input-group-addon">
-                              <span class="fa fa-paper-plane"></span>
+                      <form action="/saveComment/<%= data.postTitle %>" method="post">
+                          <div class="input-group">
+                              <div class="input-group-addon">
+                                  <button type="submit" class="post-send"><i class="fa fa-paper-plane"></i></button>
+                              </div>
+                              <input type="text" class="comment" placeholder="Write a comment" id="comment" name="postcomment">
                           </div>
-                          <input type="text" class="comment" placeholder="Write a comment" id="comment">
-                      </div>
+                      </form>
                   </div>
               </div>
           </div>
