@@ -66,16 +66,14 @@ app.post('/upload',upload.single('file'),(request,response) => {
    const nowDate = new Date()
    postDate = date.format(nowDate,'MMMM DD, YYYY')
    postAuthor = request.session.currentUser
+   const arr = []
    const postData = new Post({
       postTitle:postTitle,
       postContent:postContent,
       postDate: postDate,
       postAuthor:postAuthor,
       postImage:request.file.filename,
-      postComment : {
-          postCommentName: "",
-          postCommentContent: ""
-      }
+      postComment : arr
    })
    Post.saveNewPosts(postData,()=>{
       return response.redirect('/')
@@ -194,39 +192,34 @@ app.post('/updateProfilePhoto',upload.single('file'),(request,response) =>{
 //Saving Post Comments
 app.post('/saveComment/:postTitle',(request,response)=>{
     currentuser = request.session.currentUser
-
-    postComment = request.body.postcomment
-    commentObject = {
-        postCommentName: request.session.currentUser,
-        postCommentContent: request.body.postcomment
-    }
-    Post.savePostComments(commentObject,request.params,(err,postdetails)=>{
-        if(postdetails){
-            Post.getPostData(request.params.postTitle,(err,user)=>{
-                console.log(user)
-                User.getExistingUsername(user.postAuthor, (err, currentuser) =>{
-                    return response.render('viewPost.ejs',{
-                        titlePage:'View Post - Blogging Blogs',
-                        data:user,postUser:request.session.currentUser,
-                        picURL:currentuser.local.userProfilePic
+    query = {postTitle: request.params.postTitle}
+    copyDocs = []
+    if(currentuser){
+        postComment = request.body.postcomment
+        commentObject = {
+            postCommentName: request.session.currentUser,
+            postCommentContent: request.body.postcomment
+        }
+        Post.getPostData(request.params.postTitle, (err,docs) =>{
+            data = docs.postComment
+            Post.savePostComments(request.params.postTitle,data,commentObject,(err,docs) =>{
+                Post.getPostData(request.params.postTitle,(err,user)=>{
+                    User.getExistingUsername(user.postAuthor, (err,currentuser) =>{
+                        return response.render('viewPost.ejs',{
+                            titlePage:'View Post - Blogging Blogs',
+                            data:user,
+                            postUser:request.session.currentUser,
+                            picURL:currentuser.local.userProfilePic
+                        })
                     })
                 })
             })
-        }
-    })
-    // if(currentuser){
-    //     postComment = request.body.postcomment
-    //     commentObject = {
-    //         postCommentName: request.session.currentUser,
-    //         postCommentContent: request.body.postcomment
-    //     }
-    //     Post.savePostComments(commentObject,request.params,(err,postdetails)=>{
-    //
-    //     })
-    // }
-    // else{
-    //     response.redirect('/login')
-    // }
+        })
+
+    }
+    else{
+        return response.redirect('/login')
+    }
 })
 
 //Setting EJS Template
