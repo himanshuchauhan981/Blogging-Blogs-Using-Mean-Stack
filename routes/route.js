@@ -1,11 +1,14 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const passport = require('passport')
+
 const app = express()
 const router = express.Router()
+
 const User = require('../models/users')
 const Post = require('../models/posts')
 const StoreImage = require('../imageStorage')
-const passport = require('passport')
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
@@ -44,19 +47,30 @@ router.get('/createPost',(request,response) =>{
 router.post('/viewPost',(request,response) =>{
     data = request.body
     const keys = Object.keys(data)
+    //Post Title : console.log(keys)
     Post.getPostData(keys[0],(err,user)=>{
+        console.log(user)
         User.getExistingUsername(user.postAuthor, (err,currentuser) =>{
-            return response.render('viewPost.ejs',{titlePage:'View Post - Blogging Blogs',data:user,postUser:request.session.currentUser,picURL:currentuser.local.userProfilePic})
+            return response.render('viewPost.ejs',{
+                titlePage:'View Post - Blogging Blogs',
+                data:user,
+                postUser:request.session.currentUser,
+                picURL:currentuser.local.userProfilePic
+            })
         })
     })
 })
+
 
 router.post('/updatePost', (request,response) =>{
    data = request.body
    const keys = Object.keys(data)
    Post.getPostData(keys[0], (err,user) =>{
       if(request.session.currentUser){
-         return response.render('createPost.ejs',{titlePage:'Update Post - Blogging Blogs',data:user})
+         return response.render('createPost.ejs',{
+             titlePage:'Update Post - Blogging Blogs',
+             data:user
+         })
       }
       else{
          return response.redirect('/')
