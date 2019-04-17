@@ -7,7 +7,9 @@ const postSchema = mongoose.Schema({
    postDate : String,
    postAuthor : String,
    postImage:String,
-   postComment: []
+   postComment: {
+       type: Array
+   }
 })
 
 module.exports = mongoose.model('posts',postSchema)
@@ -41,12 +43,12 @@ module.exports.updatePostData = (title,newPostTitle,newPostContent,callback) =>{
    Post.updateOne({postTitle:title}, {$set:{'postTitle':newPostTitle, 'postContent':newPostContent}}, callback)
 }
 
-module.exports.savePostComments = (commentObject, title, callback)=>{
-    query = {postTitle:title.postTitle}
-
-    Post.findOne(query,(err,docs)=>{
-        copyDocs = docs.postComment
-        copyDocs.push({postCommentName: commentObject.postCommentName, postCommentContent: commentObject.postCommentContent})
-        Post.updateOne(query,{$set:{'postComment':copyDocs}}, callback)
-    })
+module.exports.savePostComments = (Title,data,commentObject, callback)=>{
+    let copyDocs = []
+    let i;
+    for(i=0;i<data.length;i++){
+        copyDocs.push(data[i])
+    }
+    copyDocs.push(commentObject)
+    Post.updateOne({postTitle:Title}, {$set:{'postComment':copyDocs}}, callback)
 }
