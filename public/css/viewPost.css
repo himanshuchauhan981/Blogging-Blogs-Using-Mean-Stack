@@ -81,3 +81,20 @@
 .input-group-addon span{
     font-size: 18px;
 }
+
+.commenting{
+    background-color: #ECE9E9;
+    border-radius: 56px;
+    padding: 0px 20px;
+}
+
+.commenting-heading{
+    font-family: 'Aclonica';
+    font-size: 18px;
+    padding-top:14px !important;   
+}
+
+.commenting-content{
+    font-family: 'ABeeZee';
+    font-size: 18px;
+}
