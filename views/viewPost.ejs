@@ -28,6 +28,11 @@
               <span class="share-button w3-padding"><i class="fa fa-share-alt"></i> Share</span>
           </div>
           <div class="comment-box">
+              <% for(var i=0;i < data.postComment.length; i++){ %>
+                  <div class="commenting">
+                      <p><span class="commenting-heading"><%= data.postComment[i].postCommentName %></span> :<span class="commenting-content"><%= data.postComment[i].postCommentContent %></span></p>
+                  </div>
+              <% } %>
               <div class="row">
                   <div class="col-lg-1 col-md-1">
                       <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="W3-circle user-image w3-border">
