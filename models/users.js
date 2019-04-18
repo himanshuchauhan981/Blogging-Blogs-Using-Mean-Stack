@@ -7,21 +7,29 @@ const userSchema = mongoose.Schema({
       enum:['local','google','linkedin']
    },
    local:{
-      username:String,
-      email:String,
-      password:String,
-      defaultProfilePic:String,
-      userProfilePic:String,
-      defaultCoverPic:String,
-      userCoverPic:String
+      username : String,
+      email : String,
+      password : String,
+      defaultProfilePic : String,
+      userProfilePic : String,
+      defaultCoverPic : String,
+      userCoverPic : String
    },
    google:{
-      id:String,
-      username:String
+      id : String,
+      username : String,
+      defaultProfilePic : String,
+      userProfilePic : String,
+      defaultCoverPic : String,
+      userCoverPic : String
    },
    linkedin:{
       id:String,
-      email:String
+      email:String,
+      defaultProfilePic : String,
+      userProfilePic : String,
+      defaultCoverPic : String,
+      userCoverPic : String
    }
 })
 
@@ -88,4 +96,19 @@ module.exports.updateProfilePhotoStatus = (currentuser,imageName,callback) =>{
    query = {'local.username':currentuser}
    toUpdate = {'local.defaultProfilePic':'false','local.userProfilePic':imageName}
    User.update(query,toUpdate,callback)
+}
+
+module.exports.getUsersByMethod = (method,username,callback) =>{
+    if(method == 'local'){
+        query = {"local.username":username}
+        User.findOne(query,callback)
+    }
+    else if(method =='google'){
+        query = {"google.username":username}
+        User.findOne(query,callback)
+    }
+    else if(method =='linkedin'){
+        query = {"linkedin.username":username}
+        User.findOne(query, callback)
+    }
 }
