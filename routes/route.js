@@ -48,13 +48,34 @@ router.post('/viewPost',(request,response) =>{
     data = request.body
     const keys = Object.keys(data)
     Post.getPostData(keys[0],(err,user)=>{
-        User.getExistingUsername(user.postAuthor, (err,currentuser) =>{
-            return response.render('viewPost.ejs',{
-                titlePage:'View Post - Blogging Blogs',
-                data:user,
-                postUser:request.session.currentUser,
-                picURL:currentuser.local.userProfilePic
-            })
+        User.getUsersByMethod(user.postMethod,user.postAuthor, (err,currentuser) =>{
+            if(currentuser.method === 'local'){
+                return response.render('viewPost.ejs',{
+                    titlePage:'View Post - Blogging Blogs',
+                    data:user,
+                    postUser:request.session.currentUser,
+                    picURL:currentuser.local.userProfilePic,
+                    checkPic: currentuser.local.defaultProfilePic
+                })
+            }
+            else if(currentuser.method ==='google'){
+                return response.render('viewPost.ejs',{
+                    titlePage:'View Post - Blogging Blogs',
+                    data:user,
+                    postUser:request.session.currentUser,
+                    picURL:currentuser.google.userProfilePic,
+                    checkPic: currentuser.google.defaultProfilePic
+                })
+            }
+            else if(currentuser.method ==='linkedin'){
+                return response.render('viewPost.ejs',{
+                    titlePage:'View Post - Blogging Blogs',
+                    data:user,
+                    postUser:request.session.currentUser,
+                    picURL:currentuser.linkedin.userProfilePic,
+                    checkPic: currentuser.linkedin.defaultProfilePic
+                })
+            }
         })
     })
 })
