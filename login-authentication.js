@@ -14,12 +14,15 @@ const User = require('./models/users')
 passport.serializeUser(function(request,user, done) {
     if(user.method =='local'){
         request.session.currentUser = user.local.username
+        request.session.userMethod = 'local'
     }
     else if(user.method == 'google'){
         request.session.currentUser = user.google.username
+        request.session.userMethod = 'google'
     }
     else if(user._json){
         request.session.currentUser = user._json.formattedName
+        request.session.userMethod = 'linkedin'
     }
     done(null, user.id);
 });
@@ -37,6 +40,7 @@ passport.use(
         clientID:keys.google.clientID,
         clientSecret:keys.google.clientSecret
     },(accessToken, refreshToken, profile, done) =>{
+        console.log(profile.photos[0].value)
         User.getUsersFromGoogleSignUp(profile.id,(err,currentUser) =>{
             if(currentUser){
                 return done(null,currentUser)
@@ -46,7 +50,12 @@ passport.use(
                     method:'google',
                     google:{
                         id:profile.id,
-                        username:profile.displayName
+                        username:profile.displayName,
+                        defaultProfilePic:true,
+                        userProfilePic:profile.photos[0].value,
+                        defaultCoverPic:true,
+                        userCoverPic:'https://digitalsynopsis.com/wp-content/uploads/2017/07/beautiful-color-ui-gradients-backgrounds-relay.png'
+
                     }
                 }).save().then((newUser) =>{
                     return done(null, newUser)
