@@ -68,12 +68,13 @@ app.post('/upload',upload.single('file'),(request,response) => {
    postAuthor = request.session.currentUser
    const arr = []
    const postData = new Post({
-      postTitle:postTitle,
-      postContent:postContent,
-      postDate: postDate,
-      postAuthor:postAuthor,
-      postImage:request.file.filename,
-      postComment : arr
+      postTitle : postTitle,
+      postContent : postContent,
+      postDate : postDate,
+      postAuthor : postAuthor,
+      postImage : request.file.filename,
+      postComment : arr,
+      postMethod : request.session.userMethod
    })
    Post.saveNewPosts(postData,()=>{
       return response.redirect('/')
