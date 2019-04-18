@@ -9,7 +9,8 @@ const postSchema = mongoose.Schema({
    postImage:String,
    postComment: {
        type: Array
-   }
+   },
+   postMethod: String
 })
 
 module.exports = mongoose.model('posts',postSchema)
