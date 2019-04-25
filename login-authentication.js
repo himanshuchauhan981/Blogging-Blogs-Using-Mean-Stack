@@ -40,7 +40,6 @@ passport.use(
         clientID:keys.google.clientID,
         clientSecret:keys.google.clientSecret
     },(accessToken, refreshToken, profile, done) =>{
-        console.log(profile.photos[0].value)
         User.getUsersFromGoogleSignUp(profile.id,(err,currentUser) =>{
             if(currentUser){
                 return done(null,currentUser)
@@ -115,9 +114,9 @@ passport.use(new LocalStrategy(
 ));
 
 router.post('/login',
-passport.authenticate('local',{successRedirect:'/', failureRedirect:'/login', failureFlash: true}),
+passport.authenticate('local',{successRedirect:'/home', failureRedirect:'/login', failureFlash: true}),
 function(request,response){
-    response.redirect('/')
+    response.redirect('/home')
 })
 
 router.get('/logout', (request,response) =>{
