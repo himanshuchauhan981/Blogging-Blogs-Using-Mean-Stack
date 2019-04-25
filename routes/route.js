@@ -14,6 +14,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
 router.get('/',(request,response) =>{
+    return response.render('main.ejs',{titlePage:'Blogging Blogs'})
+})
+
+router.get('/home',(request,response) =>{
    Post.getAllPostData((err,post_data) =>{
       len = post_data.length
       for(var i=0;i<len;i++){
@@ -103,7 +107,7 @@ router.get('/google',passport.authenticate('google',{
 
 
 router.get('/auth/google/redirect',passport.authenticate('google'),(req,res) =>{
-   res.redirect('/')
+   res.redirect('/home')
 })
 
 router.get('/auth/linkedin',
@@ -114,7 +118,7 @@ router.get('/auth/linkedin',
 
 router.get('/auth/linkedin/redirect',passport.authenticate('linkedin', { failureRedirect: '/login' }),
    function(req, res){
-      res.redirect('/');
+      res.redirect('/home');
    }
 );
 
