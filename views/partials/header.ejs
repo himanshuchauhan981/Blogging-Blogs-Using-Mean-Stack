@@ -81,10 +81,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active px-4">
-                        <a class="nav-link nav-items" href="/">Home</a>
-                    </li>
+                    
                     <% if(currentUser){ %>
+                        <li class="nav-item active px-4">
+                            <a class="nav-link nav-items" href="/home">Home</a>
+                        </li>
                         <li class="nav-item px-4">
                             <a class="nav-items nav-link" href="/createPost">Create Post</a>
                         </li>
@@ -98,6 +99,9 @@
                             <a class="nav-link nav-items" href="/profile">Profile</a>
                         </li>
                     <%} else {%>
+                        <li class="nav-item active px-4">
+                            <a class="nav-link nav-items" href="/">Home</a>
+                        </li>
                         <li class="nav-item px-4">
                             <a class="nav-link nav-items" href="/login">Login</a>
                         </li>
