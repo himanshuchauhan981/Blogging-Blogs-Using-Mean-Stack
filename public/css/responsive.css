@@ -20,3 +20,8 @@
 .overflowXY{
     overflow: hidden;
 }
+
+.create-post-header h3, .label-font{
+    font-family:'ABeeZee';
+}
+
