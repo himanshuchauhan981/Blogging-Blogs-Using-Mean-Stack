@@ -206,12 +206,33 @@ app.post('/saveComment/:postTitle',(request,response)=>{
             Post.savePostComments(request.params.postTitle,data,commentObject,(err,docs) =>{
                 Post.getPostData(request.params.postTitle,(err,user)=>{
                     User.getExistingUsername(user.postAuthor, (err,currentuser) =>{
+                     if(currentuser.method === 'local'){
                         return response.render('viewPost.ejs',{
                             titlePage:'View Post - Blogging Blogs',
                             data:user,
                             postUser:request.session.currentUser,
-                            picURL:currentuser.local.userProfilePic
+                            picURL:currentuser.local.userProfilePic,
+                            checkPic: currentuser.local.defaultProfilePic
                         })
+                    }
+                    else if(currentuser.method ==='google'){
+                        return response.render('viewPost.ejs',{
+                            titlePage:'View Post - Blogging Blogs',
+                            data:user,
+                            postUser:request.session.currentUser,
+                            picURL:currentuser.google.userProfilePic,
+                            checkPic: currentuser.google.defaultProfilePic
+                        })
+                    }
+                    else if(currentuser.method ==='linkedin'){
+                        return response.render('viewPost.ejs',{
+                            titlePage:'View Post - Blogging Blogs',
+                            data:user,
+                            postUser:request.session.currentUser,
+                            picURL:currentuser.linkedin.userProfilePic,
+                            checkPic: currentuser.linkedin.defaultProfilePic
+                        })
+                    }
                     })
                 })
             })
