@@ -18,17 +18,23 @@ router.get('/',(request,response) =>{
 })
 
 router.get('/home',(request,response) =>{
-   Post.getAllPostData((err,post_data) =>{
-      len = post_data.length
-      for(var i=0;i<len;i++){
-         post_data[i].postContent = post_data[i].postContent.substring(0,300)+'.....'
-      }
-      return response.render('index.ejs',{
-         titlePage:'Home - Blogging Blogs',
-         post_data:post_data,
-         len:len
+   if(request.session.currentUser){
+      Post.getAllPostData((err,post_data) =>{
+         len = post_data.length
+         for(var i=0;i<len;i++){
+            post_data[i].postContent = post_data[i].postContent.substring(0,300)+'.....'
+         }
+         return response.render('index.ejs',{
+            titlePage:'Home - Blogging Blogs',
+            post_data:post_data,
+            len:len
+         })
       })
-   })
+   }
+   else{
+      return response.redirect('/')
+   }
+   
 })
 
 router.get('/login',(request,response) =>{
