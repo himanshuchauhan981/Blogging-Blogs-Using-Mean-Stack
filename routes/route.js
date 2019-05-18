@@ -7,7 +7,8 @@ const router = express.Router()
 
 const User = require('../models/users')
 const Post = require('../models/posts')
-const StoreImage = require('../imageStorage')
+
+const StoreImage = require('../config/imageStorage')
 
 
 app.use(bodyParser.json())
