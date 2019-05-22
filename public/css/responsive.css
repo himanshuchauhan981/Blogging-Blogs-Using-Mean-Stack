@@ -21,21 +21,22 @@
     overflow: hidden;
 }
 
-.create-post-header h3, .label-font{
-    font-family:'ABeeZee';
+.create-post-header h3, .label-font{ font-family:'ABeeZee'; }
+
+.fa-facebook:hover{ color: #3B5998; }
+.fa-instagram:hover{ color: #E4717A; }
+.fa-google:hover{ color: #EA4335; }
+.fa-linkedin:hover{ color:#4875B4; }
+.label-font{ padding-top: 15px;}
+.text-inputs {resize: none; }
+.error-messages{
+    color: red;
+    font-size: 12px;
 }
 
-.fa-facebook:hover{
-    color: #3B5998;
-}
-.fa-instagram:hover{
-    color: #E4717A;
-}
-
-.fa-google:hover{
-    color: #EA4335;
-}
-
-.fa-linkedin:hover{
-    color:#4875B4;
+.font-options{
+    width: 100%;
+    padding: 5px;
+    border: 2px solid black;
+    margin-bottom: 5px;
 }
