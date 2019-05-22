@@ -5,7 +5,9 @@
 <body ng-app="">
     <div class="fluid-container signup-container">
         <div class="row">
-            <div class="col-lg-7 signup-background"></div>
+            <div class="col-lg-7 signup-background">
+                
+            </div>
             <div class="col-lg-5">
                 <div class="signup-form">
                     <h4 class="signup-heading">Sign Up</h4>
@@ -26,6 +28,7 @@
                             <div class="form-group">
                                 <label class="highlight">Password</label>
                                 <input type="password" placeholder="Enter Password" class="input-highlight" id="inputPassword" name="inputPassword" ng-model="inputPassword" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
+                                <i class="fa fa-eye signup-password" onClick="showPassword('inputPassword')"></i>
                                 <span ng-show="registerForm.inputPassword.$touched && registerForm.inputPassword.$invalid" class="red-error">* Required Password</span>
                                 <p><span class="red-error" ng-show="!registerForm.inputPassword.$error.required && (registerForm.inputPassword.$error.minlength || registerForm.inputPassword.$error.maxlength) && registerForm.inputPassword.$dirty">* Password must be between 8 and 20 characters.</span></p>
                                 <p><span class="red-error" ng-show="!registerForm.inputPassword.$error.required && !registerForm.inputPassword.$error.minlength && !registerForm.inputPassword.$error.maxlength && registerForm.inputPassword.$error.pattern && registerForm.inputPassword.$dirty">* Must contain one lower &amp; uppercase letter and one non-alpha character</span></p>
@@ -33,8 +36,9 @@
                             <div class="form-group">
                                 <label class="highlight">Repeat Password</label>
                                 <input type="password" placeholder="Re enter Password" class="input-highlight" id="confirmPassword" name="confirmPassword" ng-model="confirmPassword" ng-pattern="inputPassword" required>
+                                <i class="fa fa-eye signup-password" onclick="showPassword('confirmPassword')"></i>
                                 <span class="red-error" ng-show="registerForm.confirmPassword.$error.pattern">* Passwords do not match.</span>
-                                <span class="green-error" ng-show="registerForm.confirmPassword.$valid" style="color:green;">Password Matched</span>
+                                <span class="green-error" ng-show="registerForm.confirmPassword.$valid">Password Matched</span>
                             </div>
                             <div class="form-group">
                                 <input class="form-input-check" type="checkbox">
@@ -57,4 +61,5 @@
         </div>
     </div>
     <script src="/js/jquery.js"></script>
+    <script src="/js/javascript.js"></script>
 </body>
