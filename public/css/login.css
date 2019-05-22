@@ -60,3 +60,11 @@ label{
     background-color:#71D475;
     box-shadow: 2px 2px 12px 1px rgba(76,175,80,1);
 }
+
+.login-password{
+    position: relative;
+    bottom: 25px;
+    float: right;
+    right: 10px;
+    cursor: pointer;
+}
