@@ -101,13 +101,13 @@ passport.use(new LocalStrategy(
       User.getExistingUsername(username, (err,user) => {
          if(err) throw err;
          if(!user){
-            return done(null,false,{message:'Invalid Username'});
+            return done(null,false,{message:'Invalid Username or password'});
          }
          if(user.local.password == password){
             return done(null,user)
          }
          else{
-            return done(null,false,{message:'Invalid Password'})
+            return done(null,false,{message:'Invalid Username or password'})
          }
       })
    }
