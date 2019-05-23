@@ -34,23 +34,14 @@
                <div class="w3-container w3-padding another-heading">
                   <h4>Popular Posts</h4>
                </div>
-               <ul class="w3-ul w3-hoverable w3-white">
-                  <li class="w3-padding-16">
-                     <img src="" alt="" class="w3-left w3-margin-right" style="width:50px">
-                     <span class="w3-large">Post Title</span><br>
-                     <span>Post Author and Post Date</span>
-                  </li>
-                  <li class="w3-padding-16">
-                     <img src="" alt="" class="w3-left w3-margin-right" style="width:50px">
-                     <span class="w3-large">Post Title</span><br>
-                     <span>Post Author and Post Date</span>
-                  </li>
-                  <li class="w3-padding-16">
-                     <img src="" alt="" class="w3-left w3-margin-right" style="width:50px">
-                     <span class="w3-large">Post Title</span><br>
-                     <span>Post Author and Post Date</span>
-                  </li>
-               </ul>
+               <% for (var i=0;i < 3; i++) { %>
+                  <ul class="w3-ul w3-hoverable w3-white">
+                     <li class="w3-padding-16">
+                        <span class="w3-large"><%= post_data[i].postTitle %></span><br>
+                        <span><%= post_data[i].postAuthor %> and <%= post_data[i].postDate %></span>
+                     </li>
+                  </ul>
+               <% } %>
             </div>
          </div>
       </div>
