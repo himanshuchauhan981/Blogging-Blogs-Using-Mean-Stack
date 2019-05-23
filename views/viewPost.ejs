@@ -34,7 +34,10 @@
             <div class="comment-box">
                 <% for(var i=0;i < data.postComment.length; i++){ %>
                     <div class="commenting">
-                        <p><span class="commenting-heading"><%= data.postComment[i].postCommentName %></span> :<span class="commenting-content"><%= data.postComment[i].postCommentContent %></span></p>
+                        <p>
+                            <span class="commenting-heading"><%= data.postComment[i].postCommentName %></span> :
+                            <span class="commenting-content"><%= data.postComment[i].postCommentContent %></span>
+                        </p>
                     </div>
                 <% } %>
                 <div class="row">
