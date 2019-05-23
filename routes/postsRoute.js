@@ -54,7 +54,7 @@ router.post('/updatingPosts/:postTitle',(request, response) =>{
     Post.updatePostData(oldPostTitle, updatePostTitle, updatePostContent, (err,updateDone) =>{
        if(updateDone){
           request.flash('success','Post is Updated successfully')
-          return response.redirect('/')
+          return response.redirect('/home')
        }
     })
 })
