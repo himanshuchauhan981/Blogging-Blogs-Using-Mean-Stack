@@ -4,8 +4,8 @@ module.exports = {
       clientSecret:'OuuPO9UzhWFYlk3s'
    },
    google:{
-      clientID:'15339551386-aqb42gsniuq21v9oe3s7554iesabek6e.apps.googleusercontent.com',
-      clientSecret:'5CqoxUdr3X6dDcAyHBnUYthc'
+      clientID:'192284820445-jap02f5afgsgt1ijh2nbgj48pb22193r.apps.googleusercontent.com',
+      clientSecret:'xBKT3Bh1W8ExVhpSEG1W6eGX'
    },
    session:{
       cookieKey:'qwertyuiopasdfghjklzxcvbnm'
