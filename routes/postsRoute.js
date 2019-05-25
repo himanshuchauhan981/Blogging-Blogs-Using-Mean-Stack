@@ -4,7 +4,7 @@ const Post = require('../models/posts')
 const User = require('../models/users')
 const date = require('date-and-time')
 
-//Saving new Images
+//Saving new Images and New posts
 router.post('/upload',upload.single('file'),(request,response) => {
     postTitle = request.body.postTitle
     postContent = request.body.postContent
@@ -22,7 +22,7 @@ router.post('/upload',upload.single('file'),(request,response) => {
        postMethod : request.session.userMethod
     })
     Post.saveNewPosts(postData,()=>{
-       return response.redirect('/')
+       return response.redirect('/home')
     })
 })
 
