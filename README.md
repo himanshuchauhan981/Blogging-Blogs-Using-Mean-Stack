@@ -2,7 +2,7 @@
 
 ### Its a complete Blogging Websites which uses Node JS, Express, Mongo DB. It also uses Angular JS for validation during Signup and Login process.
 
-hello (www.google.co.in)
+[Click](http://blogging-blogs.herokuapp.com) here to view this project live.
 # Features
 
 #### 1) Create, update or delete posts
