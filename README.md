@@ -15,3 +15,9 @@
 ## Run following command inside the project folder in command prompt
 #### 1) npm install
 #### 2) npm run
+
+# Screenshots
+
+![Pic1.png](https://live-websites.000webhostapp.com/Blogging-Blogs/Pic1.png)
+![Pic2.png](https://live-websites.000webhostapp.com/Blogging-Blogs/Pic2.png)
+![Pic3.png](https://live-websites.000webhostapp.com/Blogging-Blogs/Pic3.png)
