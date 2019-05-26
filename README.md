@@ -4,7 +4,7 @@
 
 # Features
 
-### 1) Create, update or delete posts
+#### 1) Create, update or delete posts
 ### 2) User can publish images with posts
 ### 3) User can add or update profile photo and cover photo
 ### 4) User can sign up using Linkedin and google
