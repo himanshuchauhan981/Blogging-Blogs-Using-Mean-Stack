@@ -4,12 +4,16 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './header/navbar/navbar.component';
+import { CarousalComponent } from './header/carousal/carousal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    HeaderComponent,
+    NavbarComponent,
+    CarousalComponent
   ],
   imports: [
     BrowserModule,
