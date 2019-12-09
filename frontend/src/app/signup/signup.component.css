@@ -1,0 +1,101 @@
+.signup-container{
+    overflow: hidden;
+}
+.signup-background{
+    background-image: url('../../assets/21.jpg');
+    background-size: cover;
+    height:545px;
+    width:100%;
+}
+
+.signup-form{
+    padding:0px 30px 30px 30px;
+}
+
+.signup-heading{
+    text-align:center;
+    font-size:40px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.signup-form input[type="text"], .signup-form input[type="email"], .signup-form input[type="password"]{
+    width:100%;
+    border:none;
+    border-bottom: 1px solid black;
+    outline:none;
+    padding:5px 10px;
+    font-size:18px;
+}
+
+.signup-form input:focus{
+    border-bottom: 3px solid #563D7C ;
+}
+
+.signup-form label{
+    font-size:15px;
+    padding-left:10px;
+}
+
+.submit-button{
+    text-align: right;
+}
+.signup-button{
+    background-color: #563D7C !important;
+    color:white !important;
+}
+
+.signup-methods p{
+    text-align: center;
+    font-size: 20px;
+    font-family:'Open Sans', sans-serif;
+}
+
+.button-group{
+    text-align: center;
+}
+
+.linkedin-button{
+    background: #0E76A8;
+    border-radius:4px;
+    color:#fff;
+    border: 1px solid #084461;
+    padding:5px 10px;
+}
+
+.linkedin-button:active, .linkedin-button:hover{
+    background: #084461;
+    color:#fff;
+}
+
+.linkedin-button:link, .linkedin-button:hover{
+    color: #fff;
+}
+
+.google-button{
+    background:#942719 ;
+    padding: 5px 10px;
+    color: #fff;
+    border: 1px solid #CC3333;
+    border-radius:4px;
+}
+
+.google-button:active, .google-button:hover{
+    background: #CC3333;
+}
+
+.red-error{
+    font-size:12px;
+    color:red;
+}
+
+.green-error{
+    font-size:12px;
+    color:green;
+}
+
+.signup-password{
+    position: relative;
+    bottom: 25px;
+    float: right;
+    cursor:pointer;
+}

@@ -1,1 +1,108 @@
-<p>signup works!</p>
+<div class="fluid-container signup-container">
+    <div class="row">
+        <div class="col-lg-7 signup-background"></div>
+        <div class="col-lg-5">
+            <div class="signup-form">
+                <h4 class="signup-heading">Sign Up</h4>
+                <div class="signup-content">
+                    <form [formGroup]="signupForm">
+
+                        <div class="form-group">
+                            <label class="highlight">Username</label>
+                            <input
+                                type="text"
+                                placeholder="Enter Username" 
+                                class="input-highlight"
+                                formControlName="username"
+                                required
+                            >
+                            <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                                <span *ngIf="username.errors.required" class="red-error">* Username is required</span>
+                                <span *ngIf="username.errors.minlength" class="red-error">* Minimum length should be 5 characters long</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="highlight">Email ID</label>
+                            <input
+                                type="email"
+                                placeholder="Enter Email"
+                                class="input-highlight"
+                                formControlName="email"
+                                required
+                            >
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                                <span 
+                                    class="red-error"
+                                    *ngIf="email.errors.required"
+                                >* Required Email ID</span>
+                                <span 
+                                    class="red-error" 
+                                    *ngIf="email.errors.email"
+                                >* Invalid Email ID</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="highlight">Password</label>
+                            <input
+                                type="password"
+                                placeholder="Enter Password"
+                                class="input-highlight"
+                                formControlName="password"
+                                required
+                            >
+                            <i class="fa fa-eye signup-password" onClick="showPassword('inputPassword')"></i>
+                            
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                                <span class="red-error" *ngIf="password.errors.required">* Required Password</span>
+                                <span 
+                                    class="red-error" 
+                                    *ngIf="password.errors.minlength"
+                                >* Minimum password length is 8</span>
+                                <p><span
+                                    class="red-error"
+                                    *ngIf="password.errors.pattern"
+                                >* Must contain one lower &amp; uppercase letter and one non-alpha character</span></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="highlight">Repeat Password</label>
+                            <input
+                                type="password"
+                                placeholder="Re enter Password"
+                                class="input-highlight"
+                                formControlName="confirmPassword"
+                                required
+                            >
+                            <i class="fa fa-eye signup-password" onclick="showPassword('confirmPassword')"></i>
+                            <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                                <!-- <span class="red-error" *ngIf="password.errors.required">* Required Password</span> -->
+                                <span class="red-error" *ngIf="confirmPassword.errors.mustMatch">* Passwords do not match.</span>
+                                <span class="green-error" *ngIf="confirmPassword.errors.match">* Password Matched</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-input-check" type="checkbox">
+                            <label class="form-check-label">I agree to the <b>Terms of User</b></label>
+                        </div>
+                        <div class="submit-button">
+                            <button type="submit" class="btn signup-button" [disabled]="!signupForm.valid">Sign Up</button>
+                        </div>
+                        <!-- <div class="signup-methods">
+                            <p>Or Sign up using</p>
+                            <div class="button-group">
+                                <a href="/auth/linkedin"><button type="button" class="linkedin-button"><i
+                                            class="fa fa-linkedin fa-fw"></i> Linkedin</button></a>
+                                <a href="/google"><button type="button" class="google-button"><i
+                                            class="fa fa-google fa-fw"></i>Google</button></a>
+                            </div>
+                        </div>  -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
