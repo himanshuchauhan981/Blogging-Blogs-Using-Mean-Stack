@@ -68,3 +68,13 @@ label{
     right: 10px;
     cursor: pointer;
 }
+
+.red-error{
+    font-size:12px;
+    color:red;
+}
+
+.green-error{
+    font-size:12px;
+    color:green;
+}

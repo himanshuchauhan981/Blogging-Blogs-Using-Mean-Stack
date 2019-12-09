@@ -1,6 +1,6 @@
 <div class="login-background">
     <div class="container">
-        <form method="post" action="/login">
+        <form [formGroup]="loginForm">
             <div class="card login-card">
                 <img class="card-img-top" src="../../assets/19.jpg" alt="image">
                 <div class="centered">
@@ -9,13 +9,33 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="username-input">Username</label>
-                        <input type="text" placeholder="Enter your username" name="username" class="username-input">
+                        <input 
+                            type="text" 
+                            placeholder="Enter your username"
+                            name="username"
+                            class="username-input"
+                            formControlName="username"
+                            required
+                        >
+                        <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                            <span *ngIf="username.errors.required" class="red-error">* Required field</span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="password-input">Password</label>
-                        <input type="password" placeholder="Enter your password" id="showpasswordClick" name="password"
-                            class="password-input">
-                        <i class="fa fa-eye login-password"></i>
+                        <input
+                            type="password"
+                            [type]="passwordType"
+                            placeholder="Enter your password"
+                            name="password"
+                            class="password-input"
+                            formControlName="password"
+                            required
+                        >
+                        <i class="fa fa-eye login-password" (click)="togglePassword()"></i>
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                                <span class="red-error" *ngIf="password.errors.required">* Required Field</span>
+                            </div>
                     </div>
                 </div>
                 <div class="login-button text-center">
