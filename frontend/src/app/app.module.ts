@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
+import { HttpModule } from '@angular/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { SignupComponent } from './signup/signup.component'
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
       { path: 'signup', component: SignupComponent}

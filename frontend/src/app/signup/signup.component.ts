@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { signupValidators } from './signup.validators'
+import { SignupService } from '../service/signup.service'
 
 @Component({
 	selector: 'app-signup',
@@ -9,6 +10,9 @@ import { signupValidators } from './signup.validators'
 })
 
 export class SignupComponent {
+
+	constructor(private signupService: SignupService) { }
+
 	signupForm = new FormGroup({
 		username: new FormControl('',[
 			Validators.required,
@@ -38,4 +42,14 @@ export class SignupComponent {
 	get password(){ return this.signupForm.get('password') }
 
 	get confirmPassword(){ return this.signupForm.get('confirmPassword') }
+
+	signupdata(signupForm){
+		this.signupService.saveUserDetails(signupForm.value)
+		.subscribe(res =>{
+			console.log(res)
+		},(error)=>{
+			console.log(error)
+			alert('Error occured')
+		})
+	}
 }

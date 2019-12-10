@@ -5,7 +5,7 @@
             <div class="signup-form">
                 <h4 class="signup-heading">Sign Up</h4>
                 <div class="signup-content">
-                    <form [formGroup]="signupForm">
+                    <form [formGroup]="signupForm" (ngSubmit)="signupdata(signupForm)">
 
                         <div class="form-group">
                             <label class="highlight">Username</label>
@@ -90,7 +90,7 @@
                             <label class="form-check-label">I agree to the <b>Terms of User</b></label>
                         </div>
                         <div class="submit-button">
-                            <button type="submit" class="btn signup-button" [disabled]="!signupForm.valid">Sign Up</button>
+                            <button type="submit" class="btn signup-button">Sign Up</button>
                         </div>
                         <!-- <div class="signup-methods">
                             <p>Or Sign up using</p>
