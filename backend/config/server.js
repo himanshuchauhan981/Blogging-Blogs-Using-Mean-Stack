@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 
-app.use('/',routes())
+app.use('/api',routes())
 
 app.listen(PORT,HOST,(err)=>{
     if(err) console.log(err)

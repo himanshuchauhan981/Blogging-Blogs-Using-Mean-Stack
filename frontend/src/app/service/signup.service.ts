@@ -9,6 +9,6 @@ export class SignupService {
 	constructor(private http : Http) { }
 
 	saveUserDetails = (object) => {
-		return this.http.post('/signup', object)
+		return this.http.post('/api/signup', object)
 	}
 }

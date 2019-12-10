@@ -4,7 +4,7 @@ import { signupValidators } from './signup.validators'
 import { SignupService } from '../service/signup.service'
 
 @Component({
-	selector: 'app-signup',
+	selector: 'signup',
 	templateUrl: './signup.component.html',
 	styleUrls: ['./signup.component.css']
 })
