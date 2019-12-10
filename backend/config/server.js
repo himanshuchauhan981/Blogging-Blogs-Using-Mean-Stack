@@ -5,6 +5,7 @@ const {routes} = require('../routes')
 
 dotenv.config()
 const { HOST,PORT } = require('./config')
+require('../db').connection
 
 app.use('/',routes())
 
