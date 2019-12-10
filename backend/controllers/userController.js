@@ -1,8 +1,8 @@
 const { userHandler } = require('../handlers')
 
 const saveUserDetails = async(req,res)=>{
-    const response = await userHandler.saveUserDetails(req.body)
-    res.status(200).send(response)
+    const response = await userHandler.saveUserDetails(req,res)
+    return response
 }
 
 module.exports = {

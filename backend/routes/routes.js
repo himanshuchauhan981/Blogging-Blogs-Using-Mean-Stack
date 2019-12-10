@@ -1,10 +1,10 @@
 const express = require('express')
+const { userController } = require('../controllers')
 
 module.exports = ()=>{
     const router = express.Router()
 
-    router.post('/signup',(req,res)=>{
-        res.send( { "hello":"bye" }).status(200)
-    })
+    router.post('/signup',userController.saveUserDetails)
+    
     return router
 }

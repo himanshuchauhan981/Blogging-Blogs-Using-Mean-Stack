@@ -11,6 +11,8 @@ import { SignupService } from '../service/signup.service'
 
 export class SignupComponent {
 
+	signupError : string = null
+
 	constructor(private signupService: SignupService) { }
 
 	signupForm = new FormGroup({
@@ -48,8 +50,8 @@ export class SignupComponent {
 		.subscribe(res =>{
 			console.log(res)
 		},(error)=>{
-			console.log(error)
-			alert('Error occured')
+			this.signupError = error.msg
+			console.log(this.signupError)
 		})
 	}
 }
