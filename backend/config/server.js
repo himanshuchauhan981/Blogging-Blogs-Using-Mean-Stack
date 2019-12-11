@@ -23,7 +23,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-require('./passportAuth')(passport)
+require('../auth/passportAuth')(passport)
 app.use('/api',routes())
 
 app.listen(PORT,HOST,(err)=>{

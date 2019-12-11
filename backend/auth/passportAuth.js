@@ -1,4 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy
+const jwt = require('jsonwebtoken')
 
 const { users } = require('../models')
 
@@ -11,7 +12,7 @@ module.exports = (passport)=>{
                     return done(null, false,{ message : 'Incorrect Credentials'})
                 }
                 return done(null,user)
-            })
+            }).select({'username':1})
         }
     ))
     
