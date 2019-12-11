@@ -1,6 +1,6 @@
 <div class="login-background">
     <div class="container">
-        <form [formGroup]="loginForm">
+        <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm)">
             <div class="card login-card">
                 <img class="card-img-top" src="../../assets/19.jpg" alt="image">
                 <div class="centered">

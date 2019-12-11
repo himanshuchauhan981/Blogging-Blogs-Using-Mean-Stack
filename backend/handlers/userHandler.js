@@ -21,15 +21,17 @@ const saveUserDetails = async(req,res) =>{
 }
 
 const loginUser = async(req,res,next) =>{
-    passport.authenticate('local',(req,res,next)=>{
-        if(err) res.status(400).send(err)
-        if(!user){
-            return res.status(401).send({'msg':'Invalid Credentials'})
-        }
-        else{
-            console.log('do something here')
-        }
-    })
+    // console.log('login handler')
+    // passport.authenticate('local',(req,res,next)=>{
+    //     console.log('passport authenticate')
+    //     if(err) res.status(400).send(err)
+    //     if(!user){
+    //         return res.status(401).send({'msg':'Invalid Credentials'})
+    //     }
+    //     else{
+    //         console.log('do something here')
+    //     }
+    // })
 }
 
 module.exports = {

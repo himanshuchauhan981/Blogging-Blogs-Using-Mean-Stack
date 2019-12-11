@@ -6,7 +6,7 @@ import { Http } from '@angular/http'
 })
 export class LoginService {
 
-	constructor(private http: Http) { }
+	constructor(private http : Http) { }
 
 	loginExistingUser = (object) =>{
 		return this.http.post('/api/login',object)

@@ -35,7 +35,7 @@ export class LoginComponent {
 		}
 	}
 
-	public loginUser(loginForm){
+	loginUser(loginForm){
 		this.loginService.loginExistingUser(loginForm.value)
 		.subscribe((res)=>{
 			console.log(res)
