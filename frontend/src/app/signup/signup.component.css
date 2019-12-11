@@ -99,3 +99,9 @@
     float: right;
     cursor:pointer;
 }
+
+.signupError{
+    font-size: 14px;
+    color: red;
+    font-weight: bold;
+}

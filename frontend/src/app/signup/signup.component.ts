@@ -50,7 +50,8 @@ export class SignupComponent {
 		.subscribe(res =>{
 			console.log(res)
 		},(error)=>{
-			this.signupError = error.msg
+			console.log(error)
+			this.signupError = error._body
 			console.log(this.signupError)
 		})
 	}
