@@ -5,6 +5,12 @@ const saveUserDetails = async(req,res)=>{
     return response
 }
 
+const loginUser = async(req,res,next)=>{
+    const response = await userHandler.loginUser(req,res,next)
+    return response
+}
+
 module.exports = {
-    saveUserDetails
+    saveUserDetails,
+    loginUser
 }

@@ -1,10 +1,9 @@
 const { users } = require('../models')
-const { mongooseValidation } = require('../models')
+const passport = require('passport')
 
 const saveUserDetails = async(req,res) =>{
     let user = new users(req.body)
     let userStatus = await users.findOne({$and:[{email:user.email},{username:user.username}]})
-    console.log(userStatus)
     if(userStatus == null){
         await user.save((err,user)=>{
             if(err){
@@ -21,6 +20,19 @@ const saveUserDetails = async(req,res) =>{
     }
 }
 
+const loginUser = async(req,res,next) =>{
+    passport.authenticate('local',(req,res,next)=>{
+        if(err) res.status(400).send(err)
+        if(!user){
+            return res.status(401).send({'msg':'Invalid Credentials'})
+        }
+        else{
+            console.log('do something here')
+        }
+    })
+}
+
 module.exports = {
-    saveUserDetails
+    saveUserDetails,
+    loginUser
 }
