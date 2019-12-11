@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+
+import { LoginService } from '../service/login.service'
 
 @Component({
 	selector: 'app-login',
@@ -10,6 +12,8 @@ export class LoginComponent {
 
 	passwordType: string = "password"
 	passwordShown: boolean = false
+
+	constructor(private loginService : LoginService){}
 
 	loginForm = new FormGroup({
 		username : new FormControl('',Validators.required),
@@ -29,5 +33,14 @@ export class LoginComponent {
 			this.passwordShown = true
 			this.passwordType = 'text'
 		}
+	}
+
+	public loginUser(loginForm){
+		this.loginService.loginExistingUser(loginForm.value)
+		.subscribe((res)=>{
+			console.log(res)
+		},(error)=>{
+			alert('An unexpected error occured')
+		})
 	}
 }

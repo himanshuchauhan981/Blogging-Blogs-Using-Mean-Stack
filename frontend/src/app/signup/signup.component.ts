@@ -52,9 +52,7 @@ export class SignupComponent {
 		.subscribe(res =>{
 			this.router.navigate(['/login'])
 		},(error)=>{
-			console.log(error)
 			this.signupError = error._body
-			console.log(this.signupError)
 		})
 	}
 }
