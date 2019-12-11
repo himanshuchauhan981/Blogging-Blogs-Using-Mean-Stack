@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
+
 import { signupValidators } from './signup.validators'
 import { SignupService } from '../service/signup.service'
 
@@ -13,7 +15,7 @@ export class SignupComponent {
 
 	signupError : string = null
 
-	constructor(private signupService: SignupService) { }
+	constructor(private signupService: SignupService, private router: Router) { }
 
 	signupForm = new FormGroup({
 		username: new FormControl('',[
@@ -48,7 +50,7 @@ export class SignupComponent {
 	signupdata(signupForm){
 		this.signupService.saveUserDetails(signupForm.value)
 		.subscribe(res =>{
-			console.log(res)
+			this.router.navigate(['/login'])
 		},(error)=>{
 			console.log(error)
 			this.signupError = error._body

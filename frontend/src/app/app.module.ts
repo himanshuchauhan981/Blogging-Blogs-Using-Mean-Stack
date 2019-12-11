@@ -12,7 +12,8 @@ import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './header/navbar/navbar.component';
 import { CarousalComponent } from './header/carousal/carousal.component';
 import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component'
+import { SignupComponent } from './signup/signup.component';
+import { HomeComponent } from './home/home.component'
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,8 @@ import { SignupComponent } from './signup/signup.component'
 		NavbarComponent,
 		CarousalComponent,
 		LoginComponent,
-		SignupComponent
+		SignupComponent,
+		HomeComponent
 	],
 	imports: [
 		BrowserModule,
@@ -32,7 +34,8 @@ import { SignupComponent } from './signup/signup.component'
 		HttpModule,
 		RouterModule.forRoot([
 			{ path: 'login', component: LoginComponent },
-			{ path: 'signup', component: SignupComponent }
+			{ path: 'signup', component: SignupComponent },
+			{ path: 'home', component: HomeComponent}
 		])
 	],
 	providers: [],
