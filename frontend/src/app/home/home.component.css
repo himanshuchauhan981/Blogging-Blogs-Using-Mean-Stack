@@ -1,0 +1,31 @@
+.post-author{
+    font-size:16px;
+}
+
+.post-content p{
+    font-family:'Acme';
+    font-size:19px;
+    text-align:justify;
+}
+
+.another-heading{
+    background-color:#5EECE5;
+}
+
+.post-title{
+    font-family:'ABeeZee'
+}
+
+.information-heading h4, .another-heading h4{
+    font-family: 'ABeeZee';
+    font-size:19px;
+}
+
+.information-list-item{
+    font-family: 'ABeeZee';
+    font-size:16px;
+}
+
+.another-heading{
+    background-color:#5EECE5;
+}
