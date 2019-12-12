@@ -30,5 +30,9 @@ module.exports = ()=>{
         })(req,res,next)
     })
     
+    router.post('/home',passport.authenticate('jwt'),(req,res)=>{
+        console.log('yes')
+        res.status(200).send({'msg':'success'})
+    })
     return router
 }
