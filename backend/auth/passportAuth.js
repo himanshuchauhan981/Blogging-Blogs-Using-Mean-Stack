@@ -39,7 +39,7 @@ module.exports = (passport)=>{
             .catch(err =>{
                 return cb(err)
             })
-    }
+        }
     ))
 
 
