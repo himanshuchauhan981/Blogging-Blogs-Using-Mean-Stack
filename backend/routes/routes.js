@@ -1,7 +1,8 @@
 const express = require('express')
 const { userController } = require('../controllers')
 const passport = require('passport')
-const jwt = require('jsonwebtoken')
+
+const { createToken } = require('../auth').token
 
 module.exports = ()=>{
     const router = express.Router()
@@ -22,7 +23,9 @@ module.exports = ()=>{
             if(err) return next(err)
             if(!user) return res.status(401).send('Invalid Credentials')
             req.logIn(user,(err)=>{
-                return res.status(200).send('Login Successful')
+                if (err) { return next(err); }
+                let token = createToken(user._id)
+                return res.status(200).json({token: token })
             })
         })(req,res,next)
     })

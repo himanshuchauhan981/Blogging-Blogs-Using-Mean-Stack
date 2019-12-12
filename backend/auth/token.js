@@ -1,6 +1,11 @@
-const createToken = (username) =>{
+const jwt = require('jsonwebtoken')
+
+const createToken = (id) =>{
     let privateKey = 'gRG9lIiwiaWF0IjoxNTE2MjM5'
-    var token = jwt.sign({username:username},privateKey,{algorithm:'RS256'})
+    let object = {
+        userId: id
+    }
+    var token = jwt.sign(object,privateKey,{expiresIn:'1h'})
     return token
 }
 

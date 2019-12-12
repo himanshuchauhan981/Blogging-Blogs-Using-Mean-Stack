@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
-import { HashLocationStrategy, LocationStrategy } from '@angular/common'
+import { StorageServiceModule } from 'angular-webstorage-service'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +32,7 @@ import { HomeComponent } from './home/home.component'
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
+		StorageServiceModule,
 		RouterModule.forRoot([
 			{ path: 'login', component: LoginComponent },
 			{ path: 'signup', component: SignupComponent },

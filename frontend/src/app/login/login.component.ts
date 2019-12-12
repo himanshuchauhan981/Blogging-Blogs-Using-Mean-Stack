@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 
 import { LoginService } from '../service/login.service'
 
@@ -13,7 +14,7 @@ export class LoginComponent {
 	passwordType: string = "password"
 	passwordShown: boolean = false
 
-	constructor(private loginService : LoginService){}
+	constructor(private loginService : LoginService, private router: Router){}
 
 	loginForm = new FormGroup({
 		username : new FormControl('',Validators.required),
@@ -38,7 +39,8 @@ export class LoginComponent {
 	loginUser(loginForm){
 		this.loginService.loginExistingUser(loginForm.value)
 		.subscribe((res)=>{
-			console.log(res)
+			this.loginService.storeJWTToken(res.json().token)
+			// this.router.navigate(['/home'])
 		},(error)=>{
 			alert('An unexpected error occured')
 		})
