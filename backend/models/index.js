@@ -1,2 +1,2 @@
 exports.users = require('./users')
-exports.mongooseValidation = require('./mongooseValidation')
+exports.posts = require('./posts')
