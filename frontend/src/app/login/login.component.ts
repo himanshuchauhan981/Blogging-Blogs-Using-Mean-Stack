@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
+import { Router, NavigationExtras } from '@angular/router'
 
 import { LoginService } from '../service/login.service'
 
@@ -39,8 +39,9 @@ export class LoginComponent {
 	loginUser(loginForm){
 		this.loginService.loginExistingUser(loginForm.value)
 		.subscribe((res)=>{
+			// const navigationExtra : NavigationExtras = { state: {token: res.json().token}}
 			this.loginService.storeJWTToken(res.json().token)
-			// this.router.navigate(['/home'])
+			this.router.navigate(['home'])
 		},(error)=>{
 			alert('An unexpected error occured')
 		})

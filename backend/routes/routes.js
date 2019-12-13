@@ -10,7 +10,6 @@ module.exports = ()=>{
     router.post('/signup',userController.saveUserDetails)
 
     router.get('/successRedirect',(req,res)=>{
-        console.log(res.data)
         return res.status(200).send("login successful")
     })
 
@@ -29,10 +28,14 @@ module.exports = ()=>{
             })
         })(req,res,next)
     })
+
+    router.post('/token',passport.authenticate('jwt'),(req,res)=>{
+        return res.status(200).send({user: req.user})
+    })
     
     router.post('/home',passport.authenticate('jwt'),(req,res)=>{
-        console.log('yes')
         res.status(200).send({'msg':'success'})
     })
+
     return router
 }

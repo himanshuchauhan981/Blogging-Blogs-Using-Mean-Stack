@@ -32,7 +32,7 @@ module.exports = (passport)=>{
         secretOrKey: 'gRG9lIiwiaWF0IjoxNTE2MjM5'
     },
     function(jwtPayload,cb){
-        return users.findById(jwtPayload.userId)
+        return users.findById(jwtPayload.userId).select({username:1, email: 1})
             .then(user =>{
                 return cb(null,user)
             })
