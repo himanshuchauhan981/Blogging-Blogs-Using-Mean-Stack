@@ -7,7 +7,7 @@ const { createToken } = require('../auth').token
 module.exports = ()=>{
     const router = express.Router()
 
-    router.post('/signup',userController.saveUserDetails)
+    router.post('/signup',userController.users.saveUserDetails)
 
     router.get('/successRedirect',(req,res)=>{
         return res.status(200).send("login successful")
