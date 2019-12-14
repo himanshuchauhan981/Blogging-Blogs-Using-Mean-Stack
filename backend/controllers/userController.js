@@ -8,6 +8,10 @@ const users = {
     authenticateLoginUser: async(req,res,next) =>{
        const response = await userHandler.user.authenticateLoginUser(req,res,next)
        return response
+    },
+    getUsernameFromToken : async(req,res,next) =>{
+        const response = await userHandler.user.verifyJWTToken(req,res,next)
+        return response
     }
 }
 

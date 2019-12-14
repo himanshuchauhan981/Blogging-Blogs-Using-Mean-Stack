@@ -43,6 +43,7 @@ export class LoginComponent {
 			this.loginService.storeJWTToken(res.json().token)
 			this.router.navigate(['home'])
 		},(error)=>{
+			console.log(error)
 			alert('An unexpected error occured')
 		})
 	}

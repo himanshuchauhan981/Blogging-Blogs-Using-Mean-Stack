@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 
 import { LoginService } from '../service/login.service'
 
@@ -9,15 +10,22 @@ import { LoginService } from '../service/login.service'
 })
 export class HomeComponent implements OnInit {
 
-	username : string 
+	username: string
 
-	constructor(private loginService: LoginService) { }
+	constructor(private loginService: LoginService, private router: Router) { }
 
 	ngOnInit() {
 		this.loginService.getUsernameFromToken()
-			.subscribe((res)=>{
-				this.username = res.json().user.email
+			.subscribe((res) => {
+				let status = res.json().status
+				if (status === 401) {
+					this.router.navigate(['login'])
+				}
+				else if (status === 200) {
+					this.username = res.json().user.username
+				}
+			}, error => {
+				this.router.navigate(['login'])
 			})
 	}
-
 }
