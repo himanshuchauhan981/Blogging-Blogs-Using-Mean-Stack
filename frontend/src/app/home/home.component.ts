@@ -10,7 +10,7 @@ import { LoginService } from '../service/login.service'
 })
 export class HomeComponent implements OnInit {
 
-	username: string
+	username: string;
 
 	constructor(private loginService: LoginService, private router: Router) { }
 
