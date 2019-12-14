@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit,Input } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { LoginService } from '../service/login.service'
@@ -10,7 +10,7 @@ import { LoginService } from '../service/login.service'
 })
 export class HomeComponent implements OnInit {
 
-	username: string;
+	userStatus : Boolean = false
 
 	constructor(private loginService: LoginService, private router: Router) { }
 
@@ -22,7 +22,8 @@ export class HomeComponent implements OnInit {
 					this.router.navigate(['login'])
 				}
 				else if (status === 200) {
-					this.username = res.json().user.username
+					// this.username = res.json().user.username
+					this.userStatus = true
 				}
 			}, error => {
 				this.router.navigate(['login'])

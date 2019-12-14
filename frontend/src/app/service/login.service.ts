@@ -30,4 +30,8 @@ export class LoginService {
 
 		return this.http.post('/api/token',null,options)
 	}
+
+	logout = () =>{
+		this.storage.remove('token')
+	}
 }

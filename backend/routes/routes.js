@@ -7,14 +7,6 @@ module.exports = ()=>{
 
     router.post('/signup',userController.users.saveUserDetails)
 
-    // router.get('/successRedirect',(req,res)=>{
-    //     return res.status(200).send("login successful")
-    // })
-
-    // router.get('/failRedirect',(req,res)=>{
-    //     return res.status(200).send("login not possible")
-    // })
-
     router.post('/login',userController.users.authenticateLoginUser)
 
     router.post('/token',userController.users.getUsernameFromToken)
