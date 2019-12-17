@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit, OnChanges } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { LoginService } from '../../service/login.service'
@@ -8,13 +8,20 @@ import { LoginService } from '../../service/login.service'
 	templateUrl: './navbar.component.html',
 	styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
 
 	constructor(private loginService : LoginService, private router : Router) { }
+
+	loginStatus : Boolean = false
 
 	logout(){
 		this.loginService.logout()
 		this.router.navigate(['login'])
 	}
-
+	
+	ngOnInit(){
+		this.loginService.loginObservable.subscribe(value =>{
+			this.loginStatus = value
+		})
+	}
 }

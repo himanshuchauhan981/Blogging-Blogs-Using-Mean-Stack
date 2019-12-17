@@ -10,7 +10,7 @@ import { LoginService } from '../service/login.service'
 })
 export class HomeComponent implements OnInit {
 
-	userStatus : Boolean = false
+	
 
 	constructor(private loginService: LoginService, private router: Router) { }
 
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 				}
 				else if (status === 200) {
 					// this.username = res.json().user.username
-					this.userStatus = true
+					
 				}
 			}, error => {
 				this.router.navigate(['login'])
