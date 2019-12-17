@@ -27,7 +27,7 @@ export class CreatePostComponent {
 	get postContent(){ return this.createPostForm.get('postContent')}
 
 	createNewPost(createPostForm){
-
+		console.log(createPostForm)
 	}
 
 

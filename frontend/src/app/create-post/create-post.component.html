@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 w3-margin-top">
-            <form [formGroup]="createPostForm" enctype="multipart/form-data" (submit)="createNewPost()">
+            <form [formGroup]="createPostForm" enctype="multipart/form-data" (submit)="createNewPost(createPostForm)">
                 <div class="w3-container">
                     <div class="w3-card-4">
                         <div class="w3-container w3-light-grey create-post-header">
