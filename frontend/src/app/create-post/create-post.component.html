@@ -1,1 +1,32 @@
-<p>create-post works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 w3-margin-top">
+            <form name="createPostForm" enctype="multipart/form-data">
+                <div class="w3-container">
+                    <div class="w3-card-4">
+                        <div class="w3-container w3-light-grey create-post-header">
+                            <h3>New Post</h3>
+                        </div>
+                        <div class="w3-container">
+                            <label class="label-font">Post Title</label><br>
+                            <input type="text" class="w3-input" name="postTitle" ng-model="postTitle" required>
+                            <label class="label-font">Post Content</label><br>
+                            <textarea id="opt" type="text" rows="15" class="w3-input w3-margin-bottom "
+                                name="postContent" ng-model="postContent" required></textarea>
+                            <div class="custom-file">
+                                <input type="file" id="file" name="file" class="custom-file-input"
+                                    id="validatedCustomFile" required>
+                                <label class="custom-file-label" for="validatedCustomFile">Choose Image...</label>
+                            </div>
+                            <div class="w3-section">
+                                <button class="w3-button w3-green" type="submit"
+                                    ng-disabled="myForm.$invalid">Post</button>
+                                <button class="w3-button w3-red">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

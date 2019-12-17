@@ -38,7 +38,8 @@ import { CreatePostComponent } from './create-post/create-post.component'
 		RouterModule.forRoot([
 			{ path: 'login', component: LoginComponent },
 			{ path: 'signup', component: SignupComponent },
-			{ path: 'home', component: HomeComponent}
+			{ path: 'home', component: HomeComponent },
+			{ path: 'createPost', component: CreatePostComponent}
 		])
 	],
 	providers: [HomeComponent],
