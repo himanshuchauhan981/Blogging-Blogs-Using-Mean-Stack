@@ -13,7 +13,8 @@ import { NavbarComponent } from './header/navbar/navbar.component';
 import { CarousalComponent } from './header/carousal/carousal.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './home/home.component';
+import { CreatePostComponent } from './create-post/create-post.component'
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,8 @@ import { HomeComponent } from './home/home.component'
 		CarousalComponent,
 		LoginComponent,
 		SignupComponent,
-		HomeComponent
+		HomeComponent,
+		CreatePostComponent
 	],
 	imports: [
 		BrowserModule,
