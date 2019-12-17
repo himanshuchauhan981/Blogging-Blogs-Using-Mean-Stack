@@ -39,7 +39,7 @@ import { CreatePostComponent } from './create-post/create-post.component'
 			{ path: 'login', component: LoginComponent },
 			{ path: 'signup', component: SignupComponent },
 			{ path: 'home', component: HomeComponent },
-			{ path: 'createPost', component: CreatePostComponent}
+			{ path: 'post/new', component: CreatePostComponent }
 		])
 	],
 	providers: [HomeComponent],

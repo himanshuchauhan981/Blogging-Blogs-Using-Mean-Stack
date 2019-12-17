@@ -1,2 +1,8 @@
 .create-post-header h3, .label-font{ font-family:'ABeeZee'; }
 .label-font{ padding-top: 15px;}
+
+.red-error{
+    font-size:12px;
+    color:red;
+    font-weight: bold;
+}
