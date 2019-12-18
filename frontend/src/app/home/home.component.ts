@@ -4,13 +4,14 @@ import { Router } from '@angular/router'
 import { LoginService } from '../service/login.service'
 
 @Component({
-	selector: 'app-home',
+	selector: 'home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
 
 	username : string
+	
 	constructor(private loginService: LoginService, private router: Router) { }
 
 	ngOnInit() {

@@ -13,6 +13,7 @@ export class LoginComponent {
 
 	passwordType: string = "password"
 	passwordShown: boolean = false
+	loginError: string = null
 
 	constructor(private loginService : LoginService, private router: Router){}
 
@@ -39,12 +40,16 @@ export class LoginComponent {
 	loginUser(loginForm){
 		this.loginService.loginExistingUser(loginForm.value)
 		.subscribe((res)=>{
-			// const navigationExtra : NavigationExtras = { state: {token: res.json().token}}
-			this.loginService.storeJWTToken(res.json().token)
-			this.router.navigate(['home'])
+			if(res.json().status === 401){
+				this.loginError = res.json().msg
+			}
+			else if(res.json().status === 200){
+				// const navigationExtra : NavigationExtras = { state: {token: res.json().token}}
+				this.loginService.storeJWTToken(res.json().token)
+				this.router.navigate(['home'])
+			}			
 		},(error)=>{
-			console.log(error)
-			alert('An unexpected error occured')
+			
 		})
 	}
 }
