@@ -1,5 +1,5 @@
 const express = require('express')
-const { userController } = require('../controllers')
+const { userController,postController } = require('../controllers')
 const passport = require('passport')
 
 module.exports = ()=>{
@@ -14,6 +14,8 @@ module.exports = ()=>{
     router.post('/home',passport.authenticate('jwt'),(req,res)=>{
         res.status(200).send({'msg':'success'})
     })
+
+    router.post('/post',postController.post.createNewPost)
 
     return router
 }
