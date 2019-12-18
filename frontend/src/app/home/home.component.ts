@@ -10,8 +10,7 @@ import { LoginService } from '../service/login.service'
 })
 export class HomeComponent implements OnInit {
 
-	
-
+	username : string
 	constructor(private loginService: LoginService, private router: Router) { }
 
 	ngOnInit() {
@@ -19,14 +18,17 @@ export class HomeComponent implements OnInit {
 			.subscribe((res) => {
 				let status = res.json().status
 				if (status === 401) {
+					this.loginService.loginObservable.next(false)
 					this.router.navigate(['login'])
 				}
 				else if (status === 200) {
-					// this.username = res.json().user.username
+					this.loginService.loginObservable.next(true)
+					this.username = res.json().user.username
 					
 				}
 			}, error => {
 				this.router.navigate(['login'])
+				this.loginService.loginObservable.next(false)
 			})
 	}
 }
