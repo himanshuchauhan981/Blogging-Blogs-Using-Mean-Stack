@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
-import { StorageServiceModule } from 'angular-webstorage-service'
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { AngularBootstrapModule } from './angular-bootstrap.module'
+import { StorageServiceModule } from 'angular-webstorage-service'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -31,7 +32,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		NgbModule,
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
@@ -42,7 +42,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 			{ path: 'home', component: HomeComponent },
 			{ path: 'post/new', component: CreatePostComponent }
 		]),
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		AngularBootstrapModule,
+		NgbModule
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent]
