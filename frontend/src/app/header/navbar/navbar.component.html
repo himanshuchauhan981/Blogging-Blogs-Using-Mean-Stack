@@ -1,34 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-background">
-    <button class="navbar-toggler float-right" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar navbar-expand-lg indigo">
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
         <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
-            <ul class="navbar-nav mr-auto" *ngIf="loginStatus">
-                <li class="nav-item px-4">
-                    <a class="nav-link nav-items" routerLink="/home">Home</a>
+            <ul class="navbar-nav" *ngIf="loginStatus">
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
                 </li>
-                <li class="nav-item px-4">
-                    <a class="nav-items nav-link" routerLink="/post/new">Create Post</a>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/post/new" (click)="isMenuCollapsed=true">Create Post</a>
                 </li>
-                <li class="nav-item px-4">
-                    <a class="nav-link nav-items" routerLink="">Profile</a>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="" (click)="isMenuCollapsed=true">Profile</a>
                 </li>
-                <li class="nav-item px-4">
-                    <a class="nav-link nav-items" (click)="logout()">Log Out</a>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="" (click)="logout()">Log Out</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto" *ngIf="!loginStatus">
-                <li class="nav-item px-4">
-                    <a class="nav-link nav-items" routerLink="/home">Home</a>
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
                 </li>
-                <li class="nav-item px-4">
-                    <a class="nav-link nav-items" routerLink="/login">Login</a>
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/login" (click)="isMenuCollapsed=true">Login</a>
                 </li>
-                <li class="nav-item px-4">
-                    <a class="nav-link nav-items" routerLink="/signup">Sign up</a>
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/signup" (click)="isMenuCollapsed=true">Signup</a>
                 </li>
             </ul>
         </div>

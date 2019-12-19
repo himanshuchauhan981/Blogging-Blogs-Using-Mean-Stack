@@ -14,6 +14,8 @@ export class NavbarComponent implements OnInit{
 
 	loginStatus : Boolean = false
 
+	public isMenuCollapsed = true
+
 	logout(){
 		this.loginService.logout()
 		this.router.navigate(['login'])

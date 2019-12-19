@@ -1,8 +1,12 @@
-.navbar-background{
-    background-color:#5EECE5;
-}
-
-.nav-items{
+.nav-link{
     font-family:'Aclonica';
     font-size:19px;
+}
+
+.indigo{
+    background-color: #3F51B5;
+}
+
+.nav-link:hover{
+    color: white;
 }
