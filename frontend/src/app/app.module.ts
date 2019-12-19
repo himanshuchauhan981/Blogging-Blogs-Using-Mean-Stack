@@ -14,7 +14,8 @@ import { CarousalComponent } from './header/carousal/carousal.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
-import { CreatePostComponent } from './create-post/create-post.component'
+import { CreatePostComponent } from './create-post/create-post.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
 	declarations: [
@@ -40,7 +41,8 @@ import { CreatePostComponent } from './create-post/create-post.component'
 			{ path: 'signup', component: SignupComponent },
 			{ path: 'home', component: HomeComponent },
 			{ path: 'post/new', component: CreatePostComponent }
-		])
+		]),
+		BrowserAnimationsModule
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent]
