@@ -1,48 +1,41 @@
 <div class="login-background">
     <div class="container">
-        <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm)">
-            <div class="card login-card">
-                <img class="card-img-top" src="../../assets/19.jpg" alt="image">
-                <div class="centered">
-                    <h3 class="login-heading">Login</h3>
-                </div>
-                <div class="card-body">
-                    <p class="red-error">{{ loginError }}</p>
-                    <div class="form-group">
-                        <label for="username-input">Username</label>
-                        <input 
-                            type="text" 
-                            placeholder="Enter your username"
-                            name="username"
-                            class="username-input"
-                            formControlName="username"
-                            required
-                        >
-                        <div *ngIf="username.invalid && (username.dirty || username.touched)">
-                            <span *ngIf="username.errors.required" class="red-error">* Required field</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password-input">Password</label>
-                        <input
-                            type="password"
-                            [type]="passwordType"
-                            placeholder="Enter your password"
-                            name="password"
-                            class="password-input"
-                            formControlName="password"
-                            required
-                        >
-                        <i class="fa fa-eye login-password" (click)="togglePassword()"></i>
-                        <div *ngIf="password.invalid && (password.dirty || password.touched)">
-                                <span class="red-error" *ngIf="password.errors.required">* Required Field</span>
-                            </div>
-                    </div>
-                </div>
-                <div class="login-button text-center">
-                    <button type="submit">Login</button>
-                </div>
+        <mat-card class="example-card">
+            <img mat-card-image src="../../assets/19.jpg" alt="image">
+            <div class="centered">
+                <h3 class="login-heading">Login</h3>
             </div>
-        </form>
+            <mat-card-content>
+                <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm)">
+                    <div class="example-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Enter Username" 
+                                [formControl]="username"
+                                name="username"
+                                required
+                            >
+                            <mat-error *ngIf="username.invalid">Required Field</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input
+                                matInput
+                                [type]="hide ? 'password' : 'text'"
+                                placeholder="Enter Password"
+                                [formControl]="password"
+                                name="password"
+                                required
+                            >
+                            <mat-icon matSuffix (click)="hide = !hide">remove_red_eye</mat-icon>
+                            <mat-error *ngIf="password.invalid">Required Field</mat-error>
+                        </mat-form-field>
+                        <button mat-raised-button color="primary">Login</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>

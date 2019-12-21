@@ -3,20 +3,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { AngularBootstrapModule } from './angular-bootstrap.module'
 import { StorageServiceModule } from 'angular-webstorage-service'
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { NavbarComponent } from './header/navbar/navbar.component';
-import { CarousalComponent } from './header/carousal/carousal.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { HomeComponent } from './home/home.component';
-import { CreatePostComponent } from './create-post/create-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatCardModule } from '@angular/material/card'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule,MatIconModule,MatButtonModule } from '@angular/material'
+
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { HeaderComponent } from './header/header.component'
+import { NavbarComponent } from './header/navbar/navbar.component'
+import { CarousalComponent } from './header/carousal/carousal.component'
+import { LoginComponent } from './login/login.component'
+import { SignupComponent } from './signup/signup.component'
+import { HomeComponent } from './home/home.component'
+import { CreatePostComponent } from './create-post/create-post.component'
 
 @NgModule({
 	declarations: [
@@ -43,8 +45,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 			{ path: 'post/new', component: CreatePostComponent }
 		]),
 		BrowserAnimationsModule,
-		AngularBootstrapModule,
-		NgbModule
+		NgbModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatIconModule,
+		MatButtonModule
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent]

@@ -15,6 +15,8 @@ export class LoginComponent {
 	passwordShown: boolean = false
 	loginError: string = null
 
+	hide = true
+
 	constructor(private loginService : LoginService, private router: Router){}
 
 	loginForm = new FormGroup({
@@ -26,30 +28,5 @@ export class LoginComponent {
 
 	get password() { return this.loginForm.get('password') }
 
-	public togglePassword(){
-		if(this.passwordShown){
-			this.passwordShown = false
-			this.passwordType = 'password'
-		}
-		else{
-			this.passwordShown = true
-			this.passwordType = 'text'
-		}
-	}
-
-	loginUser(loginForm){
-		this.loginService.loginExistingUser(loginForm.value)
-		.subscribe((res)=>{
-			if(res.json().status === 401){
-				this.loginError = res.json().msg
-			}
-			else if(res.json().status === 200){
-				// const navigationExtra : NavigationExtras = { state: {token: res.json().token}}
-				this.loginService.storeJWTToken(res.json().token)
-				this.router.navigate(['home'])
-			}			
-		},(error)=>{
-			
-		})
-	}
+	
 }
