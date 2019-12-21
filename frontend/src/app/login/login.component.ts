@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Router, NavigationExtras } from '@angular/router'
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router'
 
 import { LoginService } from '../service/login.service'
 
@@ -15,7 +15,7 @@ export class LoginComponent {
 
 	hidePassword = true
 
-	constructor(private loginService : LoginService, private router: Router){}
+	constructor(private loginService : LoginService, private router: Router, private route: ActivatedRoute){}
 
 	loginForm = new FormGroup({
 		username : new FormControl('',Validators.required),
@@ -34,8 +34,10 @@ export class LoginComponent {
 			}
 			else if(res.json().status === 200){
 				// const navigationExtra : NavigationExtras = { state: {token: res.json().token}}
+
+				let returnUrl= this.route.snapshot.queryParamMap.get('returnUrl')
 				this.loginService.storeJWTToken(res.json().token)
-				this.router.navigate(['home'])
+				this.router.navigate([returnUrl || 'home'])
 			}			
 		},(error)=>{
 			

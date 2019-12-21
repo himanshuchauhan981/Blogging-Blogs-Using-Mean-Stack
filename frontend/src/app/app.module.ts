@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 import { HomeComponent } from './home/home.component'
 import { CreatePostComponent } from './create-post/create-post.component'
+import { AuthGuardService } from './service/auth-guard.service';
 
 @NgModule({
 	declarations: [
@@ -41,8 +42,8 @@ import { CreatePostComponent } from './create-post/create-post.component'
 		RouterModule.forRoot([
 			{ path: 'login', component: LoginComponent },
 			{ path: 'signup', component: SignupComponent },
-			{ path: 'home', component: HomeComponent },
-			{ path: 'post/new', component: CreatePostComponent }
+			{ path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
+			{ path: 'post/new', component: CreatePostComponent, canActivate:[AuthGuardService] }
 		]),
 		BrowserAnimationsModule,
 		NgbModule,

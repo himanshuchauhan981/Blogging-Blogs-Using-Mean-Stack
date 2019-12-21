@@ -23,7 +23,7 @@ export class LoginService {
 		this.loginObservable.next(true)
 	}
 
-	getUsernameFromToken = () =>{
+	validateJWTToken = () =>{
 		this.token = this.storage.get('token')
 
 		//Setting Headers
