@@ -1,8 +1,7 @@
-.create-post-header h3, .label-font{ font-family:'ABeeZee'; }
-.label-font{ padding-top: 15px;}
+.mat-card-header h3{ font-family:'ABeeZee'; }
 
-.red-error{
-    font-size:12px;
-    color:red;
-    font-weight: bold;
-}
+.example-card { margin: 0 auto; }
+  
+.example-full-width { width: 100%; }
+
+.mat-form-field{ font-size: 16px !important;}
