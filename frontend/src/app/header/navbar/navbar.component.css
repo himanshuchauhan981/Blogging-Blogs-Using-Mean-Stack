@@ -10,3 +10,7 @@
 .nav-link:hover{
     color: white;
 }
+
+.active{
+    color: #8BEEEA;
+}

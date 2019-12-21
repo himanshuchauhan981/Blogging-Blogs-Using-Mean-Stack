@@ -17,13 +17,13 @@
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto" *ngIf="!loginStatus">
-                <li class="nav-item active">
+                <li class="nav-item" [routerLinkActive]="['active']">
                     <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item" [routerLinkActive]="['active']">
                     <a class="nav-link" routerLink="/login" (click)="isMenuCollapsed=true">Login</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item" [routerLinkActive]="['active']">
                     <a class="nav-link" routerLink="/signup" (click)="isMenuCollapsed=true">Signup</a>
                 </li>
             </ul>
