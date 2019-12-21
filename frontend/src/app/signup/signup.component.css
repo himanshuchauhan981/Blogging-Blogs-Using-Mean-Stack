@@ -18,7 +18,22 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.signup-form input[type="text"], .signup-form input[type="email"], .signup-form input[type="password"]{
+.full-width{
+    width: 100%;
+}
+
+.example-section{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.example-margin {
+    margin: 0 10px;
+}
+
+/* .signup-form input[type="text"], .signup-form input[type="email"], .signup-form input[type="password"]{
     width:100%;
     border:none;
     border-bottom: 1px solid black;
@@ -104,4 +119,4 @@
     font-size: 14px;
     color: red;
     font-weight: bold;
-}
+} */

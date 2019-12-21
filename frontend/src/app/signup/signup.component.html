@@ -6,101 +6,70 @@
                 <h4 class="signup-heading">Sign Up</h4>
                 <div class="signup-content">
                     <form [formGroup]="signupForm" (ngSubmit)="signupdata(signupForm)">
-                        <div class="signupError">{{ signupError }}</div>
-                        <div class="form-group">
-                            <label class="highlight">Username</label>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Username</mat-label>
                             <input
-                                type="text"
-                                placeholder="Enter Username" 
-                                class="input-highlight"
-                                formControlName="username"
+                                matInput
+                                placeholder="Enter Username"
+                                [formControl]="username"
+                                name="username"
+                                [type]="email"
                                 required
                             >
-                            <div *ngIf="username.invalid && (username.dirty || username.touched)">
-                                <span *ngIf="username.errors.required" class="red-error">* Username is required</span>
-                                <span *ngIf="username.errors.minlength" class="red-error">* Minimum length should be 5 characters long</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="highlight">Email ID</label>
+                            <mat-error *ngIf="username.hasError('required')">Username is required</mat-error>
+                            <mat-error *ngIf="username.hasError('minlength')">Minimum length should be 5 characters long</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Email</mat-label>
                             <input
-                                type="email"
+                                matInput
                                 placeholder="Enter Email"
-                                class="input-highlight"
-                                formControlName="email"
+                                [formControl]="email"
+                                name="email"
                                 required
                             >
-                            <div *ngIf="email.invalid && (email.dirty || email.touched)">
-                                <span 
-                                    class="red-error"
-                                    *ngIf="email.errors.required"
-                                >* Required Email ID</span>
-                                <span 
-                                    class="red-error" 
-                                    *ngIf="email.errors.email"
-                                >* Invalid Email ID</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="highlight">Password</label>
+                            <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
+                            <mat-error *ngIf="!email.hasError('required') && email.hasError('email')">Invalid Email ID</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Password</mat-label>
                             <input
-                                type="password"
-                                placeholder="Enter Password"
-                                class="input-highlight"
-                                formControlName="password"
+                                matInput
+                                placeholder="Enter your password"
+                                [formControl]="password"
                                 required
+                                [type]="password"
                             >
-                            
-                            <div *ngIf="password.invalid && (password.dirty || password.touched)">
-                                <span class="red-error" *ngIf="password.errors.required">* Required Password</span>
-                                <span 
-                                    class="red-error" 
-                                    *ngIf="password.errors.minlength"
-                                >* Minimum password length is 8</span>
-                                <p><span
-                                    class="red-error"
-                                    *ngIf="password.errors.pattern"
-                                >* Must contain one lower &amp; uppercase letter and one non-alpha character</span></p>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="highlight">Repeat Password</label>
+                            <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+                            <mat-error *ngIf="password.hasError('minlength')">Minimum password length is 8</mat-error>
+                            <mat-error *ngIf="!password.hasError('minlength') && password.hasError('pattern')">Must contain one lower &amp; uppercase letter and one non-alpha character</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Confirm Password</mat-label>
                             <input
-                                type="password"
-                                placeholder="Re enter Password"
-                                class="input-highlight"
-                                formControlName="confirmPassword"
+                                matInput
+                                placeholder="retype your password"
+                                [formControl]="confirmPassword"
+                                name="confirmPassword"
+                                required
+                                [type]="password"
+                            >
+                            <mat-error *ngIf="confirmPassword.hasError('required')">Confirm Password is required</mat-error>
+                            <mat-error *ngIf="confirmPassword.hasError('mustMatch')">Password does not matched</mat-error>
+                        </mat-form-field>
+                        <section class="example-section">
+                            <mat-checkbox
+                                class="example-margin"
+                                formControlName="check"
+                                name="check"
+                                [(indeterminate)]="indeterminate"
+                                [labelPosition]="labelPosition"
                                 required
                             >
-                            <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
-                                <!-- <span class="red-error" *ngIf="password.errors.required">* Required Password</span> -->
-                                <span class="red-error" *ngIf="confirmPassword.errors.mustMatch">* Passwords do not match.</span>
-                                <span class="green-error" *ngIf="confirmPassword.errors.match">* Password Matched</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <input 
-                                class="form-input-check"
-                                type="checkbox"
-                            >
-                            <label class="form-check-label">I agree to the <b>Terms of User</b></label>
-                        </div>
-                        <div class="submit-button">
-                            <button type="submit" class="btn signup-button">Sign Up</button>
-                        </div>
-                        <!-- <div class="signup-methods">
-                            <p>Or Sign up using</p>
-                            <div class="button-group">
-                                <a href="/auth/linkedin"><button type="button" class="linkedin-button"><i
-                                            class="fa fa-linkedin fa-fw"></i> Linkedin</button></a>
-                                <a href="/google"><button type="button" class="google-button"><i
-                                            class="fa fa-google fa-fw"></i>Google</button></a>
-                            </div>
-                        </div>  -->
+                            I agree to the terms and conditions    
+                            </mat-checkbox>
+                        </section>
+                        <button mat-raised-button color="primary" class="float-right">Sign Up</button>
                     </form>
                 </div>
             </div>

@@ -8,7 +8,7 @@ import { StorageServiceModule } from 'angular-webstorage-service'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule,MatIconModule,MatButtonModule } from '@angular/material'
+import { MatInputModule,MatIconModule,MatButtonModule,MatCheckboxModule } from '@angular/material'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -50,7 +50,8 @@ import { CreatePostComponent } from './create-post/create-post.component'
 		MatFormFieldModule,
 		MatInputModule,
 		MatIconModule,
-		MatButtonModule
+		MatButtonModule,
+		MatCheckboxModule
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent]
