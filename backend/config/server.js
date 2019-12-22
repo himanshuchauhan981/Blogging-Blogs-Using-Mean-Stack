@@ -1,7 +1,7 @@
 const dotenv = require('dotenv')
 const express = require('express')
 const app = express()
-const {routes} = require('../routes')
+
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
@@ -9,6 +9,7 @@ const passport = require('passport')
 
 dotenv.config()
 const { HOST,PORT } = require('./config')
+const { routes } = require('../routes')
 require('../db').connection
 
 app.use(cookieParser())

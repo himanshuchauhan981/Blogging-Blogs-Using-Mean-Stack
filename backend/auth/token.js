@@ -5,7 +5,7 @@ const createToken = (id) =>{
     let object = {
         userId: id
     }
-    var token = jwt.sign(object,privateKey,{expiresIn:'1h'})
+    var token = jwt.sign(object,privateKey,{expiresIn:'10h'})
     return token
 }
 

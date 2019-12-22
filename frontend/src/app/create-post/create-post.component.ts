@@ -12,6 +12,12 @@ export class CreatePostComponent {
 
 	uploadedFiles : Array <File>
 
+	fileType: Array <String> = ['image/jpeg','image/jpg','image/png']
+
+	uploadFileText: String = 'Upload File'
+
+	fileUploadColor : String ="accent"
+
 	constructor(private postService: PostService) { }
 
 	createPostForm = new FormGroup({
@@ -31,11 +37,20 @@ export class CreatePostComponent {
 	get postContent(){ return this.createPostForm.get('postContent')}
 
 	fileChange(element){
-		console.log(element.target.files)
-		this.uploadedFiles = element.target.files
+		let filetype = element.target.files[0].type
+		if(this.fileType.indexOf(filetype)  >= 0){
+			this.uploadedFiles = element.target.files
+			this.uploadFileText = "File Uploaded"
+			this.fileUploadColor = "primary"
+		}
+		else{
+			this.uploadFileText = "Invalid File"
+			this.fileUploadColor = "warn"
+		}
+		
 	}
 
-	createNewPost(createPostForm){
+	submitNewPost(createPostForm){
 		let formData = new FormData()
 		if(this.uploadedFiles != undefined){
 			for(var i=0;i< this.uploadedFiles.length; i++){
@@ -44,8 +59,15 @@ export class CreatePostComponent {
 			formData.append("postTitle",createPostForm.value.postTitle)
 			formData.append("postContent",createPostForm.value.postContent)
 		}
-		this.postService.submitPost(formData)	
+		this.postService.submitPost(formData)
+		.subscribe((res)=>{
+			console.log(res)
+		})
 	}
+
+	// createNewPost(createPostForm){
+		
+	// }
 
 	uploadFile(){
 		document.getElementById('upload').click()

@@ -1,0 +1,1 @@
+exports.multerMiddleware = require('./multerMIddleware')

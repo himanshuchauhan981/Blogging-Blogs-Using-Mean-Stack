@@ -1,6 +1,8 @@
 const express = require('express')
-const { userController,postController } = require('../controllers')
 const passport = require('passport')
+
+const { userController,postController } = require('../controllers')
+const { upload } = require('../middleware').multerMiddleware
 
 module.exports = ()=>{
     const router = express.Router()
@@ -15,7 +17,7 @@ module.exports = ()=>{
         res.status(200).send({'msg':'success'})
     })
 
-    router.post('/post',postController.post.createNewPost)
+    router.post('/post',upload.single('postImage'),postController.post.createNewPost)
 
     return router
 }
