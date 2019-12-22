@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule,MatIconModule,MatButtonModule,MatCheckboxModule } from '@angular/material'
+import { MDBBootstrapModule } from 'angular-bootstrap-md'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -19,7 +20,7 @@ import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 import { HomeComponent } from './home/home.component'
 import { CreatePostComponent } from './create-post/create-post.component'
-import { AuthGuardService } from './service/auth-guard.service';
+import { AuthGuardService } from './service/auth-guard.service'
 
 @NgModule({
 	declarations: [
@@ -52,7 +53,8 @@ import { AuthGuardService } from './service/auth-guard.service';
 		MatInputModule,
 		MatIconModule,
 		MatButtonModule,
-		MatCheckboxModule
+		MatCheckboxModule,
+		MDBBootstrapModule.forRoot()
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent]

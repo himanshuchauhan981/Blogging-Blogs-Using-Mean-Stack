@@ -31,6 +31,7 @@ export class CreatePostComponent {
 	get postContent(){ return this.createPostForm.get('postContent')}
 
 	fileChange(element){
+		console.log(element.target.files)
 		this.uploadedFiles = element.target.files
 	}
 
@@ -44,6 +45,10 @@ export class CreatePostComponent {
 			formData.append("postContent",createPostForm.value.postContent)
 		}
 		this.postService.submitPost(formData)	
+	}
+
+	uploadFile(){
+		document.getElementById('upload').click()
 	}
 
 
