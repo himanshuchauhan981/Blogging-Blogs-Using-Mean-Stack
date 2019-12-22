@@ -7,6 +7,7 @@
             </div>
             <mat-card-content>
                 <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm)">
+                    <p class="red-error">{{ loginError }}</p>
                     <div class="example-container">
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Username</mat-label>
