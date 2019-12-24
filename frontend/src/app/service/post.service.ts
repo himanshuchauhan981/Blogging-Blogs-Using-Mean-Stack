@@ -12,23 +12,12 @@ export class PostService {
 	token: string
 
 	submitPost = (formData) =>{
-		console.log(formData.get('postTitle'))
-		console.log(formData.get('postContent'))
 		this.token = this.storage.get('token')
 
-		// let options = new RequestOptions()
-		// options.headers = new Headers()
-		// options.headers.append('Content-Type', 'application/json')
-		// options.headers.append('Authorization', `Bearer ${this.token}`)
-
 		let headers = new Headers()
-		// headers.append('Content-Type', 'multipart/form-data')
 		headers.append('Authorization', `Bearer ${this.token}`)
 
 		this.token = this.storage.get('token')
-		// return this.http.post('/api/post',formData,{
-		// 	headers: headers
-		// })
 		return this.http.post('/api/post',formData,{
 			headers: headers
 		})	

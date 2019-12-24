@@ -56,9 +56,9 @@ export class CreatePostComponent {
 			for(var i=0;i< this.uploadedFiles.length; i++){
 				formData.append("postImage",this.uploadedFiles[i],this.uploadedFiles[i].name)
 			}
-			formData.append("postTitle",createPostForm.value.postTitle)
-			formData.append("postContent",createPostForm.value.postContent)
 		}
+		formData.append("postTitle",createPostForm.value.postTitle)
+		formData.append("postContent",createPostForm.value.postContent)
 		this.postService.submitPost(formData)
 		.subscribe((res)=>{
 			console.log(res)
