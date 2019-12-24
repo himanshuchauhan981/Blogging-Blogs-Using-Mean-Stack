@@ -17,7 +17,11 @@ module.exports = ()=>{
         res.status(200).send({'msg':'success'})
     })
 
-    router.post('/post',upload.single('postImage'),postController.post.createNewPost)
+    router.post('/post',
+        passport.authenticate('jwt'),
+        upload.single('postImage'),
+        postController.post.createNewPost
+    )
 
     return router
 }

@@ -1,2 +1,2 @@
 exports.users = require('./users')
-exports.posts = require('./posts')
+exports.blogPosts = require('./posts')

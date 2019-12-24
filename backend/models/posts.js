@@ -15,6 +15,9 @@ const posts = new Schema({
     },
     postAuthor: {
         type: String
+    },
+    postImageId: {
+        type: String
     }
 })
 

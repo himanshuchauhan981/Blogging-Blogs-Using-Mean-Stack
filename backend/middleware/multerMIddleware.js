@@ -22,6 +22,5 @@ const storage = new GridFsStorage({
 const upload = multer({ storage })
 
 module.exports = {
-    upload,
-    storage
+    upload
 }
