@@ -3,7 +3,7 @@
         <div class="w3-row">
             <div class="w3-col l8 s12">
                 <div class="w3-card-4 w3-margin w3-white posts-box" *ngFor="let blogs of blogArray">
-                    <img src="http://bit.ly/34amoMf" alt="" style="width:100%; height:300px;">
+                    <img src="{{'/api/image/'+ blogs.postImage }}" alt="" style="width:100%; height:300px;">
                     <div class="w3-container">
                         <h2>
                             <b class="post-title">{{ blogs.postTitle }}</b>
@@ -13,7 +13,7 @@
                         </h5>
                     </div>
                     <div class="w3-container post-content">
-                        <p> {{ blogs.postContent.substring(0,190)+'.......' }}</p>
+                        <p> {{ blogs.postContent }}</p>
                     </div>
                     <div class="w3-row">
                         <form>
@@ -33,7 +33,33 @@
                 </div>
             </div>
             <div class="w3-col l4">
-                <sidebar></sidebar>
+                <div class="w3-card w3-margin">
+                    <div class="w3-container w3-padding information-heading" style="background-color:#5EECE5">
+                        <h4>You can put any information you'd like</h4>
+                    </div>
+                    <ul class="w3-ul w3-white">
+                        <li class="w3-padding-16">
+                            <span class="w3-large information-list-item">Latest Posts</span>
+                        </li>
+                        <li class="w3-padding-16">
+                            <span class="w3-large information-list-item">Announcements</span>
+                        </li>
+                        <li class="w3-padding-16">
+                            <span class="w3-large information-list-item">Calendars</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w3-card w3-margin">
+                    <div class="w3-container w3-padding another-heading">
+                        <h4>Popular Posts</h4>
+                    </div>
+                    <ul class="w3-ul w3-hoverable w3-white">
+                        <li class="w3-padding-16">
+                            <span class="w3-large">Microsoft revives TechNet and MSDN blogs</span><br>
+                            <span>himanshu chauhan and April 17, 2019</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
