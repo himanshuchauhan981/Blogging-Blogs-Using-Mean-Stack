@@ -1,0 +1,16 @@
+.nav-link{
+    font-family:'Aclonica';
+    font-size:19px;
+}
+
+.indigo{
+    background-color: #3F51B5;
+}
+
+.nav-link:hover{
+    color: white;
+}
+
+.active{
+    color: #8BEEEA;
+}

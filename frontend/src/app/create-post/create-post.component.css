@@ -1,0 +1,9 @@
+.mat-card-header h3{ font-family:'ABeeZee'; }
+
+.example-card { margin: 0 auto; }
+  
+.example-full-width { width: 100%; }
+
+.mat-form-field{ font-size: 16px !important;}
+
+.imageUpload{ visibility: hidden; }

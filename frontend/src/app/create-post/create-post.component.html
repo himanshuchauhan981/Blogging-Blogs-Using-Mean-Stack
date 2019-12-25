@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7 w3-margin-top w3-margin-bottom">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <h3>Create New Post</h3>
+                </mat-card-header>
+                <mat-card-content>
+                    <form 
+                        [formGroup]="createPostForm"
+                        enctype="multipart/form-data"
+                        (submit)="submitNewPost(createPostForm)"
+                    >
+                        <mat-form-field class="example-full-width">
+                            <input 
+                                matInput
+                                placeholder="Enter Post Title"
+                                [formControl]="postTitle"
+                                name="postTitle"
+                                required
+                            >
+                            <mat-error *ngIf="postTitle.invalid">Required Field</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <textarea 
+                                matInput
+                                placeholder="Write Something"
+                                [formControl]="postContent"
+                                name="postContent"
+                                rows="12"
+                                required></textarea>
+                            <mat-error *ngIf="postContent.invalid">Required Field</mat-error>
+                        </mat-form-field>
+                        <input
+                            type="file"
+                            hidden
+                            id="upload"
+                            name="postImage"
+                            (change)="fileChange($event)"
+                        >
+                        <button 
+                            type="button" 
+                            mat-raised-button 
+                            color="{{ fileUploadColor }}" 
+                            class="mr-3" 
+                            (click)="uploadFile()"
+                        >{{ uploadFileText }}</button>
+                        <button 
+                            mat-raised-button color="primary"
+                            
+                        >Create Post</button>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

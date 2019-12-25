@@ -1,0 +1,10 @@
+.navbar-brand{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size:35px !important;
+}
+
+.fa{ cursor: pointer; }
+.fa-facebook:hover{ color: #3B5998; }
+.fa-instagram:hover{ color: #E4717A; }
+.fa-google:hover{ color: #EA4335; }
+.fa-linkedin:hover{ color:#4875B4; }

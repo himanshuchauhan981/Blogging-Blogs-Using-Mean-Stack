@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg indigo">
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+        <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
+            <ul class="navbar-nav" *ngIf="loginStatus">
+                <li class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/post/new" (click)="isMenuCollapsed=true">Create Post</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" (click)="isMenuCollapsed=true">Profile</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" (click)="logout()">Log Out</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" *ngIf="!loginStatus">
+                <li class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/login" (click)="isMenuCollapsed=true">Login</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" routerLink="/signup" (click)="isMenuCollapsed=true">Signup</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
