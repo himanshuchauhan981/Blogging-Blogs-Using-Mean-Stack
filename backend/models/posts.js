@@ -16,7 +16,7 @@ const posts = new Schema({
     postAuthor: {
         type: String
     },
-    postImageId: {
+    postImage: {
         type: String
     }
 })

@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
 		.subscribe((res)=>{
 			if(res.json().status === 200){
 				this.blogArray = res.json().blogs
-				console.log(this.blogArray)
 			}
 		})
 	}

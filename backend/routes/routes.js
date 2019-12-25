@@ -12,10 +12,6 @@ module.exports = ()=>{
     router.post('/login',userController.users.authenticateLoginUser)
 
     router.post('/token',userController.users.getUsernameFromToken)
-    
-    router.post('/home',passport.authenticate('jwt'),(req,res)=>{
-        res.status(200).send({'msg':'success'})
-    })
 
     router.post('/post',
         passport.authenticate('jwt'),
@@ -26,6 +22,10 @@ module.exports = ()=>{
     router.get('/post',
         passport.authenticate('jwt'),
         postController.post.getAllPosts
+    )
+
+    router.get('/image/:id',
+        postController.post.getPostImage
     )
 
     return router
