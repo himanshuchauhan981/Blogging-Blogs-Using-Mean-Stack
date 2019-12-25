@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule,MatIconModule,MatButtonModule,MatCheckboxModule } from '@angular/material'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MDBBootstrapModule } from 'angular-bootstrap-md'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -54,6 +55,7 @@ import { AuthGuardService } from './service/auth-guard.service'
 		MatIconModule,
 		MatButtonModule,
 		MatCheckboxModule,
+		MatSnackBarModule,
 		MDBBootstrapModule.forRoot()
 	],
 	providers: [HomeComponent],

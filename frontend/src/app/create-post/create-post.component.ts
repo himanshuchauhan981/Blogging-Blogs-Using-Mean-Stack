@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService } from '../service/post.service'
 
@@ -10,6 +11,8 @@ import { PostService } from '../service/post.service'
 })
 export class CreatePostComponent {
 
+	msg: string
+
 	uploadedFiles : Array <File>
 
 	fileType: Array <String> = ['image/jpeg','image/jpg','image/png']
@@ -18,7 +21,7 @@ export class CreatePostComponent {
 
 	fileUploadColor : String ="accent"
 
-	constructor(private postService: PostService) { }
+	constructor(private postService: PostService, private matSnackBar: MatSnackBar) { }
 
 	createPostForm = new FormGroup({
 		postTitle: new FormControl('',[
@@ -57,21 +60,26 @@ export class CreatePostComponent {
 				formData.append("postImage",this.uploadedFiles[i],this.uploadedFiles[i].name)
 			}
 		}
+		
 		formData.append("postTitle",createPostForm.value.postTitle)
 		formData.append("postContent",createPostForm.value.postContent)
+
 		this.postService.submitPost(formData)
 		.subscribe((res)=>{
-			console.log(res)
+			if(res.json().status === 200){
+				this.msg = res.json().msg
+			}
+			else if(res.json().status === 400){
+				this.msg = "Something wrong happened, Try again!!!"
+				
+			}
+			this.matSnackBar.open(this.msg,'Close',{
+				duration: 8000
+			})
 		})
 	}
-
-	// createNewPost(createPostForm){
-		
-	// }
 
 	uploadFile(){
 		document.getElementById('upload').click()
 	}
-
-
 }

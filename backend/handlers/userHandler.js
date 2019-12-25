@@ -13,7 +13,7 @@ const user = {
                     res.status(400).send(error)
                 }
                 else {
-                    res.status(200).send({ 'dataStatus': 'Saved Details' })
+                    res.status(200).send({ status:200, msg:'Data Saved' })
                 }
             })
         }
