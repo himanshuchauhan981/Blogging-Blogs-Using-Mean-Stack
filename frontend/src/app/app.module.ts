@@ -21,7 +21,8 @@ import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 import { HomeComponent } from './home/home.component'
 import { CreatePostComponent } from './create-post/create-post.component'
-import { AuthGuardService } from './service/auth-guard.service'
+import { AuthGuardService } from './service/auth-guard.service';
+import { SidebarComponent } from './sidebar/sidebar.component'
 
 @NgModule({
 	declarations: [
@@ -32,7 +33,8 @@ import { AuthGuardService } from './service/auth-guard.service'
 		LoginComponent,
 		SignupComponent,
 		HomeComponent,
-		CreatePostComponent
+		CreatePostComponent,
+		SidebarComponent
 	],
 	imports: [
 		BrowserModule,
