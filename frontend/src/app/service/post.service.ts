@@ -7,9 +7,12 @@ import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 })
 export class PostService {
 
-	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
-
 	token: string
+
+	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { 
+		
+	}
+
 
 	submitPost = (formData) =>{
 		this.token = this.storage.get('token')
@@ -21,5 +24,16 @@ export class PostService {
 		return this.http.post('/api/post',formData,{
 			headers: headers
 		})	
+	}
+
+	getAllPost = ()=>{
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.get('/api/post',{
+			headers: headers
+		})
 	}
 }

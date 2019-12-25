@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { PostService } from '../service/post.service'
 
 @Component({
 	selector: 'home',
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core'
 })
 export class HomeComponent implements OnInit {
 
-	constructor() { }
+	constructor(private postService: PostService) { }
 
-	ngOnInit() { }
+	blogArray : Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date}>
 
-	uploadImage(){
-		
+	ngOnInit() {
+		this.postService.getAllPost()
+		.subscribe((res)=>{
+			if(res.json().status === 200){
+				this.blogArray = res.json().blogs
+			}
+		})
 	}
 }

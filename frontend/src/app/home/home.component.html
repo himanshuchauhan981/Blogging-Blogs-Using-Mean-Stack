@@ -2,22 +2,18 @@
     <div class="w3-container">
         <div class="w3-row">
             <div class="w3-col l8 s12">
-                <div class="w3-card-4 w3-margin w3-white posts-box">
+                <div class="w3-card-4 w3-margin w3-white posts-box" *ngFor="let blogs of blogArray">
                     <img src="http://bit.ly/34amoMf" alt="" style="width:100%; height:300px;">
                     <div class="w3-container">
                         <h2>
-                            <b class="post-title">Flash Missing, vanishes In Crisis</b>
+                            <b class="post-title">{{ blogs.postTitle }}</b>
                         </h2>
                         <h5>
-                            By Himanshu Chauhan <span class="w3-opacity w3-margin-left post-author">April 17, 2019
-                            </span>
+                            By Himanshu Chauhan <span class="w3-opacity w3-margin-left post-author">{{ blogs.postDate }}</span>
                         </h5>
                     </div>
                     <div class="w3-container post-content">
-                        <p>After several encounters with his former idol, Eobard Thawne/Reverse-Flash learned that the
-                            Flash's real name is Bartholomew Henry Allen, better known as Barry Allen. Eobard began to
-                            study Barry's life, acquiring knowleadge of his parents and loved ones; Nora Allen, Henry
-                            Allen, Iris West-Allen and .....</p>
+                        <p> {{ blogs.postContent.substring(0,190)+'.......' }}</p>
                     </div>
                     <div class="w3-row">
                         <form>

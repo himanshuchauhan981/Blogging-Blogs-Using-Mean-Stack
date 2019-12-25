@@ -10,6 +10,11 @@ const posts = {
         })
         await blogPostObject.save()
         res.status(200).json({ msg:"New post created",status:200 })
+    },
+    
+    getAllPosts : async(req,res)=>{
+        const allBlogs = await blogPosts.find()
+        res.status(200).json({blogs: allBlogs, status:200})
     }
 }
 

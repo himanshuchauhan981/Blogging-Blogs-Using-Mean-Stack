@@ -23,5 +23,10 @@ module.exports = ()=>{
         postController.post.createNewPost
     )
 
+    router.get('/post',
+        passport.authenticate('jwt'),
+        postController.post.getAllPosts
+    )
+
     return router
 }
