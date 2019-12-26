@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule,MatIconModule,MatButtonModule,MatCheckboxModule } from '@angular/material'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MDBBootstrapModule } from 'angular-bootstrap-md'
+import { MomentModule } from 'angular2-moment'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -61,7 +62,8 @@ import { ViewPostComponent } from './view-post/view-post.component'
 		MatButtonModule,
 		MatCheckboxModule,
 		MatSnackBarModule,
-		MDBBootstrapModule.forRoot()
+		MDBBootstrapModule.forRoot(),
+		MomentModule
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent]
