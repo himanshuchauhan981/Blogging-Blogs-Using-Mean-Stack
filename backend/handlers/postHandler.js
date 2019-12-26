@@ -2,7 +2,6 @@ const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 
 const { blogPosts } = require('../models')
-const { conn }  = require('../db').connection
 
 const posts = {
     createNewPost: async(req,res) =>{
@@ -34,6 +33,13 @@ const posts = {
             const readstream = gfs.createReadStream(file.filename)
             readstream.pipe(res)
         })
+    },
+
+    getParticularPost : async(req,res)=>{
+        let postID = req.params.id
+
+        let postData = await blogPosts.findById(postID)
+        res.status(200).json({post: postData,status:200}) 
     }
 }
 

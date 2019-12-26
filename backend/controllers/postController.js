@@ -1,7 +1,7 @@
 const { postHandler } = require('../handlers')
 
 const post = {
-    createNewPost : async(req,res)=>{
+    createNewPost : async (req,res)=>{
         const response = await postHandler.posts.createNewPost(req,res)
         return response
     },
@@ -13,6 +13,11 @@ const post = {
 
     getPostImage : async (req,res)=>{
         const response = await postHandler.posts.getPostImage(req,res)
+        return response
+    },
+
+    getParticularPost : async (req,res)=>{
+        const response = await postHandler.posts.getParticularPost(req,res)
         return response
     }
 }

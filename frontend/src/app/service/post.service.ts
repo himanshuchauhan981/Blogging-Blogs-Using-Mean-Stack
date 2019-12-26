@@ -36,4 +36,15 @@ export class PostService {
 			headers: headers
 		})
 	}
+
+	getParticularPost = (id)=>{
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.get(`/api/post/${id}`,{
+			headers: headers
+		})
+	}
 }

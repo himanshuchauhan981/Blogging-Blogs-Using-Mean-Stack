@@ -28,5 +28,9 @@ module.exports = ()=>{
         postController.post.getPostImage
     )
 
+    router.get('/post/:id',
+        postController.post.getParticularPost
+    )
+
     return router
 }
