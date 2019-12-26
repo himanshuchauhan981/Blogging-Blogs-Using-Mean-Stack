@@ -3,3 +3,5 @@ backend/node_modules
 backend/package-lock.json
 frontend/proxy.config.json
 backend/.vscode/launch.json
+.vscode
+package-lock.json
