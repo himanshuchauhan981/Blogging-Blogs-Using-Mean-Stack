@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { PostService } from '../service/post.service'
+import { Router } from '@angular/router'
 
 @Component({
 	selector: 'home',
@@ -8,7 +9,7 @@ import { PostService } from '../service/post.service'
 })
 export class HomeComponent implements OnInit {
 
-	constructor(private postService: PostService) { }
+	constructor(private postService: PostService, private router: Router) { }
 
 	blogArray : Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date}>
 

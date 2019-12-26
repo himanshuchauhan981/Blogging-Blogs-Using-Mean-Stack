@@ -49,7 +49,8 @@ import { ViewPostComponent } from './view-post/view-post.component'
 			{ path: 'login', component: LoginComponent },
 			{ path: 'signup', component: SignupComponent },
 			{ path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
-			{ path: 'post/new', component: CreatePostComponent, canActivate:[AuthGuardService] }
+			{ path: 'post/new', component: CreatePostComponent, canActivate:[AuthGuardService] },
+			{ path: 'post/:id', component: ViewPostComponent, canActivate:[AuthGuardService]}
 		]),
 		BrowserAnimationsModule,
 		NgbModule,
