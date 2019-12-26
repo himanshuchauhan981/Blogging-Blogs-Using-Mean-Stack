@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -9,7 +9,7 @@ export class AuthGuardService implements CanActivate {
 
 	isTrue: boolean  = false
 
-	constructor(private loginService: LoginService, private router: Router,private activatedRoute: ActivatedRoute) { }
+	constructor(private loginService: LoginService, private router: Router) { }
 
 	canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot) {
 		
@@ -22,11 +22,9 @@ export class AuthGuardService implements CanActivate {
 					this.isTrue  = false
 				}
 				else if(status === 200){
-					// let url = route.routeConfig.path
-					let url = this.activatedRoute.snapshot['_routerState'].url
 					this.loginService.loginObservable.next(true)
 					this.isTrue = true
-					this.router.navigate([url])
+					this.router.navigate([state.url])
 				}
 			},error =>{
 				this.router.navigate(['login'])
