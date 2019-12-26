@@ -1,12 +1,19 @@
 const { users } = require('../models')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
+
 const { createToken } = require('../auth').token
 
 const user = {
     saveUserDetails: async (req, res) => {
-        let user = new users(req.body)
         let userStatus = await users.findOne({ $and: [{ email: user.email }, { username: user.username }] })
         if (userStatus == null) {
+            let salt = bcrypt.genSaltSync(10)
+            let hash = bcrypt.hashSync(req.body.password,salt)
+            req.body.password = hash
+
+            let user = new users(req.body)
+            
             await user.save((err, user) => {
                 if (err) {
                     let error = Object.values(err.errors)[0].message

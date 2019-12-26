@@ -1,19 +1,24 @@
 const LocalStrategy = require('passport-local').Strategy
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
+const bcrypt = require('bcryptjs')
 
 const { users } = require('../models')
 
 module.exports = (passport)=>{
     passport.use(new LocalStrategy(
         (username,password,done) =>{
-            users.findOne({$and:[{username: username},{password: password}]}, (err,user) =>{
+            users.findOne({$and:[{username: username}]}, (err,user) =>{
                 if(err) return done(err)
                 if(!user){
                     return done(null, false,{ message : 'Incorrect Credentials'})
                 }
-                return done(null,user)
-            }).select({'username':1})
+                else{
+                    let userStatus = bcrypt.compareSync(password,user.password)
+                    if(userStatus) return done(null,user)
+                    else return done(null, false,{ message : 'Incorrect Credentials'})
+                }
+            }).select({'username':1,'password':1})
         }
     ))
     
