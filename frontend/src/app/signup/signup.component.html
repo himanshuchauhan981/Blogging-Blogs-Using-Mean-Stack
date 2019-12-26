@@ -8,64 +8,44 @@
                     <form [formGroup]="signupForm" (ngSubmit)="signupdata(signupForm)">
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Username</mat-label>
-                            <input
-                                matInput
-                                placeholder="Enter Username"
-                                [formControl]="username"
-                                name="username"
-                                [type]="email"
-                                required
-                            >
-                            <mat-error *ngIf="username.hasError('required')">Username is required</mat-error>
-                            <mat-error *ngIf="username.hasError('minlength')">Minimum length should be 5 characters long</mat-error>
+                            <input matInput placeholder="Enter Username" [formControl]="username" name="username"
+                                [type]="email" required>
+                            <mat-error
+                                *ngIf="signupForm.hasError('required')">
+                                Username is required</mat-error>
+                            <mat-error
+                                *ngIf="signupForm.hasError('minlength')">
+                                Minimum length should be 5 characters long</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Email</mat-label>
-                            <input
-                                matInput
-                                placeholder="Enter Email"
-                                [formControl]="email"
-                                name="email"
-                                required
-                            >
+                            <input matInput placeholder="Enter Email" [formControl]="email" name="email" required>
                             <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
-                            <mat-error *ngIf="!email.hasError('required') && email.hasError('email')">Invalid Email ID</mat-error>
+                            <mat-error *ngIf="!email.hasError('required') && email.hasError('email')">Invalid Email ID
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Password</mat-label>
-                            <input
-                                matInput
-                                placeholder="Enter your password"
-                                [formControl]="password"
-                                required
-                                type="password"
-                            >
+                            <input matInput placeholder="Enter your password" [formControl]="password" required
+                                type="password">
                             <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
                             <mat-error *ngIf="password.hasError('minlength')">Minimum password length is 8</mat-error>
-                            <mat-error *ngIf="!password.hasError('minlength') && password.hasError('pattern')">Must contain one lower &amp; uppercase letter and one non-alpha character</mat-error>
+                            <mat-error *ngIf="!password.hasError('minlength') && password.hasError('pattern')">Must
+                                contain one lower &amp; uppercase letter and one non-alpha character</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Confirm Password</mat-label>
-                            <input
-                                matInput
-                                placeholder="retype your password"
-                                [formControl]="confirmPassword"
-                                name="confirmPassword"
-                                required
-                                type="password"
-                            >
-                            <mat-error *ngIf="confirmPassword.hasError('required')">Confirm Password is required</mat-error>
-                            <mat-error *ngIf="confirmPassword.hasError('mustMatch')">Password does not matched</mat-error>
+                            <input matInput placeholder="retype your password" [formControl]="confirmPassword"
+                                name="confirmPassword" required type="password">
+                            <mat-error *ngIf="confirmPassword.hasError('required')">Confirm Password is required
+                            </mat-error>
+                            <mat-error *ngIf="confirmPassword.hasError('mustMatch')">Password does not matched
+                            </mat-error>
                         </mat-form-field>
                         <section class="example-section">
-                            <mat-checkbox
-                                class="example-margin"
-                                name="check"
-                                [(indeterminate)]="indeterminate"
-                                [labelPosition]="labelPosition"
-                                required
-                            >
-                            I agree to the terms and conditions    
+                            <mat-checkbox class="example-margin" name="check" [(indeterminate)]="indeterminate"
+                                [labelPosition]="labelPosition" required>
+                                I agree to the terms and conditions
                             </mat-checkbox>
                         </section>
                         <button mat-raised-button color="primary" class="float-right">Sign Up</button>

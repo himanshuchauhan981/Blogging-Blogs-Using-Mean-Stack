@@ -11,3 +11,44 @@
 .post-title{
     font-family:'ABeeZee'
 }
+
+.like-comment-box{
+    text-align: center;
+    padding: 10px 0px;
+    cursor: pointer;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.like-comment-box:hover{
+    background-color: grey;
+}
+
+.comment-section{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.comment-section-img{
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.comment-section-input{
+    border: none;
+    background-color: #F2F3F5;
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    padding: 0px 35px 0px 20px;
+}
+
+.fa-smile-o{
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 25px;
+    cursor: pointer;
+}

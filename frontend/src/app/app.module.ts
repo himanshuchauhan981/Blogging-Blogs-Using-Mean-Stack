@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule,MatIconModule,MatButtonModule,MatCheckboxModule } from '@angular/material'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { MDBBootstrapModule } from 'angular-bootstrap-md'
 import { MomentModule } from 'angular2-moment'
 
@@ -62,6 +63,7 @@ import { ViewPostComponent } from './view-post/view-post.component'
 		MatButtonModule,
 		MatCheckboxModule,
 		MatSnackBarModule,
+		MatTooltipModule,
 		MDBBootstrapModule.forRoot(),
 		MomentModule
 	],
