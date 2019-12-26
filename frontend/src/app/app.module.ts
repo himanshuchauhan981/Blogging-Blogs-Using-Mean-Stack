@@ -22,7 +22,8 @@ import { SignupComponent } from './signup/signup.component'
 import { HomeComponent } from './home/home.component'
 import { CreatePostComponent } from './create-post/create-post.component'
 import { AuthGuardService } from './service/auth-guard.service';
-import { SidebarComponent } from './sidebar/sidebar.component'
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ViewPostComponent } from './view-post/view-post.component'
 
 @NgModule({
 	declarations: [
@@ -34,7 +35,8 @@ import { SidebarComponent } from './sidebar/sidebar.component'
 		SignupComponent,
 		HomeComponent,
 		CreatePostComponent,
-		SidebarComponent
+		SidebarComponent,
+		ViewPostComponent
 	],
 	imports: [
 		BrowserModule,
