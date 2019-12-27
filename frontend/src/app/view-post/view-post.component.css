@@ -22,18 +22,17 @@
 
 .like-comment-box:hover{
     background-color: grey;
+    cursor: pointer;
 }
 
 .comment-section{
-    display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
 .comment-section-img{
-    height: 40px;
-    width: 40px;
-    margin-right: 10px;
+    height: 45px !important;
+    width: 45px !important;
 }
 
 .comment-section-input{
@@ -51,4 +50,25 @@
     right: 12px;
     font-size: 25px;
     cursor: pointer;
+}
+.user-comment{
+    background-color: #F2F1F1;
+    width: 100%;
+}
+
+.comments{ padding: 10px 0px; }
+
+.media{
+    width: 55px;
+    height: 55px;
+}
+
+.comment-details{
+    padding: 6px 15px;
+}
+
+
+.userName{ font-size: 13px; }
+.userComment{
+    font-size: 12px;
 }

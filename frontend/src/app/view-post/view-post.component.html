@@ -16,34 +16,33 @@
                         <p>{{ post.postContent }}</p>
                     </div>
                     <div class="w3-row">
-                        <div class="w3-col l6 s12">
+                        <div class="w3-col l6 m6 s6">
                             <div class="like-comment-box">Like</div>
                         </div>
-                        <div class="w3-col l6 s12">
-                            <div class="like-comment-box">Comment</div>
+                        <div class="w3-col l6 m6 s6">
+                            <div class="like-comment-box" (click)="focusCommentInput()">Comment</div>
                         </div>
                     </div>
                     <div class="comment-section">
+                        <div class="comments">
+                            <div class="d-flex">
+                                <img class="rounded-circle" src="http://bit.ly/34amoMf" height="60px" width="60px">
+                                <div class="d-block comment-details">
+                                    <div class="userName"><a href="">Himanshu Chauhan</a></div>
+                                    <div class="userComment">My Comment My Comment </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex">
                         <img
                             class="rounded-circle comment-section-img"
-                            src="https://images.unsplash.com/photo-1499084732479-de2c02d45fcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                            src="http://bit.ly/34amoMf"
                         >
                         <div  class="input-group">
-                            <input 
-                                type="text" 
-                                
-                                class="comment-section-input"
-                                placeholder="Write a comment..."
-                                
-                            >
-                            <i 
-                                class="fa fa-smile-o"
-                                matTooltip="Insert an Emoji"
-                                matTooltipPosition="above" 
-                                aria-label="Action"
-                            ></i>
+                            <input #comment type="text" class="comment-section-input" placeholder="Write a comment..." >
+                            <i class="fa fa-smile-o" matTooltip="Insert an Emoji" matTooltipPosition="above" aria-label="Action"></i>
                         </div>
-                        
+                        </div>
                     </div>
                 </div>
             </div>
