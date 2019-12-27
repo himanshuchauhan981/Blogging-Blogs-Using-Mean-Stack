@@ -32,5 +32,9 @@ module.exports = ()=>{
         postController.post.getParticularPost
     )
 
+    router.post('/comment',{
+        
+    })
+
     return router
 }
