@@ -27,4 +27,16 @@ export class CommentService {
 			headers: headers
 		})
 	}
+
+	getParticularPostComment(postId){
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.get('/api/comment',{
+			headers: headers,
+			params : {postId : postId}
+		})
+	}
 }

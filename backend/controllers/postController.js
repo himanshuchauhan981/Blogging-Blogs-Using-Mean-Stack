@@ -19,7 +19,19 @@ const post = {
     getParticularPost : async (req,res)=>{
         const response = await postHandler.getParticularPost(req,res)
         return response
+    },
+
+    getParticularPostComments: async (req,res)=>{
+        const response = await postHandler.getParticularPostComments(req,res)
+        return response
+    },
+
+    saveNewPostComment : async (req,res)=>{
+        const response = await postHandler.saveNewPostComment(req,res)
+        return response
     }
+
+
 }
 
 module.exports = post

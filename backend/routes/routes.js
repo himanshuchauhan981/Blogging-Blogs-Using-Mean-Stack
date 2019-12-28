@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 
-const { userController,postController,commentController } = require('../controllers')
+const { userController,postController } = require('../controllers')
 const { upload } = require('../middleware').multerMiddleware
 
 module.exports = ()=>{
@@ -34,7 +34,12 @@ module.exports = ()=>{
 
     router.post('/comment',
         passport.authenticate('jwt'),
-        commentController.saveNewComment
+        postController.saveNewPostComment
+    )
+
+    router.get('/comment',
+        passport.authenticate('jwt'),
+        postController.getParticularPostComments
     )
 
     return router

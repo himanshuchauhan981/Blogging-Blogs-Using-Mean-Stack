@@ -11,7 +11,7 @@
                         </h2>
                         <h5>
                             By Himanshu Chauhan <span
-                                class="w3-opacity w3-margin-left post-author">{{ post.postDate| amTimeAgo }}</span>
+                                class="w3-opacity w3-margin-left post-author">{{ post.postDate | amTimeAgo }}</span>
                         </h5>
                     </div>
                     <div class="w3-container post-content">
@@ -22,16 +22,16 @@
                             <div class="like-comment-box">Like</div>
                         </div>
                         <div class="w3-col l6 m6 s6">
-                            <div class="like-comment-box" (click)="focusCommentInput()">Comment</div>
+                            <div class="like-comment-box" (click)="getPostComments(post._id)">View Comments ({{ commentsLength }})</div>
                         </div>
                     </div>
                     <div class="comment-section">
-                        <div class="comments">
+                        <div class="comments" *ngFor="let comment of commentsArray">
                             <div class="d-flex">
                                 <img class="rounded-circle" src="http://bit.ly/34amoMf" height="60px" width="60px">
                                 <div class="d-block comment-details">
-                                    <div class="userName"><a href="">Himanshu Chauhan</a></div>
-                                    <div class="userComment">My Comment My Comment </div>
+                                    <div class="userName"><a href="">{{ comment.createdBy }}</a></div>
+                                    <div class="userComment">{{ comment.text }}</div>
                                 </div>
                             </div>
                         </div>

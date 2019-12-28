@@ -4,17 +4,20 @@ const Schema = mongoose.Schema
 
 const comments = new Schema({
     postId: {
-        type: String
+        type: String,
+        required:[true,'Unexpected Error']
     },
     text: {
-        type: String
+        type: String,
+        required:[true,'Unexpected Error']
     },
     createdAt: {
         type: Date,
         default: Date.now
     },
     createdBy: {
-        type: String
+        type: String,
+        required:[true,'Unexpected Error']
     }
 })
 

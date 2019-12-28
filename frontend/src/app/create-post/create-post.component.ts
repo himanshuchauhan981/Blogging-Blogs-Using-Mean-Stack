@@ -70,7 +70,7 @@ export class CreatePostComponent {
 				this.msg = res.json().msg
 			}
 			else if(res.json().status === 400){
-				this.msg = "Something wrong happened, Try again!!!"
+				this.msg = "Something wrong happened, Try again!!!"	
 				
 			}
 			this.matSnackBar.open(this.msg,'Close',{

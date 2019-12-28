@@ -1,7 +1,7 @@
 const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 
-const { blogPosts } = require('../models')
+const { blogPosts,comments } = require('../models')
 
 const posts = {
     createNewPost: async(req,res) =>{
@@ -38,7 +38,28 @@ const posts = {
         let postID = req.params.id
 
         let postData = await blogPosts.findById(postID)
-        res.status(200).json({post: postData,status:200}) 
+        let commentsdata = await comments.find({postId: postID})
+
+        res.status(200).json({post: postData,commentLength: commentsdata.length,status: 200}) 
+    },
+
+    getParticularPostComments : async(req,res)=>{
+        let commentData = await comments.find({postId: req.query.postId})
+        res.status(200).json({status : 200, comments: commentData})
+    },
+
+    saveNewPostComment : async(req,res)=>{
+        req.body.createdBy = req.user.username
+        let commentObject = new comments(req.body)
+        await commentObject.save((err,user)=>{
+            if(err){
+                let error = Object.values(err.errors)[0].message
+                res.status(200).json({status:400, msg: error})
+            }
+            else{
+                res.status(200).json({status:200, msg:'msg saved'})
+            }
+        })
     }
 }
 
