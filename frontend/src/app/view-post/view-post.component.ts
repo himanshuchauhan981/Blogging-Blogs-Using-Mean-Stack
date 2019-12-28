@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+
 import { PostService } from '../service/post.service'
+import { CommentService } from '../service/comment.service'
 
 @Component({
 	selector: 'app-view-post',
@@ -11,9 +14,22 @@ export class ViewPostComponent implements OnInit {
 
 	post = {}
 
-	constructor(private activatedRoute: ActivatedRoute, private postService: PostService) { }
+	constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private commentService: CommentService) { }
 
-	@ViewChild("comment",{static: false}) nameField: ElementRef;
+	commentForm = new FormGroup({
+		comment: new FormControl('',Validators.required)
+	})
+
+	get comment(){ return this.commentForm.get('comment')}
+
+	submitComment(commentForm,postId){
+		this.commentService.submitNewComment(commentForm.value,postId)
+		.subscribe((res)=>{
+			console.log(res)
+		})
+	}
+
+	@ViewChild("focusComment",{static: false}) nameField: ElementRef;
 	focusCommentInput() :  void{
 		this.nameField.nativeElement.focus()
 	}

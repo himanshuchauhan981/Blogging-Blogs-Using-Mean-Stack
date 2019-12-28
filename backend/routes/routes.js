@@ -33,6 +33,7 @@ module.exports = ()=>{
     )
 
     router.post('/comment',
+        passport.authenticate('jwt'),
         commentController.saveNewComment
     )
 

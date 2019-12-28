@@ -20,7 +20,6 @@ export class PostService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		this.token = this.storage.get('token')
 		return this.http.post('/api/post',formData,{
 			headers: headers
 		})	

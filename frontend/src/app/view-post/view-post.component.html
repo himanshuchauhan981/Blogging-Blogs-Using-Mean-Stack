@@ -3,13 +3,15 @@
         <div class="w3-row">
             <div class="w3-col l8 s12">
                 <div class="w3-card-4 w3-margin w3-white posts-box">
-                    <img *ngIf="post.postImage != null" src="{{'/api/image/'+ post.postImage }}" alt="" style="width:100%; height:300px;">
+                    <img *ngIf="post.postImage != null" src="{{'/api/image/'+ post.postImage }}" alt=""
+                        style="width:100%; height:300px;">
                     <div class="w3-container">
                         <h2>
                             <b class="post-title">{{ post.postTitle }}</b>
                         </h2>
                         <h5>
-                            By Himanshu Chauhan <span class="w3-opacity w3-margin-left post-author">{{ post.postDate| amTimeAgo }}</span>
+                            By Himanshu Chauhan <span
+                                class="w3-opacity w3-margin-left post-author">{{ post.postDate| amTimeAgo }}</span>
                         </h5>
                     </div>
                     <div class="w3-container post-content">
@@ -33,16 +35,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex">
-                        <img
-                            class="rounded-circle comment-section-img"
-                            src="http://bit.ly/34amoMf"
-                        >
-                        <div  class="input-group">
-                            <input #comment type="text" class="comment-section-input" placeholder="Write a comment..." >
-                            <i class="fa fa-smile-o" matTooltip="Insert an Emoji" matTooltipPosition="above" aria-label="Action"></i>
-                        </div>
-                        </div>
+                        <form [formGroup]="commentForm" (ngSubmit)="submitComment(commentForm,post._id)">
+                            <div class="d-flex">
+                                <img class="rounded-circle comment-section-img" src="http://bit.ly/34amoMf">
+                                <div class="input-group">
+                                    <input
+                                        #focusComment
+                                        type="text"
+                                        name="comment" 
+                                        class="comment-section-input"
+                                        placeholder="Write a comment..."
+                                        [formControl]="comment"
+                                        required
+                                    >
+                                    <i
+                                        class="fa fa-smile-o"
+                                        matTooltip="Insert an Emoji"
+                                        matTooltipPosition="above"
+                                        aria-label="Action"
+                                    ></i>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,6 @@ const { blogPosts } = require('../models')
 
 const posts = {
     createNewPost: async(req,res) =>{
-        console.log(req.user)
         const blogPostObject = new blogPosts({
             postTitle: req.body.postTitle,
             postContent: req.body.postContent,
