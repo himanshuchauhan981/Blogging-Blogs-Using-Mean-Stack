@@ -49,15 +49,18 @@ const posts = {
     },
 
     saveNewPostComment : async(req,res)=>{
+        let arr = []
         req.body.createdBy = req.user.username
         let commentObject = new comments(req.body)
-        await commentObject.save((err,user)=>{
+        await commentObject.save(async (err,comment)=>{
             if(err){
                 let error = Object.values(err.errors)[0].message
                 res.status(200).json({status:400, msg: error})
             }
             else{
-                res.status(200).json({status:200, msg:'msg saved'})
+                arr.push(comment)
+                let commentData = await comments.find({postId: req.body.postId})
+                res.status(200).json({status:200, msg:'msg saved',data: arr,length: commentData.length})
             }
         })
     }

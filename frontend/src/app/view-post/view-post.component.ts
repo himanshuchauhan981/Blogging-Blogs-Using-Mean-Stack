@@ -40,6 +40,10 @@ export class ViewPostComponent implements OnInit {
 					duration: 8000
 				})
 			}
+			else if(res.json().status === 200){
+				this.commentsArray = res.json().data
+				this.commentsLength = res.json().length
+			}
 		})
 	}
 
@@ -58,7 +62,6 @@ export class ViewPostComponent implements OnInit {
 			if(res.json().status === 200){
 				this.commentsArray = res.json().comments
 			}
-			console.log(this.commentsArray)
 		})
 	}
 
