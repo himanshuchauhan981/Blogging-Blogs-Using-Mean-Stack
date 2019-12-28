@@ -1,40 +1,40 @@
 const express = require('express')
 const passport = require('passport')
 
-const { userController,postController } = require('../controllers')
+const { userController,postController,commentController } = require('../controllers')
 const { upload } = require('../middleware').multerMiddleware
 
 module.exports = ()=>{
     const router = express.Router()
 
-    router.post('/signup',userController.users.saveUserDetails)
+    router.post('/signup',userController.saveUserDetails)
 
-    router.post('/login',userController.users.authenticateLoginUser)
+    router.post('/login',userController.authenticateLoginUser)
 
-    router.post('/token',userController.users.getUsernameFromToken)
+    router.post('/token',userController.getUsernameFromToken)
 
     router.post('/post',
         passport.authenticate('jwt'),
         upload.single('postImage'),
-        postController.post.createNewPost
+        postController.createNewPost
     )
 
     router.get('/post',
         passport.authenticate('jwt'),
-        postController.post.getAllPosts
+        postController.getAllPosts
     )
 
     router.get('/image/:id',
-        postController.post.getPostImage
+        postController.getPostImage
     )
 
     router.get('/post/:id',
-        postController.post.getParticularPost
+        postController.getParticularPost
     )
 
-    router.post('/comment',{
-        
-    })
+    router.post('/comment',
+        commentController.saveNewComment
+    )
 
     return router
 }
