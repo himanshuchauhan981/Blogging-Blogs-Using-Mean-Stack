@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit {
 				for(let i=0;i<len;i++){
 					this.blogArray.push(resData.blogs[i])
 				}
-
 				this.skipPostLimit = this.skipPostLimit + 2
 			}
 		})

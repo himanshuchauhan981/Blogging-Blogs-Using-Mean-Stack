@@ -17,7 +17,29 @@ const posts = {
         
     getAllPosts : async(req,res)=>{
         let skipLimit = parseInt(req.query.skipPostsLimit)
-        const allBlogs = await blogPosts.find().sort({postDate: -1}).limit(2).skip(skipLimit)
+        // const allBlogs = await blogPosts.find().sort({postDate: -1}).limit(2).skip(skipLimit)
+        const allBlogs = await blogPosts.aggregate([
+            {
+               $project:{
+                   "_id":{
+                       "$toString":"$_id"
+                   },
+                   "postTitle": "$postTitle",
+                   "postContent":"$postContent",
+                   "postDate":"$postDate",
+                   "postAuthor":"$postAuthor",
+                   "postImage":"$postImage"
+               } 
+            },
+            {
+                $lookup: {
+                    from: "comments",
+                    localField: "_id",
+                    foreignField: "postId",
+                    as: "comment"
+                }
+            }
+        ]).sort({postDate:-1}).limit(2).skip(skipLimit)
         res.status(200).json({blogs: allBlogs, status:200})
     },
 
