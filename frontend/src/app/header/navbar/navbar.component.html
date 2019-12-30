@@ -9,11 +9,11 @@
                 <li class="nav-item" [routerLinkActive]="['active']">
                     <a class="nav-link" routerLink="/post/new" (click)="isMenuCollapsed=true">Create Post</a>
                 </li>
-                <li class="nav-item" [routerLinkActive]="['active']">
-                    <a class="nav-link" (click)="isMenuCollapsed=true">Profile</a>
+                <li class="nav-item white-hover" [routerLinkActive]="['active']">
+                    <a class="nav-link cursor-pointer" (click)="isMenuCollapsed=true">Profile</a>
                 </li>
-                <li class="nav-item" [routerLinkActive]="['active']">
-                    <a class="nav-link" (click)="logout()">Log Out</a>
+                <li class="nav-item white-hover" [routerLinkActive]="['active']">
+                    <a class="nav-link cursor-pointer" (click)="logout()">Log Out</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto" *ngIf="!loginStatus">

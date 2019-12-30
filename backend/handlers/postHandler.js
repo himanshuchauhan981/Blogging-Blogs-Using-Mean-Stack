@@ -16,7 +16,7 @@ const posts = {
     },
         
     getAllPosts : async(req,res)=>{
-        const allBlogs = await blogPosts.find()
+        const allBlogs = await blogPosts.find().sort({postDate: -1})
         res.status(200).json({blogs: allBlogs, status:200})
     },
 

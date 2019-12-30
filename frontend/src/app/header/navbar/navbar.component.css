@@ -14,3 +14,11 @@
 .active{
     color: #8BEEEA;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.white-hover:hover{
+    color: white;
+}
