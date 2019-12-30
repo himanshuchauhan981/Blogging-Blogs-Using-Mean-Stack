@@ -13,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MDBBootstrapModule } from 'angular-bootstrap-md'
 import { MomentModule } from 'angular2-moment'
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -65,7 +66,8 @@ import { ViewPostComponent } from './view-post/view-post.component'
 		MatSnackBarModule,
 		MatTooltipModule,
 		MDBBootstrapModule.forRoot(),
-		MomentModule
+		MomentModule,
+		InfiniteScrollModule
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent]

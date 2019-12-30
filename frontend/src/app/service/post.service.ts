@@ -25,14 +25,17 @@ export class PostService {
 		})	
 	}
 
-	getAllPost = ()=>{
+	getAllPost = (skipPostsLimit)=>{
 		this.token = this.storage.get('token')
 
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
 		return this.http.get('/api/post',{
-			headers: headers
+			headers: headers,
+			params: {
+				skipPostsLimit: skipPostsLimit
+			}
 		})
 	}
 
