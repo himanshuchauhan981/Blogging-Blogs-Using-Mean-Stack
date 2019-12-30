@@ -16,7 +16,8 @@ const posts = {
     },
         
     getAllPosts : async(req,res)=>{
-        const allBlogs = await blogPosts.find().sort({postDate: -1})
+        let skipLimit = parseInt(req.query.skipPostsLimit)
+        const allBlogs = await blogPosts.find().sort({postDate: -1}).limit(2).skip(skipLimit)
         res.status(200).json({blogs: allBlogs, status:200})
     },
 
