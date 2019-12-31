@@ -10,10 +10,7 @@
                     <a class="nav-link" routerLink="/post/new" (click)="isMenuCollapsed=true">Create Post</a>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']">
-                    <a class="nav-link" routerLink="/:username/posts" (click)="showUserPosts()">View Posts</a>
-                </li>
-                <li class="nav-item white-hover" [routerLinkActive]="['active']">
-                    <a class="nav-link cursor-pointer" (click)="isMenuCollapsed=true">Profile</a>
+                    <a class="nav-link" routerLink="/{{ username }}" (click)="isMenuCollapsed=true">Profile</a>
                 </li>
                 <li class="nav-item white-hover" [routerLinkActive]="['active']">
                     <a class="nav-link cursor-pointer" (click)="logout()">Log Out</a>

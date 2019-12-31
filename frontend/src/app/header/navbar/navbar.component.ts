@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit{
 
 	public isMenuCollapsed = true
 
+	public username
+
 	logout(){
 		this.loginService.logout()
 		this.router.navigate(['login'])
@@ -25,11 +27,7 @@ export class NavbarComponent implements OnInit{
 	ngOnInit(){
 		this.loginService.loginObservable.subscribe(value =>{
 			this.loginStatus = value
+			this.username = this.authGuardService.currentUser
 		})
-	}
-
-	showUserPosts(){
-		let currentUser = this.authGuardService.currentUser
-		this.router.navigate([`${currentUser}/posts`])
 	}
 }
