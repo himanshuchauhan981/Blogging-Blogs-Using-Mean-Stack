@@ -26,7 +26,8 @@ import { HomeComponent } from './home/home.component'
 import { CreatePostComponent } from './create-post/create-post.component'
 import { AuthGuardService } from './service/auth-guard.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ViewPostComponent } from './view-post/view-post.component'
+import { ViewPostComponent } from './view-post/view-post.component';
+import { ViewAllPostsComponent } from './view-post/view-all-posts/view-all-posts.component'
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,8 @@ import { ViewPostComponent } from './view-post/view-post.component'
 		HomeComponent,
 		CreatePostComponent,
 		SidebarComponent,
-		ViewPostComponent
+		ViewPostComponent,
+		ViewAllPostsComponent
 	],
 	imports: [
 		BrowserModule,
