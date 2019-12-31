@@ -28,12 +28,12 @@ export class ViewAllPostsComponent implements OnInit {
 		})
 	}
 
-	editPost(){
-
+	editPost(postAuthor,postId){
+		this.router.navigate([`/${postAuthor}/${postId}`])
 	}
 
 	deletePost(){
-		
+
 	}
 
 }

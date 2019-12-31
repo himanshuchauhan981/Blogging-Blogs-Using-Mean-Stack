@@ -27,8 +27,9 @@ import { HomeComponent } from './home/home.component'
 import { CreatePostComponent } from './create-post/create-post.component'
 import { AuthGuardService } from './service/auth-guard.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ViewPostComponent } from './view-post/view-post.component';
-import { ViewAllPostsComponent } from './view-post/view-all-posts/view-all-posts.component'
+import { ViewPostComponent } from './posts/view-post/view-post.component';
+import { ViewAllPostsComponent } from './posts/view-all-posts/view-all-posts.component';
+import { EditPostComponent } from './posts/edit-post/edit-post.component'
 
 @NgModule({
 	declarations: [
@@ -42,7 +43,8 @@ import { ViewAllPostsComponent } from './view-post/view-all-posts/view-all-posts
 		CreatePostComponent,
 		SidebarComponent,
 		ViewPostComponent,
-		ViewAllPostsComponent
+		ViewAllPostsComponent,
+		EditPostComponent
 	],
 	imports: [
 		BrowserModule,
@@ -57,7 +59,8 @@ import { ViewAllPostsComponent } from './view-post/view-all-posts/view-all-posts
 			{ path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
 			{ path: 'post/new', component: CreatePostComponent, canActivate:[AuthGuardService] },
 			{ path: 'post/:id', component: ViewPostComponent, canActivate:[AuthGuardService] },
-			{ path: ':username/posts', component: ViewAllPostsComponent, canActivate:[AuthGuardService] }
+			{ path: ':username/posts', component: ViewAllPostsComponent, canActivate:[AuthGuardService] },
+			{ path: ':username/:postId', component: EditPostComponent, canActivate:[AuthGuardService] }
 		]),
 		BrowserAnimationsModule,
 		NgbModule,

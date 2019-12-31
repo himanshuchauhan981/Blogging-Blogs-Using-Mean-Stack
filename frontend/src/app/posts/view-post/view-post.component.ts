@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { PostService } from '../service/post.service'
-import { CommentService } from '../service/comment.service'
+import { PostService } from '../../service/post.service'
+import { CommentService } from '../../service/comment.service'
 
 @Component({
 	selector: 'app-view-post',
