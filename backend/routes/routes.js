@@ -42,5 +42,10 @@ module.exports = ()=>{
         postController.getParticularPostComments
     )
 
+    router.get('/:username/posts',
+        passport.authenticate('jwt'),
+        postController.getAllParticularUserPost
+    )
+
     return router
 }

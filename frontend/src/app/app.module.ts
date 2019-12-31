@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule,MatIconModule,MatButtonModule,MatCheckboxModule } from '@angular/material'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatExpansionModule } from '@angular/material/expansion'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MDBBootstrapModule } from 'angular-bootstrap-md'
 import { MomentModule } from 'angular2-moment'
@@ -55,7 +56,8 @@ import { ViewAllPostsComponent } from './view-post/view-all-posts/view-all-posts
 			{ path: 'signup', component: SignupComponent },
 			{ path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
 			{ path: 'post/new', component: CreatePostComponent, canActivate:[AuthGuardService] },
-			{ path: 'post/:id', component: ViewPostComponent, canActivate:[AuthGuardService]}
+			{ path: 'post/:id', component: ViewPostComponent, canActivate:[AuthGuardService] },
+			{ path: ':username/posts', component: ViewAllPostsComponent, canActivate:[AuthGuardService] }
 		]),
 		BrowserAnimationsModule,
 		NgbModule,
@@ -69,7 +71,8 @@ import { ViewAllPostsComponent } from './view-post/view-all-posts/view-all-posts
 		MatTooltipModule,
 		MDBBootstrapModule.forRoot(),
 		MomentModule,
-		InfiniteScrollModule
+		InfiniteScrollModule,
+		MatExpansionModule
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Injectable,Inject } from '@angular/core'
 import { Http, RequestOptions, Headers } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+import { headersToString } from 'selenium-webdriver/http'
 
 @Injectable({
 	providedIn: 'root'
@@ -46,6 +47,17 @@ export class PostService {
 		headers.append('Authorization', `Bearer ${this.token}`)
 
 		return this.http.get(`/api/post/${id}`,{
+			headers: headers
+		})
+	}
+
+	getAllParticularUserPost = (username)=>{
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.get(`/api/${username}/posts`,{
 			headers: headers
 		})
 	}

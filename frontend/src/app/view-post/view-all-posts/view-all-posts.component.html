@@ -1,1 +1,16 @@
-<p>view-all-posts works!</p>
+<div class="view-post-container">
+    <div class="mb-4" *ngFor="let post of userPost">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{ post.postTitle }}</mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>{{ post.postContent.substring(0,195)+'.....' }}</p>
+                <mat-action-row>
+                    <button mat-button color="primary" (click)="editPost(post._id)">Edit</button>
+                    <button mat-button color="warn" (click)="deletePost(post._id)">Delete</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

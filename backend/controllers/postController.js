@@ -29,8 +29,12 @@ const post = {
     saveNewPostComment : async (req,res)=>{
         const response = await postHandler.saveNewPostComment(req,res)
         return response
-    }
+    },
 
+    getAllParticularUserPost : async (req,res)=>{
+        const response = await postHandler.getAllParticularUserPost(req,res)
+        return response
+    }
 
 }
 

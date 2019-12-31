@@ -7,28 +7,31 @@ import { LoginService } from './login.service';
 })
 export class AuthGuardService implements CanActivate {
 
-	isTrue: boolean  = false
+	isTrue: boolean = false
+
+	currentUser : string
 
 	constructor(private loginService: LoginService, private router: Router) { }
 
-	canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot) {
-		
+	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+
 		this.loginService.validateJWTToken()
 			.subscribe((res) => {
 				let status = res.json().status
 				if (status === 401) {
 					this.loginService.loginObservable.next(false)
-					this.router.navigate(['login'],{queryParams: { returnUrl: state.url}})
-					this.isTrue  = false
+					this.router.navigate(['login'], { queryParams: { returnUrl: state.url } })
+					this.isTrue = false
 				}
-				else if(status === 200){
+				else if (status === 200) {
+					this.currentUser = res.json().user.username
 					this.loginService.loginObservable.next(true)
 					this.isTrue = true
 					this.router.navigate([state.url])
 				}
-			},error =>{
+			}, error => {
 				this.router.navigate(['login'])
-				this.isTrue  = false
+				this.isTrue = false
 				this.loginService.loginObservable.next(false)
 			})
 		return this.isTrue
