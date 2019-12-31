@@ -61,4 +61,15 @@ export class PostService {
 			headers: headers
 		})
 	}
+
+	deleteParticularPost = (postId) =>{
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.delete(`/api/post/${postId}`,{
+			headers: headers
+		})
+	}
 }

@@ -90,6 +90,19 @@ const posts = {
     getAllParticularUserPost: async (req, res) => {
         const userPosts = await blogPosts.find({ postAuthor: req.params.username })
         res.status(200).json({ status: 200, msg: 'Success', data: userPosts })
+    },
+
+    deleteParticularPost : async (req,res) =>{
+        let postId = req.params.id
+        const userPost = await blogPosts.findById(postId)
+        if(userPost != null && req.user.username === userPost.postAuthor){
+            const postDeleteStatus = await blogPosts.findByIdAndRemove(postId)
+            res.status(200).json({status:200, msg:'Post deleted', deletedPostId : postDeleteStatus._id})
+        }
+        else{
+            console.log('hello')
+            res.status(200).json({status: 404, msg:'Post not found'})
+        }
     }
 }
 

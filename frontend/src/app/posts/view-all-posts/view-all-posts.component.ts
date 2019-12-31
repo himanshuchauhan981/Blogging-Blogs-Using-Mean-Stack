@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { Router,ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService } from '../../service/post.service'
 
@@ -10,30 +11,40 @@ import { PostService } from '../../service/post.service'
 })
 export class ViewAllPostsComponent implements OnInit {
 
-	userPost: Array<{_id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date}> = []
+	userPost: Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date }> = []
 
 	constructor(
 		private postService: PostService,
 		private activatedRoute: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private matSnackBar: MatSnackBar
 	) { }
 
 	ngOnInit() {
 		let username = this.activatedRoute.snapshot.params.username
 		this.postService.getAllParticularUserPost(username)
-		.subscribe((res)=>{
-			if(res.json().status === 200){
-				this.userPost = res.json().data
-			}
-		})
+			.subscribe((res) => {
+				if (res.json().status === 200) {
+					this.userPost = res.json().data
+				}
+			})
 	}
 
-	editPost(postAuthor,postId){
+	editPost(postAuthor, postId) {
 		this.router.navigate([`/${postAuthor}/${postId}`])
 	}
 
-	deletePost(){
-
+	deletePost(post) {
+		this.postService.deleteParticularPost(post._id)
+			.subscribe((res) => {
+				if (res.json().status === 200) {
+					let index = this.userPost.indexOf(post)
+					this.userPost.splice(index,1)
+				}
+				this.matSnackBar.open(res.json().msg,'Close',{
+					duration: 8000
+				})
+			})
 	}
 
 }

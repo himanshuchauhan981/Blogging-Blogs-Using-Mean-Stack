@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { PostService } from '../service/post.service'
+import { PostService } from '../../service/post.service'
 
 @Component({
 	selector: 'create-post',

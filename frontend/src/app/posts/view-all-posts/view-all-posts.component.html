@@ -8,7 +8,7 @@
                 <p>{{ post.postContent.substring(0,195)+'.....' }}</p>
                 <mat-action-row>
                     <button mat-button color="primary" (click)="editPost(post.postAuthor,post._id)">Edit</button>
-                    <button mat-button color="warn" (click)="deletePost(post._id)">Delete</button>
+                    <button mat-button color="warn" (click)="deletePost(post)">Delete</button>
                 </mat-action-row>
             </mat-expansion-panel>
         </mat-accordion>

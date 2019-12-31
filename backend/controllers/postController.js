@@ -34,6 +34,10 @@ const post = {
     getAllParticularUserPost : async (req,res)=>{
         const response = await postHandler.getAllParticularUserPost(req,res)
         return response
+    },
+
+    deleteParticularPost : async (req,res)=>{
+        const response = await postHandler.deleteParticularPost(req,res)
     }
 
 }

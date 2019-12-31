@@ -24,13 +24,18 @@ module.exports = ()=>{
         postController.getAllPosts
     )
 
-    router.get('/image/:id',
-        postController.getPostImage
-    )
-
     router.get('/post/:id',
         postController.getParticularPost
     )
+
+    router.delete('/post/:id',
+        passport.authenticate('jwt'),
+        postController.deleteParticularPost
+    )
+
+    router.get('/image/:id',
+        postController.getPostImage
+    ) 
 
     router.post('/comment',
         passport.authenticate('jwt'),

@@ -24,7 +24,7 @@ import { CarousalComponent } from './header/carousal/carousal.component'
 import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 import { HomeComponent } from './home/home.component'
-import { CreatePostComponent } from './create-post/create-post.component'
+import { CreatePostComponent } from './posts/create-post/create-post.component'
 import { AuthGuardService } from './service/auth-guard.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ViewPostComponent } from './posts/view-post/view-post.component';
