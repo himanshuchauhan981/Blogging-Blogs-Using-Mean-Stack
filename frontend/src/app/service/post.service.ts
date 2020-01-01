@@ -9,30 +9,25 @@ export class PostService {
 
 	token: string
 
+	headers 
+
 	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { 
-		
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
 	}
 
 
 	submitPost = (formData) =>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
-
 		return this.http.post('/api/post',formData,{
-			headers: headers
+			headers: this.headers
 		})	
 	}
 
 	getAllPost = (skipPostsLimit)=>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
-
 		return this.http.get('/api/post',{
-			headers: headers,
+			headers: this.headers,
 			params: {
 				skipPostsLimit: skipPostsLimit
 			}
@@ -40,35 +35,20 @@ export class PostService {
 	}
 
 	getParticularPost = (id)=>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
-
 		return this.http.get(`/api/post/${id}`,{
-			headers: headers
+			headers: this.headers
 		})
 	}
 
 	getAllParticularUserPost = (username)=>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
-
 		return this.http.get(`/api/${username}/posts`,{
-			headers: headers
+			headers: this.headers
 		})
 	}
 
 	deleteParticularPost = (postId) =>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
-
 		return this.http.delete(`/api/post/${postId}`,{
-			headers: headers
+			headers: this.headers
 		})
 	}
 }
