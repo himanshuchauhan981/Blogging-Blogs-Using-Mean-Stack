@@ -1,1 +1,34 @@
-<h1>profile works!</h1>
+<div class="profile-container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="p-2">
+                    <p class="text-center my-profile">My Profile</p>
+                    <img class="profile-img rounded-circle" src="https://www.w3schools.com/w3css/img_lights.jpg">
+                </div>
+                <div class="profile-card-body">
+                    <div class="list-group">
+                        <span class="fa-size mb-2">
+                            <i class="fa fa-user fa-fw mr-3 w3-text-theme" aria-hidden="true"></i>
+                            <span class="fontSize">&nbsp; himanshu</span>
+                            <i class="fa fa-edit float-right mt-1" (click)="openDialogBox('Update username')"></i>
+                        </span>
+                        <span class="fa-size mb-2">
+                            <i class="fa fa-envelope fa-fw mr-3 w3-text-theme" aria-hidden="true"></i>
+                            <span class="fontSize">&nbsp; himanshuchauhan@gmail.com</span>
+                            <i class="fa fa-edit float-right mt-1" (click)="openDialogBox('Update email ID')"></i>
+                        </span>
+                        <span class="fa-size mb-2">
+                            <i class="fa fa-key fa-fw mr-3 w3-text-theme" aria-hidden="true"></i>
+                            <span class="fontSize">&nbsp; *********</span>
+                            <i class="fa fa-edit float-right mt-1"></i>
+                        </span>
+                    </div>
+                    <div class="text-center">
+                        <button mat-raised-button color="primary">Update Photo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
