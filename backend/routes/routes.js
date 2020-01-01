@@ -58,7 +58,8 @@ module.exports = ()=>{
     )
 
     router.patch('/:username/email',
-        passport.authenticate('jwt')
+        passport.authenticate('jwt'),
+        profileController.updateProfileEmail
     )
 
     router.get('/:username/posts',

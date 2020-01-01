@@ -2,7 +2,8 @@ const { users } = require('../models')
 
 const profile = {
     updateProfileEmail : async(req,res)=>{
-        res.status(200).json({'msg':'success'})
+        await users.findOneAndUpdate({username:req.params.username},{email: req.body.userdata})
+        res.status(200).json({status:200, msg:'Email ID updated'})
     },
 
     updateProfileUsername : async(req,res)=>{

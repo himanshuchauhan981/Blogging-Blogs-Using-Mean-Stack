@@ -33,8 +33,8 @@ export class ProfileDialogBoxComponent{
 		this.dialogRef.close()
 	}
 
-	updateUserProfile(data): void{
-		this.profileService.updateUserProfile(data)
+	submitProfile(profileForm,data): void{
+		this.profileService.updateUserProfile(profileForm.value, data)
 		.subscribe((res)=>{
 			console.log(res.json())
 		})

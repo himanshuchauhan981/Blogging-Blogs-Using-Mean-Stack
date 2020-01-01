@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core'
-import { Http, Headers } from '@angular/http'
+import { Http, Headers, RequestOptions } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 
 import { AuthGuardService } from './auth-guard.service'
@@ -29,8 +29,8 @@ export class ProfileService {
 		})
 	}
 
-	updateUserProfile(updateStatus) {
-		return this.http.patch(`/api/${updateStatus}`,{
+	updateUserProfile(object,updateStatus) {
+		return this.http.patch(`/api/${this.authGuardService.currentUser}/${updateStatus}`,object,{
 			headers: this.headers
 		})
 	}
