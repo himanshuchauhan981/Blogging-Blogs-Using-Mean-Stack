@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{ data.heading }}</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <input matInput >
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary">Update</button>
+    <button mat-raised-button color="warn" type="button" (click)="closeDialogBox()">Cancel</button>
+</div>

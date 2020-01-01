@@ -12,6 +12,7 @@ import { MatInputModule,MatIconModule,MatButtonModule,MatCheckboxModule } from '
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatDialogModule } from '@angular/material/dialog'
 import { MDBBootstrapModule } from 'angular-bootstrap-md'
 import { MomentModule } from 'angular2-moment'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
@@ -25,12 +26,13 @@ import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 import { HomeComponent } from './home/home.component'
 import { CreatePostComponent } from './posts/create-post/create-post.component'
-import { AuthGuardService } from './service/auth-guard.service';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ViewPostComponent } from './posts/view-post/view-post.component';
-import { ViewAllPostsComponent } from './posts/view-all-posts/view-all-posts.component';
-import { EditPostComponent } from './posts/edit-post/edit-post.component';
-import { ProfileComponent } from './profile/profile.component'
+import { AuthGuardService } from './service/auth-guard.service'
+import { SidebarComponent } from './sidebar/sidebar.component'
+import { ViewPostComponent } from './posts/view-post/view-post.component'
+import { ViewAllPostsComponent } from './posts/view-all-posts/view-all-posts.component'
+import { EditPostComponent } from './posts/edit-post/edit-post.component'
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileDialogBoxComponent } from './profile/profile-dialog-box/profile-dialog-box.component'
 
 @NgModule({
 	declarations: [
@@ -46,7 +48,8 @@ import { ProfileComponent } from './profile/profile.component'
 		ViewPostComponent,
 		ViewAllPostsComponent,
 		EditPostComponent,
-		ProfileComponent
+		ProfileComponent,
+		ProfileDialogBoxComponent
 	],
 	imports: [
 		BrowserModule,
@@ -77,9 +80,11 @@ import { ProfileComponent } from './profile/profile.component'
 		MDBBootstrapModule.forRoot(),
 		MomentModule,
 		InfiniteScrollModule,
-		MatExpansionModule
+		MatExpansionModule,
+		MatDialogModule
 	],
 	providers: [HomeComponent],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	entryComponents: [ProfileDialogBoxComponent]
 })
 export class AppModule { }
