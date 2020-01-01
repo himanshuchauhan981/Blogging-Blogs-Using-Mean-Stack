@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 import { ProfileService } from '../../service/profile.service'
+import { FormControl,FormGroup, Validators } from '@angular/forms'
 
 export interface DialogData{
 	heading: string,
@@ -22,15 +23,21 @@ export class ProfileDialogBoxComponent{
 		private profileService: ProfileService
 	) { }
 
+	profileForm = new FormGroup({
+		userdata : new FormControl('',Validators.required)
+	})
+
+	get userdata() { return this.profileForm.get('userdata') }
+
 	closeDialogBox(): void{
 		this.dialogRef.close()
 	}
 
-	update(data): void{
-		// this.profileService.updateUserProfile(data)
-		// .subscribe((res)=>{
-		// 	console.log(res.json())
-		// })
+	updateUserProfile(data): void{
+		this.profileService.updateUserProfile(data)
+		.subscribe((res)=>{
+			console.log(res.json())
+		})
 	}
 
 }

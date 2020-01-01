@@ -11,25 +11,27 @@ export class ProfileService {
 
 	token: string
 
+	headers
+
 	constructor(
-		private http: Http, 
+		private http: Http,
 		@Inject(SESSION_STORAGE) private storage: WebStorageService,
 		private authGuardService: AuthGuardService
-	) { }
-
-	getUserProfileData(){
+	) {
 		this.token = this.storage.get('token')
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		this.headers = new Headers()
+		this.headers.append('Authorization', `Bearer ${this.token}`)
+	}
 
-		return this.http.get(`/api/${this.authGuardService.currentUser}`,{
-			headers:headers
+	getUserProfileData() {
+		return this.http.get(`/api/${this.authGuardService.currentUser}`, {
+			headers: this.headers
 		})
 	}
 
-	updateUserProfile(updateStatus){
-		this.token = this.storage.get('token')
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+	updateUserProfile(updateStatus) {
+		return this.http.patch(`/api/${updateStatus}`,{
+			headers: this.headers
+		})
 	}
 }

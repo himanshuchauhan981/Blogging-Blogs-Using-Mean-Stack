@@ -1,7 +1,11 @@
 const { users } = require('../models')
 
 const profile = {
-    updateUserProfile : async(req,res)=>{
+    updateProfileEmail : async(req,res)=>{
+        res.status(200).json({'msg':'success'})
+    },
+
+    updateProfileUsername : async(req,res)=>{
         res.status(200).json({'msg':'success'})
     },
 
