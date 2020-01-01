@@ -10,17 +10,15 @@ import { ProfileDialogBoxComponent } from './profile-dialog-box/profile-dialog-b
 })
 export class ProfileComponent implements OnInit {
 
-	heading: string
-
 	constructor(public matDialog: MatDialog) { }
 
 	ngOnInit() {
 	}
 
-	openDialogBox(heading) {
+	openDialogBox(heading){
 		this.matDialog.open(ProfileDialogBoxComponent, {
-			width: '250px',
-			data : { heading: heading}
+			width: '350px',
+			data : { heading: heading, updateFunction:`update${heading}` }
 		})
 	}
 

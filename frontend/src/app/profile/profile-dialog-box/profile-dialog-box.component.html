@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>{{ data.heading }}</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title class="text-center">Update {{ data.heading }} ID</h1>
+<div mat-dialog-content class="container-width">
     <mat-form-field>
-        <input matInput >
+        <input matInput placeholder="Enter {{ data.heading }} ID" class="w-100">
     </mat-form-field>
 </div>
-<div mat-dialog-actions>
-    <button mat-raised-button color="primary">Update</button>
+<div mat-dialog-actions class="float-right">
+    <button mat-raised-button color="primary" type="button" (click)="update(data.heading)">Update</button>
     <button mat-raised-button color="warn" type="button" (click)="closeDialogBox()">Cancel</button>
 </div>
