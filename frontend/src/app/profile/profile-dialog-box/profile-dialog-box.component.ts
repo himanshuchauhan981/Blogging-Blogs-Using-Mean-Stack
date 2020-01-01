@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog'
 
+import { ProfileService } from '../../service/profile.service'
+
 export interface DialogData{
 	heading: string,
 	updateFunction: string,
@@ -16,7 +18,8 @@ export class ProfileDialogBoxComponent{
 
 	constructor(
 		public dialogRef: MatDialogRef<ProfileDialogBoxComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: DialogData
+		@Inject(MAT_DIALOG_DATA) public data: DialogData,
+		private profileService: ProfileService
 	) { }
 
 	closeDialogBox(): void{
@@ -24,7 +27,10 @@ export class ProfileDialogBoxComponent{
 	}
 
 	update(data): void{
-		console.log(data)
+		// this.profileService.updateUserProfile(data)
+		// .subscribe((res)=>{
+		// 	console.log(res.json())
+		// })
 	}
 
 }

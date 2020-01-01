@@ -1,7 +1,6 @@
 import { Injectable,Inject } from '@angular/core'
 import { Http, RequestOptions, Headers } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
-import { headersToString } from 'selenium-webdriver/http'
 
 @Injectable({
 	providedIn: 'root'

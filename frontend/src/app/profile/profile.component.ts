@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 
 import { ProfileDialogBoxComponent } from './profile-dialog-box/profile-dialog-box.component'
+import { ProfileService } from '../service/profile.service'
 
 @Component({
 	selector: 'profile',
@@ -10,15 +11,23 @@ import { ProfileDialogBoxComponent } from './profile-dialog-box/profile-dialog-b
 })
 export class ProfileComponent implements OnInit {
 
-	constructor(public matDialog: MatDialog) { }
+	user  = { }
 
-	ngOnInit() {
+	constructor(public matDialog: MatDialog, private profileService: ProfileService) { }
+
+	ngOnInit(){
+		this.profileService.getUserProfileData()
+		.subscribe((res)=>{
+			if(res.json().status === 200){
+				this.user = res.json().data[0]
+			}
+		})
 	}
 
 	openDialogBox(heading){
 		this.matDialog.open(ProfileDialogBoxComponent, {
 			width: '350px',
-			data : { heading: heading, updateFunction:`update${heading}` }
+			data : { heading: heading }
 		})
 	}
 

@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 
-const { userController,postController } = require('../controllers')
+const { userController,postController,profileController } = require('../controllers')
 const { upload } = require('../middleware').multerMiddleware
 
 module.exports = ()=>{
@@ -47,8 +47,18 @@ module.exports = ()=>{
         postController.getParticularPostComments
     )
 
-    router.get('/:username/posts',
+    router.get('/:username',
+        // passport.authenticate('jwt'),
+        profileController.getUserProfileData
+    )
+
+    router.patch('/:username/username',
         passport.authenticate('jwt'),
+        profileController.updateUserProfile
+    )
+
+    router.get('/:username/posts',
+        // passport.authenticate('jwt'),
         postController.getAllParticularUserPost
     )
 
