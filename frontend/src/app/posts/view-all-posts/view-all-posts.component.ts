@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute,ActivatedRouteSnapshot } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService } from '../../service/post.service'
@@ -21,11 +21,12 @@ export class ViewAllPostsComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		let username = this.activatedRoute.snapshot.params.username
+		let username = this.activatedRoute.snapshot.params.id
 		this.postService.getAllParticularUserPost(username)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.userPost = res.json().data
+					console.log(this.userPost)
 				}
 			})
 	}
@@ -39,9 +40,9 @@ export class ViewAllPostsComponent implements OnInit {
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					let index = this.userPost.indexOf(post)
-					this.userPost.splice(index,1)
+					this.userPost.splice(index, 1)
 				}
-				this.matSnackBar.open(res.json().msg,'Close',{
+				this.matSnackBar.open(res.json().msg, 'Close', {
 					duration: 8000
 				})
 			})

@@ -9,7 +9,7 @@
                 <li class="nav-item" [routerLinkActive]="['active']">
                     <a class="nav-link" routerLink="/post/new" (click)="isMenuCollapsed=true">Create Post</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/{{ username }}" (click)="isMenuCollapsed=true">Profile</a>
                 </li>
                 <li class="nav-item white-hover" [routerLinkActive]="['active']">

@@ -11,12 +11,14 @@
                         <span class="fa-size mb-2">
                             <i class="fa fa-user fa-fw mr-3 w3-text-theme" aria-hidden="true"></i>
                             <span class="fontSize">&nbsp; {{ user.username }}</span>
-                            <i *ngIf="authorized" class="fa fa-edit float-right mt-1" (click)="openDialogBox('username')"></i>
+                            <i *ngIf="authorized" class="fa fa-edit float-right mt-1"
+                                (click)="openDialogBox('username')"></i>
                         </span>
                         <span class="fa-size mb-2">
                             <i class="fa fa-envelope fa-fw mr-3 w3-text-theme" aria-hidden="true"></i>
                             <span class="fontSize">&nbsp; {{ user.email }}</span>
-                            <i *ngIf="authorized" class="fa fa-edit float-right mt-1" (click)="openDialogBox('email')"></i>
+                            <i *ngIf="authorized === true" class="fa fa-edit float-right mt-1"
+                                (click)="openDialogBox('email')"></i>
                         </span>
                         <span class="fa-size mb-2" *ngIf="authorized">
                             <i class="fa fa-key fa-fw mr-3 w3-text-theme" aria-hidden="true"></i>
@@ -29,6 +31,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-8">
+            <view-all-posts></view-all-posts>
         </div>
     </div>
 </div>
