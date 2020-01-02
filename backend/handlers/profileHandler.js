@@ -2,12 +2,26 @@ const { users } = require('../models')
 
 const profile = {
     updateProfileEmail : async(req,res)=>{
-        await users.findOneAndUpdate({username:req.params.username},{email: req.body.userdata})
-        res.status(200).json({status:200, msg:'Email ID updated'})
+        let checkExistingEmail = await users.find({email:req.body.userdata})
+        if(checkExistingEmail.length == 0){
+            await users.findOneAndUpdate({username:req.params.username},{email: req.body.userdata})
+            res.status(200).json({status:200, msg:'Email ID updated'})
+        }
+        else{
+            res.status(200).json({status:400, msg:'Email ID already existed'})
+        }
+        
     },
 
     updateProfileUsername : async(req,res)=>{
-        res.status(200).json({'msg':'success'})
+        let checkExistinUsername = await users.find({username: req.body.userdata})
+        if(checkExistinUsername.length === 0){
+            await users.findOneAndUpdate({username: req.params.username},{email: req.body.userdata})
+            res.status(200).json({status:200, msg:'Username updated'})
+        }
+        else{
+            res.status(200).json({status:200,'msg':'Username already existed'})
+        }
     },
 
     getUserProfileData : async(req,res)=>{

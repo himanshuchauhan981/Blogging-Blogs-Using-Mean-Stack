@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
+
 
 import { ProfileDialogBoxComponent } from './profile-dialog-box/profile-dialog-box.component'
 import { ProfileService } from '../service/profile.service'
@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit {
 	constructor(
 		public matDialog: MatDialog,
 		private profileService: ProfileService,
-		private matSnackBar: MatSnackBar
 	) { }
 
 	ngOnInit(){
@@ -25,11 +24,6 @@ export class ProfileComponent implements OnInit {
 		.subscribe((res)=>{
 			if(res.json().status === 200){
 				this.user = res.json().data[0]
-			}
-			else if(res.json().status === 400){
-				this.matSnackBar.open(res.json().msg,'Close',{
-					duration: 8000
-				})
 			}
 		})
 	}
