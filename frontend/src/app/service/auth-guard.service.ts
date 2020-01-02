@@ -24,7 +24,6 @@ export class AuthGuardService implements CanActivate {
 					this.isTrue = false
 				}
 				else if (status === 200) {
-					this.currentUser = res.json().user.username
 					this.loginService.loginObservable.next(true)
 					this.isTrue = true
 					this.router.navigate([state.url])

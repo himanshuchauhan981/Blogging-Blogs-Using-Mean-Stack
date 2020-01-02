@@ -14,13 +14,7 @@ export class LoginService {
 
 	public loginObservable = new Subject<Boolean>()
 
-	constructor(private http : Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { 
-		this.token = this.storage.get('token')
-		this.options = new RequestOptions()
-		this.options.headers = new Headers()
-		this.options.headers.append('Content-Type', 'application/json')
-		this.options.headers.append('Authorization', `Bearer ${this.token}`)
-	}
+	constructor(private http : Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
 
 	loginExistingUser = (object) =>{
 		return this.http.post('/api/login',object)
@@ -32,7 +26,15 @@ export class LoginService {
 	}
 
 	validateJWTToken = () =>{
-		return this.http.post('/api/token',null,this.options)
+		this.token = this.storage.get('token')
+
+		//setting up headers
+		let options = new RequestOptions()
+		options.headers = new Headers()
+		options.headers.append('Content-Type', 'application/json')
+		options.headers.append('Authorization', `Bearer ${this.token}`)
+		
+		return this.http.post('/api/token',null,options)
 	}
 
 	logout = () =>{
