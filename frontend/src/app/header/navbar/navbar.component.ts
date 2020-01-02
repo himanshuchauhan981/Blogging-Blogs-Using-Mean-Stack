@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit{
 		this.loginService.loginObservable.subscribe(value =>{
 			this.loginStatus = value
 			this.username = this.authGuardService.currentUser
+			console.log(this.username)
 		})
 	}
 }

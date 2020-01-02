@@ -72,7 +72,6 @@ const posts = {
 
     saveNewPostComment: async (req, res) => {
         let arr = []
-        req.body.createdBy = req.user.username
         let commentObject = new comments(req.body)
         await commentObject.save(async (err, comment) => {
             if (err) {
