@@ -25,6 +25,7 @@ const profile = {
     },
 
     getUserProfileData : async(req,res)=>{
+        console.log(req.params)
         const userDetails = await users.find({username:req.params.username}).select({email:1,username:1})
         res.status(200).json({status: 200,data: userDetails,msg:'Success'})
     }

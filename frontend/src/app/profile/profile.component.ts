@@ -23,7 +23,9 @@ export class ProfileComponent implements OnInit {
 		this.profileService.getUserProfileData()
 		.subscribe((res)=>{
 			if(res.json().status === 200){
+				// console.log(res.json())
 				this.user = res.json().data[0]
+				console.log(this.user)
 			}
 		})
 	}

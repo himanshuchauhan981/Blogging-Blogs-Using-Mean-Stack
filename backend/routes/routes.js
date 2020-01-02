@@ -48,7 +48,7 @@ module.exports = ()=>{
     )
 
     router.get('/:username',
-        // passport.authenticate('jwt'),
+        passport.authenticate('jwt'),
         profileController.getUserProfileData
     )
 

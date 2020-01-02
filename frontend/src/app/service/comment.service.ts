@@ -12,9 +12,7 @@ export class CommentService {
 	token: string
 
 	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) {
-		this.token = this.storage.get('token')
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		
 	}
 
 	submitNewComment(object, postId) {
@@ -24,14 +22,22 @@ export class CommentService {
 			createdBy: null
 		}
 
+		this.token = this.storage.get('token')
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
 		return this.http.post('/api/comment', commentObject, {
-			headers: this.headers
+			headers: headers
 		})
 	}
 
 	getParticularPostComment(postId) {
+		this.token = this.storage.get('token')
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
 		return this.http.get('/api/comment', {
-			headers: this.headers,
+			headers: headers,
 			params: { postId: postId }
 		})
 	}

@@ -15,34 +15,34 @@ export class LoginComponent {
 
 	hidePassword = true
 
-	constructor(private loginService : LoginService, private router: Router, private route: ActivatedRoute){}
+	constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) { }
 
 	loginForm = new FormGroup({
-		username : new FormControl('',Validators.required),
-		password : new FormControl('',Validators.required)
+		username: new FormControl('', Validators.required),
+		password: new FormControl('', Validators.required)
 	})
 
 	get username() { return this.loginForm.get('username') }
 
 	get password() { return this.loginForm.get('password') }
 
-	loginUser(loginForm){
+	loginUser(loginForm) {
 		this.loginService.loginExistingUser(loginForm.value)
-		.subscribe((res)=>{
-			if(res.json().status === 401){
-				this.loginError = res.json().msg
-			}
-			else if(res.json().status === 200){
-				// const navigationExtra : NavigationExtras = { state: {token: res.json().token}}
+			.subscribe((res) => {
+				if (res.json().status === 401) {
+					this.loginError = res.json().msg
+				}
+				else if (res.json().status === 200) {
+					// const navigationExtra : NavigationExtras = { state: {token: res.json().token}}
 
-				let returnUrl= this.route.snapshot.queryParamMap.get('returnUrl')
-				this.loginService.storeJWTToken(res.json().token)
-				this.router.navigate([returnUrl || 'home'])
-			}			
-		},(error)=>{
-			
-		})
+					let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
+					this.loginService.storeJWTToken(res.json().token)
+					this.router.navigate([returnUrl || 'home'])
+				}
+			}, (error) => {
+
+			})
 	}
 
-	
+
 }
