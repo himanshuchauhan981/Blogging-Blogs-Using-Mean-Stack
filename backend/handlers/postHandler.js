@@ -99,7 +99,6 @@ const posts = {
             res.status(200).json({status:200, msg:'Post deleted', deletedPostId : postDeleteStatus._id})
         }
         else{
-            console.log('hello')
             res.status(200).json({status: 404, msg:'Post not found'})
         }
     }

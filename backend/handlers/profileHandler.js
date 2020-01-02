@@ -25,9 +25,12 @@ const profile = {
     },
 
     getUserProfileData : async(req,res)=>{
-        console.log(req.params)
+        let authorized = false
+        if(req.user.username === req.params.username){
+            authorized = true
+        }
         const userDetails = await users.find({username:req.params.username}).select({email:1,username:1})
-        res.status(200).json({status: 200,data: userDetails,msg:'Success'})
+        res.status(200).json({status: 200, data: userDetails, msg: 'Success', authorized: authorized})
     }
 }
 

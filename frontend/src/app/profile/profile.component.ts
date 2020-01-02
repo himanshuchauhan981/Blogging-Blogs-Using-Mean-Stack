@@ -12,28 +12,29 @@ import { ProfileService } from '../service/profile.service'
 })
 export class ProfileComponent implements OnInit {
 
-	user  = { }
+	user = {}
+
+	authorized: Boolean = false
 
 	constructor(
 		public matDialog: MatDialog,
 		private profileService: ProfileService,
 	) { }
 
-	ngOnInit(){
+	ngOnInit() {
 		this.profileService.getUserProfileData()
-		.subscribe((res)=>{
-			if(res.json().status === 200){
-				// console.log(res.json())
-				this.user = res.json().data[0]
-				console.log(this.user)
-			}
-		})
+			.subscribe((res) => {
+				if (res.json().status === 200) {
+					this.user = res.json().data[0]
+					this.authorized = res.json().authorized
+				}
+			})
 	}
 
-	openDialogBox(heading){
+	openDialogBox(heading) {
 		this.matDialog.open(ProfileDialogBoxComponent, {
 			width: '350px',
-			data : { heading: heading }
+			data: { heading: heading }
 		})
 	}
 

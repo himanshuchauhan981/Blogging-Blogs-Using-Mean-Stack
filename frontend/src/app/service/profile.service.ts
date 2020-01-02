@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core'
-import { Http, Headers, RequestOptions } from '@angular/http'
+import { Http, Headers } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+import { Router } from '@angular/router';
 
 import { AuthGuardService } from './auth-guard.service'
 
@@ -16,22 +17,27 @@ export class ProfileService {
 	constructor(
 		private http: Http,
 		@Inject(SESSION_STORAGE) private storage: WebStorageService,
-		private authGuardService: AuthGuardService
-	) {
-		this.token = this.storage.get('token')
-		this.headers = new Headers()
-		this.headers.append('Authorization', `Bearer ${this.token}`)
-	}
+		private authGuardService: AuthGuardService,
+		private router: Router
+	) { }
 
 	getUserProfileData() {
-		return this.http.get(`/api/${this.authGuardService.currentUser}`, {
-			headers: this.headers
+		this.token = this.storage.get('token')
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.get(`/api${this.router.url}`, {
+			headers: headers
 		})
 	}
 
-	updateUserProfile(object,updateStatus) {
-		return this.http.patch(`/api/${this.authGuardService.currentUser}/${updateStatus}`,object,{
-			headers: this.headers
+	updateUserProfile(object, updateStatus) {
+		this.token = this.storage.get('token')
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.patch(`/api/${this.authGuardService.currentUser}/${updateStatus}`, object, {
+			headers: headers
 		})
 	}
 }

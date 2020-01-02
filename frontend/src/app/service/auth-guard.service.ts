@@ -9,7 +9,7 @@ export class AuthGuardService implements CanActivate {
 
 	isTrue: boolean = false
 
-	currentUser : string
+	currentUser: string
 
 	constructor(private loginService: LoginService, private router: Router) { }
 
@@ -24,6 +24,7 @@ export class AuthGuardService implements CanActivate {
 					this.isTrue = false
 				}
 				else if (status === 200) {
+					// console.log(state.url)
 					this.loginService.loginObservable.next(true)
 					this.isTrue = true
 					this.router.navigate([state.url])
