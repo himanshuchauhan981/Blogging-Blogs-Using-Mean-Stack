@@ -14,8 +14,8 @@ export class PostService {
 	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { 
 		this.token = this.storage.get('token')
 
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		this.headers = new Headers()
+		this.headers.append('Authorization', `Bearer ${this.token}`)
 	}
 
 
