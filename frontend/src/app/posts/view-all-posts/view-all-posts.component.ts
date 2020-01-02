@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { Router, ActivatedRoute,ActivatedRouteSnapshot } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService } from '../../service/post.service'

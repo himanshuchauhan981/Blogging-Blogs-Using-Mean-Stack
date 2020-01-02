@@ -1,3 +1,12 @@
-.view-post-container{
-    margin: 30px 50px;
+.profile-image {
+    width: 70px;
+    height: 70px;
+}
+
+mat-card {
+    margin-bottom: 25px;
+}
+
+.post-image{
+    height: 350px;
 }

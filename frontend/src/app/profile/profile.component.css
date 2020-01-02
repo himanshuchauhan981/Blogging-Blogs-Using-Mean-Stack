@@ -1,25 +1,30 @@
 .profile-container{
+    position: absolute;
     padding: 25px 20px;
     background-color: #F5F7F8;
-}
-
-.my-profile{
-    font-size: 26px;
+    /* height: 100%; */
+    width:100%;
 }
 
 .profile-img{
-    width: 100px;
-    height: 100px;
+    width: 100%;
     display: block;
     margin: auto;
 }
+
+.card{ box-shadow: 0px 0px 5px 2px rgba(130,126,130,1); width: 30vw; }
+
+
+/* -------------------------------------------------------------- */
 
 .profile-card-body{ padding: 10px; }
 
 .fa-size{ font-size: 20px!important; }
 
 .fontSize{ font-size: 16px; }
+.my-profile{
+    font-size: 26px;
+}
 
-.card{ box-shadow: 0px 0px 5px 2px rgba(130,126,130,1); }
 
 .fa-edit { cursor: pointer; }

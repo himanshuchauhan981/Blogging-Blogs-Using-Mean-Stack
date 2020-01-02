@@ -1,16 +1,16 @@
-<div class="view-post-container">
-    <div class="mb-4" *ngFor="let post of userPost">
-        <mat-accordion>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>{{ post.postTitle }}</mat-panel-title>
-                </mat-expansion-panel-header>
-                <p>{{ post.postContent.substring(0,195)+'.....' }}</p>
-                <mat-action-row>
-                    <button mat-button color="primary" (click)="editPost(post.postAuthor,post._id)">Edit</button>
-                    <button mat-button color="warn" (click)="deletePost(post)">Delete</button>
-                </mat-action-row>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </div>
-</div>
+<mat-card *ngFor="let post of userPost">
+    <mat-card-header>
+        <img mat-card-avatar src="../../../assets/1.jpg" class="profile-image">
+        <mat-card-title>Himanshu Chauhan</mat-card-title>
+        <mat-card-subtitle>13 min ago</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="post-image" src="../../../assets/1.jpg">
+    <mat-card-content>
+        <p>{{ post.postContent.substring(0,195)+'.....' }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="accent">Read More</button>
+        <button mat-raised-button color="primary" (click)="editPost(post.postAuthor,post._id)">Edit</button>
+        <button mat-raised-button color="warn" (click)="deletePost(post)">Delete</button>
+    </mat-card-actions>
+</mat-card>
