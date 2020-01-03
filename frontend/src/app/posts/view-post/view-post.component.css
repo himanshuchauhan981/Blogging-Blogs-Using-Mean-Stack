@@ -51,6 +51,14 @@
     font-size: 25px;
     cursor: pointer;
 }
+.fa-trash{
+    position: relative;
+    bottom: 40px;
+    font-size: 25px;
+    right: 26px;
+    cursor: pointer;
+
+}
 .user-comment{
     background-color: #F2F1F1;
     width: 100%;

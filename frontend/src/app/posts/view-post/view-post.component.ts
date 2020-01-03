@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog } from '@angular/material/dialog'
 
 import { PostService } from '../../service/post.service'
 import { CommentService } from '../../service/comment.service'
+import { DeleteCommentDialogBoxComponent } from './delete-comment-dialog-box/delete-comment-dialog-box.component'
 
 @Component({
 	selector: 'app-view-post',
@@ -17,13 +19,16 @@ export class ViewPostComponent implements OnInit {
 
 	commentsLength  = 0
 
+	clearComment = ''
+
 	commentsArray : Array<{_id: string, postId: string, text: string, createdBy: string, createdAt: Date}>
 
 	constructor(
 		private activatedRoute: ActivatedRoute, 
 		private postService: PostService, 
 		private commentService: CommentService,
-		private matSnackBar: MatSnackBar
+		private matSnackBar: MatSnackBar,
+		private matDialog: MatDialog
 	) { }
 
 	commentForm = new FormGroup({
@@ -43,6 +48,7 @@ export class ViewPostComponent implements OnInit {
 			else if(res.json().status === 200){
 				this.commentsArray = res.json().data
 				this.commentsLength = res.json().length
+				this.clearComment = null
 			}
 		})
 	}
@@ -62,6 +68,12 @@ export class ViewPostComponent implements OnInit {
 			if(res.json().status === 200){
 				this.commentsArray = res.json().comments
 			}
+		})
+	}
+
+	openDeleteDialogBox(commentId){
+		this.matDialog.open(DeleteCommentDialogBoxComponent,{
+			width: '450px'
 		})
 	}
 

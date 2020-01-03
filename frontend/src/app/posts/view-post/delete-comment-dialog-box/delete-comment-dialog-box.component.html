@@ -1,0 +1,9 @@
+<form [formGroup]="deleteCommentForm" (ngSubmit)="deleteComment()">
+    <h1 mat-dialog-title>Are you sure want to delete the comment ?</h1>
+    <div mat-dialog-content>
+        <div class="flex">
+            <button mat-raised-button color="primary">Delete</button>
+            <button mat-raised-button color="warn" type="button" (click)="closeDialogBox()">Cancel</button>
+        </div>
+    </div>
+</form>

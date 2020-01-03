@@ -33,7 +33,8 @@ import { ViewAllPostsComponent } from './posts/view-all-posts/view-all-posts.com
 import { EditPostComponent } from './posts/edit-post/edit-post.component'
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileDialogBoxComponent } from './profile/profile-dialog-box/profile-dialog-box.component';
-import { PasswordDialogBoxComponent } from './profile/password-dialog-box/password-dialog-box.component'
+import { PasswordDialogBoxComponent } from './profile/password-dialog-box/password-dialog-box.component';
+import { DeleteCommentDialogBoxComponent } from './posts/view-post/delete-comment-dialog-box/delete-comment-dialog-box.component';
 
 @NgModule({
 	declarations: [
@@ -51,7 +52,8 @@ import { PasswordDialogBoxComponent } from './profile/password-dialog-box/passwo
 		EditPostComponent,
 		ProfileComponent,
 		ProfileDialogBoxComponent,
-		PasswordDialogBoxComponent
+		PasswordDialogBoxComponent,
+		DeleteCommentDialogBoxComponent
 	],
 	imports: [
 		BrowserModule,
@@ -89,7 +91,8 @@ import { PasswordDialogBoxComponent } from './profile/password-dialog-box/passwo
 	bootstrap: [AppComponent],
 	entryComponents: [
 		ProfileDialogBoxComponent,
-		PasswordDialogBoxComponent
+		PasswordDialogBoxComponent,
+		DeleteCommentDialogBoxComponent
 	]
 })
 export class AppModule { }

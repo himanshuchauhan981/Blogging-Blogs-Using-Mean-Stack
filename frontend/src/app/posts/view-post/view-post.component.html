@@ -10,12 +10,13 @@
                             <b class="post-title">{{ post.postTitle }}</b>
                         </h2>
                         <h5>
-                            By Himanshu Chauhan <span
+                            By Himanshu Chauhan 
+                            <span
                                 class="w3-opacity w3-margin-left post-author">{{ post.postDate | amTimeAgo }}</span>
                         </h5>
                     </div>
                     <div class="w3-container post-content">
-                        <p>{{ post.postContent }}</p>
+                        <pre>{{ post.postContent }}</pre>
                     </div>
                     <div class="w3-row">
                         <div class="w3-col l6 m6 s6">
@@ -34,6 +35,13 @@
                                     <div class="userComment">{{ comment.text }}</div>
                                 </div>
                             </div>
+                            <i 
+                                class="fa fa-trash pull-right"
+                                matTooltip="Delete Comment"
+                                matTooltipPosition="above"
+                                aria-label="Action"
+                                (click)="openDeleteDialogBox(comment._id)"
+                            ></i>
                         </div>
                         <form [formGroup]="commentForm" (ngSubmit)="submitComment(commentForm,post._id)">
                             <div class="d-flex">
@@ -46,6 +54,7 @@
                                         class="comment-section-input"
                                         placeholder="Write a comment..."
                                         [formControl]="comment"
+                                        [value]="clearComment"
                                         required
                                     >
                                     <i
