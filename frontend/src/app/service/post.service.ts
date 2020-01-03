@@ -9,14 +9,7 @@ export class PostService {
 
 	token: string
 
-	headers 
-
-	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { 
-		this.token = this.storage.get('token')
-
-		this.headers = new Headers()
-		this.headers.append('Authorization', `Bearer ${this.token}`)
-	}
+	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
 
 
 	submitPost = (formData) =>{

@@ -26,7 +26,6 @@ export class ViewAllPostsComponent implements OnInit {
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.userPost = res.json().data
-					console.log(this.userPost)
 				}
 			})
 	}

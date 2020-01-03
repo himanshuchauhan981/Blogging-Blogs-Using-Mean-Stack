@@ -12,7 +12,7 @@ import { ProfileService } from '../service/profile.service'
 })
 export class ProfileComponent implements OnInit {
 
-	user = {}
+	user = { id:String, username: String, email: String}
 
 	authorized: Boolean = false
 
@@ -27,6 +27,12 @@ export class ProfileComponent implements OnInit {
 				if (res.json().status === 200) {
 					this.user = res.json().data[0]
 					this.authorized = res.json().authorized
+				}
+			})
+		this.profileService.getEmittedEmailValue()
+			.subscribe(data=>{
+				if(data!=undefined){
+					this.user.email = data
 				}
 			})
 	}

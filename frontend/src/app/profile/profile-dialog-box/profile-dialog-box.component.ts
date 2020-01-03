@@ -7,7 +7,6 @@ import { Router } from '@angular/router'
 import { ProfileService } from '../../service/profile.service'
 import { LoginService } from '../../service/login.service'
 
-
 export interface DialogData{
 	heading: string,
 	updateFunction: string,
@@ -50,6 +49,7 @@ export class ProfileDialogBoxComponent{
 				this.matSnackBar.open(msg,'Close',{
 					duration: 8000
 				})
+				this.profileService.changeEmailValue(res.json().data)
 			}
 			else if(status === 200 && data === 'username'){
 				this.loginService.logout()
