@@ -1,5 +1,8 @@
-import { Component } from '@angular/core'
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatSnackBar } from '@angular/material/snack-bar'
+
+import { CommentService } from '../../../service/comment.service'
 
 @Component({
 	selector: 'delete-comment-dialog-box',
@@ -8,10 +11,31 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DeleteCommentDialogBoxComponent {
 
-	constructor(public dialogRef: MatDialogRef<DeleteCommentDialogBoxComponent>) { }
+	constructor(
+		public dialogRef: MatDialogRef<DeleteCommentDialogBoxComponent>,
+		@Inject(MAT_DIALOG_DATA) private data: commentData,
+		private matSnackBar: MatSnackBar,
+		private commentService: CommentService
+	) { }
 
-	closeDialogBox(){
+	closeDialogBox() {
 		this.dialogRef.close();
 	}
 
+	deleteComment() {
+		this.commentService.deleteComment(this.data.id)
+			.subscribe((res) => {
+				this.closeDialogBox()
+				if (res.json().status === 200) {
+					this.commentService.changeComment(res.json().data)
+				}
+				this.matSnackBar.open(res.json().msg, 'Close', {
+					duration: 8000
+				})
+			})
+	}
+}
+
+export interface commentData {
+	id: string
 }

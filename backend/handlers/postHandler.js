@@ -45,7 +45,7 @@ const posts = {
                     as: "comment"
                 }
             }
-        ]).sort({ postDate: -1 }).limit(2).skip(skipLimit)
+        ]).sort({ postDate: -1 }).limit(3).skip(skipLimit)
         res.status(200).json({ blogs: allBlogs, status: 200 })
     },
 
@@ -92,6 +92,11 @@ const posts = {
                 res.status(200).json({ status: 200, msg: 'msg saved', data: arr, length: commentData.length })
             }
         })
+    },
+
+    deletePostComment: async (req,res)=>{
+        const deleteCommentStatus = await comments.findByIdAndDelete(req.params.id)
+        res.status(200).json({ status: 200, msg: 'message deleted', data: deleteCommentStatus })
     },
 
     getAllParticularUserPost: async (req, res) => {

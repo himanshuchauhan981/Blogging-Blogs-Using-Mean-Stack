@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core'
+import { Injectable, Inject, Output, EventEmitter } from '@angular/core'
 import { Http, Headers } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 
@@ -7,13 +7,11 @@ import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 })
 export class CommentService {
 
-	headers 
-
 	token: string
 
-	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) {
-		
-	}
+	@Output() deleteCommentEvent: EventEmitter<any> = new EventEmitter()
+
+	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
 
 	submitNewComment(object, postId) {
 		let commentObject = {
@@ -40,5 +38,23 @@ export class CommentService {
 			headers: headers,
 			params: { postId: postId }
 		})
+	}
+
+	deleteComment(id){
+		this.token = this.storage.get('token')
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.delete(`/api/comment/${id}`,{
+			headers: headers
+		})
+	}
+
+	changeComment(data){
+		this.deleteCommentEvent.emit(data)
+	}
+
+	getEmittedComment(){
+		return this.deleteCommentEvent
 	}
 }

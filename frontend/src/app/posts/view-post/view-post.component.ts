@@ -56,10 +56,17 @@ export class ViewPostComponent implements OnInit {
 	ngOnInit() {
 		let postID = this.activatedRoute.snapshot.params.id
 		this.postService.getParticularPost(postID)
-		.subscribe((res)=>{
-			this.post = res.json().post
-			this.commentsLength = res.json().commentLength
-		})
+			.subscribe((res)=>{
+				this.post = res.json().post
+				this.commentsLength = res.json().commentLength
+			})
+
+		this.commentService.getEmittedComment()
+			.subscribe(data=>{
+				let index = this.commentsArray.findIndex(p => p._id == data._id)
+				this.commentsArray.splice(index,1)
+				this.commentsLength = this.commentsLength - 1
+			})
 	}
 
 	getPostComments(postId){
@@ -73,7 +80,8 @@ export class ViewPostComponent implements OnInit {
 
 	openDeleteDialogBox(commentId){
 		this.matDialog.open(DeleteCommentDialogBoxComponent,{
-			width: '450px'
+			width: '450px',
+			data: { id: commentId }
 		})
 	}
 
