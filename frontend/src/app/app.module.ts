@@ -32,7 +32,8 @@ import { ViewPostComponent } from './posts/view-post/view-post.component'
 import { ViewAllPostsComponent } from './posts/view-all-posts/view-all-posts.component'
 import { EditPostComponent } from './posts/edit-post/edit-post.component'
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileDialogBoxComponent } from './profile/profile-dialog-box/profile-dialog-box.component'
+import { ProfileDialogBoxComponent } from './profile/profile-dialog-box/profile-dialog-box.component';
+import { PasswordDialogBoxComponent } from './profile/password-dialog-box/password-dialog-box.component'
 
 @NgModule({
 	declarations: [
@@ -49,7 +50,8 @@ import { ProfileDialogBoxComponent } from './profile/profile-dialog-box/profile-
 		ViewAllPostsComponent,
 		EditPostComponent,
 		ProfileComponent,
-		ProfileDialogBoxComponent
+		ProfileDialogBoxComponent,
+		PasswordDialogBoxComponent
 	],
 	imports: [
 		BrowserModule,
@@ -85,6 +87,9 @@ import { ProfileDialogBoxComponent } from './profile/profile-dialog-box/profile-
 	],
 	providers: [HomeComponent],
 	bootstrap: [AppComponent],
-	entryComponents: [ProfileDialogBoxComponent]
+	entryComponents: [
+		ProfileDialogBoxComponent,
+		PasswordDialogBoxComponent
+	]
 })
 export class AppModule { }

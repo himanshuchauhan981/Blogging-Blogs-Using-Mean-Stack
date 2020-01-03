@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 
-
 import { ProfileDialogBoxComponent } from './profile-dialog-box/profile-dialog-box.component'
+import { PasswordDialogBoxComponent } from './password-dialog-box/password-dialog-box.component'
 import { ProfileService } from '../service/profile.service'
 
 @Component({
@@ -41,6 +41,12 @@ export class ProfileComponent implements OnInit {
 		this.matDialog.open(ProfileDialogBoxComponent, {
 			width: '350px',
 			data: { heading: heading }
+		})
+	}
+
+	openPasswordDialogBox(){
+		this.matDialog.open(PasswordDialogBoxComponent, {
+			width: '350px'
 		})
 	}
 

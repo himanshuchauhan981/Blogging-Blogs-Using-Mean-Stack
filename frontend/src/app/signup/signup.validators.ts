@@ -5,10 +5,10 @@ export class signupValidators{
         const password : string = control.get('password').value
         const confirmPassword : string = control.get('confirmPassword').value
         if(password !== confirmPassword){
-            control.get('confirmPassword').setErrors({ mustMatch : true})
+            control.get('confirmPassword').setErrors({mustMatch: true})
         }
         else{
-            control.get('confirmPassword').setErrors({ match: true})
+            control.get('confirmPassword').setErrors(null)
         }
         return null
     }
