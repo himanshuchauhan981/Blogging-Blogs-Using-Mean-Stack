@@ -32,9 +32,9 @@ import { ViewPostComponent } from './posts/view-post/view-post.component'
 import { ViewAllPostsComponent } from './posts/view-all-posts/view-all-posts.component'
 import { EditPostComponent } from './posts/edit-post/edit-post.component'
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileDialogBoxComponent } from './profile/profile-dialog-box/profile-dialog-box.component';
-import { PasswordDialogBoxComponent } from './profile/password-dialog-box/password-dialog-box.component';
-import { DeleteCommentDialogBoxComponent } from './posts/view-post/delete-comment-dialog-box/delete-comment-dialog-box.component';
+import { ProfileDialogBoxComponent } from './dialog-box/profile-dialog-box/profile-dialog-box.component';
+import { PasswordDialogBoxComponent } from './dialog-box/password-dialog-box/password-dialog-box.component';
+import { DeleteCommentDialogBoxComponent } from './dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component';
 
 @NgModule({
 	declarations: [

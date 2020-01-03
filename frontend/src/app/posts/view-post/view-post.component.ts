@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog'
 
 import { PostService } from '../../service/post.service'
 import { CommentService } from '../../service/comment.service'
-import { DeleteCommentDialogBoxComponent } from './delete-comment-dialog-box/delete-comment-dialog-box.component'
+import { DeleteCommentDialogBoxComponent } from '../../dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component'
 
 @Component({
 	selector: 'app-view-post',

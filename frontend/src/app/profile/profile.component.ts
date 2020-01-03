@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 
-import { ProfileDialogBoxComponent } from './profile-dialog-box/profile-dialog-box.component'
-import { PasswordDialogBoxComponent } from './password-dialog-box/password-dialog-box.component'
+import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/profile-dialog-box.component'
+import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
 import { ProfileService } from '../service/profile.service'
 
 @Component({

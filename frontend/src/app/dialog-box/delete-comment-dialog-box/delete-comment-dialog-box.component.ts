@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { CommentService } from '../../../service/comment.service'
+import { CommentService } from '../../service/comment.service'
 
 @Component({
 	selector: 'delete-comment-dialog-box',
