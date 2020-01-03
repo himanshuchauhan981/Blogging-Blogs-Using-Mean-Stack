@@ -33,7 +33,6 @@ export class ViewPostComponent implements OnInit {
 	get comment(){ return this.commentForm.get('comment')}
 
 	submitComment(commentForm,postId){
-		console.log(commentForm.value)
 		this.commentService.submitNewComment(commentForm.value,postId)
 		.subscribe((res)=>{
 			if(res.json().status === 400){

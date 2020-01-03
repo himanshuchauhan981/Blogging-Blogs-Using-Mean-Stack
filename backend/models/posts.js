@@ -4,10 +4,12 @@ const Schema = mongoose.Schema
 
 const posts = new Schema({
     postTitle: {
-        type: String
+        type: String,
+        required: [true,'Post Title is required']
     },
     postContent: {
-        type: String
+        type: String,
+        required: [true,'Post Content is required']
     },
     postDate : {
         type: Date,

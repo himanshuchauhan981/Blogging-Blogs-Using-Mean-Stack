@@ -11,8 +11,15 @@ const posts = {
             postImage: typeof req.file === "undefined" || !req.file ? null : req.file.filename,
             postAuthor: req.user.username
         })
-        await blogPostObject.save()
-        res.status(200).json({ msg: "New post created", status: 200 })
+        await blogPostObject.save((err,post)=>{
+            if (err) {
+                let error = Object.values(err.errors)[0].message
+                res.status(400).send({ status:400,msg:error })
+            }
+            else {
+                res.status(200).send({ status:200, msg: "New post created" })
+            }
+        })
     },
 
     getAllPosts: async (req, res) => {
@@ -72,6 +79,7 @@ const posts = {
 
     saveNewPostComment: async (req, res) => {
         let arr = []
+        req.body.createdBy = req.user.username
         let commentObject = new comments(req.body)
         await commentObject.save(async (err, comment) => {
             if (err) {
