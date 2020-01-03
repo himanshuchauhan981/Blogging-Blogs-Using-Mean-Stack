@@ -1,4 +1,5 @@
 const { users } = require('../models')
+const bcrypt = require('bcryptjs')
 
 const profile = {
     updateProfileEmail : async(req,res)=>{
@@ -31,6 +32,23 @@ const profile = {
         }
         const userDetails = await users.find({username:req.params.username}).select({email:1,username:1})
         res.status(200).json({status: 200, data: userDetails, msg: 'Success', authorized: authorized})
+    },
+
+    updateUserPassword : async(req,res)=>{
+        if(req.user.username === req.params.username){
+            const userDetails = await users.findOne({username: req.params.username}).select({password:1})
+            let userStatus = bcrypt.compareSync(req.body.currentPassword,userDetails.password)
+            if(userStatus){
+                let salt = bcrypt.genSaltSync(10)
+                let hash = bcrypt.hashSync(req.body.password,salt)
+                await users.findOneAndUpdate({username: req.params.username},{password: hash})
+                res.status(200).json({status: 200, msg:'Password Changed successfully'})
+            }
+            else{
+                res.status(200).json({status: 400, msg:'Incorrect Current Password'})
+            }
+        }
+        
     }
 }
 

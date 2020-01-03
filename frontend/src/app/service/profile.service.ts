@@ -42,6 +42,17 @@ export class ProfileService {
 		})
 	}
 
+	updateUserPassword(object) {
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.patch(`/api${this.router.url}/password`,object,{
+			headers: headers
+		})
+	}
+
 	changeEmailValue(data){
 		this.fire.emit(data);
 	}

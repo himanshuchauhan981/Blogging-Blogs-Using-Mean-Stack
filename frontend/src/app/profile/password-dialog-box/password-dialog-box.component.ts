@@ -1,8 +1,10 @@
 import { Component } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { signupValidators } from '../../signup/signup.validators'
+import { ProfileService } from '../../service/profile.service'
 
 @Component({
 	selector: 'password-dialog-box',
@@ -11,7 +13,11 @@ import { signupValidators } from '../../signup/signup.validators'
 })
 export class PasswordDialogBoxComponent{
 
-	constructor(private dialogRef: MatDialogRef<PasswordDialogBoxComponent>) { }
+	constructor(
+		private dialogRef: MatDialogRef<PasswordDialogBoxComponent>, 
+		private profileService: ProfileService,
+		private matSnackBar: MatSnackBar
+	) { }
 
 	passwordProfileForm = new FormGroup({
 		currentPassword: new FormControl('',[Validators.required]),
@@ -34,5 +40,23 @@ export class PasswordDialogBoxComponent{
 	get password() { return this.passwordProfileForm.get('password') }
 
 	get confirmPassword() { return this.passwordProfileForm.get('confirmPassword') }
+
+	submitNewPassword(passwordProfileForm){
+		this.profileService.updateUserPassword(passwordProfileForm.value)
+		.subscribe(res=>{
+			this.dialogRef.close()
+			if(res.json().status === 200){
+				this.matSnackBar.open(res.json().msg,'Close',{
+					duration: 3000
+				})
+			}
+			else if(res.json().status === 400){
+				this.matSnackBar.open(res.json().msg,'Close',{
+					duration: 3000
+				})
+			}
+
+		})
+	}
 
 }

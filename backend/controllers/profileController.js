@@ -5,12 +5,19 @@ const profiles = {
         const response = profileHandler.updateProfileUsername(req,res)
         return response
     },
+
     updateProfileEmail : async (req,res)=>{
         const response = profileHandler.updateProfileEmail(req,res)
         return response
     },
+
     getUserProfileData : async (req,res)=>{
         const response = profileHandler.getUserProfileData(req,res)
+        return response
+    },
+
+    updateUserPassword : async (req,res)=>{
+        const response = profileHandler.updateUserPassword(req,res)
         return response
     }
 }
