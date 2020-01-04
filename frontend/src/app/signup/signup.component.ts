@@ -18,6 +18,12 @@ export class SignupComponent {
 	constructor(private signupService: SignupService, private router: Router) { }
 
 	signupForm = new FormGroup({
+		firstName: new FormControl('',[
+			Validators.required
+		]),
+		lastName: new FormControl('',[
+			Validators.required
+		]),
 		username: new FormControl('',[
 			Validators.required,
 			Validators.minLength(5)
@@ -38,6 +44,10 @@ export class SignupComponent {
 	{	
 		validators : signupValidators.MustMatch
 	})
+
+	get firstName(){ return this.signupForm.get('firstName') }
+
+	get lastName(){ return this.signupForm.get('lastName') }
 
 	get username(){ return this.signupForm.get('username') }
 
