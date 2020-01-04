@@ -15,7 +15,7 @@ const posts = new Schema({
         type: Date,
         default: Date.now
     },
-    postAuthor: {
+    userId: {
         type: String
     },
     postImage: {

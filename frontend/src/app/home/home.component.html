@@ -9,7 +9,9 @@
                             <b class="post-title">{{ blogs.postTitle }}</b>
                         </h2>
                         <h5>
-                            By {{ blogs.postAuthor }} <span class="w3-opacity w3-margin-left post-author">{{ blogs.postDate | amTimeAgo }}</span>
+                            By 
+                            <span class="profile-link"(click)="openProfilePage(blogs.postAuthor)">{{ blogs.postAuthor }}</span>
+                            <span class="w3-opacity w3-margin-left post-author">{{ blogs.postDate | amTimeAgo }}</span>
                         </h5>
                     </div>
                     <div class="w3-container post-content">

@@ -23,7 +23,7 @@ const posts = {
         await blogPostObject.save((err,post)=>{
             if (err) {
                 let error = Object.values(err.errors)[0].message
-                res.status(400).send({ status:400,msg:error })
+                res.status(400).send({ status:400,msg:'Unexpected erirr, Try Again' })
             }
             else {
                 res.status(200).send({ status:200, msg: "New post created" })
@@ -124,14 +124,6 @@ const posts = {
         else{
             res.status(200).json({status: 404, msg:'Post not found'})
         }
-    },
-
-    capitalizeUsername : async (username) =>{
-        let userData = await getFirstNameAndLastName(username)
-        userData.firstName = userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1)
-        userData.lastName = userData.lastName.charAt(0).toUpperCase() + userData.lastName.slice(1)
-
-        return userData
     }
 }
 

@@ -10,7 +10,8 @@ import { PostService } from '../service/post.service'
 })
 export class HomeComponent implements OnInit {
 
-	constructor(private postService: PostService, private router: Router) { }
+	constructor(
+		private postService: PostService, private router: Router) { }
 
 	skipPostLimit : number = 0
 
@@ -42,5 +43,9 @@ export class HomeComponent implements OnInit {
 				this.skipPostLimit = this.skipPostLimit + 2
 			}
 		})
+	}
+
+	openProfilePage(postAuthor){
+		this.router.navigate(['/post/new'])
 	}
 }
