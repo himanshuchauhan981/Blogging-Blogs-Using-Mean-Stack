@@ -2,14 +2,23 @@ const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 
 const { blogPosts, comments } = require('../models')
+const { getFirstNameAndLastName }  = require('./userHandler')
+
+async function capitalizeUsername(username){
+    let userData = await getFirstNameAndLastName(username)
+        userData.firstName = userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1)
+        userData.lastName = userData.lastName.charAt(0).toUpperCase() + userData.lastName.slice(1)
+        return userData
+}
 
 const posts = {
     createNewPost: async (req, res) => {
+        let userData = await capitalizeUsername(req.user.username)
         const blogPostObject = new blogPosts({
             postTitle: req.body.postTitle,
             postContent: req.body.postContent,
             postImage: typeof req.file === "undefined" || !req.file ? null : req.file.filename,
-            postAuthor: req.user.username
+            postAuthor: userData.firstName+' '+userData.lastName
         })
         await blogPostObject.save((err,post)=>{
             if (err) {
@@ -79,7 +88,8 @@ const posts = {
 
     saveNewPostComment: async (req, res) => {
         let arr = []
-        req.body.createdBy = req.user.username
+        let userData = await capitalizeUsername(req.user.username)
+        req.body.createdBy = userData.firstName+' '+userData.lastName
         let commentObject = new comments(req.body)
         await commentObject.save(async (err, comment) => {
             if (err) {
@@ -114,6 +124,14 @@ const posts = {
         else{
             res.status(200).json({status: 404, msg:'Post not found'})
         }
+    },
+
+    capitalizeUsername : async (username) =>{
+        let userData = await getFirstNameAndLastName(username)
+        userData.firstName = userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1)
+        userData.lastName = userData.lastName.charAt(0).toUpperCase() + userData.lastName.slice(1)
+
+        return userData
     }
 }
 

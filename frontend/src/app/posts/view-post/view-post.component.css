@@ -51,14 +51,23 @@
     font-size: 25px;
     cursor: pointer;
 }
+
 .fa-trash{
     position: relative;
     bottom: 40px;
-    font-size: 25px;
+    font-size: 20px;
     right: 26px;
     cursor: pointer;
 
 }
+
+.fa-edit{
+    position: relative;
+    font-size: 20px;
+    bottom: 38px;
+    right: 30px;
+}
+
 .user-comment{
     background-color: #F2F1F1;
     width: 100%;

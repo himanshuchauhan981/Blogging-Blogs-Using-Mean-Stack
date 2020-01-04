@@ -21,6 +21,8 @@ export class ViewPostComponent implements OnInit {
 
 	clearComment = ''
 
+	isCommentEdited : Boolean = false
+
 	commentsArray : Array<{_id: string, postId: string, text: string, createdBy: string, createdAt: Date}>
 
 	constructor(
@@ -85,4 +87,7 @@ export class ViewPostComponent implements OnInit {
 		})
 	}
 
+	editComment(id,text){
+		console.log(id,text)
+	}
 }

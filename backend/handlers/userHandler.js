@@ -57,6 +57,11 @@ const user = {
             })
 
         })(req, res, next)
+    },
+
+    getFirstNameAndLastName : async (username)=>{
+        let data = await users.findOne({username: username}).select({firstName:1,lastName:1})
+        return data
     }
 }
 
