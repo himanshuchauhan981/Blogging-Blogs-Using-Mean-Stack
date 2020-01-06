@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { PostService } from '../service/post.service'
+import { AuthGuardService } from '../service/auth-guard.service'
 
 @Component({
 	selector: 'home',
@@ -11,9 +12,14 @@ import { PostService } from '../service/post.service'
 export class HomeComponent implements OnInit {
 
 	constructor(
-		private postService: PostService, private router: Router) { }
+		private postService: PostService,
+		private authGuardService: AuthGuardService,
+		private router: Router
+	) { }
 
 	skipPostLimit : number = 0
+
+	username : String
 
 	blogArray : Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date}> = []
 
@@ -29,6 +35,7 @@ export class HomeComponent implements OnInit {
 				this.skipPostLimit = this.skipPostLimit + 2
 			}
 		})
+		this.username = this.authGuardService.currentUser
 	}
 
 	onScroll(){
@@ -45,7 +52,7 @@ export class HomeComponent implements OnInit {
 		})
 	}
 
-	openProfilePage(postAuthor){
-		this.router.navigate(['/post/new'])
+	openProfilePage(username){
+		this.router.navigate([`/profile/${username}`])
 	}
 }

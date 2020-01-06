@@ -12,7 +12,7 @@ import { ProfileService } from '../service/profile.service'
 })
 export class ProfileComponent implements OnInit {
 
-	user = { id:String, username: String, email: String}
+	user = { id: String, username: String, email: String }
 
 	authorized: Boolean = false
 
@@ -30,8 +30,8 @@ export class ProfileComponent implements OnInit {
 				}
 			})
 		this.profileService.getEmittedEmailValue()
-			.subscribe(data=>{
-				if(data!=undefined){
+			.subscribe(data => {
+				if (data != undefined) {
 					this.user.email = data
 				}
 			})
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
 		})
 	}
 
-	openPasswordDialogBox(){
+	openPasswordDialogBox() {
 		this.matDialog.open(PasswordDialogBoxComponent, {
 			width: '350px'
 		})

@@ -18,12 +18,13 @@ const posts = {
             postTitle: req.body.postTitle,
             postContent: req.body.postContent,
             postImage: typeof req.file === "undefined" || !req.file ? null : req.file.filename,
-            postAuthor: userData.firstName+' '+userData.lastName
+            postAuthor: userData.firstName+' '+userData.lastName,
+            userId: req.user._id
         })
         await blogPostObject.save((err,post)=>{
             if (err) {
                 let error = Object.values(err.errors)[0].message
-                res.status(400).send({ status:400,msg:'Unexpected erirr, Try Again' })
+                res.status(400).send({ status:400,msg:'Unexpected error, Try Again' })
             }
             else {
                 res.status(200).send({ status:200, msg: "New post created" })
@@ -43,7 +44,8 @@ const posts = {
                     "postContent": "$postContent",
                     "postDate": "$postDate",
                     "postAuthor": "$postAuthor",
-                    "postImage": "$postImage"
+                    "postImage": "$postImage",
+                    "userId": "$userId"
                 }
             },
             {

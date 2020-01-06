@@ -15,6 +15,9 @@ const posts = new Schema({
         type: Date,
         default: Date.now
     },
+    postAuthor:{
+        type: String
+    },
     userId: {
         type: String
     },

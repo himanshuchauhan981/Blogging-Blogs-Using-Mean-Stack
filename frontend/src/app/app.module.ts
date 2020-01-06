@@ -66,6 +66,7 @@ import { DeleteCommentDialogBoxComponent } from './dialog-box/delete-comment-dia
 			{ path: 'login', component: LoginComponent },
 			{ path: 'signup', component: SignupComponent },
 			{ path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
+			{ path: 'profile/:id', component: ProfileComponent, canActivate:[AuthGuardService] },
 			{ path: 'post/new', component: CreatePostComponent, canActivate:[AuthGuardService] },
 			{ path: 'post/:id', component: ViewPostComponent, canActivate:[AuthGuardService] },
 			{ path: ':username/:postId', component: EditPostComponent, canActivate:[AuthGuardService] },
