@@ -60,4 +60,15 @@ export class ProfileService {
 	getEmittedEmailValue(){
 		return this.fire
 	}
+
+	getOtherUserProfileUsername(id){
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.get(`/api/profile/id/${id}`,{
+			headers: headers
+		})
+	}
 }

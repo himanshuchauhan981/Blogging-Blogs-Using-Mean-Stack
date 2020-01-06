@@ -19,6 +19,11 @@ const profiles = {
     updateUserPassword : async (req,res)=>{
         const response = profileHandler.updateUserPassword(req,res)
         return response
+    },
+
+    getOtherUserProfileData : async (req,res)=>{
+        const response = profileHandler.getOtherUserProfileData(req,res)
+        return response
     }
 }
 

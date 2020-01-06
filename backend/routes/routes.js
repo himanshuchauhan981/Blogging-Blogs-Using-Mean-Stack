@@ -77,5 +77,10 @@ module.exports = ()=>{
         profileController.updateUserPassword
     )
 
+    router.get('/profile/id/:id',
+        passport.authenticate('jwt'),
+        profileController.getOtherUserProfileData
+    )
+
     return router
 }

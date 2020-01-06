@@ -10,7 +10,7 @@
                         </h2>
                         <h5>
                             By 
-                            <span class="profile-link"(click)="openProfilePage(username)">{{ blogs.postAuthor }}</span>
+                            <span class="profile-link"(click)="openOtherUserProfilePage(blogs.userId)">{{ blogs.postAuthor }}</span>
                             <span class="w3-opacity w3-margin-left post-author">{{ blogs.postDate | amTimeAgo }}</span>
                         </h5>
                     </div>

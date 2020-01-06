@@ -47,8 +47,12 @@ const profile = {
             else{
                 res.status(200).json({status: 400, msg:'Incorrect Current Password'})
             }
-        }
-        
+        }   
+    },
+
+    getOtherUserProfileData : async (req,res)=>{
+        const profileData = await users.findById(req.params.id).select({username:1})
+        res.status(200).json({status: 200, msg: 'Success', data: profileData})
     }
 }
 

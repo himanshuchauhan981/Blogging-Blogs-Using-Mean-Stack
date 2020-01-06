@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { PostService } from '../service/post.service'
-import { AuthGuardService } from '../service/auth-guard.service'
+import { ProfileService } from '../service/profile.service'
 
 @Component({
 	selector: 'home',
@@ -13,46 +13,49 @@ export class HomeComponent implements OnInit {
 
 	constructor(
 		private postService: PostService,
-		private authGuardService: AuthGuardService,
+		private profileService: ProfileService,
 		private router: Router
 	) { }
 
-	skipPostLimit : number = 0
+	skipPostLimit: number = 0
 
-	username : String
-
-	blogArray : Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date}> = []
+	blogArray: Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date }> = []
 
 	ngOnInit() {
 		this.postService.getAllPost(this.skipPostLimit)
-		.subscribe((res)=>{
-			if(res.json().status === 200){
-				let resData = res.json()
-				let len = resData.blogs.length
-				for(let i=0;i<len;i++){
-					this.blogArray.push(resData.blogs[i])
+			.subscribe((res) => {
+				console.log(res.json().blogs)
+				if (res.json().status === 200) {
+					let resData = res.json()
+					let len = resData.blogs.length
+					for (let i = 0; i < len; i++) {
+						this.blogArray.push(resData.blogs[i])
+					}
+					this.skipPostLimit = this.skipPostLimit + 2
 				}
-				this.skipPostLimit = this.skipPostLimit + 2
-			}
-		})
-		this.username = this.authGuardService.currentUser
+			})
 	}
 
-	onScroll(){
+	onScroll() {
 		this.postService.getAllPost(this.skipPostLimit)
-		.subscribe((res)=>{
-			if(res.json().status === 200){
-				let resData = res.json()
-				let len = resData.blogs.length
-				for(let i=0;i<len;i++){
-					this.blogArray.push(resData.blogs[i])
+			.subscribe((res) => {
+				if (res.json().status === 200) {
+					let resData = res.json()
+					let len = resData.blogs.length
+					for (let i = 0; i < len; i++) {
+						this.blogArray.push(resData.blogs[i])
+					}
+					this.skipPostLimit = this.skipPostLimit + 2
 				}
-				this.skipPostLimit = this.skipPostLimit + 2
-			}
-		})
+			})
 	}
 
-	openProfilePage(username){
-		this.router.navigate([`/profile/${username}`])
+	openOtherUserProfilePage(id) {
+		this.profileService.getOtherUserProfileUsername(id)
+		.subscribe((res)=>{
+			if(res.json().status === 200){
+				this.router.navigate([`/profile/${res.json().data.username}`])
+			}
+		})
 	}
 }
