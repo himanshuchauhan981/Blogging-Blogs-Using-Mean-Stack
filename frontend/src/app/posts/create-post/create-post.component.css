@@ -1,4 +1,7 @@
-.mat-card-header h3{ font-family:'ABeeZee'; }
+h3{ 
+    font-family: 'Roboto Mono', monospace; 
+    text-align: center;
+}
 
 .example-card { margin: 0 auto; }
   

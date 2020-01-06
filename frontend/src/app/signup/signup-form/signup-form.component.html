@@ -47,12 +47,6 @@
                 <mat-error *ngIf="confirmPassword.hasError('mustMatch')">Password does not matched
                 </mat-error>
             </mat-form-field>
-            <section class="example-section">
-                <mat-checkbox class="example-margin" name="check" [(indeterminate)]="indeterminate"
-                    [labelPosition]="labelPosition" required>
-                    I agree to the terms and conditions
-                </mat-checkbox>
-            </section>
             <button mat-raised-button color="primary" class="float-right">Sign Up</button>
         </form>
     </div>
