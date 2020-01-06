@@ -68,7 +68,7 @@ module.exports = ()=>{
     )
 
     router.get('/:username/posts',
-        // passport.authenticate('jwt'),
+        passport.authenticate('jwt'),
         postController.getAllParticularUserPost
     )
 

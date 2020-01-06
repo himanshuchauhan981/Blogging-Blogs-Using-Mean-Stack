@@ -16,6 +16,8 @@ export class ProfileComponent implements OnInit {
 
 	authorized: Boolean = false
 
+	name : string
+
 	constructor(
 		public matDialog: MatDialog,
 		private profileService: ProfileService,
@@ -25,7 +27,10 @@ export class ProfileComponent implements OnInit {
 		this.profileService.getUserProfileData()
 			.subscribe((res) => {
 				if (res.json().status === 200) {
-					this.user = res.json().data[0]
+					this.user = res.json().data
+					let firstName = res.json().data.firstName.charAt(0).toUpperCase() + res.json().data.firstName.slice(1)
+					let lastName = res.json().data.lastName.charAt(0).toUpperCase() + res.json().data.lastName.slice(1)
+					this.name = firstName + ' '+lastName
 					this.authorized = res.json().authorized
 				}
 			})

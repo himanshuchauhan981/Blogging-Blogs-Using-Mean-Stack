@@ -13,6 +13,8 @@ export class ViewAllPostsComponent implements OnInit {
 
 	userPost: Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date }> = []
 
+	authenticated: Boolean
+
 	constructor(
 		private postService: PostService,
 		private activatedRoute: ActivatedRoute,
@@ -25,6 +27,7 @@ export class ViewAllPostsComponent implements OnInit {
 		this.postService.getAllParticularUserPost(username)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
+					this.authenticated = res.json().authenticated
 					this.userPost = res.json().data
 				}
 			})
@@ -45,6 +48,10 @@ export class ViewAllPostsComponent implements OnInit {
 					duration: 8000
 				})
 			})
+	}
+
+	viewPost(postId){
+		
 	}
 
 }

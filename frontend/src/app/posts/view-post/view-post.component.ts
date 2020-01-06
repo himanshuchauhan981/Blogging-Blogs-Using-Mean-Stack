@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { PostService } from '../../service/post.service'
 import { CommentService } from '../../service/comment.service'
 import { DeleteCommentDialogBoxComponent } from '../../dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component'
+import { ProfileService } from 'src/app/service/profile.service'
 
 @Component({
 	selector: 'app-view-post',
@@ -29,6 +30,8 @@ export class ViewPostComponent implements OnInit {
 		private activatedRoute: ActivatedRoute, 
 		private postService: PostService, 
 		private commentService: CommentService,
+		private profileService: ProfileService,
+		private router: Router,
 		private matSnackBar: MatSnackBar,
 		private matDialog: MatDialog
 	) { }
@@ -89,5 +92,14 @@ export class ViewPostComponent implements OnInit {
 
 	editComment(id,text){
 		console.log(id,text)
+	}
+
+	openOtherUserProfilePage(id) {
+		this.profileService.getOtherUserProfileUsername(id)
+		.subscribe((res)=>{
+			if(res.json().status === 200){
+				this.router.navigate([`/profile/${res.json().data.username}`])
+			}
+		})
 	}
 }

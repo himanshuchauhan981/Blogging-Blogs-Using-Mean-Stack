@@ -77,7 +77,6 @@ const posts = {
     getParticularPost: async (req, res) => {
         let postID = req.params.id
 
-        console.log(postID)
         let postData = await blogPosts.findById(postID)
         let commentsdata = await comments.find({ postId: postID })
 
@@ -113,9 +112,13 @@ const posts = {
     },
 
     getAllParticularUserPost: async (req, res) => {
+        let authenticated = false
+        if(req.user.username === req.params.username){
+            authenticated = true
+        }
         let userId = await users.findOne({username: req.params.username}).select({_id:1})
         const userPosts = await blogPosts.find({ userId: userId._id })
-        res.status(200).json({ status: 200, msg: 'Success', data: userPosts })
+        res.status(200).json({ status: 200, msg: 'Success', data: userPosts, authenticated: authenticated })
     },
 
     deleteParticularPost : async (req,res) =>{

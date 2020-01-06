@@ -9,8 +9,8 @@
         <p>{{ post.postContent.substring(0,195)+'.....' }}</p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="accent">Read More</button>
-        <button mat-raised-button color="primary" (click)="editPost(post.postAuthor,post._id)">Edit</button>
-        <button mat-raised-button color="warn" (click)="deletePost(post)">Delete</button>
+        <a [routerLink]="['/post',post._id]"><button mat-raised-button color="accent">Read More</button></a>
+        <button *ngIf="authenticated" mat-raised-button color="primary" (click)="editPost(post.postAuthor,post._id)">Edit</button>
+        <button *ngIf="authenticated" mat-raised-button color="warn" (click)="deletePost(post)">Delete</button>
     </mat-card-actions>
 </mat-card>

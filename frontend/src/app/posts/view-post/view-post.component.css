@@ -89,3 +89,12 @@
 .userComment{
     font-size: 12px;
 }
+
+.profile-link{
+    color: #3F51B5;
+    cursor: pointer;
+}
+
+.profile-link:hover{
+    text-decoration: underline;
+}
