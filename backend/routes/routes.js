@@ -9,6 +9,11 @@ module.exports = ()=>{
 
     router.post('/signup',userController.saveUserDetails)
 
+    router.post('/signup/image',
+        upload.single('profileImage'),
+        userController.saveProfilePic
+    )
+
     router.post('/login',userController.authenticateLoginUser)
 
     router.post('/token',userController.getUsernameFromToken)

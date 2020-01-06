@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 
@@ -13,6 +13,8 @@ import { SignupService } from '../../service/signup.service';
 export class SignupFormComponent {
 
 	signupError: string = null
+
+	@Output() idEmitter = new EventEmitter()
 
 	constructor(private signupService: SignupService, private router: Router) { }
 
@@ -59,10 +61,11 @@ export class SignupFormComponent {
 	signupdata(signupForm) {
 		this.signupService.saveUserDetails(signupForm.value)
 			.subscribe(res => {
-				this.router.navigate(['/login'])
+				this.signupService.signUpObservable.next(true)
+				this.idEmitter.emit(res.json().data)
 			}, (error) => {
+				this.signupService.signUpObservable.next(false)
 				this.signupError = error._body
 			})
 	}
-
 }

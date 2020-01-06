@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core'
+
+import { SignupService } from '../../service/signup.service'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { EventEmitter } from 'events'
 
 @Component({
 	selector: 'profile-photo-form',
@@ -7,7 +11,7 @@ import { Component } from '@angular/core';
 })
 export class ProfilePhotoFormComponent {
 
-	constructor() { }
+	constructor(private signupService: SignupService) { }
 
 	uploadedFiles: Array<File>
 
@@ -19,8 +23,15 @@ export class ProfilePhotoFormComponent {
 
 	defaultImgSrc: string = 'https://i.stack.imgur.com/X9JD4.png?s=136&g=1'
 
+	@Input() id : string
+
+	profilePhotoForm = new FormGroup({
+		profileImage: new FormControl('',[Validators.required])
+	})
+
+	get profileImage() { return this.profilePhotoForm.get('profileImage') }
+
 	fileChange(element) {
-		console.log(element.target.files)
 		let filetype = element.target.files[0].type
 		if (this.fileType.indexOf(filetype) >= 0) {
 			var reader = new FileReader();
@@ -44,5 +55,19 @@ export class ProfilePhotoFormComponent {
 
 	uploadFile() {
 		document.getElementById('upload').click()
+	}
+
+	saveProfilePhoto(){
+		let formData = new FormData()
+		if(this.uploadedFiles !== undefined){
+			for(var i=0;i< this.uploadedFiles.length; i++){
+				formData.append("profileImage",this.uploadedFiles[i],this.uploadedFiles[i].name)
+			}
+			formData.append('userId', this.id)
+			this.signupService.saveProfilePhoto(formData)
+				.subscribe((res)=>{
+					console.log(res.json())
+				})
+		}
 	}
 }

@@ -42,6 +42,10 @@ const users = new Schema({
             },
             message: 'Must contain one upper letter, one lower letter and one non-alpha character'
         }
+    },
+    profileImage:{
+        type: String,
+        default: null
     }
 })
 

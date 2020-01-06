@@ -1,6 +1,7 @@
 const { users } = require('../models')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
+const mongoose = require('mongoose')
 
 const { createToken } = require('../auth').token
 
@@ -20,7 +21,7 @@ const user = {
                     res.status(400).send(error)
                 }
                 else {
-                    res.status(200).send({ status:200, msg:'Data Saved' })
+                    res.status(200).send({ status:200, msg:'Data Saved',data: user._id })
                 }
             })
         }
@@ -62,6 +63,13 @@ const user = {
     getFirstNameAndLastName : async (username)=>{
         let data = await users.findOne({username: username}).select({firstName:1,lastName:1})
         return data
+    },
+
+    saveProfilePic : async(req,res)=>{
+        let id = mongoose.Types.ObjectId(req.body.userId)
+
+        await users.findOneAndUpdate({_id: id},{profileImage:req.file.filename})
+        res.status(200).json({status:200, msg:'Image saved'})
     }
 }
 

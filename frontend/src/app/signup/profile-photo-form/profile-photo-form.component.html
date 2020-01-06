@@ -1,12 +1,15 @@
 <div class="profile-form">
-    <h4 class="profile-heading">Insert Profile Photo</h4>
-    <img src="{{ defaultImgSrc }}" class="profile-image">
-    <div class="insert-image">
-        <input type="file" hidden id="upload" name="profileImage" (change)="fileChange($event)">
-    </div>
-    <div class="float-right">
-        <button mat-raised-button color="primary" (click)="uploadFile()" color="{{ fileUploadColor }}" class="mr-2">{{ uploadFileText }}</button>
-        <button mat-raised-button color="primary" class="mr-2">Save</button>
-        <button mat-raised-button color="primary">Skip</button>
-    </div>
+    <form [formGroup]="profilePhotoForm" ngSubmit="saveProfilePhoto($event)" enctype="multipart/form-data">
+        <h4 class="profile-heading">Insert Profile Photo</h4>
+        <img src="{{ defaultImgSrc }}" class="profile-image">
+        <div class="insert-image">
+            <input type="file" hidden id="upload" name="profileImage" (change)="fileChange($event)">
+        </div>
+        <div class="float-right">
+            <button mat-raised-button color="primary" (click)="uploadFile()" color="{{ fileUploadColor }}"
+                class="mr-2" type="button">{{ uploadFileText }}</button>
+            <button mat-raised-button color="primary" class="mr-2" (click)="saveProfilePhoto()">Save</button>
+            <button mat-raised-button color="primary" type="button">Skip</button>
+        </div>
+    </form>
 </div>
