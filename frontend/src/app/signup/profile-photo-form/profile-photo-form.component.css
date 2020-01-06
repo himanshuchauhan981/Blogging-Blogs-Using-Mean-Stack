@@ -1,0 +1,21 @@
+.profile-form{
+    padding:0px 30px 30px 30px;
+    text-align: center;
+    display: block;
+}
+
+.profile-heading{
+    text-align:center;
+    font-size:40px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.profile-image{
+    width: 200px;
+    height: 200px;
+    margin-top: 10vh;
+}
+
+.insert-image{
+    margin-top: 15vh;
+}
