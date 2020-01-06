@@ -1,0 +1,24 @@
+.signup-form{
+    padding:0px 30px 30px 30px;
+}
+
+.signup-heading{
+    text-align:center;
+    font-size:40px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.example-section{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.example-margin {
+    margin: 0 10px;
+}

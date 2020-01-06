@@ -3,7 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { signupValidators } from '../../signup/signup.validators'
+import { signupValidators } from '../../signup/signup-form/signup.validators'
 import { ProfileService } from '../../service/profile.service'
 
 @Component({
