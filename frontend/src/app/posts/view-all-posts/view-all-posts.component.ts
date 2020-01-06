@@ -29,6 +29,7 @@ export class ViewAllPostsComponent implements OnInit {
 				if (res.json().status === 200) {
 					this.authenticated = res.json().authenticated
 					this.userPost = res.json().data
+					console.log(this.userPost)
 				}
 			})
 	}

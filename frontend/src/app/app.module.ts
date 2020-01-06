@@ -35,6 +35,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileDialogBoxComponent } from './dialog-box/profile-dialog-box/profile-dialog-box.component';
 import { PasswordDialogBoxComponent } from './dialog-box/password-dialog-box/password-dialog-box.component';
 import { DeleteCommentDialogBoxComponent } from './dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component';
+import { SignupFormComponent } from './signup/signup-form/signup-form.component';
+import { ProfilePhotoFormComponent } from './signup/profile-photo-form/profile-photo-form.component';
 
 @NgModule({
 	declarations: [
@@ -53,7 +55,9 @@ import { DeleteCommentDialogBoxComponent } from './dialog-box/delete-comment-dia
 		ProfileComponent,
 		ProfileDialogBoxComponent,
 		PasswordDialogBoxComponent,
-		DeleteCommentDialogBoxComponent
+		DeleteCommentDialogBoxComponent,
+		SignupFormComponent,
+		ProfilePhotoFormComponent
 	],
 	imports: [
 		BrowserModule,
