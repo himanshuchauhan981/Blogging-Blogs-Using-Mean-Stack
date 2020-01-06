@@ -2,7 +2,7 @@ import { Component, Input, Output } from '@angular/core'
 
 import { SignupService } from '../../service/signup.service'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { EventEmitter } from 'events'
+import { Router } from '@angular/router'
 
 @Component({
 	selector: 'profile-photo-form',
@@ -11,7 +11,7 @@ import { EventEmitter } from 'events'
 })
 export class ProfilePhotoFormComponent {
 
-	constructor(private signupService: SignupService) { }
+	constructor(private signupService: SignupService,private router: Router) { }
 
 	uploadedFiles: Array<File>
 
@@ -66,7 +66,9 @@ export class ProfilePhotoFormComponent {
 			formData.append('userId', this.id)
 			this.signupService.saveProfilePhoto(formData)
 				.subscribe((res)=>{
-					console.log(res.json())
+					if(res.json().status === 200){
+						this.router.navigate(['login'])
+					}
 				})
 		}
 	}

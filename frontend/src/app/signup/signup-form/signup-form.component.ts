@@ -61,8 +61,10 @@ export class SignupFormComponent {
 	signupdata(signupForm) {
 		this.signupService.saveUserDetails(signupForm.value)
 			.subscribe(res => {
-				this.signupService.signUpObservable.next(true)
-				this.idEmitter.emit(res.json().data)
+				if(res.json().status === 200){
+					this.signupService.signUpObservable.next(true)
+					this.idEmitter.emit(res.json().data)
+				}
 			}, (error) => {
 				this.signupService.signUpObservable.next(false)
 				this.signupError = error._body
