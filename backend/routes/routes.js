@@ -30,6 +30,7 @@ module.exports = ()=>{
     )
 
     router.get('/post/:id',
+        passport.authenticate('jwt'),
         postController.getParticularPost
     )
 

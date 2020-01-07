@@ -19,19 +19,19 @@ export class ViewPostComponent implements OnInit {
 
 	post = {}
 
-	commentsLength  = 0
+	commentsLength = 0
 
 	clearComment = ''
 
-	isCommentEdited : Boolean = false
+	isCommentEdited: Boolean = false
 
-	likeState : Boolean = false
+	likeState: Boolean = false
 
-	commentsArray : Array<{_id: string, postId: string, text: string, createdBy: string, createdAt: Date}>
+	commentsArray: Array<{ _id: string, postId: string, text: string, createdBy: string, createdAt: Date }>
 
 	constructor(
-		private activatedRoute: ActivatedRoute, 
-		private postService: PostService, 
+		private activatedRoute: ActivatedRoute,
+		private postService: PostService,
 		private commentService: CommentService,
 		private profileService: ProfileService,
 		private likeService: LikeService,
@@ -41,81 +41,82 @@ export class ViewPostComponent implements OnInit {
 	) { }
 
 	commentForm = new FormGroup({
-		comment: new FormControl('',Validators.required)
+		comment: new FormControl('', Validators.required)
 	})
 
-	get comment(){ return this.commentForm.get('comment')}
+	get comment() { return this.commentForm.get('comment') }
 
-	submitComment(commentForm,postId){
-		this.commentService.submitNewComment(commentForm.value,postId)
-		.subscribe((res)=>{
-			if(res.json().status === 400){
-				this.matSnackBar.open(res.json().msg,'Close',{
-					duration: 8000
-				})
-			}
-			else if(res.json().status === 200){
-				this.commentsArray = res.json().data
-				this.commentsLength = res.json().length
-				this.clearComment = null
-			}
-		})
+	submitComment(commentForm, postId) {
+		this.commentService.submitNewComment(commentForm.value, postId)
+			.subscribe((res) => {
+				if (res.json().status === 400) {
+					this.matSnackBar.open(res.json().msg, 'Close', {
+						duration: 8000
+					})
+				}
+				else if (res.json().status === 200) {
+					this.commentsArray = res.json().data
+					this.commentsLength = res.json().length
+					this.clearComment = null
+				}
+			})
 	}
 
 	ngOnInit() {
 		let postID = this.activatedRoute.snapshot.params.id
 		this.postService.getParticularPost(postID)
-			.subscribe((res)=>{
+			.subscribe((res) => {
+				this.likeState = res.json().likeStatus
 				this.post = res.json().post
 				this.commentsLength = res.json().commentLength
 			})
 
 		this.commentService.getEmittedComment()
-			.subscribe(data=>{
+			.subscribe(data => {
 				let index = this.commentsArray.findIndex(p => p._id == data._id)
-				this.commentsArray.splice(index,1)
+				this.commentsArray.splice(index, 1)
 				this.commentsLength = this.commentsLength - 1
 			})
 	}
 
-	getPostComments(postId){
+	getPostComments(postId) {
 		this.commentService.getParticularPostComment(postId)
-		.subscribe((res)=>{
-			if(res.json().status === 200){
-				this.commentsArray = res.json().comments
-			}
-		})
+			.subscribe((res) => {
+				if (res.json().status === 200) {
+					this.commentsArray = res.json().comments
+				}
+			})
 	}
 
-	openDeleteDialogBox(commentId){
-		this.matDialog.open(DeleteCommentDialogBoxComponent,{
+	openDeleteDialogBox(commentId) {
+		this.matDialog.open(DeleteCommentDialogBoxComponent, {
 			width: '450px',
 			data: { id: commentId }
 		})
 	}
 
-	editComment(id,text){
-		console.log(id,text)
+	editComment(id, text) {
+		console.log(id, text)
 	}
 
 	openOtherUserProfilePage(postId) {
 		this.profileService.getOtherUserProfileUsername(postId)
-		.subscribe((res)=>{
-			if(res.json().status === 200){
-				this.router.navigate([`/profile/${res.json().data.username}`])
-			}
-		})
+			.subscribe((res) => {
+				if (res.json().status === 200) {
+					this.router.navigate([`/profile/${res.json().data.username}`])
+				}
+			})
 	}
 
-	saveOrDeletePostLike(postId){
+	saveOrDeletePostLike(postId) {
 		this.likeService.saveOrDeletePostLike(postId)
-		.subscribe((res)=>{
-			if(res.json().status === 200){
-				this.likeState = true
-			}
-			else if(res.json().status === 404){
-				this.likeState = false
-			}
-		})
+			.subscribe((res) => {
+				if (res.json().status === 200) {
+					this.likeState = true
+				}
+				else if (res.json().status === 404) {
+					this.likeState = false
+				}
+			})
 	}
 }

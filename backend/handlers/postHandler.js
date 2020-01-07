@@ -1,7 +1,7 @@
 const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 
-const { blogPosts, comments, users } = require('../models')
+const { blogPosts, comments, users,postLikes } = require('../models')
 const { getFirstNameAndLastName }  = require('./userHandler')
 
 async function capitalizeUsername(username){
@@ -76,11 +76,16 @@ const posts = {
 
     getParticularPost: async (req, res) => {
         let postID = req.params.id
+        let userID = req.user._id
+        let likeStatus = false
 
         let postData = await blogPosts.findById(postID)
         let commentsdata = await comments.find({ postId: postID })
+        let likeData = await postLikes.findOne({postId: postID, userId: userID})
 
-        res.status(200).json({ post: postData, commentLength: commentsdata.length, status: 200 })
+        if(likeData != null) likeStatus = true
+
+        res.status(200).json({ post: postData, commentLength: commentsdata.length, status: 200,likeStatus: likeStatus })
     },
 
     getParticularPostComments: async (req, res) => {
