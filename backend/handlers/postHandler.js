@@ -64,7 +64,7 @@ const posts = {
         let image = {
             filename: req.params.id
         }
-
+                
         let gfs = Grid(mongoose.connection.db, mongoose.mongo)
         gfs.collection('photos')
 

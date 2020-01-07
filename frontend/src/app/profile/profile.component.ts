@@ -10,9 +10,18 @@ import { ProfileService } from '../service/profile.service'
 	templateUrl: './profile.component.html',
 	styleUrls: ['./profile.component.css']
 })
+
+// interface User {
+// 	id: string,
+// 	username: string,
+// 	email: string,
+// 	profileImage: string
+// }
 export class ProfileComponent implements OnInit {
 
-	user = { id: String, username: String, email: String }
+	user : { id: string, username: string, email: String, profileImage: string } = null;
+
+	// user = { }
 
 	authorized: Boolean = false
 
@@ -32,6 +41,7 @@ export class ProfileComponent implements OnInit {
 					let lastName = res.json().data.lastName.charAt(0).toUpperCase() + res.json().data.lastName.slice(1)
 					this.name = firstName + ' '+lastName
 					this.authorized = res.json().authorized
+					// this.user.profileImage = `/api/image/${this.user.profileImage}`
 				}
 			})
 		this.profileService.getEmittedEmailValue()
