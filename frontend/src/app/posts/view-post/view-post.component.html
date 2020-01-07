@@ -21,7 +21,7 @@
                     </div>
                     <div class="w3-row">
                         <div class="w3-col l6 m6 s6">
-                            <div class="like-comment-box">Like</div>
+                            <div class="like-comment-box" (click)="saveOrDeletePostLike(post._id)"><i class="fa fa-thumbs-up" [ngClass]="likeState ? 'likeColor':'unlikeColor'"> Like</i></div>
                         </div>
                         <div class="w3-col l6 m6 s6">
                             <div class="like-comment-box" (click)="getPostComments(post._id)">View Comments ({{ commentsLength }})</div>

@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 
-const { userController,postController,profileController } = require('../controllers')
+const { userController,postController,profileController,likeController } = require('../controllers')
 const { upload } = require('../middleware').multerMiddleware
 
 module.exports = ()=>{
@@ -85,6 +85,11 @@ module.exports = ()=>{
     router.get('/profile/id/:id',
         passport.authenticate('jwt'),
         profileController.getOtherUserProfileData
+    )
+
+    router.post('/:postId/like',
+        passport.authenticate('jwt'),
+        likeController.saveOrDeletePostLike
     )
 
     return router

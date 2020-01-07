@@ -8,6 +8,7 @@ import { PostService } from '../../service/post.service'
 import { CommentService } from '../../service/comment.service'
 import { DeleteCommentDialogBoxComponent } from '../../dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component'
 import { ProfileService } from 'src/app/service/profile.service'
+import { LikeService } from 'src/app/service/like.service'
 
 @Component({
 	selector: 'app-view-post',
@@ -24,6 +25,8 @@ export class ViewPostComponent implements OnInit {
 
 	isCommentEdited : Boolean = false
 
+	likeState : Boolean = false
+
 	commentsArray : Array<{_id: string, postId: string, text: string, createdBy: string, createdAt: Date}>
 
 	constructor(
@@ -31,6 +34,7 @@ export class ViewPostComponent implements OnInit {
 		private postService: PostService, 
 		private commentService: CommentService,
 		private profileService: ProfileService,
+		private likeService: LikeService,
 		private router: Router,
 		private matSnackBar: MatSnackBar,
 		private matDialog: MatDialog
@@ -94,11 +98,23 @@ export class ViewPostComponent implements OnInit {
 		console.log(id,text)
 	}
 
-	openOtherUserProfilePage(id) {
-		this.profileService.getOtherUserProfileUsername(id)
+	openOtherUserProfilePage(postId) {
+		this.profileService.getOtherUserProfileUsername(postId)
 		.subscribe((res)=>{
 			if(res.json().status === 200){
 				this.router.navigate([`/profile/${res.json().data.username}`])
+			}
+		})
+	}
+
+	saveOrDeletePostLike(postId){
+		this.likeService.saveOrDeletePostLike(postId)
+		.subscribe((res)=>{
+			if(res.json().status === 200){
+				this.likeState = true
+			}
+			else if(res.json().status === 404){
+				this.likeState = false
 			}
 		})
 	}

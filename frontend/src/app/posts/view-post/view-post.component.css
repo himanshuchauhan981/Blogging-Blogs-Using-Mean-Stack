@@ -98,3 +98,11 @@
 .profile-link:hover{
     text-decoration: underline;
 }
+
+.likeColor{
+    color: blue;
+}
+
+.unlikeColor{
+    color: none;
+}

@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {
 		this.postService.getAllPost(this.skipPostLimit)
 			.subscribe((res) => {
-				console.log(res.json().blogs)
 				if (res.json().status === 200) {
 					let resData = res.json()
 					let len = resData.blogs.length

@@ -10,7 +10,8 @@ const likes = new Schema({
         type: String,
     },
     likedAt: {
-        type: String
+        type: Date,
+        default: Date.now
     }
 })
 
