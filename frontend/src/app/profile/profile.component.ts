@@ -11,17 +11,9 @@ import { ProfileService } from '../service/profile.service'
 	styleUrls: ['./profile.component.css']
 })
 
-// interface User {
-// 	id: string,
-// 	username: string,
-// 	email: string,
-// 	profileImage: string
-// }
 export class ProfileComponent implements OnInit {
 
-	user : { id: string, username: string, email: String, profileImage: string } = null;
-
-	// user = { }
+	user : { id: string, username: string, email: string, profileImage: string, name:string } = null
 
 	authorized: Boolean = false
 
@@ -39,9 +31,8 @@ export class ProfileComponent implements OnInit {
 					this.user = res.json().data
 					let firstName = res.json().data.firstName.charAt(0).toUpperCase() + res.json().data.firstName.slice(1)
 					let lastName = res.json().data.lastName.charAt(0).toUpperCase() + res.json().data.lastName.slice(1)
-					this.name = firstName + ' '+lastName
+					this.user.name = firstName + ' '+lastName
 					this.authorized = res.json().authorized
-					// this.user.profileImage = `/api/image/${this.user.profileImage}`
 				}
 			})
 		this.profileService.getEmittedEmailValue()

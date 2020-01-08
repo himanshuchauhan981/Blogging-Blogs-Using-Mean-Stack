@@ -1,7 +1,7 @@
 const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 
-const { blogPosts, comments, users,postLikes } = require('../models')
+const { blogPosts, comments, users, postLikes } = require('../models')
 const { getFirstNameAndLastName }  = require('./userHandler')
 
 async function capitalizeUsername(username){
@@ -67,11 +67,17 @@ const posts = {
                 
         let gfs = Grid(mongoose.connection.db, mongoose.mongo)
         gfs.collection('photos')
-
-        gfs.files.findOne(image, (err, file) => {
-            const readstream = gfs.createReadStream(file.filename)
-            readstream.pipe(res)
-        })
+            gfs.files.findOne(image, (err, file) => {
+                if(!err){
+                    try{
+                        const readstream = gfs.createReadStream(file.filename)
+                        readstream.pipe(res)
+                    }
+                    catch(e){
+                        console.log(e)
+                    }  
+                }
+            })
     },
 
     getParticularPost: async (req, res) => {
@@ -122,7 +128,25 @@ const posts = {
             authenticated = true
         }
         let userId = await users.findOne({username: req.params.username}).select({_id:1})
-        const userPosts = await blogPosts.find({ userId: userId._id })
+        const userPosts = await users.aggregate([
+            {
+                $project:{
+                    "_id": {
+                        "$toString": "$_id",
+                    },
+                    "profileImage": "$profileImage",
+                }
+            },
+            {
+                $lookup:{
+                    from: 'posts',
+                    localField: 'userId',
+                    foreignField: '+_id',
+                    as: 'postData'
+                }
+            }
+        ])
+        // const userPost = await blogPosts.find({ userId: userId._id })
         res.status(200).json({ status: 200, msg: 'Success', data: userPosts, authenticated: authenticated })
     },
 

@@ -1,6 +1,6 @@
 <mat-card *ngFor="let post of userPost">
     <mat-card-header>
-        <img mat-card-avatar src="../../../assets/1.jpg" class="profile-image">
+        <img mat-card-avatar src="/api/image/{{ userProfileImage }}" class="profile-image">
         <mat-card-title>{{ post.postAuthor }}</mat-card-title>
         <mat-card-subtitle>{{ post.postDate | amTimeAgo }}</mat-card-subtitle>
     </mat-card-header>

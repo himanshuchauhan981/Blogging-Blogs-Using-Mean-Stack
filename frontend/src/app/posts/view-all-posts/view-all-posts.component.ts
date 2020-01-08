@@ -15,6 +15,8 @@ export class ViewAllPostsComponent implements OnInit {
 
 	authenticated: Boolean
 
+	userProfileImage: string
+
 	constructor(
 		private postService: PostService,
 		private activatedRoute: ActivatedRoute,
@@ -28,7 +30,9 @@ export class ViewAllPostsComponent implements OnInit {
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.authenticated = res.json().authenticated
-					this.userPost = res.json().data
+					this.userPost = res.json().data[0].postData
+					console.log(this.userPost)
+					this.userProfileImage = res.json().data[0].profileImage
 				}
 			})
 	}
