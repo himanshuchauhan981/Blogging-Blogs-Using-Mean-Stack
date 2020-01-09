@@ -30,9 +30,8 @@ export class ViewAllPostsComponent implements OnInit {
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.authenticated = res.json().authenticated
-					this.userPost = res.json().data[0].postData
+					this.userPost = res.json().postData
 					console.log(this.userPost)
-					this.userProfileImage = res.json().data[0].profileImage
 				}
 			})
 	}

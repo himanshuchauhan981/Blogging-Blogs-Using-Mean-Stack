@@ -19,7 +19,7 @@ const posts = new Schema({
         type: String
     },
     userId: {
-        type: String
+        type: Schema.Types.ObjectId
     },
     postImage: {
         type: String

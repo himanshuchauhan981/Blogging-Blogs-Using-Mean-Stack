@@ -127,27 +127,31 @@ const posts = {
         if(req.user.username === req.params.username){
             authenticated = true
         }
-        let userId = await users.findOne({username: req.params.username}).select({_id:1})
-        const userPosts = await users.aggregate([
+        let userid = await users.findOne({username: req.params.username}).select({_id:1})
+        let userPosts = await blogPosts.aggregate([
             {
-                $project:{
-                    "_id": {
-                        "$toString": "$_id",
-                    },
-                    "profileImage": "$profileImage",
-                }
+                $match: {userId: userid._id}
+            },
+            { 
+                $project:{ postTitle: 1, postContent: 1, postAuthor: 1, postImage: 1, postDate: 1 }
             },
             {
                 $lookup:{
-                    from: 'posts',
-                    localField: 'userId',
-                    foreignField: '+_id',
-                    as: 'postData'
+                    from:'users',
+                    pipeline:[
+                        {
+                            $match: {_id: userid._id}
+                        },
+                        {
+                            $project:{ profileImage: 1, username: 1 }
+                        }
+                    ],
+                    as:'userdata'
                 }
             }
+            
         ])
-        // const userPost = await blogPosts.find({ userId: userId._id })
-        res.status(200).json({ status: 200, msg: 'Success', data: userPosts, authenticated: authenticated })
+        res.status(200).json({ status: 200, msg: 'Success', postData: userPosts, authenticated: authenticated })
     },
 
     deleteParticularPost : async (req,res) =>{
