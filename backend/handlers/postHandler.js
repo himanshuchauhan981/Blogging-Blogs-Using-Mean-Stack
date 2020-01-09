@@ -157,7 +157,8 @@ const posts = {
     deleteParticularPost : async (req,res) =>{
         let postId = req.params.id
         const userPost = await blogPosts.findById(postId)
-        if(userPost != null && req.user.username === userPost.postAuthor){
+        let isTrue = Object.toString(req.user._id) === Object.toString(userPost.userId)
+        if(userPost != null && isTrue){
             const postDeleteStatus = await blogPosts.findByIdAndRemove(postId)
             res.status(200).json({status:200, msg:'Post deleted', deletedPostId : postDeleteStatus._id})
         }

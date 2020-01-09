@@ -3,6 +3,7 @@
         <div class="col-md-4">
             <div class="card">
                 <img *ngIf="user?.profileImage != null" src="api/image/{{ user.profileImage }}" class="profile-img img-card-top" alt="">
+                <img *ngIf="user?.profileImage == null" src="{{ defaultProfileImage }}" class="profile-img img-card-top" alt="">
                 <div class="card-body">
                     <div class="list-group">
                         <span class="fa-size mb-2">

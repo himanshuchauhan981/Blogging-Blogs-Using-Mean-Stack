@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
 
 	name : string
 
+	defaultProfileImage : string
+
 	constructor(
 		public matDialog: MatDialog,
 		private profileService: ProfileService,
@@ -41,6 +43,7 @@ export class ProfileComponent implements OnInit {
 					this.user.email = data
 				}
 			})
+		this.defaultProfileImage = this.profileService.defaultProfileImage
 	}
 
 	openDialogBox(heading) {

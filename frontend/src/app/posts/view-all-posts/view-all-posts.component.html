@@ -1,11 +1,12 @@
 <mat-card *ngFor="let post of userPost">
     <mat-card-header>
-        <img mat-card-avatar src="/api/image/{{ post.userdata[0].profileImage }}" class="profile-image">
+        <img *ngIf="post.userdata[0].profileImage != null" mat-card-avatar src="/api/image/{{ post.userdata[0].profileImage }}" class="profile-image">
+        <img *ngIf="post.userdata[0].profileImage == null" mat-card-avatar src="{{ defaultProfileImage }}" class="profile-image">
         <mat-card-title>{{ post.postAuthor }}</mat-card-title>
         <mat-card-subtitle>{{ post.postDate | amTimeAgo }}</mat-card-subtitle>
     </mat-card-header>
     <b class="post-title">{{ post.postTitle }}</b>
-    <img mat-card-image *ngIf="post.postImage != null" class="post-image" src="../../../assets/1.jpg">
+    <img mat-card-image *ngIf="post.postImage != null" class="post-image" src="/api/image/{{ post.postImage }}">
     <mat-card-content>
         <p>{{ post.postContent.substring(0,195)+'.....' }}</p>
     </mat-card-content>

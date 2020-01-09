@@ -12,7 +12,9 @@ export class ProfileService {
 
 	token: string
 
-	@Output() fire: EventEmitter<any> = new EventEmitter();
+	@Output() fire: EventEmitter<any> = new EventEmitter()
+
+	defaultProfileImage: string = 'https://pngimage.net/wp-content/uploads/2018/05/default-user-image-png-7.png'
 
 	constructor(
 		private http: Http,

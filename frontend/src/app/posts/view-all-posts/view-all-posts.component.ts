@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService } from '../../service/post.service'
+import { ProfileService } from 'src/app/service/profile.service'
 
 @Component({
 	selector: 'view-all-posts',
@@ -15,10 +16,11 @@ export class ViewAllPostsComponent implements OnInit {
 
 	authenticated: Boolean
 
-	userProfileImage: string
+	defaultProfileImage: string 
 
 	constructor(
 		private postService: PostService,
+		private profileService: ProfileService,
 		private activatedRoute: ActivatedRoute,
 		private router: Router,
 		private matSnackBar: MatSnackBar
@@ -31,9 +33,9 @@ export class ViewAllPostsComponent implements OnInit {
 				if (res.json().status === 200) {
 					this.authenticated = res.json().authenticated
 					this.userPost = res.json().postData
-					console.log(this.userPost)
 				}
 			})
+		this.defaultProfileImage = this.profileService.defaultProfileImage
 	}
 
 	editPost(postAuthor, postId) {
