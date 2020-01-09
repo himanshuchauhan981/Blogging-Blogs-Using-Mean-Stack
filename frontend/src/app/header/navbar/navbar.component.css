@@ -1,24 +1,35 @@
-.nav-link{
+.nav-link {
     font-family: 'Roboto Mono', monospace;
-    font-size:19px;
+    font-size: 19px;
 }
 
-.indigo{
+.indigo {
     background-color: #3F51B5;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: white;
 }
 
-.active{
+.active {
     color: #8BEEEA;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
-.white-hover:hover{
+.white-hover:hover {
     color: white;
+}
+
+.searchUser {
+    border: none;
+    outline: none;
+    padding: 5px 12px;
+    width: 20vw;
+}
+
+.searchUser:active {
+    border-color: #8BEEEA;
 }
