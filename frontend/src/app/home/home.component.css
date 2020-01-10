@@ -1,22 +1,37 @@
-.post-author{
-    font-size:16px;
+.home-container{
+    padding: 20px;
 }
 
-.post-content p{
-    font-family:'Acme';
-    font-size:19px;
-    text-align:justify;
-}
-
-.post-title{
-    font-family:'ABeeZee'
+.profile-img{
+    height: 80px!important;
+    width: 80px!important;
 }
 
 .profile-link{
     color: #3F51B5;
     cursor: pointer;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-bottom: 0!important;
 }
 
 .profile-link:hover{
     text-decoration: underline;
+}
+
+.post-content{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 18px;
+    text-align:justify;
+}
+
+.post-title{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 22px;
+}
+
+.comment-section{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0px 0px 0px !important;
 }

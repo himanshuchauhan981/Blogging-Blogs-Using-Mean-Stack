@@ -6,9 +6,9 @@ const { getFirstNameAndLastName }  = require('./userHandler')
 
 async function capitalizeUsername(username){
     let userData = await getFirstNameAndLastName(username)
-        userData.firstName = userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1)
-        userData.lastName = userData.lastName.charAt(0).toUpperCase() + userData.lastName.slice(1)
-        return userData
+    userData.firstName = userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1)
+    userData.lastName = userData.lastName.charAt(0).toUpperCase() + userData.lastName.slice(1)
+    return userData
 }
 
 const posts = {

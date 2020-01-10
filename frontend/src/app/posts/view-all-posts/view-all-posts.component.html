@@ -1,14 +1,14 @@
 <mat-card *ngFor="let post of userPost">
-    <mat-card-header>
+    <mat-card-header class="mb-2">
         <img *ngIf="post.userdata[0].profileImage != null" mat-card-avatar src="/api/image/{{ post.userdata[0].profileImage }}" class="profile-image">
         <img *ngIf="post.userdata[0].profileImage == null" mat-card-avatar src="{{ defaultProfileImage }}" class="profile-image">
         <mat-card-title>{{ post.postAuthor }}</mat-card-title>
         <mat-card-subtitle>{{ post.postDate | amTimeAgo }}</mat-card-subtitle>
     </mat-card-header>
-    <b class="post-title">{{ post.postTitle }}</b>
     <img mat-card-image *ngIf="post.postImage != null" class="post-image" src="/api/image/{{ post.postImage }}">
+    <b class="post-title">{{ post.postTitle }}</b>
     <mat-card-content>
-        <p>{{ post.postContent.substring(0,195)+'.....' }}</p>
+        <p class="post-content">{{ post.postContent.substring(0,195)+'.....' }}</p>
     </mat-card-content>
     <mat-card-actions>
         <a [routerLink]="['/post',post._id]"><button mat-raised-button color="accent">Read More</button></a>
