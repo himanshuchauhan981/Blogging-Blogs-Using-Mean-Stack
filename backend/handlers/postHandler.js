@@ -150,7 +150,7 @@ const posts = {
                 }
             }
             
-        ])
+        ]).sort({ postDate: -1 })
         res.status(200).json({ status: 200, msg: 'Success', postData: userPosts, authenticated: authenticated })
     },
 
