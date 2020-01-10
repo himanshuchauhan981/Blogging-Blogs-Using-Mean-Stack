@@ -1,11 +1,8 @@
 <nav class="navbar navbar-expand-lg indigo">
     <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse flex-md-row-reverse mr-4">
-        <div class="d-md-flex d-block flex-row mx-0">
+        <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
             <ul class="navbar-nav" *ngIf="loginStatus">
-                <form class="pt-2">
-                    <input type="text" class="searchUser form-control" placeholder="Search user">
-                </form>
                 <li class="nav-item" [routerLinkActive]="['active']">
                     <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
                 </li>

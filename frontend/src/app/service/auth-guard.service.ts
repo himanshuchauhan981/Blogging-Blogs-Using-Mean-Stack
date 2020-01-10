@@ -19,6 +19,7 @@ export class AuthGuardService implements CanActivate {
 			.subscribe((res) => {
 				let status = res.json().status
 				if (status === 401) {
+					console.log('401')
 					this.loginService.loginObservable.next(false)
 					this.router.navigate(['login'], { queryParams: { returnUrl: state.url } })
 					this.isTrue = false
