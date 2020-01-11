@@ -169,9 +169,11 @@ const posts = {
 
     editPost : async (req,res)=>{
         if(req.params.username === req.user.username){
+            console.log(req.file)
             await blogPosts.findByIdAndUpdate(req.params.postId,{
                 postTitle: req.body.postTitle,
-                postContent: req.body.postContent
+                postContent: req.body.postContent,
+                postImage: req.file.filename
             })
             res.status(200).json({status:200,msg:'post edited'})
         }

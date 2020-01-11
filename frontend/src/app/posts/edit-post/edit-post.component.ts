@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService } from '../../service/post.service'
+import { $ } from 'protractor'
 
 @Component({
 	selector: 'app-edit-post',
@@ -50,8 +51,19 @@ export class EditPostComponent implements OnInit {
 	}
 
 	editPost(editPostForm){
+		let formData = new FormData()
+
+		if(this.uploadedFiles != undefined){
+			for(var i=0;i< this.uploadedFiles.length; i++){
+				formData.append("postImage",this.uploadedFiles[i],this.uploadedFiles[i].name)
+			}
+		}
+		
+		formData.append("postTitle",editPostForm.value.postTitle)
+		formData.append("postContent",editPostForm.value.postContent)
+
 		let params = this.activatedRoute.snapshot.params
-		this.postService.editPost(params.username,params.postId,editPostForm.value)
+		this.postService.editPost(params.username,params.postId,formData)
 			.subscribe(res=>{
 				let msg = res.json().msg
 				this.matSnackBar.open(msg,'Close',{

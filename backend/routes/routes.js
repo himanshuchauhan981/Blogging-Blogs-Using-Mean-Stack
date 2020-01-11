@@ -95,6 +95,7 @@ module.exports = ()=>{
 
     router.patch('/:username/:postId',
         passport.authenticate('jwt'),
+        upload.single('postImage'),
         postController.editPost
     )
 
