@@ -69,4 +69,15 @@ export class PostService {
 			headers: headers
 		})
 	}
+
+	editPost = (username,postId,postData)=>{
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization',`Bearer ${this.token}`)
+
+		return this.http.patch(`/api/${username}/${postId}`,postData,{
+			headers: headers
+		})
+	}
 }

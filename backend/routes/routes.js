@@ -93,5 +93,10 @@ module.exports = ()=>{
         likeController.saveOrDeletePostLike
     )
 
+    router.patch('/:username/:postId',
+        passport.authenticate('jwt'),
+        postController.editPost
+    )
+
     return router
 }

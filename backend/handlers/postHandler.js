@@ -165,6 +165,17 @@ const posts = {
         else{
             res.status(200).json({status: 404, msg:'Post not found'})
         }
+    },
+
+    editPost : async (req,res)=>{
+        if(req.params.username === req.user.username){
+            await blogPosts.findByIdAndUpdate(req.params.postId,{
+                postTitle: req.body.postTitle,
+                postContent: req.body.postContent
+            })
+            res.status(200).json({status:200,msg:'post edited'})
+        }
+        else res.status(200).json({status:400, msg:'Unexpected Error'})
     }
 }
 

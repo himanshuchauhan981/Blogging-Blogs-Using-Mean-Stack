@@ -44,6 +44,11 @@ const post = {
     deletePostComment : async (req,res)=>{
         const response = await postHandler.deletePostComment(req,res)
         return response
+    },
+
+    editPost : async (req,res)=>{
+        const response = await postHandler.editPost(req,res)
+        return response
     }
 
 }

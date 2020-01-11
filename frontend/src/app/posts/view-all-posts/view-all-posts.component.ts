@@ -39,7 +39,7 @@ export class ViewAllPostsComponent implements OnInit {
 	}
 
 	editPost(postAuthor, postId) {
-		this.router.navigate([`/${postAuthor}/${postId}`])
+		this.router.navigate([`/${postAuthor}/${postId}/edit`])
 	}
 
 	deletePost(post) {
@@ -54,11 +54,7 @@ export class ViewAllPostsComponent implements OnInit {
 				})
 			})
 	}
-
-	viewPost(postId){
-		
-	}
-
+	
 	openProfilePage(id){
 		this.profileService.getOtherUserProfileUsername(id)
 			.subscribe((res)=>{

@@ -1,1 +1,50 @@
+<div class="edit-post">
+    <form [formGroup]="editPostForm" enctype="multipart/form-data" (submit)="editPost(editPostForm)">
+        <div class="row">
+            <div class="col-md-8">
+                <mat-card>
+                    <h3>Edit Post</h3>
+                    <mat-form-field class="w-100">
+                        <input 
+                            matInput 
+                            placeholder="Enter Post Title"
+                            name="postTitle"
+                            [formControl]="postTitle"
+                        >
+                        <!-- <mat-error *ngIf="postTitle.invalid">Required Field</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <textarea
+                            matInput
+                            placeholder="Write Something"
+                            rows="12"
+                            [formControl]="postContent"
+                            name="postContent"
+                        ></textarea>
+                        <!-- <mat-error *ngIf="postContent.invalid">Required Field</mat-error> -->
+                    </mat-form-field>
+                    <mat-card-actions>
+                        <button 
+                        mat-raised-button 
+                        color="primary"
+                    >Edit Post</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div class="col-md-4">
+                <mat-card>
+                    <h3>Post Image</h3>
+                    <img 
+                        mat-card-image 
+                        *ngIf="post?.postImage != null" 
+                        src="/api/image/{{ post.postImage }}" 
+                        alt="image"
+                    >
+                    <mat-card-actions>
 
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </form>
+</div>

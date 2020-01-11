@@ -17,7 +17,7 @@ const routes: Routes = [
 	{ path: 'profile/:id', component: ProfileComponent, canActivate:[AuthGuardService] },
 	{ path: 'post/new', component: CreatePostComponent, canActivate:[AuthGuardService] },
 	{ path: 'post/:id', component: ViewPostComponent, canActivate:[AuthGuardService] },
-	{ path: ':username/:postId', component: EditPostComponent, canActivate:[AuthGuardService] },
+	{ path: ':username/:postId/edit', component: EditPostComponent, canActivate:[AuthGuardService] },
 	{ path: ':id', component: ProfileComponent, canActivate:[AuthGuardService] }
 ];
 
