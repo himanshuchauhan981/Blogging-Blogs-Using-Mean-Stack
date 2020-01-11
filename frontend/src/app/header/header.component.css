@@ -1,10 +1,43 @@
-.navbar-brand{
-    font-family: 'Roboto Mono', monospace;
-    font-size:35px !important;
+.header-container{
+    margin: 0vw 4vw;
 }
 
-.fa{ cursor: pointer; }
+.navbar-brand{
+    font-family: 'Roboto Mono', monospace;
+    font-size:2.3vw !important;
+}
+
+.fa{ 
+    cursor: pointer; 
+    font-size: 2vw;
+}
+
 .fa-facebook:hover{ color: #3B5998; }
 .fa-instagram:hover{ color: #E4717A; }
 .fa-google:hover{ color: #EA4335; }
 .fa-linkedin:hover{ color:#4875B4; }
+
+@media only screen and (max-width:992px){
+    .nav-link{ padding: 0 .5rem; }
+    .fa{ font-size: 26px!important;}
+}
+
+@media only screen and (max-width: 768px){
+    .navbar-brand{ font-size: 3.5vw!important; }
+}
+
+@media only screen and (max-width: 576px){
+    .navbar-nav{ 
+        display: flex;
+        flex-direction: row;  
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .navbar-brand{ font-size: 4vw!important; }
+    .fa { font-size: 20px!important; }
+}
+
+@media only screen and (max-width: 376px){
+    .fa { font-size: 16px!important;}
+}
