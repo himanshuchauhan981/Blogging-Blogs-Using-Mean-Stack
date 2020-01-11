@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { FormGroup, FormControl } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { PostService } from 'src/app/service/post.service'
+import { PostService } from '../../service/post.service'
 
 @Component({
 	selector: 'app-edit-post',
@@ -13,9 +14,18 @@ export class EditPostComponent implements OnInit {
 
 	post:any = {}
 
+	uploadedFiles : Array <File>
+
+	fileType: Array <String> = ['image/jpeg','image/jpg','image/png']
+
+	uploadFileText: String = 'Upload File'
+
+	fileUploadColor : String ="accent"
+
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		private postService: PostService
+		private postService: PostService,
+		private matSnackBar: MatSnackBar
 	) { }
 
 	editPostForm = new FormGroup({
@@ -43,10 +53,27 @@ export class EditPostComponent implements OnInit {
 		let params = this.activatedRoute.snapshot.params
 		this.postService.editPost(params.username,params.postId,editPostForm.value)
 			.subscribe(res=>{
-				if(res.json().status === 200){
-					console.log(res.json())
-				}
+				let msg = res.json().msg
+				this.matSnackBar.open(msg,'Close',{
+					duration: 8000
+				})
 			})
 	}
 
+	fileChange(element){
+		let filetype = element.target.files[0].type
+		if(this.fileType.indexOf(filetype)  >= 0){
+			this.uploadedFiles = element.target.files
+			this.uploadFileText = "File Uploaded"
+			this.fileUploadColor = "primary"
+		}
+		else{
+			this.uploadFileText = "Invalid File"
+			this.fileUploadColor = "warn"
+		}
+	}
+
+	uploadFile(){
+		document.getElementById('upload').click()
+	}
 }

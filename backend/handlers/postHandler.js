@@ -27,7 +27,7 @@ const posts = {
                 res.status(400).send({ status:400,msg:'Unexpected error, Try Again' })
             }
             else {
-                res.status(200).send({ status:200, msg: "New post created" })
+                res.status(200).send({ status:200,msg: "New post created" })
             }
         })
     },
