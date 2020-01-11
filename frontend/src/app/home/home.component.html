@@ -1,48 +1,3 @@
-<!-- <div class="w3-light-grey" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
-    <div class="w3-container">
-        <div class="w3-row">
-            <div class="w3-col l8 s12">
-                <div class="w3-card-4 w3-margin w3-white posts-box" *ngFor="let blogs of blogArray">
-                    <img *ngIf="blogs.postImage != null" src="{{'/api/image/'+ blogs.postImage }}" alt="" style="width:100%; height:300px;">
-                    <div class="w3-container">
-                        <h2>
-                            <b class="post-title">{{ blogs.postTitle }}</b>
-                        </h2>
-                        <h5>
-                            By 
-                            <span class="profile-link"(click)="openOtherUserProfilePage(blogs.userId)">{{ blogs.postAuthor }}</span>
-                            <span class="w3-opacity w3-margin-left post-author">{{ blogs.postDate | amTimeAgo }}</span>
-                        </h5>
-                    </div>
-                    <div class="w3-container post-content">
-                        <p> {{ blogs.postContent.substring(0,195)+'.....' }}</p>
-                    </div>
-                    <div class="w3-row">
-                        <form>
-                            <div class="w3-col m8 s12">
-                                <a [routerLink]="['/post',blogs._id]">
-                                    <button mat-raised-button color="primary" class="ml-3">Read More</button>
-                                </a>
-                            </div>
-                            <div class="w3-col m4 w3-hide-small">
-                                <p>
-                                    <span class="w3-padding-large w3-right">
-                                        <b>Comments </b> 
-                                        <span class="w3-tag">{{ blogs.comment.length }}</span>
-                                    </span>
-                                </p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="w3-col l4">
-                <sidebar></sidebar>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="home-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
     <div class="row">
         <div class="col-md-8">
@@ -55,7 +10,7 @@
                 <img mat-card-image *ngIf="blogs.postImage != null" src="{{'/api/image/'+ blogs.postImage }}" alt="">
                 <mat-card-content>
                     <b class="post-title">{{ blogs.postTitle }}</b>
-                    <p class="post-content"> {{ blogs.postContent.substring(0,195)+'.....' }}</p>
+                    <p class="post-content">{{ (blogs.postContent.length > 195)? blogs.postContent.substring(0,195)+'.....' : blogs.postContent }}</p>
                     <div class="d-flex justify-content-between">
                         <a [routerLink]="['/post',blogs._id]">
                             <button mat-raised-button color="accent">Read More</button>

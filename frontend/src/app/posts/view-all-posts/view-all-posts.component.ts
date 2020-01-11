@@ -59,4 +59,13 @@ export class ViewAllPostsComponent implements OnInit {
 		
 	}
 
+	openProfilePage(id){
+		this.profileService.getOtherUserProfileUsername(id)
+			.subscribe((res)=>{
+				if(res.json().status === 200){
+					this.router.navigate([`/profile/${res.json().data.username}`])
+				}
+			})
+	}
+
 }

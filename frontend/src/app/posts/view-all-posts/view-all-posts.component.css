@@ -22,3 +22,14 @@ mat-card {
     font-size: 18px;
     margin-top: 5px!important;
 }
+
+.profile-link{
+    color: #3F51B5;
+    cursor: pointer;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-bottom: 0!important;
+}
+
+.profile-link:hover{
+    text-decoration: underline;
+}
