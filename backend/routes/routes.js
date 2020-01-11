@@ -41,7 +41,11 @@ module.exports = ()=>{
 
     router.get('/image/:id',
         postController.getPostImage
-    ) 
+    )
+
+    router.get('/user/image/:id',
+        userController.getUserImage
+    )
 
     router.post('/comment',
         passport.authenticate('jwt'),

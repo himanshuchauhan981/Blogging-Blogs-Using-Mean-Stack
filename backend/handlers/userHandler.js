@@ -1,9 +1,10 @@
-const { users } = require('../models')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose')
+const Grid = require('gridfs-stream')
 
 const { createToken } = require('../auth').token
+const { users } = require('../models')
 
 const user = {
     saveUserDetails: async (req, res) => {
@@ -70,6 +71,28 @@ const user = {
 
         await users.findOneAndUpdate({_id: id},{profileImage:req.file.filename})
         res.status(200).json({status:200, msg:'Image saved'})
+    },
+
+    getUserImage: async(req,res)=>{
+        let data = await users.findById(req.params.id).select({profileImage:1})
+        
+        let image = {
+            filename: data.profileImage
+        }
+                
+        let gfs = Grid(mongoose.connection.db, mongoose.mongo)
+        gfs.collection('photos')
+            gfs.files.findOne(image, (err, file) => {
+                if(!err){
+                    try{
+                        const readstream = gfs.createReadStream(file.filename)
+                        readstream.pipe(res)
+                    }
+                    catch(e){
+                        console.log(e)
+                    }  
+                }
+            })
     }
 }
 

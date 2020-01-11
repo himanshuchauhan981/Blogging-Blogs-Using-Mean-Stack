@@ -2,10 +2,10 @@
     font-size:16px;
 }
 
-.post-content p{
+.post-content pre{
     font-family:'Acme';
     font-size:19px;
-    text-align:justify;
+    white-space: pre-wrap;
 }
 
 .post-title{

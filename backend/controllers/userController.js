@@ -19,6 +19,11 @@ const users = {
     saveProfilePic: async(req,res)=>{
         const response = await userHandler.saveProfilePic(req,res)
         return response
+    },
+
+    getUserImage: async(req,res)=>{
+        const response = await userHandler.getUserImage(req,res)
+        return response
     }
 }
 

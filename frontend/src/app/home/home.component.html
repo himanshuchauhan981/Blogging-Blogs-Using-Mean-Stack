@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <mat-card *ngFor="let blogs of blogArray" class="mb-3">
                 <mat-card-header class="mb-2">
-                    <img mat-card-avatar class="profile-img" src='https://content.fortune.com/wp-content/uploads/2018/07/gettyimages-961697338.jpg'>
+                    <img mat-card-avatar class="profile-img" src='/api/user/image/{{ blogs.userId }}'>
                     <mat-card-title class="profile-link mt-2"(click)="openOtherUserProfilePage(blogs.userId)">{{ blogs.postAuthor }}</mat-card-title>
                     <mat-card-subtitle class="mt-1">{{ blogs.postDate | amTimeAgo }}</mat-card-subtitle>
                 </mat-card-header>
