@@ -79,7 +79,8 @@ const user = {
         let image = {
             filename: data.profileImage
         }
-                
+        if(data.profileImage === null) image.filename = 'f4cf63567d7652cd466c1a67172efeed.png'
+		
         let gfs = Grid(mongoose.connection.db, mongoose.mongo)
         gfs.collection('photos')
             gfs.files.findOne(image, (err, file) => {
