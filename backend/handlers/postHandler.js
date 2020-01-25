@@ -11,6 +11,23 @@ async function capitalizeUsername(username){
     return userData
 }
 
+async function editPostWithoutImageUpdate(req){
+    await blogPosts.findByIdAndUpdate(req.params.postId,{
+        postTitle: req.body.postTitle,
+        postContent: req.body.postContent,
+        lastModifiedAt: Date.now()
+    })
+}
+
+async function editPostWithImageUpdate(req){
+    await blogPosts.findByIdAndUpdate(req.params.postId,{
+        postTitle: req.body.postTitle,
+        postContent: req.body.postContent,
+        postImage: req.file.filename,
+        lastModifiedAt: Date.now()
+    })
+}
+
 const posts = {
     createNewPost: async (req, res) => {
         let userData = await capitalizeUsername(req.user.username)
@@ -169,12 +186,9 @@ const posts = {
 
     editPost : async (req,res)=>{
         if(req.params.username === req.user.username){
-            console.log(req.file)
-            await blogPosts.findByIdAndUpdate(req.params.postId,{
-                postTitle: req.body.postTitle,
-                postContent: req.body.postContent,
-                postImage: req.file.filename
-            })
+            if(req.file  === undefined) await editPostWithoutImageUpdate(req)
+            else await editPostWithImageUpdate(req)
+            
             res.status(200).json({status:200,msg:'post edited'})
         }
         else res.status(200).json({status:400, msg:'Unexpected Error'})

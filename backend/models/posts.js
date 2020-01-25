@@ -23,6 +23,10 @@ const posts = new Schema({
     },
     postImage: {
         type: String
+    },
+    lastModifiedAt: {
+        type: Date,
+        default: null
     }
 })
 

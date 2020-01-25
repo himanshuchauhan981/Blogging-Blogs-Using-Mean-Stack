@@ -19,9 +19,7 @@ export class EditPostComponent implements OnInit {
 
 	fileType: Array <String> = ['image/jpeg','image/jpg','image/png']
 
-	uploadFileText: String = 'Upload File'
-
-	fileUploadColor : String ="accent"
+	imageUrl : any = 'http://textiletrends.in/gallery/1547020644No_Image_Available.jpg'
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -46,6 +44,7 @@ export class EditPostComponent implements OnInit {
 					this.post = res.json().post
 					this.editPostForm.controls['postTitle'].setValue(this.post.postTitle)
 					this.editPostForm.controls['postContent'].setValue(this.post.postContent)
+					this.imageUrl = `/api/image/${this.post.postImage}`
 				}
 			})
 	}
@@ -74,14 +73,14 @@ export class EditPostComponent implements OnInit {
 
 	fileChange(element){
 		let filetype = element.target.files[0].type
+		let reader = new FileReader()
 		if(this.fileType.indexOf(filetype)  >= 0){
 			this.uploadedFiles = element.target.files
-			this.uploadFileText = "File Uploaded"
-			this.fileUploadColor = "primary"
-		}
-		else{
-			this.uploadFileText = "Invalid File"
-			this.fileUploadColor = "warn"
+
+			reader.readAsDataURL(element.target.files[0])
+			reader.onload = (event)=>{
+				this.imageUrl = event.target.result;
+			}
 		}
 	}
 

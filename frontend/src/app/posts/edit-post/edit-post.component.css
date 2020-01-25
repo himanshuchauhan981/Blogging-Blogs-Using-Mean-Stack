@@ -6,3 +6,12 @@
 input[type="file"]{
     display: none;
 }
+
+.msg{
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.default-img{
+    width: 370px;
+}

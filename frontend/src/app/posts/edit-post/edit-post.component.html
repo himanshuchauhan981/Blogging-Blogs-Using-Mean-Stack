@@ -6,12 +6,10 @@
                     <h3>Edit Post</h3>
                     <mat-form-field class="w-100">
                         <input matInput placeholder="Enter Post Title" name="postTitle" [formControl]="postTitle">
-                        <!-- <mat-error *ngIf="postTitle.invalid">Required Field</mat-error> -->
                     </mat-form-field>
                     <mat-form-field class="w-100">
                         <textarea matInput placeholder="Write Something" rows="12" [formControl]="postContent"
                             name="postContent"></textarea>
-                        <!-- <mat-error *ngIf="postContent.invalid">Required Field</mat-error> -->
                     </mat-form-field>
                     <mat-card-actions>
                         <button mat-raised-button color="primary">Edit Post</button>
@@ -20,26 +18,21 @@
             </div>
             <div class="col-md-4">
                 <mat-card>
-                    <h3>Post Image</h3>
-                    <img mat-card-image *ngIf="post?.postImage != null" src="/api/image/{{ post.postImage }}"
-                        alt="image">
+                    <h3 class="text-center">Post Image</h3>
+                    <div *ngIf="post?.postImage != null; else showDefaultImg">
+                        <img mat-card-image src="{{ imageUrl }}" alt="image">
+                    </div>
                     <mat-card-actions>
-                        <input 
-                            type="file"
-                            id="upload"
-                            name="postImage"
-                            (change)="fileChange($event)"
-                        >
-                        <button 
-                            type="button" 
-                            mat-raised-button 
-                            color="{{ fileUploadColor }}" 
-                            class="mr-3" 
-                            (click)="uploadFile()"
-                        >{{ uploadFileText }}</button>
+                        <input type="file" id="upload" name="postImage" (change)="fileChange($event)">
+                        <button type="button" mat-raised-button color="primary" class="mr-3"
+                            (click)="uploadFile()">Upload File</button>
                     </mat-card-actions>
                 </mat-card>
             </div>
         </div>
     </form>
 </div>
+
+<ng-template #showDefaultImg>
+    <img mat-card-image src="{{ imageUrl }}">
+</ng-template>
