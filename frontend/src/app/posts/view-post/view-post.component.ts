@@ -98,10 +98,6 @@ export class ViewPostComponent implements OnInit {
 		})
 	}
 
-	editComment(id, text) {
-		console.log(id, text)
-	}
-
 	openOtherUserProfilePage(postId) {
 		this.profileService.getOtherUserProfileUsername(postId)
 			.subscribe((res) => {

@@ -41,13 +41,6 @@
                                 aria-label="Action"
                                 (click)="openDeleteDialogBox(comment._id)"
                             ></i>
-                            <i 
-                                class="fa fa-edit pull-right"
-                                matTooltip="Edit Comment"
-                                matTooltipPosition="above"
-                                aria-label="Action"
-                                (click)="editComment(comment._id,comment.text)"
-                            ></i>
                         </div>
                         <form [formGroup]="commentForm" (ngSubmit)="submitComment(commentForm,post._id)">
                             <div class="d-flex full-width">

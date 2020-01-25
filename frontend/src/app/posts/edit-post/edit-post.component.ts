@@ -78,7 +78,7 @@ export class EditPostComponent implements OnInit {
 			this.uploadedFiles = element.target.files
 
 			reader.readAsDataURL(element.target.files[0])
-			reader.onload = (event)=>{
+			reader.onload = (event:any)=>{
 				this.imageUrl = event.target.result;
 			}
 		}
