@@ -8,7 +8,7 @@ import { LoginService } from './service/login.service'
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	title = 'Blogging Blogs'
+	title : string
 
 	constructor(private loginService: LoginService){
 

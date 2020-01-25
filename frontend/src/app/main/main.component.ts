@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import * as AOS from 'aos';
+import { Component, OnInit } from '@angular/core'
+import { LoginService } from '../service/login.service'
 
 @Component({
 	selector: 'app-main',
@@ -8,10 +8,10 @@ import * as AOS from 'aos';
 })
 export class MainComponent implements OnInit {
 
-	constructor() { }
+	constructor(private loginService: LoginService) { }
 
 	ngOnInit() {
-		AOS.init()
+		this.loginService.titleObservable.next('Blogging Blogs')
 	}
 
 }

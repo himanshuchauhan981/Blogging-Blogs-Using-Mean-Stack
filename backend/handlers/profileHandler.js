@@ -14,17 +14,6 @@ const profile = {
         
     },
 
-    updateProfileUsername : async(req,res)=>{
-        let checkExistinUsername = await users.find({username: req.body.userdata})
-        if(checkExistinUsername.length === 0){
-            await users.findOneAndUpdate({username: req.params.username},{username: req.body.userdata})
-            res.status(200).json({status:200, msg:'Username updated'})
-        }
-        else{
-            res.status(200).json({status:400,'msg':'Username already existed'})
-        }
-    },
-
     getUserProfileData : async(req,res)=>{
         let authorized = false
         if(req.user.username === req.params.username){

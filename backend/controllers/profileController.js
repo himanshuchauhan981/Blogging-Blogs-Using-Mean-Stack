@@ -1,10 +1,6 @@
 const { profileHandler } = require('../handlers')
 
 const profiles = {
-    updateProfileUsername : async (req,res)=>{
-        const response = profileHandler.updateProfileUsername(req,res)
-        return response
-    },
 
     updateProfileEmail : async (req,res)=>{
         const response = profileHandler.updateProfileEmail(req,res)
