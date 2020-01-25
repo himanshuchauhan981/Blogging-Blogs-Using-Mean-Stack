@@ -3,13 +3,13 @@
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse flex-md-row-reverse mr-4">
         <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
             <ul class="navbar-nav" *ngIf="loginStatus">
-                <li class="nav-item" [routerLinkActive]="['active']">
+                <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']">
                     <a class="nav-link" routerLink="/post/new" (click)="isMenuCollapsed=true">Create Post</a>
                 </li>
-                <li class="nav-item" [routerLinkActive]="['active']">
+                <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/{{ username }}" (click)="isMenuCollapsed=true">Profile</a>
                 </li>
                 <li class="nav-item white-hover" [routerLinkActive]="['active']">
@@ -17,8 +17,8 @@
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto" *ngIf="!loginStatus">
-                <li class="nav-item" [routerLinkActive]="['active']">
-                    <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
+                <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a class="nav-link" routerLink="/" (click)="isMenuCollapsed=true">Home</a>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']">
                     <a class="nav-link" routerLink="/login" (click)="isMenuCollapsed=true">Login</a>
