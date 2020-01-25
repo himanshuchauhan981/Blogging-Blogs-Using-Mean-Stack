@@ -9,8 +9,10 @@ import { ProfileComponent } from './profile/profile.component'
 import { CreatePostComponent } from './posts/create-post/create-post.component'
 import { ViewPostComponent } from './posts/view-post/view-post.component'
 import { EditPostComponent } from './posts/edit-post/edit-post.component'
+import { MainComponent } from './main/main.component'
 
 const routes: Routes = [
+	{ path: '', component: MainComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
