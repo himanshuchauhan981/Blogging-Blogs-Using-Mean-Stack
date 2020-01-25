@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router'
 
@@ -9,7 +9,7 @@ import { LoginService } from '../service/login.service'
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
 	loginError: string = null
 
@@ -21,6 +21,10 @@ export class LoginComponent {
 		username: new FormControl('', Validators.required),
 		password: new FormControl('', Validators.required)
 	})
+
+	ngOnInit(){
+		this.loginService.titleObservable.next('Login - Blogging Blogs')
+	}
 
 	get username() { return this.loginForm.get('username') }
 

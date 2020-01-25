@@ -1,8 +1,8 @@
-import { Component,OnInit, ViewChild, AfterViewInit, Output, OnDestroy, OnChanges } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 
 import { SignupService } from '../service/signup.service'
 import { SignupFormComponent } from './signup-form/signup-form.component'
-import { EventEmitter } from 'events'
+import { LoginService } from '../service/login.service'
 
 @Component({
 	selector: 'signup',
@@ -16,14 +16,16 @@ export class SignupComponent implements OnInit {
 
 	signUpSuccess : Boolean
 
-	constructor(private signupService: SignupService){ }
+	constructor(private signupService: SignupService, private loginService: LoginService){ }
 
 	id: string
 	
 	ngOnInit(){
 		this.signupService.signUpObservable.subscribe(value =>{
 			this.signUpSuccess = value
-		})	
+		})
+
+		this.loginService.titleObservable.next('Sign Up- Blogging Blogs')
 	}
 
 	itemSelected(e){

@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService } from '../../service/post.service'
+import { LoginService } from 'src/app/service/login.service'
 
 @Component({
 	selector: 'create-post',
 	templateUrl: './create-post.component.html',
 	styleUrls: ['./create-post.component.css']
 })
-export class CreatePostComponent {
+export class CreatePostComponent implements OnInit{
 
 	msg: string
 
@@ -21,7 +22,15 @@ export class CreatePostComponent {
 
 	fileUploadColor : String ="accent"
 
-	constructor(private postService: PostService, private matSnackBar: MatSnackBar) { }
+	constructor(
+		private postService: PostService,
+		private loginService: LoginService,
+		private matSnackBar: MatSnackBar
+	) { }
+
+	ngOnInit(){
+		this.loginService.titleObservable.next('Create Post - Blogging Blogs')
+	}
 
 	createPostForm = new FormGroup({
 		postTitle: new FormControl('',[

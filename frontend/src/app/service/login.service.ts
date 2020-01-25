@@ -10,7 +10,7 @@ export class LoginService {
 
 	token: string
 
-	options
+	public titleObservable = new Subject<string>()
 
 	public loginObservable = new Subject<Boolean>()
 

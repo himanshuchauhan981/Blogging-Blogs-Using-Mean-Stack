@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 
 import { PostService } from '../service/post.service'
 import { ProfileService } from '../service/profile.service'
+import { LoginService } from '../service/login.service'
 
 @Component({
 	selector: 'home',
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
 	constructor(
 		private postService: PostService,
 		private profileService: ProfileService,
+		private loginService: LoginService,
 		private router: Router
 	) { }
 
@@ -33,6 +35,8 @@ export class HomeComponent implements OnInit {
 					this.skipPostLimit = this.skipPostLimit + 2
 				}
 			})
+		
+		this.loginService.titleObservable.next('Home - Blogging Blogs')
 	}
 
 	onScroll() {
