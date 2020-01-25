@@ -27,6 +27,8 @@ export class ViewPostComponent implements OnInit {
 
 	likeState: Boolean = false
 
+	userImage: String
+
 	commentsArray: Array<{ _id: string, postId: string, text: string, createdBy: string, createdAt: Date }>
 
 	constructor(
@@ -69,6 +71,7 @@ export class ViewPostComponent implements OnInit {
 				this.likeState = res.json().likeStatus
 				this.post = res.json().post
 				this.commentsLength = res.json().commentLength
+				this.userImage = `/api/user/image/${res.json().currentUserId}`
 			})
 
 		this.commentService.getEmittedComment()

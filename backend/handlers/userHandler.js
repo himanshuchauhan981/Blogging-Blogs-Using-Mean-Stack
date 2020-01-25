@@ -75,7 +75,6 @@ const user = {
 
     getUserImage: async(req,res)=>{
         let data = await users.findById(req.params.id).select({profileImage:1})
-        
         let image = {
             filename: data.profileImage
         }

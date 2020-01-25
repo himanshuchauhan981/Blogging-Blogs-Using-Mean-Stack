@@ -108,7 +108,7 @@ const posts = {
 
         if(likeData != null) likeStatus = true
 
-        res.status(200).json({ post: postData, commentLength: commentsdata.length, status: 200,likeStatus: likeStatus })
+        res.status(200).json({ post: postData, commentLength: commentsdata.length, status: 200,likeStatus: likeStatus, currentUserId: req.user._id })
     },
 
     getParticularPostComments: async (req, res) => {

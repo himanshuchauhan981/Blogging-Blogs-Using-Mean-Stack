@@ -21,8 +21,7 @@
 }
 
 .like-comment-box:hover{
-    background-color: grey;
-    cursor: pointer;
+    text-decoration: underline;
 }
 
 .comment-section{
@@ -32,7 +31,7 @@
 
 .comment-section-img{
     height: 45px !important;
-    width: 45px !important;
+    width: 46px !important;
 }
 
 .comment-section-input{
@@ -105,4 +104,8 @@
 
 .unlikeColor{
     color: none;
+}
+
+.full-width{
+    width: 100%;
 }

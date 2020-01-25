@@ -10,10 +10,8 @@
                             <b class="post-title">{{ post.postTitle }}</b>
                         </h2>
                         <h5>
-                            By
-                            <span class="profile-link"(click)="openOtherUserProfilePage(post.userId)">{{ post.postAuthor }}</span>
-                            <span
-                                class="w3-opacity w3-margin-left post-author">{{ post.postDate | amTimeAgo }}</span>
+                            By <span class="profile-link"(click)="openOtherUserProfilePage(post.userId)">{{ post.postAuthor }}</span>
+                            <span class="w3-opacity w3-margin-left post-author">{{ post.postDate | amTimeAgo }}</span>
                         </h5>
                     </div>
                     <div class="w3-container post-content">
@@ -52,8 +50,8 @@
                             ></i>
                         </div>
                         <form [formGroup]="commentForm" (ngSubmit)="submitComment(commentForm,post._id)">
-                            <div class="d-flex">
-                                <img class="rounded-circle comment-section-img" src="http://bit.ly/34amoMf">
+                            <div class="d-flex full-width">
+                                <img class="rounded-circle comment-section-img" src="{{ userImage }}">
                                 <div class="input-group">
                                     <input
                                         #focusComment
@@ -63,6 +61,7 @@
                                         placeholder="Write a comment..."
                                         [formControl]="comment"
                                         [value]="clearComment"
+                                        autocomplete="off"
                                         required
                                     >
                                     <i
