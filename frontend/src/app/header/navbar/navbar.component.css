@@ -33,3 +33,21 @@
 .searchUser:active {
     border-color: #8BEEEA;
 }
+
+.search-box{
+    outline: none;
+    border: none;
+    padding: 5px 16px;
+    margin-right: 15px;
+    border-radius: 4px;
+}
+
+.showUsers{
+    width: 240px;
+    
+}
+
+.form-inline{
+    display: block;
+    margin-top: 6px;
+}

@@ -15,7 +15,11 @@ export class LoginComponent implements OnInit {
 
 	hidePassword = true
 
-	constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) { }
+	constructor(
+		private loginService: LoginService,
+		private router: Router,
+		private route: ActivatedRoute
+	) { }
 
 	loginForm = new FormGroup({
 		username: new FormControl('', Validators.required),

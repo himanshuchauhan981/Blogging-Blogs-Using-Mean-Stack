@@ -42,6 +42,19 @@ const profile = {
     getOtherUserProfileData : async (req,res)=>{
         const profileData = await users.findById(req.params.id).select({username:1})
         res.status(200).json({status: 200, msg: 'Success', data: profileData})
+    },
+
+    getAllProfileName : async(req,res)=>{
+        const profileName = await users.aggregate(
+            [
+                {
+                    $project: {
+                        fullName: { $concat : ["$firstName"," ","$lastName"]}
+                    }
+                }
+            ]
+        )
+        res.status(200).json({status: 200, msg:'Success',data:profileName})
     }
 }
 

@@ -62,6 +62,11 @@ module.exports = ()=>{
         postController.deletePostComment
     )
 
+    router.get('/profile/name',
+        passport.authenticate('jwt'),
+        profileController.getAllProfileName
+    ),
+
     router.get(['/:username','/profile/:username'],
         passport.authenticate('jwt'),
         profileController.getUserProfileData

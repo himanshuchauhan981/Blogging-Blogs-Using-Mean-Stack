@@ -73,4 +73,15 @@ export class ProfileService {
 			headers: headers
 		})
 	}
+
+	getAllProfileName(){
+		this.token = this.storage.get('token')
+
+		let headers = new Headers()
+		headers.append('Authorization', `Bearer ${this.token}`)
+
+		return this.http.get(`/api/profile/name`,{
+			headers: headers
+		})
+	}
 }

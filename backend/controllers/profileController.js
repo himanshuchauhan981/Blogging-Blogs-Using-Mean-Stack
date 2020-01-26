@@ -20,6 +20,11 @@ const profiles = {
     getOtherUserProfileData : async (req,res)=>{
         const response = profileHandler.getOtherUserProfileData(req,res)
         return response
+    },
+
+    getAllProfileName : async (req,res)=>{
+        const response = profileHandler.getAllProfileName(req,res)
+        return response
     }
 }
 
