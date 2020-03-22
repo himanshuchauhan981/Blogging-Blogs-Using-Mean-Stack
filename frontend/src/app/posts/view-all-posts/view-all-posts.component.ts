@@ -43,7 +43,7 @@ export class ViewAllPostsComponent implements OnInit {
 	}
 
 	deletePost(post) {
-		this.postService.deleteParticularPost(post._id)
+		this.postService.delete(post._id)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					let index = this.userPost.indexOf(post)
@@ -56,7 +56,7 @@ export class ViewAllPostsComponent implements OnInit {
 	}
 	
 	openProfilePage(id){
-		this.profileService.getOtherUserProfileUsername(id)
+		this.profileService.profileUsername(id)
 			.subscribe((res)=>{
 				if(res.json().status === 200){
 					this.router.navigate([`/profile/${res.json().data.username}`])

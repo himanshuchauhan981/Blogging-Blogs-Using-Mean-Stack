@@ -63,7 +63,7 @@ export class ProfileService {
 		return this.fire
 	}
 
-	getOtherUserProfileUsername(id){
+	profileUsername(id){
 		this.token = this.storage.get('token')
 
 		let headers = new Headers()

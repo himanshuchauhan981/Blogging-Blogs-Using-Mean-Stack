@@ -1,8 +1,7 @@
-import { Component, Input, Output } from '@angular/core'
-
-import { SignupService } from '../../service/signup.service'
+import { Component, Input } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+
 import { UserService } from 'src/app/service/user.service'
 
 @Component({

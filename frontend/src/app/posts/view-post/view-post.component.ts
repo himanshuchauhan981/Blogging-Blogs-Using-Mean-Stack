@@ -99,7 +99,7 @@ export class ViewPostComponent implements OnInit {
 	}
 
 	openOtherUserProfilePage(postId) {
-		this.profileService.getOtherUserProfileUsername(postId)
+		this.profileService.profileUsername(postId)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.router.navigate([`/profile/${res.json().data.username}`])

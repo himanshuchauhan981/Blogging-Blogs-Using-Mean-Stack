@@ -6,10 +6,9 @@ import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 import { HomeComponent } from './home/home.component'
 import { ProfileComponent } from './profile/profile.component'
-import { CreatePostComponent } from './posts/create-post/create-post.component'
 import { ViewPostComponent } from './posts/view-post/view-post.component'
-import { EditPostComponent } from './posts/edit-post/edit-post.component'
 import { MainComponent } from './main/main.component'
+import { PostComponent } from './posts/post/post.component'
 
 const routes: Routes = [
 	{ path: '', component: MainComponent },
@@ -17,9 +16,9 @@ const routes: Routes = [
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
 	{ path: 'profile/:id', component: ProfileComponent, canActivate:[AuthGuardService] },
-	{ path: 'post/new', component: CreatePostComponent, canActivate:[AuthGuardService] },
+	{ path: 'post/new', component: PostComponent},
 	{ path: 'post/:id', component: ViewPostComponent, canActivate:[AuthGuardService] },
-	{ path: ':username/:postId/edit', component: EditPostComponent, canActivate:[AuthGuardService] },
+	{ path: ':username/:postId/edit', component: PostComponent, canActivate:[AuthGuardService] },
 	{ path: ':id', component: ProfileComponent, canActivate:[AuthGuardService] }
 ];
 

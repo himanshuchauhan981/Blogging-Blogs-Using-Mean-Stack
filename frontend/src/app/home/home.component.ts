@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
-import { PostService } from '../service/post.service'
+import { PostService, Blogs } from '../service/post.service'
 import { ProfileService } from '../service/profile.service'
 import { UserService } from '../service/user.service'
 
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
 	skipPostLimit: number = 0
 
-	blogArray: Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date }> = []
+	blogArray: Array<Blogs> = []
 
 	ngOnInit() {
 		this.postService.getAllPost(this.skipPostLimit)
@@ -53,8 +53,8 @@ export class HomeComponent implements OnInit {
 			})
 	}
 
-	openOtherUserProfilePage(id) {
-		this.profileService.getOtherUserProfileUsername(id)
+	profilePage(id) {
+		this.profileService.profileUsername(id)
 		.subscribe((res)=>{
 			if(res.json().status === 200){
 				this.router.navigate([`/profile/${res.json().data.username}`])

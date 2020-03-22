@@ -1,5 +1,6 @@
 import { Injectable,Inject } from '@angular/core'
 import { Http, Headers } from '@angular/http'
+import { Router} from '@angular/router'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 
 import { environment } from '../../environments/environment'
@@ -13,10 +14,21 @@ export class PostService {
 
 	token: string
 
-	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
+	url: string
 
+	imageUrl : any = 'http://textiletrends.in/gallery/1547020644No_Image_Available.jpg'
 
-	submitPost = (formData) =>{
+	constructor(
+		private http: Http,
+		@Inject(SESSION_STORAGE) private storage: WebStorageService,
+		private router: Router
+	){ 
+		this.url = this.router.url
+	}
+
+	fileType: Array <String> = ['image/jpeg','image/jpg','image/png']
+
+	post = (formData) =>{
 		this.token = this.storage.get('token')
 
 		let headers = new Headers()
@@ -63,7 +75,7 @@ export class PostService {
 		})
 	}
 
-	deleteParticularPost = (postId) =>{
+	delete = (postId) =>{
 		this.token = this.storage.get('token')
 
 		let headers = new Headers()
@@ -74,7 +86,7 @@ export class PostService {
 		})
 	}
 
-	editPost = (username,postId,postData)=>{
+	edit = (username,postId,postData)=>{
 		this.token = this.storage.get('token')
 
 		let headers = new Headers()
@@ -84,4 +96,12 @@ export class PostService {
 			headers: headers
 		})
 	}
+}
+
+export interface Blogs{
+	_id: string,
+	postTitle: string,
+	postContent: string,
+	postImageId: string,
+	postDate: Date
 }
