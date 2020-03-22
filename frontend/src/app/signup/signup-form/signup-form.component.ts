@@ -1,9 +1,8 @@
-import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
 
 import { signupValidators } from './signup.validators'
-import { SignupService } from '../../service/signup.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
 	selector: 'signup-form',
@@ -16,7 +15,7 @@ export class SignupFormComponent {
 
 	@Output() idEmitter = new EventEmitter()
 
-	constructor(private signupService: SignupService, private router: Router) { }
+	constructor(private userService: UserService) { }
 
 	signupForm = new FormGroup({
 		firstName: new FormControl('', [
@@ -46,27 +45,15 @@ export class SignupFormComponent {
 			validators: signupValidators.MustMatch
 		})
 
-	get firstName() { return this.signupForm.get('firstName') }
-
-	get lastName() { return this.signupForm.get('lastName') }
-
-	get username() { return this.signupForm.get('username') }
-
-	get email() { return this.signupForm.get('email') }
-
-	get password() { return this.signupForm.get('password') }
-
-	get confirmPassword() { return this.signupForm.get('confirmPassword') }
-
 	signupdata(signupForm) {
-		this.signupService.saveUserDetails(signupForm.value)
+		this.userService.saveUser(signupForm.value)
 			.subscribe(res => {
 				if(res.json().status === 200){
-					this.signupService.signUpObservable.next(true)
+					this.userService.signUpObservable.next(true)
 					this.idEmitter.emit(res.json().data)
 				}
 			}, (error) => {
-				this.signupService.signUpObservable.next(false)
+				this.userService.signUpObservable.next(false)
 				this.signupError = error._body
 			})
 	}

@@ -27,7 +27,6 @@
     "@angular/router": "~8.2.8",
     "@ng-bootstrap/ng-bootstrap": "^5.1.5",
     "@types/aos": "^3.0.3",
-    "angular-bootstrap-md": "^8.8.1",
     "angular-material-fileupload": "^2.0.0",
     "angular-webstorage-service": "^1.0.2",
     "angular2-moment": "^1.9.0",

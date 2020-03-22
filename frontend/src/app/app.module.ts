@@ -12,7 +12,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatDialogModule } from '@angular/material/dialog'
-import { MDBBootstrapModule } from 'angular-bootstrap-md'
 import { MatTableModule } from '@angular/material/table'
 import { MomentModule } from 'angular2-moment'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
@@ -77,7 +76,6 @@ import { MainComponent } from './main/main.component';
 		MatCheckboxModule,
 		MatSnackBarModule,
 		MatTooltipModule,
-		MDBBootstrapModule.forRoot(),
 		MomentModule,
 		InfiniteScrollModule,
 		MatExpansionModule,

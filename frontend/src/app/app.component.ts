@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import * as AOS from 'aos'
-import { LoginService } from './service/login.service'
+import { UserService } from './service/user.service'
 
 @Component({
 	selector: 'app-root',
@@ -10,14 +10,14 @@ import { LoginService } from './service/login.service'
 export class AppComponent implements OnInit {
 	title : string
 
-	constructor(private loginService: LoginService){
+	constructor(private userService: UserService){
 
 	}
 
 	ngOnInit() {
 		AOS.init()
 
-		this.loginService.titleObservable.subscribe(value =>{
+		this.userService.titleObservable.subscribe(value =>{
 			this.title = value
 		})
 	}

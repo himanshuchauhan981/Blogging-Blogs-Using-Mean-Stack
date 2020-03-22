@@ -5,7 +5,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 
 import { ProfileService } from '../../service/profile.service'
-import { LoginService } from '../../service/login.service'
+import { UserService } from 'src/app/service/user.service';
 
 export interface DialogData{
 	heading: string,
@@ -24,7 +24,7 @@ export class ProfileDialogBoxComponent{
 		public dialogRef: MatDialogRef<ProfileDialogBoxComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: DialogData,
 		private profileService: ProfileService,
-		private loginService: LoginService,
+		private userService: UserService,
 		private matSnackBar: MatSnackBar,
 		private router: Router
 	) { }
@@ -52,7 +52,7 @@ export class ProfileDialogBoxComponent{
 				this.profileService.changeEmailValue(res.json().data)
 			}
 			else if(status === 200 && data === 'username'){
-				this.loginService.logout()
+				this.userService.logout()
 				this.router.navigate(['login'])
 			}
 			else if(status === 400 && data ==='username'){

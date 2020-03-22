@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/profile-dialog-box.component'
 import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
 import { ProfileService } from '../service/profile.service'
-import { LoginService } from '../service/login.service'
+import { UserService } from '../service/user.service'
 
 @Component({
 	selector: 'profile',
@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
 	constructor(
 		public matDialog: MatDialog,
 		private profileService: ProfileService,
-		private loginService: LoginService
+		private userService: UserService
 	) { }
 
 	ngOnInit() {
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
 					let lastName = res.json().data.lastName.charAt(0).toUpperCase() + res.json().data.lastName.slice(1)
 					this.user.name = firstName + ' '+lastName
 					this.authorized = res.json().authorized
-					this.loginService.titleObservable.next(`${this.user.name}`)
+					this.userService.titleObservable.next(`${this.user.name}`)
 				}
 			})
 		this.profileService.getEmittedEmailValue()

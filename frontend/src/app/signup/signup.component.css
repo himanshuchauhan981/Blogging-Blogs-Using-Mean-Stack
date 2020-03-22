@@ -1,18 +1,5 @@
-.signup-container{
-    overflow: hidden;
-}
 .signup-background{
     background-image: url('../../assets/21.jpg');
     background-size: cover;
     height:535px;
-    width:100%;
 }
-
-
-/* background-image: url('../../assets/20.jpg');
-    padding: 20px 0px;
-    min-height: 100%;
-    width: 100%;
-    height: auto;
-    background-size: cover;
-    background-repeat: no-repeat; */

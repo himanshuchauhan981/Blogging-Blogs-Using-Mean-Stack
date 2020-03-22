@@ -1,6 +1,6 @@
-<div class="fluid-container signup-container">
+<div class="fluid-container overflow-hidden">
     <div class="row">
-        <div class="col-lg-7 signup-background"></div>
+        <div class="col-lg-7 signup-background w-100"></div>
         <div class="col-lg-5">
             <div *ngIf="!signUpSuccess">
                 <signup-form (idEmitter)="itemSelected($event)"></signup-form>

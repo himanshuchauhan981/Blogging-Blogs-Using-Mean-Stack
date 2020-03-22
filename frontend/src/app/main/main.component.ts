@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { LoginService } from '../service/login.service'
+import { UserService } from '../service/user.service'
 
 @Component({
 	selector: 'app-main',
@@ -8,10 +8,10 @@ import { LoginService } from '../service/login.service'
 })
 export class MainComponent implements OnInit {
 
-	constructor(private loginService: LoginService) { }
+	constructor(private userService: UserService) { }
 
 	ngOnInit() {
-		this.loginService.titleObservable.next('Blogging Blogs')
+		this.userService.titleObservable.next('Blogging Blogs')
 	}
 
 }

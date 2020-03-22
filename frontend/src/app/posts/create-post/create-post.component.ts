@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService } from '../../service/post.service'
-import { LoginService } from 'src/app/service/login.service'
+import { UserService } from 'src/app/service/user.service'
 
 @Component({
 	selector: 'create-post',
@@ -24,12 +24,12 @@ export class CreatePostComponent implements OnInit{
 
 	constructor(
 		private postService: PostService,
-		private loginService: LoginService,
+		private userService: UserService,
 		private matSnackBar: MatSnackBar
 	) { }
 
 	ngOnInit(){
-		this.loginService.titleObservable.next('Create Post - Blogging Blogs')
+		this.userService.titleObservable.next('Create Post - Blogging Blogs')
 	}
 
 	createPostForm = new FormGroup({

@@ -9,11 +9,13 @@
                         <input 
                             matInput 
                             placeholder="Enter First Name" 
-                            [formControl]="firstName"
+                            formControlName="firstName"
                             name="firstName"
                             required
                         >
-                        <mat-error *ngIf="firstName.hasError('required')">Required First name</mat-error>
+                        <mat-error 
+                            *ngIf="signupForm.controls['firstName'].hasError('required')"
+                        >Required First name</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -22,11 +24,13 @@
                         <input 
                             matInput 
                             placeholder="Enter Last Name"
-                            [formControl]="lastName"
+                            formControlName="lastName"
                             name="lastName"
                             required
                         >
-                        <mat-error *ngIf="lastName.hasError('required')">Required Last name</mat-error>
+                        <mat-error 
+                            *ngIf="signupForm.controls['lastName'].hasError('required')"
+                        >Required Last name</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -36,15 +40,17 @@
                 <input 
                     matInput
                     placeholder="Enter Username"
-                    [formControl]="username"
+                    formControlName="username"
                     name="username"
                     [type]="email"
                     required
                 >
-                <mat-error *ngIf="username.hasError('required')">
-                    Username is required</mat-error>
-                <mat-error *ngIf="username.hasError('minlength')">
-                    Minimum length should be 5 characters long</mat-error>
+                <mat-error 
+                    *ngIf="signupForm.controls['username'].hasError('required')"
+                >Username is required</mat-error>
+                <mat-error 
+                    *ngIf="signupForm.controls['username'].hasError('minlength')"
+                >Minimum length should be 5 characters long</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
@@ -52,12 +58,16 @@
                 <input 
                     matInput
                     placeholder="Enter Email"
-                    [formControl]="email"
+                    formControlName="email"
                     name="email" 
                     required
                 >
-                <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
-                <mat-error *ngIf="!email.hasError('required') && email.hasError('email')">Invalid Email ID
+                <mat-error 
+                    *ngIf="signupForm.controls['email'].hasError('required')"
+                >Email is required</mat-error>
+                <mat-error 
+                    *ngIf="!signupForm.controls['email'].hasError('required') && signupForm.controls['email'].hasError('email')"
+                >Invalid Email ID
                 </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
@@ -65,14 +75,19 @@
                 <input 
                     matInput
                     placeholder="Enter your password" 
-                    [formControl]="password"
+                    formControlName="password"
                     required 
                     type="password"
                 >
-                <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
-                <mat-error *ngIf="password.hasError('minlength')">Minimum password length is 8</mat-error>
-                <mat-error *ngIf="!password.hasError('minlength') && password.hasError('pattern')">Must
-                    contain one lower &amp; uppercase letter and one non-alpha character</mat-error>
+                <mat-error 
+                    *ngIf="signupForm.controls['password'].hasError('required')"
+                >Password is required</mat-error>
+                <mat-error
+                    *ngIf="signupForm.controls['password'].hasError('minlength')"
+                >Minimum password length is 8</mat-error>
+                <mat-error
+                    *ngIf="!signupForm.controls['password'].hasError('minlength') && signupForm.controls['password'].hasError('pattern')"
+                >Must contain one lower &amp; uppercase letter and one non-alpha character</mat-error>
             </mat-form-field>
             
             <mat-form-field appearance="outline" class="full-width">
@@ -80,15 +95,17 @@
                 <input 
                     matInput
                     placeholder="retype your password"
-                    [formControl]="confirmPassword"
+                    formControlName="confirmPassword"
                     name="confirmPassword"
                     required
                     type="password"
                 >
-                <mat-error *ngIf="confirmPassword.hasError('required')">Confirm Password is required
-                </mat-error>
-                <mat-error *ngIf="confirmPassword.hasError('mustMatch')">Password does not matched
-                </mat-error>
+                <mat-error 
+                    *ngIf="signupForm.controls['confirmPassword'].hasError('required')"
+                >Confirm Password is required</mat-error>
+                <mat-error 
+                    *ngIf="signupForm.controls['confirmPassword'].hasError('mustMatch')"
+                >Password does not matched</mat-error>
             </mat-form-field>
             <button mat-raised-button color="primary" class="float-right">Sign Up</button>
         </form>

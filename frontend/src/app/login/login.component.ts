@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router'
-
-import { LoginService } from '../service/login.service'
+import { Router, ActivatedRoute } from '@angular/router'
+import { UserService } from '../service/user.service'
 
 @Component({
 	selector: 'app-login',
@@ -16,9 +15,9 @@ export class LoginComponent implements OnInit {
 	hidePassword = true
 
 	constructor(
-		private loginService: LoginService,
 		private router: Router,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private userService: UserService
 	) { }
 
 	loginForm = new FormGroup({
@@ -27,28 +26,20 @@ export class LoginComponent implements OnInit {
 	})
 
 	ngOnInit(){
-		this.loginService.titleObservable.next('Login - Blogging Blogs')
+		this.userService.titleObservable.next('Login - Blogging Blogs')
 	}
 
-	get username() { return this.loginForm.get('username') }
-
-	get password() { return this.loginForm.get('password') }
-
 	loginUser(loginForm) {
-		this.loginService.loginExistingUser(loginForm.value)
+		this.userService.login(loginForm.value)
 			.subscribe((res) => {
 				if (res.json().status === 401) {
 					this.loginError = res.json().msg
 				}
 				else if (res.json().status === 200) {
-					// const navigationExtra : NavigationExtras = { state: {token: res.json().token}}
-
 					let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
-					this.loginService.storeJWTToken(res.json().token)
+					this.userService.storeJWTToken(res.json().token)
 					this.router.navigate([returnUrl || 'home'])
 				}
-			}, (error) => {
-
 			})
 	}
 

@@ -3,6 +3,7 @@ import { Component, Input, Output } from '@angular/core'
 import { SignupService } from '../../service/signup.service'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { UserService } from 'src/app/service/user.service'
 
 @Component({
 	selector: 'profile-photo-form',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router'
 })
 export class ProfilePhotoFormComponent {
 
-	constructor(private signupService: SignupService,private router: Router) { }
+	constructor(private userService: UserService,private router: Router) { }
 
 	uploadedFiles: Array<File>
 
@@ -64,7 +65,7 @@ export class ProfilePhotoFormComponent {
 				formData.append("profileImage",this.uploadedFiles[i],this.uploadedFiles[i].name)
 			}
 			formData.append('userId', this.id)
-			this.signupService.saveProfilePhoto(formData)
+			this.userService.saveProfilePhoto(formData)
 				.subscribe((res)=>{
 					if(res.json().status === 200){
 						this.router.navigate(['login'])
