@@ -1,11 +1,15 @@
 import { Injectable,Inject } from '@angular/core'
-import { Http, RequestOptions, Headers } from '@angular/http'
+import { Http, Headers } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+
+import { environment } from '../../environments/environment'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class PostService {
+
+	private basicUrl : string = environment.basicUrl
 
 	token: string
 
@@ -18,7 +22,7 @@ export class PostService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		return this.http.post('/api/post',formData,{
+		return this.http.post(`${this.basicUrl}/api/post`,formData,{
 			headers: headers
 		})	
 	}
@@ -29,7 +33,7 @@ export class PostService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		return this.http.get('/api/post',{
+		return this.http.get(`${this.basicUrl}/api/post`,{
 			headers: headers,
 			params: {
 				skipPostsLimit: skipPostsLimit
@@ -43,7 +47,7 @@ export class PostService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		return this.http.get(`/api/post/${id}`,{
+		return this.http.get(`${this.basicUrl}/api/post/${id}`,{
 			headers: headers
 		})
 	}
@@ -54,7 +58,7 @@ export class PostService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		return this.http.get(`/api/${username}/posts`,{
+		return this.http.get(`${this.basicUrl}/api/${username}/posts`,{
 			headers: headers
 		})
 	}
@@ -65,7 +69,7 @@ export class PostService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		return this.http.delete(`/api/post/${postId}`,{
+		return this.http.delete(`${this.basicUrl}/api/post/${postId}`,{
 			headers: headers
 		})
 	}
@@ -76,7 +80,7 @@ export class PostService {
 		let headers = new Headers()
 		headers.append('Authorization',`Bearer ${this.token}`)
 
-		return this.http.patch(`/api/${username}/${postId}`,postData,{
+		return this.http.patch(`${this.basicUrl}/api/${username}/${postId}`,postData,{
 			headers: headers
 		})
 	}

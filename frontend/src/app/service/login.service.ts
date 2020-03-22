@@ -3,10 +3,14 @@ import { Http, RequestOptions, Headers } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 import { Subject } from 'rxjs'
 
+import { environment } from '../../environments/environment'
+
 @Injectable({
 	providedIn: 'root'
 })
 export class LoginService {
+
+	private basicUrl : string = environment.basicUrl
 
 	token: string
 
@@ -17,7 +21,7 @@ export class LoginService {
 	constructor(private http : Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
 
 	loginExistingUser = (object) =>{
-		return this.http.post('/api/login',object)
+		return this.http.post(`${this.basicUrl}/api/login`,object)
 	}
 
 	storeJWTToken  = (token) =>{
@@ -34,7 +38,7 @@ export class LoginService {
 		options.headers.append('Content-Type', 'application/json')
 		options.headers.append('Authorization', `Bearer ${this.token}`)
 		
-		return this.http.post('/api/token',null,options)
+		return this.http.post(`${this.basicUrl}/api/token`,null,options)
 	}
 
 	logout = () =>{

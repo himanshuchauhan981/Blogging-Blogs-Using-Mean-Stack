@@ -2,12 +2,16 @@ import { Injectable, Inject, Output, EventEmitter } from '@angular/core'
 import { Http, Headers } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 
+import { environment } from '../../environments/environment'
+
 @Injectable({
 	providedIn: 'root'
 })
 export class CommentService {
 
 	token: string
+
+	private basicUrl : string = environment.basicUrl
 
 	@Output() deleteCommentEvent: EventEmitter<any> = new EventEmitter()
 
@@ -24,7 +28,7 @@ export class CommentService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		return this.http.post('/api/comment', commentObject, {
+		return this.http.post(`${this.basicUrl}/api/comment`, commentObject, {
 			headers: headers
 		})
 	}
@@ -34,7 +38,7 @@ export class CommentService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		return this.http.get('/api/comment', {
+		return this.http.get(`${this.basicUrl}/api/comment`, {
 			headers: headers,
 			params: { postId: postId }
 		})
@@ -45,7 +49,7 @@ export class CommentService {
 		let headers = new Headers()
 		headers.append('Authorization', `Bearer ${this.token}`)
 
-		return this.http.delete(`/api/comment/${id}`,{
+		return this.http.delete(`${this.basicUrl}/api/comment/${id}`,{
 			headers: headers
 		})
 	}
