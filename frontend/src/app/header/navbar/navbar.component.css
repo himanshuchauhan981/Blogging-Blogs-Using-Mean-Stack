@@ -43,8 +43,12 @@
 }
 
 .showUsers{
-    width: 240px;
-    
+    width: 223px;
+    background-color: white;
+    position: relative;
+    top: 38px;
+    right: 238px;
+    /* display: none; */
 }
 
 .form-inline{

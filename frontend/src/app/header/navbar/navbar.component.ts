@@ -38,22 +38,12 @@ export class NavbarComponent implements OnInit{
 		this.loginService.logout()
 		this.router.navigate(['login'])
 	}
-	
-	// searchUserForm = new FormGroup({
-	// 	user: new FormControl('')
-	// })
-
-	// get user(){ return this.searchUserForm.get('user')}
 
 	ngOnInit(){
 		this.loginService.loginObservable.subscribe(value =>{
 			this.loginStatus = value
 			this.username = this.authGuardService.currentUser
 		})
-
-		// this.searchUserForm.get('user').valueChanges.subscribe(val =>{
-		// 	this.searchUser(val)
-		// })
 
 		this.profileService.getAllProfileName()
 			.subscribe(res =>{
@@ -62,16 +52,13 @@ export class NavbarComponent implements OnInit{
 					let fullName = this.capitalizaFirstAndLastName(data.fullName)
 					data.fullName = fullName
 				})
-				this.defaultUserList = data
+				this.defaultUserList = data.map((obj)=>{
+					return obj.fullName
+				})
 			})		
 	}
 
-	// searchUser(value){
-	// 	this.userList = []
-	// 	this.defaultUserList.forEach(val =>{
-	// 		if(val.fullName.startsWith(value) && value !=""){
-	// 			this.userList.push(val)
-	// 		}
-	// 	})
-	// }
+	searchUsers(event){
+		console.log(event.length)
+	}
 }

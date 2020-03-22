@@ -2,32 +2,6 @@
     <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse flex-md-row-reverse mr-4">
         <div class="d-md-flex d-block flex-row mx-0" *ngIf="loginStatus">
-            <!-- <div class="form-inline">
-                <form [formGroup]="searchUserForm" (ngOnChanges)="searchUser">
-                    <input
-                        type="text"
-                        class="search-box"
-                        placeholder="Search"
-                        [formControl]="user"
-                        name="user"
-                    >
-                </form>
-            </div> -->
-            <div class="form-inline">
-                <input 
-                    type="text"
-                    class="search-box"
-                    name="search"
-                    [(ngModel)]="searchText"
-                    autocomplete="off"
-                    placeholder="&#61442; Search"
-                >
-                <!-- <div class="showUsers">
-                    <div *ngFor="let user of defaultUserList | filter:searchText">
-                        <p>{{ user.fullName }}</p>
-                    </div>
-                </div> -->
-            </div>
             <ul class="navbar-nav" *ngIf="loginStatus">
                 <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
