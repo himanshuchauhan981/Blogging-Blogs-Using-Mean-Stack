@@ -25,7 +25,6 @@
 
 .comment-section{
     justify-content: space-between;
-    padding: 10px;
 }
 
 .comment-section-img{
@@ -66,20 +65,9 @@
     right: 30px;
 }
 
-.user-comment{
-    background-color: #F2F1F1;
-    width: 100%;
-}
-
-.comments{ padding: 10px 0px; }
-
 .media{
     width: 55px;
     height: 55px;
-}
-
-.comment-details{
-    padding: 6px 15px;
 }
 
 .userName{ font-size: 13px; }
@@ -103,8 +91,4 @@
 
 .unlikeColor{
     color: none;
-}
-
-.full-width{
-    width: 100%;
 }

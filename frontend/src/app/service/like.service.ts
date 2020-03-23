@@ -1,25 +1,20 @@
-import { Injectable, Inject } from '@angular/core'
-import { Http, Headers } from '@angular/http'
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+import { Injectable } from '@angular/core'
+import { Http } from '@angular/http'
 
 import { environment } from '../../environments/environment'
+import { UserService } from './user.service'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class LikeService {
 
-	token: string
-
 	private basicUrl : string = environment.basicUrl
 
-	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
+	constructor(private http: Http, private userService: UserService) { }
 
-	saveOrDeletePostLike(postId){
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+	post(postId){
+		let headers = this.userService.appendHeaders()
 
 		return this.http.post(`${this.basicUrl}/api/${postId}/like`,null,{
 			headers: headers

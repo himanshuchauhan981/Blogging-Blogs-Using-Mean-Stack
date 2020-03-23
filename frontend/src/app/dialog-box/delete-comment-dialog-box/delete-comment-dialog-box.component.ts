@@ -23,7 +23,7 @@ export class DeleteCommentDialogBoxComponent {
 	}
 
 	deleteComment() {
-		this.commentService.deleteComment(this.data.id)
+		this.commentService.delete(this.data.id)
 			.subscribe((res) => {
 				this.closeDialogBox()
 				if (res.json().status === 200) {

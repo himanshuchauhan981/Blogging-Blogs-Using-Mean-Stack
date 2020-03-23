@@ -14,7 +14,7 @@
                         <b class="post-title">{{ post?.postTitle }}</b>
                     </h2>
                     <h5>By 
-                        <span class="profile-link"(click)="openOtherUserProfilePage(post.userId)">{{ post?.postAuthor }}</span>
+                        <span class="profile-link"(click)="userProfile(post.userId)">{{ post?.postAuthor }}</span>
                         <span class="ml-2 post-author">{{ post?.postDate | amTimeAgo }}</span>
                     </h5>
                     <div class="post-content">
@@ -22,19 +22,19 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="like-comment-box text-center" (click)="saveOrDeletePostLike(post._id)">
+                            <div class="like-comment-box text-center" (click)="postLike(post._id)">
                                 <i class="fa fa-thumbs-up" [ngClass]="likeState ? 'likeColor':'unlikeColor'"> Like</i>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="like-comment-box" (click)="getPostComments(post._id)">View Comments ({{ commentsLength }})</div>
+                            <div class="like-comment-box" (click)="postComments(post._id)">View Comments ({{ commentsLength }})</div>
                         </div>
                     </div>
                     <div class="comment-section">
-                        <div class="comments" *ngFor="let comment of commentsArray">
+                        <div class="mt-2" *ngFor="let comment of commentsArray">
                             <div class="d-flex">
                                 <img class="rounded-circle" src="http://bit.ly/34amoMf" height="60px" width="60px">
-                                <div class="d-block comment-details">
+                                <div class="d-block pt-2 pl-3 comment-details">
                                     <div class="userName"><a href="">{{ comment.createdBy }}</a></div>
                                     <div class="userComment">{{ comment.text }}</div>
                                 </div>
@@ -44,11 +44,11 @@
                                 matTooltip="Delete Comment"
                                 matTooltipPosition="above"
                                 aria-label="Action"
-                                (click)="openDeleteDialogBox(comment._id)"
+                                (click)="dialogBox(comment._id)"
                             ></i>
                         </div>
-                        <form [formGroup]="commentForm" (ngSubmit)="submitComment(commentForm,post._id)">
-                            <div class="d-flex full-width">
+                        <form [formGroup]="commentForm" (ngSubmit)="submit(commentForm,post._id)">
+                            <div class="d-flex w-100">
                                 <img class="rounded-circle comment-section-img" src="{{ userImage }}">
                                 <div class="input-group">
                                     <input
@@ -57,7 +57,7 @@
                                         name="comment" 
                                         class="comment-section-input"
                                         placeholder="Write a comment..."
-                                        [formControl]="comment"
+                                        formControlName="comment"
                                         [value]="clearComment"
                                         autocomplete="off"
                                         required

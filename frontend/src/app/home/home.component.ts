@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 	blogArray: Array<Blogs> = []
 
 	ngOnInit() {
-		this.postService.getAllPost(this.skipPostLimit)
+		this.postService.allPosts(this.skipPostLimit)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					let resData = res.json()
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	onScroll() {
-		this.postService.getAllPost(this.skipPostLimit)
+		this.postService.allPosts(this.skipPostLimit)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					let resData = res.json()
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	profilePage(id) {
-		this.profileService.profileUsername(id)
+		this.profileService.username(id)
 		.subscribe((res)=>{
 			if(res.json().status === 200){
 				this.router.navigate([`/profile/${res.json().data.username}`])

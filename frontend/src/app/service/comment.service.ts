@@ -1,42 +1,38 @@
-import { Injectable, Inject, Output, EventEmitter } from '@angular/core'
-import { Http, Headers } from '@angular/http'
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+import { Injectable, Output, EventEmitter } from '@angular/core'
+import { Http } from '@angular/http'
 
 import { environment } from '../../environments/environment'
+import { UserService } from './user.service'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CommentService {
 
-	token: string
-
 	private basicUrl : string = environment.basicUrl
 
 	@Output() deleteCommentEvent: EventEmitter<any> = new EventEmitter()
 
-	constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
+	constructor(
+		private http: Http,
+		private userService: UserService
+	) { }
 
-	submitNewComment(object, postId) {
+	post(object, postId) {
 		let commentObject = {
 			postId: postId,
 			text: object.comment,
 			createdBy: null
 		}
-
-		this.token = this.storage.get('token')
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		let headers = this.userService.appendHeaders()
 
 		return this.http.post(`${this.basicUrl}/api/comment`, commentObject, {
 			headers: headers
 		})
 	}
 
-	getParticularPostComment(postId) {
-		this.token = this.storage.get('token')
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+	get(postId: string) {
+		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/comment`, {
 			headers: headers,
@@ -44,10 +40,8 @@ export class CommentService {
 		})
 	}
 
-	deleteComment(id){
-		this.token = this.storage.get('token')
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+	delete(id: string){
+		let headers = this.userService.appendHeaders()
 
 		return this.http.delete(`${this.basicUrl}/api/comment/${id}`,{
 			headers: headers
@@ -61,4 +55,12 @@ export class CommentService {
 	getEmittedComment(){
 		return this.deleteCommentEvent
 	}
+}
+
+export interface Comment{
+	_id: string
+	postId: string
+	text: string
+	createdBy: string
+	createdAt: Date
 }

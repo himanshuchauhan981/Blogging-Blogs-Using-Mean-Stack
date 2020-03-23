@@ -44,7 +44,7 @@ export class PostService {
 		})
 	}
 
-	getAllPost = (skipPostsLimit)=>{
+	allPosts = (skipPostsLimit)=>{
 		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/post`,{
@@ -55,7 +55,7 @@ export class PostService {
 		})
 	}
 
-	getParticularPost = (id)=>{
+	particularPost = (id)=>{
 		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/post/${id}`,{
@@ -63,7 +63,7 @@ export class PostService {
 		})
 	}
 
-	getAllParticularUserPost = (username)=>{
+	userPosts = (username)=>{
 		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/${username}/posts`,{

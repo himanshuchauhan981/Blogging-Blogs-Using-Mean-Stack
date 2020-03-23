@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { PostService } from '../../service/post.service'
+import { PostService, Blogs } from '../../service/post.service'
 import { ProfileService } from 'src/app/service/profile.service'
 
 @Component({
@@ -12,7 +12,7 @@ import { ProfileService } from 'src/app/service/profile.service'
 })
 export class ViewAllPostsComponent implements OnInit {
 
-	userPost: Array<{ _id: string, postTitle: string, postContent: string, postImageId: string, postDate: Date }> = []
+	userPost: Array<Blogs>
 
 	authenticated: Boolean
 
@@ -28,9 +28,11 @@ export class ViewAllPostsComponent implements OnInit {
 
 	ngOnInit() {
 		let username = this.activatedRoute.snapshot.params.id
-		this.postService.getAllParticularUserPost(username)
-			.subscribe((res) => {
+		this.postService.userPosts(username)
+			.subscribe((res:any) => {
 				if (res.json().status === 200) {
+					let resData = res.json().postData
+					
 					this.authenticated = res.json().authenticated
 					this.userPost = res.json().postData
 				}
@@ -56,7 +58,7 @@ export class ViewAllPostsComponent implements OnInit {
 	}
 	
 	openProfilePage(id){
-		this.profileService.profileUsername(id)
+		this.profileService.username(id)
 			.subscribe((res)=>{
 				if(res.json().status === 200){
 					this.router.navigate([`/profile/${res.json().data.username}`])

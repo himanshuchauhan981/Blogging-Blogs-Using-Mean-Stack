@@ -1,16 +1,15 @@
-import { Injectable, Inject, Output, EventEmitter } from '@angular/core'
-import { Http, Headers } from '@angular/http'
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+import { Injectable, Output, EventEmitter } from '@angular/core'
+import { Http } from '@angular/http'
 import { Router } from '@angular/router';
 
 import { AuthGuardService } from './auth-guard.service'
+import { UserService } from './user.service'
+
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ProfileService {
-
-	token: string
 
 	@Output() fire: EventEmitter<any> = new EventEmitter()
 
@@ -18,37 +17,29 @@ export class ProfileService {
 
 	constructor(
 		private http: Http,
-		@Inject(SESSION_STORAGE) private storage: WebStorageService,
 		private authGuardService: AuthGuardService,
+		private userService: UserService,
 		private router: Router
 	) { }
 
-	getUserProfileData() {
-		this.token = this.storage.get('token')
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+	getProfile() {
+		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`/api${this.router.url}`, {
 			headers: headers
 		})
 	}
 
-	updateUserProfile(object, updateStatus) {
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+	updateProfile(object, updateStatus) {
+		let headers = this.userService.appendHeaders()
 
 		return this.http.patch(`/api/${this.authGuardService.currentUser}/${updateStatus}`, object, {
 			headers: headers
 		})
 	}
 
-	updateUserPassword(object) {
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+	updatePassword(object) {
+		let headers = this.userService.appendHeaders()
 
 		return this.http.patch(`/api${this.router.url}/password`,object,{
 			headers: headers
@@ -59,15 +50,12 @@ export class ProfileService {
 		this.fire.emit(data);
 	}
 
-	getEmittedEmailValue(){
+	emailValue(){
 		return this.fire
 	}
 
-	profileUsername(id){
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+	username(id){
+		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`/api/profile/id/${id}`,{
 			headers: headers
@@ -75,10 +63,7 @@ export class ProfileService {
 	}
 
 	getAllProfileName(){
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`/api/profile/name`,{
 			headers: headers

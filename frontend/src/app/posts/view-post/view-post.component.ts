@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 
 import { PostService, Blogs } from '../../service/post.service'
-import { CommentService } from '../../service/comment.service'
+import { CommentService,Comment } from '../../service/comment.service'
 import { DeleteCommentDialogBoxComponent } from '../../dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component'
 import { ProfileService } from 'src/app/service/profile.service'
 import { LikeService } from 'src/app/service/like.service'
@@ -30,7 +30,7 @@ export class ViewPostComponent implements OnInit {
 
 	userImage: String
 
-	commentsArray: Array<{ _id: string, postId: string, text: string, createdBy: string, createdAt: Date }>
+	commentsArray: Array<Comment>
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -47,10 +47,9 @@ export class ViewPostComponent implements OnInit {
 		comment: new FormControl('', Validators.required)
 	})
 
-	get comment() { return this.commentForm.get('comment') }
 
-	submitComment(commentForm, postId) {
-		this.commentService.submitNewComment(commentForm.value, postId)
+	submit(commentForm, postId) {
+		this.commentService.post(commentForm.value, postId)
 			.subscribe((res) => {
 				if (res.json().status === 400) {
 					this.matSnackBar.open(res.json().msg, 'Close', {
@@ -67,7 +66,7 @@ export class ViewPostComponent implements OnInit {
 
 	ngOnInit() {
 		let postID = this.activatedRoute.snapshot.params.id
-		this.postService.getParticularPost(postID)
+		this.postService.particularPost(postID)
 			.subscribe((res) => {
 				this.likeState = res.json().likeStatus
 				this.post = res.json().post
@@ -84,8 +83,8 @@ export class ViewPostComponent implements OnInit {
 			})
 	}
 
-	getPostComments(postId) {
-		this.commentService.getParticularPostComment(postId)
+	postComments(postId) {
+		this.commentService.get(postId)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.commentsArray = res.json().comments
@@ -93,15 +92,15 @@ export class ViewPostComponent implements OnInit {
 			})
 	}
 
-	openDeleteDialogBox(commentId) {
+	dialogBox(commentId) {
 		this.matDialog.open(DeleteCommentDialogBoxComponent, {
 			width: '450px',
 			data: { id: commentId }
 		})
 	}
 
-	openOtherUserProfilePage(postId) {
-		this.profileService.profileUsername(postId)
+	serProfile(postId) {
+		this.profileService.username(postId)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.router.navigate([`/profile/${res.json().data.username}`])
@@ -109,8 +108,8 @@ export class ViewPostComponent implements OnInit {
 			})
 	}
 
-	saveOrDeletePostLike(postId) {
-		this.likeService.saveOrDeletePostLike(postId)
+	postLike(postId) {
+		this.likeService.post(postId)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.likeState = true

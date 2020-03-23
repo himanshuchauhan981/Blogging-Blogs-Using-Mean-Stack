@@ -42,7 +42,7 @@ export class PasswordDialogBoxComponent{
 	get confirmPassword() { return this.passwordProfileForm.get('confirmPassword') }
 
 	submitNewPassword(passwordProfileForm){
-		this.profileService.updateUserPassword(passwordProfileForm.value)
+		this.profileService.updatePassword(passwordProfileForm.value)
 		.subscribe(res=>{
 			this.dialogRef.close()
 			if(res.json().status === 200){

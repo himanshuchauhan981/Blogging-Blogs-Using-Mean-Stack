@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.profileService.getUserProfileData()
+		this.profileService.getProfile()
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.user = res.json().data
@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
 					this.userService.titleObservable.next(`${this.user.name}`)
 				}
 			})
-		this.profileService.getEmittedEmailValue()
+		this.profileService.emailValue()
 			.subscribe(data => {
 				if (data != undefined) {
 					this.user.email = data

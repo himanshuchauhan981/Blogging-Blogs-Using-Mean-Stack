@@ -87,7 +87,7 @@ export class PostComponent implements OnInit {
 	showPost() {
 		this.heading = 'Update Post'
 		let postId = this.activatedRoute.snapshot.params.postId
-		this.postService.getParticularPost(postId)
+		this.postService.particularPost(postId)
 			.subscribe(res => {
 				console.log(res.json())
 				if (res.json().status === 200) {
