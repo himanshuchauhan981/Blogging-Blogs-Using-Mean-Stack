@@ -17,6 +17,8 @@ export class ViewAllPostsComponent implements OnInit {
 
 	authenticated: Boolean
 
+	basicUrl : string = environment.basicUrl
+
 	constructor(
 		private postService: PostService,
 		private profileService: ProfileService,
