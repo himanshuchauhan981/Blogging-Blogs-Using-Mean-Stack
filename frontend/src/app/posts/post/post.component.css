@@ -3,3 +3,11 @@ h3{
 }
 
 .mat-form-field{ font-size: 16px !important;}
+
+input[type="file"]{
+    display: none;
+}
+
+img{
+    height: 50vh;
+}

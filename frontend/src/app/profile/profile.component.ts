@@ -5,6 +5,7 @@ import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/prof
 import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
 import { ProfileService } from '../service/profile.service'
 import { UserService } from '../service/user.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
 	selector: 'profile',
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					this.user = res.json().data
+					this.user.profileImage = `${environment.basicUrl}/api/image/${this.user.profileImage}`
 					let firstName = res.json().data.firstName.charAt(0).toUpperCase() + res.json().data.firstName.slice(1)
 					let lastName = res.json().data.lastName.charAt(0).toUpperCase() + res.json().data.lastName.slice(1)
 					this.user.name = firstName + ' '+lastName

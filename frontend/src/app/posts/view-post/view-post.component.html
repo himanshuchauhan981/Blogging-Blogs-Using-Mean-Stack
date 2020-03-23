@@ -1,27 +1,32 @@
-<div class="w3-light-grey">
-    <div class="w3-container">
-        <div class="w3-row">
-            <div class="w3-col l8 s12">
-                <div class="w3-card-4 w3-margin w3-white posts-box">
-                    <img *ngIf="post.postImage != null" src="{{'/api/image/'+ post.postImage }}" alt=""
-                        style="width:100%; height:300px;">
-                    <div class="w3-container">
-                        <h2>
-                            <b class="post-title">{{ post.postTitle }}</b>
-                        </h2>
-                        <h5>
-                            By <span class="profile-link"(click)="openOtherUserProfilePage(post.userId)">{{ post.postAuthor }}</span>
-                            <span class="w3-opacity w3-margin-left post-author">{{ post.postDate | amTimeAgo }}</span>
-                        </h5>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <mat-card>
+                <img 
+                    mat-card-image
+                    style="height: 300px;"
+                    *ngIf="post?.postImage != null"
+                    src="{{ post.postImage }}" 
+                    alt="Photo of a Shiba Inu"
+                >
+                <mat-card-content>
+                    <h2>
+                        <b class="post-title">{{ post?.postTitle }}</b>
+                    </h2>
+                    <h5>By 
+                        <span class="profile-link"(click)="openOtherUserProfilePage(post.userId)">{{ post?.postAuthor }}</span>
+                        <span class="ml-2 post-author">{{ post?.postDate | amTimeAgo }}</span>
+                    </h5>
+                    <div class="post-content">
+                        <pre>{{ post?.postContent }}</pre>
                     </div>
-                    <div class="w3-container post-content">
-                        <pre>{{ post.postContent }}</pre>
-                    </div>
-                    <div class="w3-row">
-                        <div class="w3-col l6 m6 s6">
-                            <div class="like-comment-box" (click)="saveOrDeletePostLike(post._id)"><i class="fa fa-thumbs-up" [ngClass]="likeState ? 'likeColor':'unlikeColor'"> Like</i></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="like-comment-box text-center" (click)="saveOrDeletePostLike(post._id)">
+                                <i class="fa fa-thumbs-up" [ngClass]="likeState ? 'likeColor':'unlikeColor'"> Like</i>
+                            </div>
                         </div>
-                        <div class="w3-col l6 m6 s6">
+                        <div class="col-md-6">
                             <div class="like-comment-box" (click)="getPostComments(post._id)">View Comments ({{ commentsLength }})</div>
                         </div>
                     </div>
@@ -67,11 +72,11 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-            <div class="w3-col l4">
-                <sidebar></sidebar>
-            </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4">
+            <sidebar></sidebar>
         </div>
     </div>
 </div>

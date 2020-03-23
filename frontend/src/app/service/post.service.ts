@@ -1,7 +1,7 @@
-import { Injectable,Inject } from '@angular/core'
-import { Http, Headers } from '@angular/http'
-import { Router} from '@angular/router'
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+import { Injectable } from '@angular/core'
+import { Http } from '@angular/http'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { UserService } from './user.service'
 
 import { environment } from '../../environments/environment'
 
@@ -12,38 +12,40 @@ export class PostService {
 
 	private basicUrl : string = environment.basicUrl
 
-	token: string
-
-	url: string
+	msg: string
 
 	imageUrl : any = 'http://textiletrends.in/gallery/1547020644No_Image_Available.jpg'
 
 	constructor(
 		private http: Http,
-		@Inject(SESSION_STORAGE) private storage: WebStorageService,
-		private router: Router
-	){ 
-		this.url = this.router.url
-	}
+		private matSnackBar: MatSnackBar,
+		private userService: UserService
+	){ }
 
 	fileType: Array <String> = ['image/jpeg','image/jpg','image/png']
 
 	post = (formData) =>{
-		this.token = this.storage.get('token')
+		let headers = this.userService.appendHeaders()
 
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
-
-		return this.http.post(`${this.basicUrl}/api/post`,formData,{
+		this.http.post(`${this.basicUrl}/api/post`,formData,{
 			headers: headers
-		})	
+		})
+		.subscribe((res) => {
+			if (res.json().status === 200) {
+				this.msg = res.json().msg
+			}
+			else if (res.json().status === 400) {
+				this.msg = "Something wrong happened, Try again!!!"
+
+			}
+			this.matSnackBar.open(this.msg, 'Close', {
+				duration: 8000
+			})
+		})
 	}
 
 	getAllPost = (skipPostsLimit)=>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/post`,{
 			headers: headers,
@@ -54,10 +56,7 @@ export class PostService {
 	}
 
 	getParticularPost = (id)=>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/post/${id}`,{
 			headers: headers
@@ -65,10 +64,7 @@ export class PostService {
 	}
 
 	getAllParticularUserPost = (username)=>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/${username}/posts`,{
 			headers: headers
@@ -76,10 +72,7 @@ export class PostService {
 	}
 
 	delete = (postId) =>{
-		this.token = this.storage.get('token')
-
-		let headers = new Headers()
-		headers.append('Authorization', `Bearer ${this.token}`)
+		let headers = this.userService.appendHeaders()
 
 		return this.http.delete(`${this.basicUrl}/api/post/${postId}`,{
 			headers: headers
@@ -87,13 +80,16 @@ export class PostService {
 	}
 
 	edit = (username,postId,postData)=>{
-		this.token = this.storage.get('token')
+		let headers = this.userService.appendHeaders()
 
-		let headers = new Headers()
-		headers.append('Authorization',`Bearer ${this.token}`)
-
-		return this.http.patch(`${this.basicUrl}/api/${username}/${postId}`,postData,{
+		this.http.patch(`${this.basicUrl}/api/${username}/${postId}`,postData,{
 			headers: headers
+		})
+		.subscribe(res => {
+			let msg = res.json().msg
+			this.matSnackBar.open(msg, 'Close', {
+				duration: 8000
+			})
 		})
 	}
 }
@@ -102,6 +98,9 @@ export interface Blogs{
 	_id: string,
 	postTitle: string,
 	postContent: string,
-	postImageId: string,
-	postDate: Date
+	postImage: string,
+	postDate: Date,
+	userId: string,
+	lastModifiedAt: string,
+	postAuthor: string
 }

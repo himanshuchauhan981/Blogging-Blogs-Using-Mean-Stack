@@ -4,11 +4,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 
-import { PostService } from '../../service/post.service'
+import { PostService, Blogs } from '../../service/post.service'
 import { CommentService } from '../../service/comment.service'
 import { DeleteCommentDialogBoxComponent } from '../../dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component'
 import { ProfileService } from 'src/app/service/profile.service'
 import { LikeService } from 'src/app/service/like.service'
+import { environment } from   '../../../environments/environment'
 
 @Component({
 	selector: 'app-view-post',
@@ -17,7 +18,7 @@ import { LikeService } from 'src/app/service/like.service'
 })
 export class ViewPostComponent implements OnInit {
 
-	post = {}
+	post : Blogs
 
 	commentsLength = 0
 
@@ -70,8 +71,9 @@ export class ViewPostComponent implements OnInit {
 			.subscribe((res) => {
 				this.likeState = res.json().likeStatus
 				this.post = res.json().post
+				this.post.postImage = `${environment.basicUrl}/api/image/${this.post.postImage}`
 				this.commentsLength = res.json().commentLength
-				this.userImage = `/api/user/image/${res.json().currentUserId}`
+				this.userImage = `${environment.basicUrl}/api/user/image/${res.json().currentUserId}`
 			})
 
 		this.commentService.getEmittedComment()

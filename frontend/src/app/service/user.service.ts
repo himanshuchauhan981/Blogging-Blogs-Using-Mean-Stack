@@ -61,5 +61,14 @@ export class UserService {
   logout = () =>{
 		this.storage.remove('token')
 		this.loginObservable.next(false)
-	}
+  }
+  
+  appendHeaders = () =>{
+    this.token = this.storage.get('token')
+
+    let headers = new Headers()
+    headers.append('Authorization', `Bearer ${this.token}`)
+    
+    return headers
+  }
 }
