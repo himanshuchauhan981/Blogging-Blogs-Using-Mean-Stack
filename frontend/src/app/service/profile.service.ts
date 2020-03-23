@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 
 import { AuthGuardService } from './auth-guard.service'
 import { UserService } from './user.service'
+import { environment } from '../../environments/environment'
 
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ProfileService {
+	basicUrl : string = environment.basicUrl
 
 	@Output() fire: EventEmitter<any> = new EventEmitter()
 
@@ -25,7 +27,7 @@ export class ProfileService {
 	getProfile() {
 		let headers = this.userService.appendHeaders()
 
-		return this.http.get(`/api${this.router.url}`, {
+		return this.http.get(`${this.basicUrl}/api${this.router.url}`, {
 			headers: headers
 		})
 	}
@@ -33,7 +35,7 @@ export class ProfileService {
 	updateProfile(object, updateStatus) {
 		let headers = this.userService.appendHeaders()
 
-		return this.http.patch(`/api/${this.authGuardService.currentUser}/${updateStatus}`, object, {
+		return this.http.patch(`${this.basicUrl}/api/${this.authGuardService.currentUser}/${updateStatus}`, object, {
 			headers: headers
 		})
 	}
@@ -41,7 +43,7 @@ export class ProfileService {
 	updatePassword(object) {
 		let headers = this.userService.appendHeaders()
 
-		return this.http.patch(`/api${this.router.url}/password`,object,{
+		return this.http.patch(`${this.basicUrl}/api${this.router.url}/password`,object,{
 			headers: headers
 		})
 	}
@@ -57,7 +59,7 @@ export class ProfileService {
 	username(id){
 		let headers = this.userService.appendHeaders()
 
-		return this.http.get(`/api/profile/id/${id}`,{
+		return this.http.get(`${this.basicUrl}/api/profile/id/${id}`,{
 			headers: headers
 		})
 	}
@@ -65,7 +67,7 @@ export class ProfileService {
 	getAllProfileName(){
 		let headers = this.userService.appendHeaders()
 
-		return this.http.get(`/api/profile/name`,{
+		return this.http.get(`${this.basicUrl}/api/profile/name`,{
 			headers: headers
 		})
 	}

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService, Blogs } from '../../service/post.service'
 import { ProfileService } from 'src/app/service/profile.service'
+import { environment } from '../../../environments/environment'
 
 @Component({
 	selector: 'view-all-posts',
@@ -15,8 +16,6 @@ export class ViewAllPostsComponent implements OnInit {
 	userPost: Array<Blogs>
 
 	authenticated: Boolean
-
-	defaultProfileImage: string 
 
 	constructor(
 		private postService: PostService,
@@ -31,13 +30,10 @@ export class ViewAllPostsComponent implements OnInit {
 		this.postService.userPosts(username)
 			.subscribe((res:any) => {
 				if (res.json().status === 200) {
-					let resData = res.json().postData
-					
 					this.authenticated = res.json().authenticated
 					this.userPost = res.json().postData
 				}
 			})
-		this.defaultProfileImage = this.profileService.defaultProfileImage
 	}
 
 	editPost(postAuthor, postId) {

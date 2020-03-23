@@ -1,7 +1,7 @@
 <mat-card *ngFor="let post of userPost">
     <mat-card-header class="mb-2">
         <img *ngIf="post.userdata[0].profileImage != null" mat-card-avatar src="/api/image/{{ post.userdata[0].profileImage }}" class="profile-image">
-        <img *ngIf="post.userdata[0].profileImage == null" mat-card-avatar src="{{ defaultProfileImage }}" class="profile-image">
+        <img *ngIf="post.userdata[0].profileImage == null" mat-card-avatar src="{{ profile.defaultProfileImage }}" class="profile-image">
         <mat-card-title class="profile-link" (click)="openProfilePage(post.userdata[0]._id)">{{ post.postAuthor }}</mat-card-title>
         <mat-card-subtitle class="mt-1">{{ post.postDate | amTimeAgo }}</mat-card-subtitle>
     </mat-card-header>
