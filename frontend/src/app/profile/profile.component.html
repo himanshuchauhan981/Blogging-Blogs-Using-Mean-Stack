@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                <div *ngIf="user?.profileImage != null else profileImg">
+                <div *ngIf="user.profileImage != null else profileImg">
                     <img src="{{ user.profileImage }}" class="profile-img img-card-top" alt="">
                 </div>
                 <div class="card-body">
@@ -33,5 +33,5 @@
 </div>
 
 <ng-template #profileImg>
-    <img *ngIf="user?.profileImage == null" src="{{ defaultProfileImage }}" class="profile-img img-card-top" alt="">
+    <img src="{{ profileService.defaultProfileImage }}" class="profile-img img-card-top" alt="">
 </ng-template>

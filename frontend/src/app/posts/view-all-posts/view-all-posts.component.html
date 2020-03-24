@@ -1,11 +1,10 @@
 <mat-card *ngFor="let post of userPost">
     <mat-card-header class="mb-2">
-        <img *ngIf="post.userdata[0].profileImage != null" mat-card-avatar src="{{ basicUrl+'/api/image/' + post.userdata[0].profileImage }}" class="profile-image">
-        <img *ngIf="post.userdata[0].profileImage == null" mat-card-avatar src="{{ profile.defaultProfileImage }}" class="profile-image">
+        <img *ngIf="post.userdata[0].profileImage != null; else profileImage" mat-card-avatar src="{{ post.userdata[0].profileImage }}" class="profile-image">
         <mat-card-title class="profile-link" (click)="openProfilePage(post.userdata[0]._id)">{{ post.postAuthor }}</mat-card-title>
         <mat-card-subtitle class="mt-1">{{ post.postDate | amTimeAgo }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image *ngIf="post.postImage != null" class="post-image" src="{{ basicUrl+'/api/image/' + post.postImage }}">
+    <img mat-card-image *ngIf="post.postImage != null" class="post-image" src="{{ post.postImage }}">
     <b class="post-title">{{ post.postTitle }}</b>
     <mat-card-content>
         <p class="post-content">{{ (post.postContent.length > 195)? post.postContent.substring(0,195)+'.....' : post.postContent }}</p>
@@ -16,3 +15,7 @@
         <button *ngIf="authenticated" mat-raised-button color="warn" (click)="deletePost(post)">Delete</button>
     </mat-card-actions>
 </mat-card>
+
+<ng-template #profileImage>
+    <img *ngIf="post.userdata[0].profileImage == null" mat-card-avatar src="{{ profile.defaultProfileImage }}" class="profile-image">
+</ng-template>

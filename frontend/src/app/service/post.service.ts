@@ -14,8 +14,8 @@ export class PostService {
 
 	msg: string
 
-	imageUrl : any = 'http://textiletrends.in/gallery/1547020644No_Image_Available.jpg'
-
+	imageUrl : string = 'http://textiletrends.in/gallery/1547020644No_Image_Available.jpg'
+	
 	constructor(
 		private http: Http,
 		private matSnackBar: MatSnackBar,
@@ -44,13 +44,14 @@ export class PostService {
 		})
 	}
 
-	allPosts = (skipPostsLimit)=>{
+	allPosts = (pageIndex, pageSize)=>{
 		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/post`,{
 			headers: headers,
 			params: {
-				skipPostsLimit: skipPostsLimit
+				pageIndex: pageIndex,
+				pageSize:  pageSize
 			}
 		})
 	}

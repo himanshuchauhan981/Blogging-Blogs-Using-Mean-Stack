@@ -20,23 +20,29 @@ export class HomeComponent implements OnInit {
 		private router: Router
 	) { }
 
-	skipPostLimit: number = 0
+	pageSize : number  = 3
+
+	pageIndex : number  = 0
 
 	blogArray: Array<Blogs> = []
 
 	ngOnInit() {
-		this.postService.allPosts(this.skipPostLimit)
+		this.postService.allPosts(this.pageIndex, this.pageSize)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					let resData = res.json()
 					let len = resData.blogs.length
 					for (let i = 0; i < len; i++) {
-						let imageUrl = `${environment.basicUrl}/api/image/${resData.blogs[i].postImage}`
-						resData.blogs[i].userImage = `${environment.basicUrl}/api/user/image/${resData.blogs[i].userId}`
-						resData.blogs[i].postImage = imageUrl
+						if(resData.blogs[i].userImage != null){
+							let imageUrl = `${environment.basicUrl}/api/user/image/${resData.blogs[i].userId}`
+							resData.blogs[i].userImage = imageUrl
+						}
+						else if(resData.blogs[i].postImage != null){
+							let imageUrl = `${environment.basicUrl}/api/image/${resData.blogs[i].postImage}`
+							resData.blogs[i].postImage = imageUrl
+						}
 						this.blogArray.push(resData.blogs[i])
 					}
-					this.skipPostLimit = this.skipPostLimit + 2
 				}
 			})
 		
@@ -44,7 +50,8 @@ export class HomeComponent implements OnInit {
 	}
 
 	onScroll() {
-		this.postService.allPosts(this.skipPostLimit)
+		this.pageIndex = this.pageIndex + 1
+		this.postService.allPosts(this.pageIndex, this.pageSize)
 			.subscribe((res) => {
 				if (res.json().status === 200) {
 					let resData = res.json()
@@ -52,7 +59,6 @@ export class HomeComponent implements OnInit {
 					for (let i = 0; i < len; i++) {
 						this.blogArray.push(resData.blogs[i])
 					}
-					this.skipPostLimit = this.skipPostLimit + 2
 				}
 			})
 	}

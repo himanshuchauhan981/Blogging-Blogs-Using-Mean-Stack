@@ -50,7 +50,9 @@ const posts = {
     },
 
     getAllPosts: async (req, res) => {
-        let skipLimit = parseInt(req.query.skipPostsLimit)
+        let pageIndex = parseInt(req.query.pageIndex)
+        let pageSize = parseInt(req.query.pageSize)
+        pageIndex = pageIndex * pageSize + 1
         const allBlogs = await blogPosts.aggregate([
             {
                 $project: {
@@ -73,7 +75,7 @@ const posts = {
                     as: "comment"
                 }
             }
-        ]).sort({ postDate: -1 }).limit(3).skip(skipLimit)
+        ]).sort({ postDate: -1 }).skip(pageIndex).limit(pageSize)
         res.status(200).json({ blogs: allBlogs, status: 200 })
     },
 
@@ -144,7 +146,9 @@ const posts = {
         if(req.user.username === req.params.username){
             authenticated = true
         }
+        console.log(req.params.username)
         let userid = await users.findOne({username: req.params.username}).select({_id:1})
+        console.log(userid)
         let userPosts = await blogPosts.aggregate([
             {
                 $match: {userId: userid._id}

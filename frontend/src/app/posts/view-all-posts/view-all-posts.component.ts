@@ -13,7 +13,7 @@ import { environment } from '../../../environments/environment'
 })
 export class ViewAllPostsComponent implements OnInit {
 
-	userPost: Array<Blogs>
+	userPost: Array<Blogs> = []
 
 	authenticated: Boolean
 
@@ -32,8 +32,23 @@ export class ViewAllPostsComponent implements OnInit {
 		this.postService.userPosts(username)
 			.subscribe((res:any) => {
 				if (res.json().status === 200) {
+					let resData = res.json().postData
+					for(let i=0;i< resData.length; i++){
+						if(resData.postImage != null){
+							let imageUrl = `${this.basicUrl}/api/image/${resData.postImage}`
+							resData.postImage = imageUrl
+						}
+						if(resData[i].userdata[0].profileImage != null){
+							let imageUrl = `${this.basicUrl}/api/image/${resData[i].userdata[0].profileImage}`
+							resData[i].userdata[0].profileImage = imageUrl
+						}
+						else{
+							resData[i].userdata[0].profileImage = this.profileService.defaultProfileImage
+						}
+						this.userPost.push(resData[i])
+						
+					}
 					this.authenticated = res.json().authenticated
-					this.userPost = res.json().postData
 				}
 			})
 	}

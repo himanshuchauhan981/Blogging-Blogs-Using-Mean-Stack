@@ -14,9 +14,13 @@ module.exports = ()=>{
         userController.saveProfilePic
     )
 
-    router.post('/login',userController.authenticateLoginUser)
+    router.post('/login',
+        userController.authenticateLoginUser
+    )
 
-    router.post('/token',userController.getUsernameFromToken)
+    router.post('/token',
+        userController.getUsernameFromToken
+    )
 
     router.post('/post',
         passport.authenticate('jwt'),

@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <mat-card *ngFor="let blogs of blogArray" class="mb-3">
                 <mat-card-header class="mb-2">
-                    <img mat-card-avatar class="profile-img" src='{{ blogs.userImage }}'>
+                    <img mat-card-avatar class="profile-img" *ngIf="blogs?.userImage != null; else userImage" src='{{ blogs.userImage }}'>
                     <mat-card-title class="profile-link mt-2"(click)="profilePage(blogs.userId)">{{ blogs.postAuthor }}</mat-card-title>
                     <mat-card-subtitle class="mt-1">{{ blogs.postDate | amTimeAgo }}</mat-card-subtitle>
                 </mat-card-header>
@@ -25,3 +25,7 @@
         </div>
     </div>
 </div>
+
+<ng-template #userImage>
+    <img mat-card-avatar class="profile-img" src="{{ profileService.defaultProfileImage }}">
+</ng-template>

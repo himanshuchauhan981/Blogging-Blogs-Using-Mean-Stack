@@ -2,6 +2,7 @@
     background-image: url('../../assets/20.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    height: 80%;
 }
 
 .login-heading{
