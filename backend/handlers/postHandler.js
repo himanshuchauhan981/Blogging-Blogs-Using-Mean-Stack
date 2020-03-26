@@ -1,5 +1,6 @@
 const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId
 
 const { blogPosts, comments, users, postLikes } = require('../models')
 const { getFirstNameAndLastName }  = require('./userHandler')
@@ -101,16 +102,35 @@ const posts = {
 
     getParticularPost: async (req, res) => {
         let postID = req.params.id
-        let userID = req.user._id
+        // let userID = req.user._id
         let likeStatus = false
 
-        let postData = await blogPosts.findById(postID)
-        let commentsdata = await comments.find({ postId: postID })
-        let likeData = await postLikes.findOne({postId: postID, userId: userID})
+        let postData = await blogPosts.aggregate([
+            {
+                $match: { "_id":  ObjectId(postID) }
+            },
+            {
+                $project: { postTitle :1, postContent: 1,postDate: 1, postAuthor:1 }
+            },
+            {
+                $lookup: {
+                    from:'likes',
+                    pipeline: [{ $match: { postId: postID } }],
+                    as:'likes'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'comments',
+                    pipeline: [ { $match: { postId: postID } },{ $project: { text:1, createdAt:1 } } ],
+                    as: 'comments'
+                }
+            } 
+        ])
+        likeCount = postData[0]['likes'].length
+        commentCount = postData[0]['comments'].length
 
-        if(likeData != null) likeStatus = true
-
-        res.status(200).json({ post: postData, commentLength: commentsdata.length, status: 200,likeStatus: likeStatus, currentUserId: req.user._id })
+        res.status(200).json({ post: postData[0], commentCount: commentCount, status: 200,likeCount: likeCount })
     },
 
     getParticularPostComments: async (req, res) => {

@@ -20,7 +20,7 @@ export class ViewPostComponent implements OnInit {
 
 	post : Blogs
 
-	commentsLength = 0
+	commentCount : number = 0
 
 	clearComment = ''
 
@@ -58,7 +58,7 @@ export class ViewPostComponent implements OnInit {
 				}
 				else if (res.json().status === 200) {
 					this.commentsArray = res.json().data
-					this.commentsLength = res.json().length
+					this.commentCount = res.json().length
 					this.clearComment = null
 				}
 			})
@@ -70,8 +70,11 @@ export class ViewPostComponent implements OnInit {
 			.subscribe((res) => {
 				this.likeState = res.json().likeStatus
 				this.post = res.json().post
-				this.post.postImage = `${environment.basicUrl}/api/image/${this.post.postImage}`
-				this.commentsLength = res.json().commentLength
+				if(this.post.postImage != null){
+					this.post.postImage = `${environment.basicUrl}/api/image/${this.post.postImage}`
+				}
+				this.commentCount = res.json().commentCount
+				console.log(res.json())
 				this.userImage = `${environment.basicUrl}/api/user/image/${res.json().currentUserId}`
 			})
 
@@ -79,7 +82,7 @@ export class ViewPostComponent implements OnInit {
 			.subscribe(data => {
 				let index = this.commentsArray.findIndex(p => p._id == data._id)
 				this.commentsArray.splice(index, 1)
-				this.commentsLength = this.commentsLength - 1
+				this.commentCount = this.commentCount - 1
 			})
 	}
 
