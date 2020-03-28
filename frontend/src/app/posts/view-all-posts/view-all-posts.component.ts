@@ -17,7 +17,7 @@ export class ViewAllPostsComponent implements OnInit {
 
 	authenticated: Boolean
 
-	basicUrl : string = environment.basicUrl
+	basicUrl: string = environment.basicUrl
 
 	constructor(
 		private postService: PostService,
@@ -30,26 +30,23 @@ export class ViewAllPostsComponent implements OnInit {
 	ngOnInit() {
 		let username = this.activatedRoute.snapshot.params.id
 		this.postService.userPosts(username)
-			.subscribe((res:any) => {
-				if (res.json().status === 200) {
-					let resData = res.json().postData
-					for(let i=0;i< resData.length; i++){
-						if(resData.postImage != null){
-							let imageUrl = `${this.basicUrl}/api/image/${resData.postImage}`
-							resData.postImage = imageUrl
-						}
-						if(resData[i].userdata[0].profileImage != null){
-							let imageUrl = `${this.basicUrl}/api/image/${resData[i].userdata[0].profileImage}`
-							resData[i].userdata[0].profileImage = imageUrl
-						}
-						else{
-							resData[i].userdata[0].profileImage = this.profileService.defaultProfileImage
-						}
-						this.userPost.push(resData[i])
-						
+			.subscribe((res: any) => {
+				let resData = res.postData
+				for (let i = 0; i < resData.length; i++) {
+					if (resData.postImage != null) {
+						let imageUrl = `${this.basicUrl}/api/image/${resData.postImage}`
+						resData.postImage = imageUrl
 					}
-					this.authenticated = res.json().authenticated
+					if (resData[i].userdata[0].profileImage != null) {
+						let imageUrl = `${this.basicUrl}/api/image/${resData[i].userdata[0].profileImage}`
+						resData[i].userdata[0].profileImage = imageUrl
+					}
+					else {
+						resData[i].userdata[0].profileImage = this.profileService.defaultProfileImage
+					}
+					this.userPost.push(resData[i])
 				}
+				this.authenticated = res.authenticated
 			})
 	}
 
@@ -57,26 +54,30 @@ export class ViewAllPostsComponent implements OnInit {
 		this.router.navigate([`/${postAuthor}/${postId}/edit`])
 	}
 
-	deletePost(post) {
-		this.postService.delete(post._id)
-			.subscribe((res) => {
-				if (res.json().status === 200) {
-					let index = this.userPost.indexOf(post)
-					this.userPost.splice(index, 1)
-				}
-				this.matSnackBar.open(res.json().msg, 'Close', {
-					duration: 8000
-				})
+	deletePost(id) {
+		this.postService.delete(id)
+			.subscribe((res: any) => {
+				this.userPost = this.userPost.filter(post => post._id != id)
+				this.openSnackBar(res.msg)
+			},
+			error =>{
+				this.openSnackBar(error.msg)
 			})
 	}
-	
-	openProfilePage(id){
-		this.profileService.username(id)
-			.subscribe((res)=>{
-				if(res.json().status === 200){
-					this.router.navigate([`/profile/${res.json().data.username}`])
-				}
-			})
+
+	// openProfilePage(id) {
+	// 	this.profileService.username(id)
+	// 		.subscribe((res: any) => {
+	// 			if (res.json().status === 200) {
+	// 				this.router.navigate([`/profile/${res.json().data.username}`])
+	// 			}
+	// 		})
+	// }
+
+	openSnackBar(msg){
+		this.matSnackBar.open(msg,'Close',{
+			duration: 2000
+		})
 	}
 
 }

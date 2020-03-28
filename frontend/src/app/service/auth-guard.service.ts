@@ -14,26 +14,17 @@ export class AuthGuardService implements CanActivate {
 	constructor(private userService: UserService, private router: Router) { }
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
 		this.userService.validateJWTToken()
-			.subscribe((res) => {
-				let status = res.json().status
-				if (status === 401) {
-					this.userService.loginObservable.next(false)
-					this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } })
-					this.isTrue = false
-				}
-				else if (status === 200) {
-					this.userService.loginObservable.next(true)
-					this.isTrue = true
-					this.router.navigate([state.url])
-					this.currentUser = res.json().user.username
-				}
-			}, error => {
-				this.router.navigate(['login'])
-				this.isTrue = false
-				this.userService.loginObservable.next(false)
-			})
+		.subscribe((res:any) =>{
+			this.userService.loginObservable.next(true)
+			this.isTrue = true
+			this.router.navigate([state.url])
+			this.currentUser = res.user.username
+		},error =>{
+			this.userService.loginObservable.next(false)
+			this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } })
+			this.isTrue = false
+		})
 		return this.isTrue
 	}
 }

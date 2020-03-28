@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core'
-import { Http, RequestOptions, Headers } from '@angular/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 import { Subject } from 'rxjs'
 
@@ -22,7 +22,7 @@ export class UserService {
 	public loginObservable = new Subject<Boolean>()
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
   ) { }
 
@@ -48,14 +48,11 @@ export class UserService {
   }
   
   validateJWTToken = () =>{
-		this.token = this.storage.get('token')
-
-		let options = new RequestOptions()
-		options.headers = new Headers()
-		options.headers.append('Content-Type', 'application/json')
-		options.headers.append('Authorization', `Bearer ${this.token}`)
-		
-		return this.http.post(`${this.basicUrl}/api/token`,null,options)
+    let options = this.appendHeaders()
+    
+		return this.http.post(`${this.basicUrl}/api/token`,null,{
+      headers : options
+    })
   }
   
   logout = () =>{
@@ -65,10 +62,20 @@ export class UserService {
   
   appendHeaders = () =>{
     this.token = this.storage.get('token')
-
-    let headers = new Headers()
-    headers.append('Authorization', `Bearer ${this.token}`)
     
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+    headers = headers.append('Authorization',`Bearer ${this.token}`)
+
+    return headers
+  }
+
+  getToken(){
+    return this.storage.get('token')
+  }
+
+  multipartHeaders = () =>{
+    this.token = this.storage.get('token')
+    let headers = new HttpHeaders().set('Authorization',`Bearer ${this.token}`)
     return headers
   }
 }

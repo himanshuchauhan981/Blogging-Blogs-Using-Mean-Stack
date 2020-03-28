@@ -2,7 +2,7 @@ const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId
 
-const { blogPosts, comments, users, postLikes } = require('../models')
+const { blogPosts, users, postLikes } = require('../models')
 const { getFirstNameAndLastName }  = require('./userHandler')
 
 async function capitalizeUsername(username){
@@ -29,6 +29,59 @@ async function editPostWithImageUpdate(req){
     })
 }
 
+async function showEditPost(id){
+    let post = await blogPosts.findById(id).select({postTitle:1, postContent:1, postImage:1})
+    return post
+}
+
+async function viewPost(postId,userId){
+    let likeStatus = false
+    
+    let postData = await blogPosts.aggregate([
+        {
+            $match: { "_id":  ObjectId(postId) }
+        },
+        {
+            $project: { postTitle :1, postContent: 1,postDate: 1, postAuthor:1,postImage:1,userId:1 }
+        },
+        {
+            $lookup: {
+                from:'likes',
+                pipeline: [{ $match: { postId: postId } }],
+                as:'likes'
+            }
+        },
+        {
+            $lookup: {
+                from: 'comments',
+                pipeline: [ { $match: { postId: postId } },{ $project: { text:1, createdAt:1 } } ],
+                as: 'comments'
+            }
+        },
+        {
+            $lookup: {
+                from: 'users',
+                pipeline: [ { $match: {"_id":  ObjectId(userId)} },{ $project: { profileImage:1,username:1 } } ],
+                as: 'user'
+            }
+        }
+    ])
+    likeCount = postData[0]['likes'].length
+    commentCount = postData[0]['comments'].length
+
+
+    let likeData = await postLikes.findOne({postId: postId, userId: userId})
+    if(likeData != null) likeStatus = true
+
+    let data = { 
+        post: postData[0],
+        commentCount: commentCount, 
+        likeCount: likeCount,
+        likeStatus: likeStatus
+    }
+    return data
+}
+
 const posts = {
     createNewPost: async (req, res) => {
         let userData = await capitalizeUsername(req.user.username)
@@ -42,10 +95,10 @@ const posts = {
         await blogPostObject.save((err,post)=>{
             if (err) {
                 let error = Object.values(err.errors)[0].message
-                res.status(400).send({ status:400,msg:'Unexpected error, Try Again' })
+                res.status(400).json('Something wrong happened, Try again!!!')
             }
             else {
-                res.status(200).send({ status:200,msg: "New post created" })
+                res.status(200).json('New post created')
             }
         })
     },
@@ -56,6 +109,14 @@ const posts = {
         pageIndex = pageIndex * pageSize + 1
         const allBlogs = await blogPosts.aggregate([
             {
+                $lookup: {
+                    from: "comments",
+                    localField: "_id",
+                    foreignField: "postId",
+                    as: "comments"
+                }
+            },
+            {
                 $project: {
                     "_id": {
                         "$toString": "$_id"
@@ -65,26 +126,19 @@ const posts = {
                     "postDate": "$postDate",
                     "postAuthor": "$postAuthor",
                     "postImage": "$postImage",
-                    "userId": "$userId"
-                }
-            },
-            {
-                $lookup: {
-                    from: "comments",
-                    localField: "_id",
-                    foreignField: "postId",
-                    as: "comment"
+                    "userId": "$userId",
+                    "comments.text":1
                 }
             }
         ]).sort({ postDate: -1 }).skip(pageIndex).limit(pageSize)
-        res.status(200).json({ blogs: allBlogs, status: 200 })
+        res.status(200).json({ blogs: allBlogs })
     },
 
     getPostImage: async (req, res) => {
         let image = {
             filename: req.params.id
         }
-                
+
         let gfs = Grid(mongoose.connection.db, mongoose.mongo)
         gfs.collection('photos')
             gfs.files.findOne(image, (err, file) => {
@@ -95,70 +149,23 @@ const posts = {
                     }
                     catch(e){
                         console.log(e)
-                    }  
+                    }
                 }
             })
     },
 
     getParticularPost: async (req, res) => {
-        let postID = req.params.id
-        // let userID = req.user._id
-        let likeStatus = false
-
-        let postData = await blogPosts.aggregate([
-            {
-                $match: { "_id":  ObjectId(postID) }
-            },
-            {
-                $project: { postTitle :1, postContent: 1,postDate: 1, postAuthor:1 }
-            },
-            {
-                $lookup: {
-                    from:'likes',
-                    pipeline: [{ $match: { postId: postID } }],
-                    as:'likes'
-                }
-            },
-            {
-                $lookup: {
-                    from: 'comments',
-                    pipeline: [ { $match: { postId: postID } },{ $project: { text:1, createdAt:1 } } ],
-                    as: 'comments'
-                }
-            } 
-        ])
-        likeCount = postData[0]['likes'].length
-        commentCount = postData[0]['comments'].length
-
-        res.status(200).json({ post: postData[0], commentCount: commentCount, status: 200,likeCount: likeCount })
-    },
-
-    getParticularPostComments: async (req, res) => {
-        let commentData = await comments.find({ postId: req.query.postId })
-        res.status(200).json({ status: 200, comments: commentData })
-    },
-
-    saveNewPostComment: async (req, res) => {
-        let arr = []
-        let userData = await capitalizeUsername(req.user.username)
-        req.body.createdBy = userData.firstName+' '+userData.lastName
-        let commentObject = new comments(req.body)
-        await commentObject.save(async (err, comment) => {
-            if (err) {
-                let error = Object.values(err.errors)[0].message
-                res.status(200).json({ status: 400, msg: error })
-            }
-            else {
-                arr.push(comment)
-                let commentData = await comments.find({ postId: req.body.postId })
-                res.status(200).json({ status: 200, msg: 'msg saved', data: arr, length: commentData.length })
-            }
-        })
-    },
-
-    deletePostComment: async (req,res)=>{
-        const deleteCommentStatus = await comments.findByIdAndDelete(req.params.id)
-        res.status(200).json({ status: 200, msg: 'message deleted', data: deleteCommentStatus })
+        let post
+        let editStatus = req.query.edit
+        let postId = req.params.id
+        let userId = req.user._id
+        if(editStatus === 'true'){
+            post = await showEditPost(postId)
+        }
+        else{
+            post = await viewPost(postId,userId)   
+        }
+        res.status(200).send(post)
     },
 
     getAllParticularUserPost: async (req, res) => {
@@ -166,14 +173,12 @@ const posts = {
         if(req.user.username === req.params.username){
             authenticated = true
         }
-        console.log(req.params.username)
         let userid = await users.findOne({username: req.params.username}).select({_id:1})
-        console.log(userid)
         let userPosts = await blogPosts.aggregate([
             {
                 $match: {userId: userid._id}
             },
-            { 
+            {
                 $project:{ postTitle: 1, postContent: 1, postAuthor: 1, postImage: 1, postDate: 1 }
             },
             {
@@ -190,32 +195,32 @@ const posts = {
                     as:'userdata'
                 }
             }
-            
+
         ]).sort({ postDate: -1 })
-        res.status(200).json({ status: 200, msg: 'Success', postData: userPosts, authenticated: authenticated })
+        res.status(200).json({ postData: userPosts, authenticated: authenticated })
     },
 
     deleteParticularPost : async (req,res) =>{
-        let postId = req.params.id
-        const userPost = await blogPosts.findById(postId)
-        let isTrue = Object.toString(req.user._id) === Object.toString(userPost.userId)
-        if(userPost != null && isTrue){
-            const postDeleteStatus = await blogPosts.findByIdAndRemove(postId)
-            res.status(200).json({status:200, msg:'Post deleted', deletedPostId : postDeleteStatus._id})
+        let id = req.params.id
+        let userPost = await blogPosts.findById(id)
+        if(userPost){
+            let authorizedUser = Object.toString(req.user._id) === Object.toString(userPost.userId)
+            if(authorizedUser){
+                await blogPosts.remove(id)
+                res.status(200).json({msg:'Post deleted'})
+            }
+            else res.status(404).json('Something wrong happened, Try again')
         }
-        else{
-            res.status(200).json({status: 404, msg:'Post not found'})
-        }
+        else res.status(404).json('Post not found')
     },
 
     editPost : async (req,res)=>{
         if(req.params.username === req.user.username){
             if(req.file  === undefined) await editPostWithoutImageUpdate(req)
             else await editPostWithImageUpdate(req)
-            
-            res.status(200).json({status:200,msg:'post edited'})
+            res.status(200).json('Post edited')
         }
-        else res.status(200).json({status:400, msg:'Unexpected Error'})
+        else res.status(400).json('Post not edited. Try again')
     }
 }
 

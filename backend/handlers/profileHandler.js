@@ -19,8 +19,13 @@ const profile = {
         if(req.user.username === req.params.username){
             authorized = true
         }
-        const userDetails = await users.findOne({username:req.params.username}).select({email:1,firstName:1, lastName:1,profileImage:1})
-        res.status(200).json({status: 200, data: userDetails, msg: 'Success', authorized: authorized})
+        let userDetails = await users.findOne(
+            {
+                username:req.params.username
+            }
+        ).select({email:1, firstName:1, lastName:1, profileImage:1})
+        
+        res.status(200).json({userDetails, authorized})
     },
 
     updateUserPassword : async(req,res)=>{
@@ -40,8 +45,8 @@ const profile = {
     },
 
     getOtherUserProfileData : async (req,res)=>{
-        const profileData = await users.findById(req.params.id).select({username:1})
-        res.status(200).json({status: 200, msg: 'Success', data: profileData})
+        const profileData = await users.findById(req.query.id).select({username:1})
+        res.status(200).send(profileData)
     },
 
     getAllProfileName : async(req,res)=>{

@@ -31,15 +31,13 @@ export class LoginComponent implements OnInit {
 
 	loginUser(loginForm) {
 		this.userService.login(loginForm.value)
-			.subscribe((res) => {
-				if (res.json().status === 401) {
-					this.loginError = res.json().msg
-				}
-				else if (res.json().status === 200) {
-					let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
-					this.userService.storeJWTToken(res.json().token)
-					this.router.navigate([returnUrl || 'home'])
-				}
+			.subscribe((res:any) => {
+				let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
+				this.userService.storeJWTToken(res.token)
+				this.router.navigate([returnUrl || 'home'])
+			},
+			error =>{
+				this.loginError = error.msg
 			})
 	}
 

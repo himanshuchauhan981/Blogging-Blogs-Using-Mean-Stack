@@ -21,16 +21,6 @@ const post = {
         return response
     },
 
-    getParticularPostComments: async (req,res)=>{
-        const response = await postHandler.getParticularPostComments(req,res)
-        return response
-    },
-
-    saveNewPostComment : async (req,res)=>{
-        const response = await postHandler.saveNewPostComment(req,res)
-        return response
-    },
-
     getAllParticularUserPost : async (req,res)=>{
         const response = await postHandler.getAllParticularUserPost(req,res)
         return response
@@ -38,11 +28,6 @@ const post = {
 
     deleteParticularPost : async (req,res)=>{
         const response = await postHandler.deleteParticularPost(req,res)
-        return response
-    },
-
-    deletePostComment : async (req,res)=>{
-        const response = await postHandler.deletePostComment(req,res)
         return response
     },
 

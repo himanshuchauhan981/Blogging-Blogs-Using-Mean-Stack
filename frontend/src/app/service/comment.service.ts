@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core'
-import { Http } from '@angular/http'
+import { HttpClient } from '@angular/common/http'
 
 import { environment } from '../../environments/environment'
 import { UserService } from './user.service'
@@ -14,7 +14,7 @@ export class CommentService {
 	@Output() deleteCommentEvent: EventEmitter<any> = new EventEmitter()
 
 	constructor(
-		private http: Http,
+		private http: HttpClient,
 		private userService: UserService
 	) { }
 

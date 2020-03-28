@@ -9,11 +9,11 @@ let likes = {
                 userId : req.user._id
             })
             await likeObject.save()
-            res.status(200).json({status:200,msg:'like saved'})
+            res.status(200).send(true)
         }
         else{
             await postLikes.findOneAndRemove({postId: req.params.postId,userId: req.user._id})
-            res.status(200).json({status:404,msg:'Like existed and removed successfully'})
+            res.status(200).send(false)
         }
     }
 }

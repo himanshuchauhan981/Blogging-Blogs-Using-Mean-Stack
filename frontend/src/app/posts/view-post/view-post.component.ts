@@ -50,7 +50,7 @@ export class ViewPostComponent implements OnInit {
 
 	submit(commentForm, postId) {
 		this.commentService.post(commentForm.value, postId)
-			.subscribe((res) => {
+			.subscribe((res:any) => {
 				if (res.json().status === 400) {
 					this.matSnackBar.open(res.json().msg, 'Close', {
 						duration: 8000
@@ -66,16 +66,20 @@ export class ViewPostComponent implements OnInit {
 
 	ngOnInit() {
 		let postID = this.activatedRoute.snapshot.params.id
-		this.postService.particularPost(postID)
-			.subscribe((res) => {
-				this.likeState = res.json().likeStatus
-				this.post = res.json().post
-				if(this.post.postImage != null){
-					this.post.postImage = `${environment.basicUrl}/api/image/${this.post.postImage}`
+		let editPost = false
+		this.postService.particularPost(postID,editPost)
+			.subscribe((res:any) => {
+				this.likeState = res.likeStatus
+				let post = res.post
+				if(post.postImage != null){
+					post.postImage = `${environment.basicUrl}/api/image/${post.postImage}`
 				}
-				this.commentCount = res.json().commentCount
-				console.log(res.json())
-				this.userImage = `${environment.basicUrl}/api/user/image/${res.json().currentUserId}`
+				this.commentCount = res.commentCount
+				this.post = post
+				if(res.post.user[0].profileImage != null){
+					this.userImage = res.post.user[0].profileImage
+				}
+				else this.userImage = this.profileService.defaultProfileImage			
 			})
 
 		this.commentService.getEmittedComment()
@@ -88,10 +92,8 @@ export class ViewPostComponent implements OnInit {
 
 	postComments(postId) {
 		this.commentService.get(postId)
-			.subscribe((res) => {
-				if (res.json().status === 200) {
-					this.commentsArray = res.json().comments
-				}
+			.subscribe((res:any) => {
+				this.commentsArray = res
 			})
 	}
 
@@ -102,24 +104,17 @@ export class ViewPostComponent implements OnInit {
 		})
 	}
 
-	serProfile(postId) {
-		this.profileService.username(postId)
-			.subscribe((res) => {
-				if (res.json().status === 200) {
-					this.router.navigate([`/profile/${res.json().data.username}`])
-				}
-			})
+	userProfile(userId) {
+		this.profileService.username(userId)
+		.subscribe((res:any) => {
+			this.router.navigate([`/profile/${res.username}`])
+		})
 	}
 
 	postLike(postId) {
 		this.likeService.post(postId)
-			.subscribe((res) => {
-				if (res.json().status === 200) {
-					this.likeState = true
-				}
-				else if (res.json().status === 404) {
-					this.likeState = false
-				}
-			})
+		.subscribe((res:boolean) => {
+			this.likeState = res
+		})
 	}
 }

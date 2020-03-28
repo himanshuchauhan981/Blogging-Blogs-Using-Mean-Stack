@@ -24,9 +24,9 @@ export class DeleteCommentDialogBoxComponent {
 
 	deleteComment() {
 		this.commentService.delete(this.data.id)
-			.subscribe((res) => {
+			.subscribe((res:any) => {
 				this.closeDialogBox()
-				if (res.json().status === 200) {
+				if (res.status === 200) {
 					this.commentService.changeComment(res.json().data)
 				}
 				this.matSnackBar.open(res.json().msg, 'Close', {

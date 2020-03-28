@@ -41,7 +41,7 @@ export class ProfileDialogBoxComponent{
 
 	submitProfile(profileForm,data): void{
 		this.profileService.updateProfile(profileForm.value, data)
-		.subscribe((res)=>{
+		.subscribe((res:any)=>{
 			let status = res.json().status
 			let msg = res.json().msg
 			this.dialogRef.close()

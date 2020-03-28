@@ -30,20 +30,9 @@ export class ProfileComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+
 		this.profileService.getProfile()
-			.subscribe((res) => {
-				if (res.json().status === 200) {
-					this.user = res.json().data
-					if(this.user.profileImage != null){
-						this.user.profileImage = `${environment.basicUrl}/api/image/${this.user.profileImage}`
-					}
-					let firstName = res.json().data.firstName.charAt(0).toUpperCase() + res.json().data.firstName.slice(1)
-					let lastName = res.json().data.lastName.charAt(0).toUpperCase() + res.json().data.lastName.slice(1)
-					this.user.name = firstName + ' '+lastName
-					this.authorized = res.json().authorized
-					this.userService.titleObservable.next(`${this.user.name}`)
-				}
-			})
+
 		this.profileService.emailValue()
 			.subscribe(data => {
 				if (data != undefined) {
@@ -66,4 +55,12 @@ export class ProfileComponent implements OnInit {
 		})
 	}
 
+}
+
+export interface Profile{
+	id: string
+	username: string
+	email: string
+	profileImage: string
+	name:string
 }

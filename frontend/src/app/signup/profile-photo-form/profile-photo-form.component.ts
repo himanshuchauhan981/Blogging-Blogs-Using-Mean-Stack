@@ -65,11 +65,9 @@ export class ProfilePhotoFormComponent {
 			}
 			formData.append('userId', this.id)
 			this.userService.saveProfilePhoto(formData)
-				.subscribe((res)=>{
-					if(res.json().status === 200){
-						this.router.navigate(['login'])
-					}
-				})
+			.subscribe((res)=>{
+				this.router.navigate(['login'])
+			})
 		}
 	}
 

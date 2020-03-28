@@ -2,6 +2,7 @@
     <h4 class="signup-heading">Sign Up</h4>
     <div class="signup-content">
         <form [formGroup]="signupForm" (ngSubmit)="signupdata(signupForm)">
+            <div *ngIf="signupError">{{ signupError }}</div>
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <mat-form-field appearance="outline" class="set-width">

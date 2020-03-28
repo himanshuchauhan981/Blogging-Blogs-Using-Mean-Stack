@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { StorageServiceModule } from 'angular-webstorage-service'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -35,6 +36,7 @@ import { SignupFormComponent } from './signup/signup-form/signup-form.component'
 import { ProfilePhotoFormComponent } from './signup/profile-photo-form/profile-photo-form.component';
 import { MainComponent } from './main/main.component';
 import { PostComponent } from './posts/post/post.component';
+import { ErrorIntercept } from './error.interceptor'
 
 @NgModule({
 	declarations: [
@@ -63,6 +65,7 @@ import { PostComponent } from './posts/post/post.component';
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
+		HttpClientModule,
 		StorageServiceModule,
 		BrowserAnimationsModule,
 		NgbModule,
@@ -80,7 +83,14 @@ import { PostComponent } from './posts/post/post.component';
 		MatDialogModule,
 		MatTableModule
 	],
-	providers: [HomeComponent],
+	providers: [
+		HomeComponent,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorIntercept,
+			multi: true
+		}
+	],
 	bootstrap: [AppComponent],
 	entryComponents: [
 		ProfileDialogBoxComponent,

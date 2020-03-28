@@ -15,14 +15,14 @@ const user = {
             req.body.password = hash
 
             let user = new users(req.body)
-            
+
             await user.save((err, user) => {
                 if (err) {
                     let error = Object.values(err.errors)[0].message
                     res.status(400).send(error)
                 }
                 else {
-                    res.status(200).send({ status:200, msg:'Data Saved',data: user._id })
+                    res.status(200).send({ data: user._id })
                 }
             })
         }
@@ -34,11 +34,11 @@ const user = {
     authenticateLoginUser: async (req, res, next) => {
         passport.authenticate('local', (err, user, info) => {
             if (err) return next(err)
-            if (!user) return res.status(200).send({status:401, msg:'Invalid Credentials'})
+            if (!user) return res.status(401).send('Invalid Credentials')
             req.logIn(user, (err) => {
                 if (err) { return next(err); }
                 let token = createToken(user._id)
-                return res.status(200).json({ status: 200, msg: 'Login Successful', token: token })
+                return res.status(200).json({ token: token })
             })
         })(req, res, next)
     },
@@ -47,17 +47,9 @@ const user = {
         passport.authenticate('jwt', (err, user, info) => {
             if (err) return next(err)
             if (!user) {
-                return res.status(200).json({
-                    status: 401,
-                    error: 'Unauthorized User'
-                })
+                return res.status(401).json({ error: 'Unauthorized User' })
             }
-            return res.status(200).json({
-                status: 200,
-                user: user,
-                msg : 'Authorized User'
-            })
-
+            return res.status(200).json({ user: user })
         })(req, res, next)
     },
 
@@ -70,7 +62,7 @@ const user = {
         let id = mongoose.Types.ObjectId(req.body.userId)
 
         await users.findOneAndUpdate({_id: id},{profileImage:req.file.filename})
-        res.status(200).json({status:200, msg:'Image saved'})
+        res.status(200).json({msg:'Image saved'})
     },
 
     getUserImage: async(req,res)=>{
@@ -79,7 +71,7 @@ const user = {
             filename: data.profileImage
         }
         if(data.profileImage === null) image.filename = 'f4cf63567d7652cd466c1a67172efeed.png'
-		
+
         let gfs = Grid(mongoose.connection.db, mongoose.mongo)
         gfs.collection('photos')
             gfs.files.findOne(image, (err, file) => {
@@ -90,7 +82,7 @@ const user = {
                     }
                     catch(e){
                         console.log(e)
-                    }  
+                    }
                 }
             })
     }

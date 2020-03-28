@@ -43,7 +43,7 @@ export class PasswordDialogBoxComponent{
 
 	submitNewPassword(passwordProfileForm){
 		this.profileService.updatePassword(passwordProfileForm.value)
-		.subscribe(res=>{
+		.subscribe((res:any)=>{
 			this.dialogRef.close()
 			if(res.json().status === 200){
 				this.matSnackBar.open(res.json().msg,'Close',{

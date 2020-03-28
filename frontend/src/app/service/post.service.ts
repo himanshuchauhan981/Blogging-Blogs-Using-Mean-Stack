@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core'
-import { Http } from '@angular/http'
+import { HttpClient } from '@angular/common/http'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { UserService } from './user.service'
+import { Router } from '@angular/router'
 
 import { environment } from '../../environments/environment'
+import { UserService } from './user.service'
 
 @Injectable({
 	providedIn: 'root'
@@ -12,37 +13,31 @@ export class PostService {
 
 	private basicUrl : string = environment.basicUrl
 
-	msg: string
-
 	imageUrl : string = 'http://textiletrends.in/gallery/1547020644No_Image_Available.jpg'
 	
 	constructor(
-		private http: Http,
+		private http: HttpClient,
 		private matSnackBar: MatSnackBar,
-		private userService: UserService
+		private userService: UserService,
+		private router: Router
 	){ }
 
 	fileType: Array <String> = ['image/jpeg','image/jpg','image/png']
 
-	post = (formData) =>{
-		let headers = this.userService.appendHeaders()
-
+	post = (formData: FormData) =>{
+		let options = this.userService.multipartHeaders()
+		
 		this.http.post(`${this.basicUrl}/api/post`,formData,{
-			headers: headers
+			headers: options
 		})
-		.subscribe((res) => {
-			if (res.json().status === 200) {
-				this.msg = res.json().msg
-			}
-			else if (res.json().status === 400) {
-				this.msg = "Something wrong happened, Try again!!!"
-
-			}
-			this.matSnackBar.open(this.msg, 'Close', {
-				duration: 8000
-			})
+		.subscribe((res:any) => {
+			this.openSnackBar(200,res)
+		},
+		error =>{
+			this.openSnackBar(error.status,error.msg)
 		})
 	}
+	
 
 	allPosts = (pageIndex, pageSize)=>{
 		let headers = this.userService.appendHeaders()
@@ -56,11 +51,14 @@ export class PostService {
 		})
 	}
 
-	particularPost = (id)=>{
+	particularPost = (id,editPost)=>{
 		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/post/${id}`,{
-			headers: headers
+			headers: headers,
+			params: {
+				edit: editPost
+			}
 		})
 	}
 
@@ -81,16 +79,28 @@ export class PostService {
 	}
 
 	edit = (username,postId,postData)=>{
-		let headers = this.userService.appendHeaders()
+		let headers = this.userService.multipartHeaders()
 
 		this.http.patch(`${this.basicUrl}/api/${username}/${postId}`,postData,{
 			headers: headers
 		})
-		.subscribe(res => {
-			let msg = res.json().msg
-			this.matSnackBar.open(msg, 'Close', {
-				duration: 8000
-			})
+		.subscribe((res:any) => {
+			this.openSnackBar(200,res)
+		},
+		error=>{
+			this.openSnackBar(error.status,error.msg)
+		})
+	}
+
+	openSnackBar(status,msg){
+		let snackBarRef = this.matSnackBar.open(msg,'Close',{
+			duration: 2000
+		})
+
+		snackBarRef.afterDismissed().subscribe(() =>{
+			if(status === 200){
+				this.router.navigate(['home'])
+			}
 		})
 	}
 }
@@ -102,6 +112,10 @@ export interface Blogs{
 	postImage: string,
 	postDate: Date,
 	userId: string,
-	lastModifiedAt: string,
-	postAuthor: string
+	postAuthor: string,
+	comments : Comments[]
+}
+
+export interface Comments{
+
 }

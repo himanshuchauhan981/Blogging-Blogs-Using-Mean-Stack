@@ -45,17 +45,17 @@ export class NavbarComponent implements OnInit{
 			this.username = this.authGuardService.currentUser
 		})
 
-		this.profileService.getAllProfileName()
-			.subscribe(res =>{
-				let data = res.json().data
-				data.forEach((data)=>{
-					let fullName = this.capitalizaFirstAndLastName(data.fullName)
-					data.fullName = fullName
-				})
-				this.defaultUserList = data.map((obj)=>{
-					return obj.fullName
-				})
-			})		
+		// this.profileService.getAllProfileName()
+		// 	.subscribe(res =>{
+		// 		let data = res.json().data
+		// 		data.forEach((data)=>{
+		// 			let fullName = this.capitalizaFirstAndLastName(data.fullName)
+		// 			data.fullName = fullName
+		// 		})
+		// 		this.defaultUserList = data.map((obj)=>{
+		// 			return obj.fullName
+		// 		})
+		// 	})		
 	}
 
 	searchUsers(event){

@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 
-const { userController,postController,profileController,likeController } = require('../controllers')
+const { userController,postController,profileController,likeController,commentController } = require('../controllers')
 const { upload } = require('../middleware').multerMiddleware
 
 module.exports = ()=>{
@@ -53,22 +53,27 @@ module.exports = ()=>{
 
     router.post('/comment',
         passport.authenticate('jwt'),
-        postController.saveNewPostComment
+        commentController.saveNewPostComment
     )
 
     router.get('/comment',
         passport.authenticate('jwt'),
-        postController.getParticularPostComments
+        commentController.getParticularPostComments
     )
 
     router.delete('/comment/:id',
         passport.authenticate('jwt'),
-        postController.deletePostComment
+        commentController.deletePostComment
     )
 
     router.get('/profile/name',
         passport.authenticate('jwt'),
         profileController.getAllProfileName
+    ),
+
+    router.get('/profile/id',
+        passport.authenticate('jwt'),
+        profileController.getOtherUserProfileData
     ),
 
     router.get(['/:username','/profile/:username'],
@@ -89,11 +94,6 @@ module.exports = ()=>{
     router.patch('/:username/password',
         passport.authenticate('jwt'),
         profileController.updateUserPassword
-    )
-
-    router.get('/profile/id/:id',
-        passport.authenticate('jwt'),
-        profileController.getOtherUserProfileData
     )
 
     router.post('/:postId/like',

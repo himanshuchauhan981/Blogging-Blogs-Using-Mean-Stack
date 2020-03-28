@@ -28,21 +28,19 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 		this.postService.allPosts(this.pageIndex, this.pageSize)
-			.subscribe((res) => {
-				if (res.json().status === 200) {
-					let resData = res.json()
-					let len = resData.blogs.length
-					for (let i = 0; i < len; i++) {
-						if(resData.blogs[i].userImage != null){
-							let imageUrl = `${environment.basicUrl}/api/user/image/${resData.blogs[i].userId}`
-							resData.blogs[i].userImage = imageUrl
-						}
-						else if(resData.blogs[i].postImage != null){
-							let imageUrl = `${environment.basicUrl}/api/image/${resData.blogs[i].postImage}`
-							resData.blogs[i].postImage = imageUrl
-						}
-						this.blogArray.push(resData.blogs[i])
+			.subscribe((res:any) => {
+				let resData = res
+				let len = resData.blogs.length
+				for (let i = 0; i < len; i++) {
+					if(resData.blogs[i].userImage != null){
+						let imageUrl = `${environment.basicUrl}/api/user/image/${resData.blogs[i].userId}`
+						resData.blogs[i].userImage = imageUrl
 					}
+					else if(resData.blogs[i].postImage != null){
+						let imageUrl = `${environment.basicUrl}/api/image/${resData.blogs[i].postImage}`
+						resData.blogs[i].postImage = imageUrl
+					}
+					this.blogArray.push(resData.blogs[i])
 				}
 			})
 		
@@ -52,23 +50,19 @@ export class HomeComponent implements OnInit {
 	onScroll() {
 		this.pageIndex = this.pageIndex + 1
 		this.postService.allPosts(this.pageIndex, this.pageSize)
-			.subscribe((res) => {
-				if (res.json().status === 200) {
-					let resData = res.json()
-					let len = resData.blogs.length
-					for (let i = 0; i < len; i++) {
-						this.blogArray.push(resData.blogs[i])
-					}
+			.subscribe((res:any) => {
+				let resData = res
+				let len = resData.blogs.length
+				for (let i = 0; i < len; i++) {
+					this.blogArray.push(resData.blogs[i])
 				}
 			})
 	}
 
 	profilePage(id) {
 		this.profileService.username(id)
-		.subscribe((res)=>{
-			if(res.json().status === 200){
-				this.router.navigate([`/profile/${res.json().data.username}`])
-			}
+		.subscribe((res:any)=>{
+			this.router.navigate([`/profile/${res.username}`])
 		})
 	}
 }

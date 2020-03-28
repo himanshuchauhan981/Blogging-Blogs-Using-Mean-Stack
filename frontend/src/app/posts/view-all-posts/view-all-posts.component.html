@@ -12,7 +12,7 @@
     <mat-card-actions>
         <a [routerLink]="['/post',post._id]"><button mat-raised-button color="accent">Read More</button></a>
         <button *ngIf="authenticated" mat-raised-button color="primary" (click)="editPost(post.userdata[0].username,post._id)">Edit</button>
-        <button *ngIf="authenticated" mat-raised-button color="warn" (click)="deletePost(post)">Delete</button>
+        <button *ngIf="authenticated" mat-raised-button color="warn" (click)="deletePost(post._id)">Delete</button>
     </mat-card-actions>
 </mat-card>
 

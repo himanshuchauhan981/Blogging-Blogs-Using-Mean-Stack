@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core'
-import { Http } from '@angular/http'
+import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
 
 import { AuthGuardService } from './auth-guard.service'
@@ -15,10 +15,14 @@ export class ProfileService {
 
 	@Output() fire: EventEmitter<any> = new EventEmitter()
 
+	user : { id: string, username: string, email: string, profileImage: string, name:string } = null
+
+	authorized: Boolean = false
+
 	defaultProfileImage: string = 'https://pngimage.net/wp-content/uploads/2018/05/default-user-image-png-7.png'
 
 	constructor(
-		private http: Http,
+		private http: HttpClient,
 		private authGuardService: AuthGuardService,
 		private userService: UserService,
 		private router: Router
@@ -27,8 +31,18 @@ export class ProfileService {
 	getProfile() {
 		let headers = this.userService.appendHeaders()
 
-		return this.http.get(`${this.basicUrl}/api${this.router.url}`, {
+		this.http.get(`${this.basicUrl}/api${this.router.url}`, {
 			headers: headers
+		})
+		.subscribe((res:any) =>{
+			let profileData = res.userDetails
+			profileData.name = profileData.firstName + ' '+profileData.lastName
+			if(profileData.profileImage != null){
+				profileData.profileImage = `${environment.basicUrl}/api/image/${profileData.profileImage}`
+			}
+			this.user = profileData
+			this.authorized = res.authorized
+			this.userService.titleObservable.next(`${this.user.name}`)
 		})
 	}
 
@@ -59,8 +73,11 @@ export class ProfileService {
 	username(id){
 		let headers = this.userService.appendHeaders()
 
-		return this.http.get(`${this.basicUrl}/api/profile/id/${id}`,{
-			headers: headers
+		return this.http.get(`${this.basicUrl}/api/profile/id`,{
+			headers: headers,
+			params: {
+				id: id
+			}
 		})
 	}
 

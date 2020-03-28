@@ -72,7 +72,7 @@ export class PostComponent implements OnInit {
 
 		formData.append("postTitle", postValues.postTitle)
 		formData.append("postContent", postValues.postContent)
-
+		
 		let url = this.activatedRoute.snapshot.routeConfig.path
 		if (url == 'post/new') {
 			this.postService.post(formData)
@@ -87,16 +87,17 @@ export class PostComponent implements OnInit {
 	showPost() {
 		this.heading = 'Update Post'
 		let postId = this.activatedRoute.snapshot.params.postId
-		this.postService.particularPost(postId)
-			.subscribe(res => {
-				console.log(res.json())
-				if (res.json().status === 200) {
-					this.post = res.json().post
-					this.postForm.controls['postTitle'].setValue(this.post.postTitle)
-					this.postForm.controls['postContent'].setValue(this.post.postContent)
-					this.postService.imageUrl = `${environment.basicUrl}/api/image/${this.post.postImage}`
-				}
-			})
+		let editPost = true
+		this.postService.particularPost(postId,editPost)
+		.subscribe((res:any) => {
+			let post = res.post
+			this.postForm.controls['postTitle'].setValue(post.postTitle)
+			this.postForm.controls['postContent'].setValue(post.postContent)
+			
+			if(post.postImage != null){
+				this.postService.imageUrl = `${environment.basicUrl}/api/image/${post.postImage}`
+			}
+		})
 	}
 
 	uploadFile() {
