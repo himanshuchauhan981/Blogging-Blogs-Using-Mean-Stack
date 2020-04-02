@@ -34,6 +34,14 @@ async function showEditPost(id){
     return post
 }
 
+async function calculateComments(blogs){
+    for(i=0;i<blogs.length;i++){
+        let len = blogs[i].comments.length
+        blogs[i].comments = len
+    }
+    return blogs
+}
+
 async function viewPost(postId,userId){
     let likeStatus = false
     
@@ -107,30 +115,27 @@ const posts = {
         let pageIndex = parseInt(req.query.pageIndex)
         let pageSize = parseInt(req.query.pageSize)
         pageIndex = pageIndex * pageSize + 1
-        const allBlogs = await blogPosts.aggregate([
+        let allBlogs = await blogPosts.aggregate([
             {
-                $lookup: {
-                    from: "comments",
-                    localField: "_id",
-                    foreignField: "postId",
-                    as: "comments"
-                }
-            },
-            {
-                $project: {
+                "$project": {
                     "_id": {
                         "$toString": "$_id"
                     },
-                    "postTitle": "$postTitle",
-                    "postContent": "$postContent",
-                    "postDate": "$postDate",
-                    "postAuthor": "$postAuthor",
-                    "postImage": "$postImage",
-                    "userId": "$userId",
-                    "comments.text":1
+                    "postContent": 1, "postTitle": 1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1,
+                }
+            },
+            {
+                "$lookup": {
+                    "from": "comments", "localField": "_id", "foreignField": "postId", "as": "comments"
+                }
+            },
+            {
+                "$project": {
+                    "comments._id": 1,"postContent":1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1
                 }
             }
-        ]).sort({ postDate: -1 }).skip(pageIndex).limit(pageSize)
+        ]).skip(pageIndex).limit(pageSize).sort({postDate:-1})
+        allBlogs = await calculateComments(allBlogs)
         res.status(200).json({ blogs: allBlogs })
     },
 

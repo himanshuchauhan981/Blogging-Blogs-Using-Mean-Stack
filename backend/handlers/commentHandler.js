@@ -2,14 +2,29 @@ const { comments } = require('../models')
 
 const comment = {
     getParticularPostComments: async (req, res) => {
-        let commentData = await comments.find({ postId: req.query.postId })
+        let postId = req.query.postId
+        let commentData = await comments.aggregate([
+            { $match: {postId: postId} },
+            { $project: {'createdBy':1,'text':1} },
+            {
+                "$lookup":{
+                    "let": { "userObjId": { "$toObjectId": "$createdBy" } },
+                    "from":"users",
+                    "pipeline":[
+                        { "$match": { "$expr": { "$eq": ["$_id","$$userObjId"] } } }
+                    ],
+                    "as":"user"
+                },
+            },
+            { "$unwind":"$user" },
+            { "$project":{ 'user.firstName':1,'user.lastName':1,'user.profileImage':1,'text':1 } }
+        ])
         res.status(200).send(commentData)
     },
 
     saveNewPostComment: async (req, res) => {
         let arr = []
-        let userData = await capitalizeUsername(req.user.username)
-        req.body.createdBy = userData.firstName+' '+userData.lastName
+        req.body.createdBy = req.user._id
         let commentObject = new comments(req.body)
         await commentObject.save(async (err, comment) => {
             if (err) {
@@ -19,7 +34,7 @@ const comment = {
             else {
                 arr.push(comment)
                 let commentData = await comments.find({ postId: req.body.postId })
-                res.status(200).json({ status: 200, msg: 'msg saved', data: arr, length: commentData.length })
+                res.status(200).json({ data: arr, length: commentData.length })
             }
         })
     },

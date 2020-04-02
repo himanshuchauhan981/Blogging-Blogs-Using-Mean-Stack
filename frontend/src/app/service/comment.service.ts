@@ -18,10 +18,10 @@ export class CommentService {
 		private userService: UserService
 	) { }
 
-	post(object, postId) {
+	post(values, postId) {
 		let commentObject = {
 			postId: postId,
-			text: object.comment,
+			text: values.comment,
 			createdBy: null
 		}
 		let headers = this.userService.appendHeaders()

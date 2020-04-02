@@ -30,7 +30,7 @@ export class ViewPostComponent implements OnInit {
 
 	userImage: String
 
-	commentsArray: Array<Comment>
+	commentsList: Array<Comment> = []
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -48,20 +48,13 @@ export class ViewPostComponent implements OnInit {
 	})
 
 
-	submit(commentForm, postId) {
-		this.commentService.post(commentForm.value, postId)
-			.subscribe((res:any) => {
-				if (res.json().status === 400) {
-					this.matSnackBar.open(res.json().msg, 'Close', {
-						duration: 8000
-					})
-				}
-				else if (res.json().status === 200) {
-					this.commentsArray = res.json().data
-					this.commentCount = res.json().length
-					this.clearComment = null
-				}
-			})
+	submit(commentValues, postId) {
+		this.commentService.post(commentValues, postId)
+		.subscribe((res:any) => {
+			this.commentsList = res.data
+			this.commentCount = res.length
+			this.clearComment = null
+		})
 	}
 
 	ngOnInit() {
@@ -84,8 +77,8 @@ export class ViewPostComponent implements OnInit {
 
 		this.commentService.getEmittedComment()
 			.subscribe(data => {
-				let index = this.commentsArray.findIndex(p => p._id == data._id)
-				this.commentsArray.splice(index, 1)
+				let index = this.commentsList.findIndex(p => p._id == data._id)
+				this.commentsList.splice(index, 1)
 				this.commentCount = this.commentCount - 1
 			})
 	}
@@ -93,7 +86,10 @@ export class ViewPostComponent implements OnInit {
 	postComments(postId) {
 		this.commentService.get(postId)
 			.subscribe((res:any) => {
-				this.commentsArray = res
+				for(let i=0;i<res.length;i++){
+					res[i].createdBy = res[i].user.firstName + " "+ res[i].user.lastName
+					this.commentsList.push(res[i])
+				}
 			})
 	}
 

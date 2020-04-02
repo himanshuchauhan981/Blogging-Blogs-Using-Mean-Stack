@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="comment-section">
-                        <div class="mt-2" *ngFor="let comment of commentsArray">
+                        <div class="mt-2" *ngFor="let comment of commentsList">
                             <div class="d-flex">
                                 <img class="rounded-circle" src="http://bit.ly/34amoMf" height="60px" width="60px">
                                 <div class="d-block pt-2 pl-3 comment-details">
@@ -47,7 +47,7 @@
                                 (click)="dialogBox(comment._id)"
                             ></i>
                         </div>
-                        <form [formGroup]="commentForm" (ngSubmit)="submit(commentForm,post._id)">
+                        <form [formGroup]="commentForm" (ngSubmit)="submit(commentForm.value,post._id)">
                             <div class="d-flex w-100">
                                 <img class="rounded-circle comment-section-img" src="{{ userImage }}">
                                 <div class="input-group">
