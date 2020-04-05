@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AuthGuardService } from './auth-guard.service'
 import { UserService } from './user.service'
 import { environment } from '../../environments/environment'
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -21,12 +23,28 @@ export class ProfileService {
 
 	defaultProfileImage: string = 'https://pngimage.net/wp-content/uploads/2018/05/default-user-image-png-7.png'
 
+	private _profileNames: string[]
+
+	public model: ProfileNames
+
+	formatter = (profileName: ProfileNames) => profileName.fullName
+
+	private _nameList(){
+		let headers = this.userService.appendHeaders()
+
+		return this.http.get(`${this.basicUrl}/api/profile/name`,{
+			headers: headers
+		})
+	}
+
 	constructor(
 		private http: HttpClient,
 		private authGuardService: AuthGuardService,
 		private userService: UserService,
 		private router: Router
-	) { }
+	){ 
+		this.prepareProfileNames()
+	}
 
 	getProfile() {
 		let headers = this.userService.appendHeaders()
@@ -81,11 +99,36 @@ export class ProfileService {
 		})
 	}
 
-	getAllProfileName(){
-		let headers = this.userService.appendHeaders()
-
-		return this.http.get(`${this.basicUrl}/api/profile/name`,{
-			headers: headers
+	prepareProfileNames(){
+		this._nameList().subscribe((res:any) =>{
+			this._profileNames = res
 		})
 	}
+
+	typeahead  = (text$: Observable<string>) => text$.pipe(
+		debounceTime(200),
+		distinctUntilChanged(),
+		filter(keyword => keyword.length >= 2),
+		map(keyword => this._profileNames.filter(data  => data['fullName'].toLowerCase().indexOf(keyword.toLowerCase())> -1))
+	)
+
+	redirectToProfilePage(id: string){
+		this.username(id)
+		.subscribe((res:any)=>{
+			this.router.navigate([`/profile/${res.username}`])
+		})	
+	}
+}
+
+export interface ProfileNames{
+	id: string,
+	fullName: string
+}
+
+export interface User {
+	id: string,
+	username: string,
+	email: string,
+	profileImage: string,
+	name:string 
 }

@@ -8,7 +8,8 @@ const { users } = require('../models')
 
 const user = {
     saveUserDetails: async (req, res) => {
-        let userStatus = await users.findOne({ $and: [{ email: user.email }, { username: user.username }] })
+        let userDetails = req.body
+        let userStatus = await users.findOne({ $or: [{ email: userDetails.email }, { username: userDetails.username }] })
         if (userStatus == null) {
             let salt = bcrypt.genSaltSync(10)
             let hash = bcrypt.hashSync(req.body.password,salt)

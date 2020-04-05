@@ -3,6 +3,15 @@
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse flex-md-row-reverse mr-4">
         <div class="d-md-flex d-block flex-row mx-0" *ngIf="loginStatus">
             <ul class="navbar-nav" *ngIf="loginStatus">
+                <input 
+                    type="text" 
+                    [ngbTypeahead]="profileService.typeahead" 
+                    [(ngModel)]="profileService.model"
+                    [inputFormatter]="profileService.formatter"
+                    [resultFormatter]="profileService.formatter"
+                    [editable]="false"
+                    (selectItem)="redirectToUser($event)"
+                >
                 <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
                 </li>

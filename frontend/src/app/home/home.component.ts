@@ -60,9 +60,6 @@ export class HomeComponent implements OnInit {
 	}
 
 	profilePage(id) {
-		this.profileService.username(id)
-		.subscribe((res:any)=>{
-			this.router.navigate([`/profile/${res.username}`])
-		})
+		this.profileService.redirectToProfilePage(id)
 	}
 }

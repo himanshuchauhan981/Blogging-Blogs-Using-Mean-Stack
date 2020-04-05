@@ -59,7 +59,7 @@ const profile = {
                 }
             ]
         )
-        res.status(200).json({status: 200, msg:'Success',data:profileName})
+        res.status(200).json(profileName)
     }
 }
 

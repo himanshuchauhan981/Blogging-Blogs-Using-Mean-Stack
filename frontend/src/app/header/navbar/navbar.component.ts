@@ -28,8 +28,6 @@ export class NavbarComponent implements OnInit{
 
 	userList = []
 
-	defaultUserList = []
-
 	capitalizaFirstAndLastName(fullName){
 		return fullName.toLowerCase().replace( /\b./g, function(a){ return a.toUpperCase(); } );
 	}
@@ -43,22 +41,11 @@ export class NavbarComponent implements OnInit{
 		this.userService.loginObservable.subscribe(value =>{
 			this.loginStatus = value
 			this.username = this.authGuardService.currentUser
-		})
-
-		// this.profileService.getAllProfileName()
-		// 	.subscribe(res =>{
-		// 		let data = res.json().data
-		// 		data.forEach((data)=>{
-		// 			let fullName = this.capitalizaFirstAndLastName(data.fullName)
-		// 			data.fullName = fullName
-		// 		})
-		// 		this.defaultUserList = data.map((obj)=>{
-		// 			return obj.fullName
-		// 		})
-		// 	})		
+		})	
 	}
 
-	searchUsers(event){
-		console.log(event.length)
+	redirectToUser(event){
+		let userId = event.item._id
+		this.profileService.redirectToProfilePage(userId)
 	}
 }

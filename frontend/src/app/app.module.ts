@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule,NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap'
 import { StorageServiceModule } from 'angular-webstorage-service'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatCardModule } from '@angular/material/card'
@@ -81,7 +81,8 @@ import { ErrorIntercept } from './error.interceptor'
 		InfiniteScrollModule,
 		MatExpansionModule,
 		MatDialogModule,
-		MatTableModule
+		MatTableModule,
+		NgbTypeaheadModule
 	],
 	providers: [
 		HomeComponent,
