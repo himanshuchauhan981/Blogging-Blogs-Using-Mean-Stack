@@ -1,3 +1,7 @@
+.navbar {
+    padding: 0px 2px!important;
+}
+
 .nav-link {
     font-family: 'Roboto Mono', monospace;
     font-size: 19px;
@@ -24,34 +28,19 @@
 }
 
 .searchUser {
-    border: none;
+    margin-left: 8px;
+    margin-top: 8px;
+    height: 30px;
+    width: 300px;
+    border: 0;
     outline: none;
-    padding: 5px 12px;
-    width: 20vw;
+    border-radius: 6px;
+    padding: 12px;
 }
 
-.searchUser:active {
-    border-color: #8BEEEA;
-}
-
-.search-box{
-    outline: none;
-    border: none;
-    padding: 5px 16px;
-    margin-right: 15px;
-    border-radius: 4px;
-}
-
-.showUsers{
-    width: 223px;
-    background-color: white;
-    position: relative;
-    top: 38px;
-    right: 238px;
-    /* display: none; */
-}
-
-.form-inline{
-    display: block;
-    margin-top: 6px;
+::ng-deep ngb-typeahead-window.dropdown-menu {
+    position: absolute;
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
 }

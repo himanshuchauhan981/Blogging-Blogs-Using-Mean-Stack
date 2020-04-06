@@ -17,7 +17,7 @@ export class ProfileService {
 
 	@Output() fire: EventEmitter<any> = new EventEmitter()
 
-	user : { id: string, username: string, email: string, profileImage: string, name:string } = null
+	user : User 
 
 	authorized: Boolean = false
 
