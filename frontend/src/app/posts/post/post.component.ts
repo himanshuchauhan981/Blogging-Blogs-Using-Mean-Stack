@@ -90,12 +90,11 @@ export class PostComponent implements OnInit {
 		let editPost = true
 		this.postService.particularPost(postId,editPost)
 		.subscribe((res:any) => {
-			let post = res.post
-			this.postForm.controls['postTitle'].setValue(post.postTitle)
-			this.postForm.controls['postContent'].setValue(post.postContent)
+			this.postForm.controls['postTitle'].setValue(res.postTitle)
+			this.postForm.controls['postContent'].setValue(res.postContent)
 			
-			if(post.postImage != null){
-				this.postService.imageUrl = `${environment.basicUrl}/api/image/${post.postImage}`
+			if(res.postImage != null){
+				this.postService.imageUrl = `${environment.basicUrl}/api/image/${res.postImage}`
 			}
 		})
 	}
