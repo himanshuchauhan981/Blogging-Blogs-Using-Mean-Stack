@@ -5,7 +5,6 @@ import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/prof
 import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
 import { ProfileService } from '../service/profile.service'
 import { UserService } from '../service/user.service'
-import { environment } from 'src/environments/environment'
 
 @Component({
 	selector: 'profile',

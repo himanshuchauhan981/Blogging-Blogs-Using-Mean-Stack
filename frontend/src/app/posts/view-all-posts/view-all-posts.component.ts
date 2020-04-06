@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { PostService, Blogs } from '../../service/post.service'
-import { ProfileService } from 'src/app/service/profile.service'
+import { ProfileService,User } from 'src/app/service/profile.service'
 import { environment } from '../../../environments/environment'
 
 @Component({
@@ -16,6 +16,8 @@ export class ViewAllPostsComponent implements OnInit {
 	userPost: Array<Blogs> = []
 
 	authenticated: Boolean
+
+	userDetails: User
 
 	basicUrl: string = environment.basicUrl
 
@@ -31,20 +33,23 @@ export class ViewAllPostsComponent implements OnInit {
 		let username = this.activatedRoute.snapshot.params.id
 		this.postService.userPosts(username)
 			.subscribe((res: any) => {
-				let resData = res.postData
+				let resData = res.userPosts
+				let userDetails = res.userDetails
 				for (let i = 0; i < resData.length; i++) {
-					if (resData.postImage != null) {
-						let imageUrl = `${this.basicUrl}/api/image/${resData.postImage}`
-						resData.postImage = imageUrl
-					}
-					if (resData[i].userdata[0].profileImage != null) {
-						let imageUrl = `${this.basicUrl}/api/image/${resData[i].userdata[0].profileImage}`
-						resData[i].userdata[0].profileImage = imageUrl
-					}
-					else {
-						resData[i].userdata[0].profileImage = this.profileService.defaultProfileImage
+					if (resData[i].postImage != null) {
+						let imageUrl = `${this.basicUrl}/api/image/${resData[i].postImage}`
+						resData[i].postImage = imageUrl
 					}
 					this.userPost.push(resData[i])
+				}
+				if (userDetails.profileImage != null) {
+					let imageUrl = `${this.basicUrl}/api/image/${userDetails.profileImage}`
+					userDetails.profileImage = imageUrl
+					this.userDetails = userDetails
+				}
+				else {
+					userDetails.profileImage = this.profileService.defaultProfileImage
+					this.userDetails = userDetails
 				}
 				this.authenticated = res.authenticated
 			})
@@ -64,15 +69,6 @@ export class ViewAllPostsComponent implements OnInit {
 				this.openSnackBar(error.msg)
 			})
 	}
-
-	// openProfilePage(id) {
-	// 	this.profileService.username(id)
-	// 		.subscribe((res: any) => {
-	// 			if (res.json().status === 200) {
-	// 				this.router.navigate([`/profile/${res.json().data.username}`])
-	// 			}
-	// 		})
-	// }
 
 	openSnackBar(msg){
 		this.matSnackBar.open(msg,'Close',{

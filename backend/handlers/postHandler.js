@@ -178,31 +178,10 @@ const posts = {
         if(req.user.username === req.params.username){
             authenticated = true
         }
-        let userid = await users.findOne({username: req.params.username}).select({_id:1})
-        let userPosts = await blogPosts.aggregate([
-            {
-                $match: {userId: userid._id}
-            },
-            {
-                $project:{ postTitle: 1, postContent: 1, postAuthor: 1, postImage: 1, postDate: 1 }
-            },
-            {
-                $lookup:{
-                    from:'users',
-                    pipeline:[
-                        {
-                            $match: {_id: userid._id}
-                        },
-                        {
-                            $project:{ profileImage: 1, username: 1 }
-                        }
-                    ],
-                    as:'userdata'
-                }
-            }
+        let userDetails = await users.findOne({username: req.params.username}).select({_id:1,profileImage:1,username:1})
+        let userPosts = await blogPosts.find({userId: userDetails._id}).sort({ postDate: -1 })
 
-        ]).sort({ postDate: -1 })
-        res.status(200).json({ postData: userPosts, authenticated: authenticated })
+        res.status(200).json({ userPosts, authenticated,userDetails })
     },
 
     deleteParticularPost : async (req,res) =>{
