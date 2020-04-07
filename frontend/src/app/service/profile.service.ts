@@ -7,6 +7,7 @@ import { UserService } from './user.service'
 import { environment } from '../../environments/environment'
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 
 @Injectable({
@@ -41,7 +42,8 @@ export class ProfileService {
 		private http: HttpClient,
 		private authGuardService: AuthGuardService,
 		private userService: UserService,
-		private router: Router
+		private router: Router,
+		private titleService: Title
 	){ 
 		this.prepareProfileNames()
 	}
@@ -55,12 +57,12 @@ export class ProfileService {
 		.subscribe((res:any) =>{
 			let profileData = res.userDetails
 			profileData.name = profileData.firstName + ' '+profileData.lastName
+			this.titleService.setTitle(`${profileData.name} - Blogging Blogs`)
 			if(profileData.profileImage != null){
 				profileData.profileImage = `${environment.basicUrl}/api/image/${profileData.profileImage}`
 			}
 			this.user = profileData
 			this.authorized = res.authorized
-			this.userService.titleObservable.next(`${this.user.name}`)
 		})
 	}
 

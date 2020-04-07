@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 
 import { PostService } from 'src/app/service/post.service'
 import { environment } from '../../../environments/environment'
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'post',
@@ -14,7 +15,8 @@ export class PostComponent implements OnInit {
 
 	constructor(
 		private postService: PostService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private titleService: Title
 	) { }
 
 	heading: string
@@ -31,7 +33,10 @@ export class PostComponent implements OnInit {
 
 	ngOnInit() {
 		let url = this.activatedRoute.snapshot.routeConfig.path
-		if (url == 'post/new') this.heading = 'Create New Post'
+		if (url == 'post/new'){ 
+			this.heading = 'Create New Post'
+			this.titleService.setTitle('New Post - Blogging Blogs')
+		}
 		else this.showPost()
 	}
 
@@ -92,7 +97,7 @@ export class PostComponent implements OnInit {
 		.subscribe((res:any) => {
 			this.postForm.controls['postTitle'].setValue(res.postTitle)
 			this.postForm.controls['postContent'].setValue(res.postContent)
-			
+			this.titleService.setTitle(res.postTitle)
 			if(res.postImage != null){
 				this.postService.imageUrl = `${environment.basicUrl}/api/image/${res.postImage}`
 			}

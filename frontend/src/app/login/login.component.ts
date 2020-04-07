@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { UserService } from '../service/user.service'
+import { Title } from '@angular/platform-browser'
 
 @Component({
 	selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private userService: UserService
+		private userService: UserService,
+		private titleService: Title
 	) { }
 
 	loginForm = new FormGroup({
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
 	})
 
 	ngOnInit(){
-		this.userService.titleObservable.next('Login - Blogging Blogs')
+		this.titleService.setTitle('Login - Blogging Blogs')
 	}
 
 	loginUser(loginForm) {

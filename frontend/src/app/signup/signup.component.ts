@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 
 import { SignupFormComponent } from './signup-form/signup-form.component'
 import { UserService } from '../service/user.service'
+import { Title } from '@angular/platform-browser'
 
 @Component({
 	selector: 'signup',
@@ -15,7 +16,7 @@ export class SignupComponent implements OnInit {
 
 	signUpSuccess : Boolean
 
-	constructor(private userService: UserService){ }
+	constructor(private userService: UserService,private titleService: Title){ }
 
 	id: string
 	
@@ -24,7 +25,7 @@ export class SignupComponent implements OnInit {
 			this.signUpSuccess = value
 		})
 
-		this.userService.titleObservable.next('Sign Up- Blogging Blogs')
+		this.titleService.setTitle('Sign Up- Blogging Blogs')
 	}
 
 	itemSelected(e){

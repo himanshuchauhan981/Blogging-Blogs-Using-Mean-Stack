@@ -5,6 +5,7 @@ import { PostService, Blogs } from '../service/post.service'
 import { ProfileService } from '../service/profile.service'
 import { UserService } from '../service/user.service'
 import { environment } from '../../environments/environment'
+import { Title } from '@angular/platform-browser'
 
 @Component({
 	selector: 'home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
 		private postService: PostService,
 		private profileService: ProfileService,
 		private userService: UserService,
-		private router: Router
+		private titleService: Title
 	) { }
 
 	pageSize : number  = 3
@@ -44,7 +45,7 @@ export class HomeComponent implements OnInit {
 				}
 			})
 		
-		this.userService.titleObservable.next('Home - Blogging Blogs')
+		this.titleService.setTitle('Home - Blogging Blogs')
 	}
 
 	onScroll() {

@@ -10,6 +10,7 @@ import { DeleteCommentDialogBoxComponent } from '../../dialog-box/delete-comment
 import { ProfileService } from 'src/app/service/profile.service'
 import { LikeService } from 'src/app/service/like.service'
 import { environment } from   '../../../environments/environment'
+import { Title } from '@angular/platform-browser'
 
 @Component({
 	selector: 'app-view-post',
@@ -39,7 +40,7 @@ export class ViewPostComponent implements OnInit {
 		private profileService: ProfileService,
 		private likeService: LikeService,
 		private router: Router,
-		private matSnackBar: MatSnackBar,
+		private titleService: Title,
 		private matDialog: MatDialog
 	) { }
 
@@ -69,6 +70,7 @@ export class ViewPostComponent implements OnInit {
 				}
 				this.commentCount = res.commentCount
 				this.post = post
+				this.titleService.setTitle(res.post.postTitle)
 				if(res.post.user[0].profileImage != null){
 					this.userImage = res.post.user[0].profileImage
 				}

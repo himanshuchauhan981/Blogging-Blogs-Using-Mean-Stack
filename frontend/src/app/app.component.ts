@@ -16,9 +16,5 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		AOS.init()
-
-		this.userService.titleObservable.subscribe(value =>{
-			this.title = value
-		})
 	}
 }

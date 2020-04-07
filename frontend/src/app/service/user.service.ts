@@ -17,8 +17,6 @@ export class UserService {
 
   public token : string
 
-	public titleObservable = new Subject<string>()
-
 	public loginObservable = new Subject<Boolean>()
 
   constructor(
