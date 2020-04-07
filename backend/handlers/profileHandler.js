@@ -5,11 +5,15 @@ const profile = {
     updateProfileEmail : async(req,res)=>{
         let checkExistingEmail = await users.find({email:req.body.userdata})
         if(checkExistingEmail.length == 0){
-            const updateStatus = await users.findOneAndUpdate({username:req.params.username},{email: req.body.userdata},{new: true})
-            res.status(200).json({status:200, msg:'Email ID updated',data: updateStatus.email})
+            const updateStatus = await users.findOneAndUpdate(
+                { username:req.params.username },
+                { email: req.body.userdata },
+                { new: true }
+            )
+            res.status(200).json({msg:'Email ID updated',data: updateStatus.email})
         }
         else{
-            res.status(200).json({status:400, msg:'Email ID already existed'})
+            res.status(400).json('Email ID already existed')
         }
         
     },
@@ -36,10 +40,10 @@ const profile = {
                 let salt = bcrypt.genSaltSync(10)
                 let hash = bcrypt.hashSync(req.body.password,salt)
                 await users.findOneAndUpdate({username: req.params.username},{password: hash})
-                res.status(200).json({status: 200, msg:'Password Changed successfully'})
+                res.status(200).json('Password Changed successfully')
             }
             else{
-                res.status(200).json({status: 400, msg:'Incorrect Current Password'})
+                res.status(400).json('Incorrect Current Password')
             }
         }   
     },

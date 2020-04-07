@@ -41,26 +41,18 @@ export class ProfileDialogBoxComponent{
 
 	submitProfile(profileForm,data): void{
 		this.profileService.updateProfile(profileForm.value, data)
-		.subscribe((res:any)=>{
-			let status = res.json().status
-			let msg = res.json().msg
+		.subscribe((res:any) =>{
 			this.dialogRef.close()
-			if((status === 200 || status === 400) && data === 'email'){
-				this.matSnackBar.open(msg,'Close',{
-					duration: 8000
-				})
-				this.profileService.changeEmailValue(res.json().data)
-			}
-			else if(status === 200 && data === 'username'){
-				this.userService.logout()
-				this.router.navigate(['login'])
-			}
-			else if(status === 400 && data ==='username'){
-				this.matSnackBar.open(msg,'Close',{
-					duration: 8000
-				})
-			}
+			this.matSnackBar.open(res.msg,'Close',{
+				duration: 8000
+			})
+			this.profileService.changeEmailValue(res.json().data)
+		},
+		(error) =>{
+			this.dialogRef.close()
+			this.matSnackBar.open(error.msg,'Close',{
+				duration: 8000
+			})
 		})
 	}
-
 }

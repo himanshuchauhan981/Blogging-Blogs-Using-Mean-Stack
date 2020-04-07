@@ -35,27 +35,20 @@ export class PasswordDialogBoxComponent{
 		this.dialogRef.close()
 	}
 
-	get currentPassword() { return this.passwordProfileForm.get('currentPassword') }
-
-	get password() { return this.passwordProfileForm.get('password') }
-
-	get confirmPassword() { return this.passwordProfileForm.get('confirmPassword') }
-
 	submitNewPassword(passwordProfileForm){
 		this.profileService.updatePassword(passwordProfileForm.value)
 		.subscribe((res:any)=>{
 			this.dialogRef.close()
-			if(res.json().status === 200){
-				this.matSnackBar.open(res.json().msg,'Close',{
-					duration: 3000
-				})
-			}
-			else if(res.json().status === 400){
-				this.matSnackBar.open(res.json().msg,'Close',{
-					duration: 3000
-				})
-			}
+			this.matSnackBar.open(res,'Close',{
+				duration: 3000
+			})
 
+		},
+		(error) =>{
+			this.dialogRef.close()
+			this.matSnackBar.open(error.msg,'Close',{
+				duration: 3000
+			})
 		})
 	}
 

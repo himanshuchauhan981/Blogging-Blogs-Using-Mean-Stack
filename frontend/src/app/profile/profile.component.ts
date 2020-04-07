@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
 
 	openPasswordDialogBox() {
 		this.matDialog.open(PasswordDialogBoxComponent, {
-			width: '350px'
+			width: '450px'
 		})
 	}
 
