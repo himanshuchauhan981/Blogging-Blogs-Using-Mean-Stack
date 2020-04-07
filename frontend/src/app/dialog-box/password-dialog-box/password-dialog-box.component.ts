@@ -36,20 +36,21 @@ export class PasswordDialogBoxComponent{
 	}
 
 	submitNewPassword(passwordProfileForm){
-		this.profileService.updatePassword(passwordProfileForm.value)
-		.subscribe((res:any)=>{
-			this.dialogRef.close()
-			this.matSnackBar.open(res,'Close',{
-				duration: 3000
-			})
+		if(!this.passwordProfileForm.invalid){
+			this.profileService.updatePassword(passwordProfileForm.value)
+			.subscribe((res:any)=>{
+				this.dialogRef.close()
+				this.matSnackBar.open(res,'Close',{
+					duration: 3000
+				})
 
-		},
-		(error) =>{
-			this.dialogRef.close()
-			this.matSnackBar.open(error.msg,'Close',{
-				duration: 3000
+			},
+			(error) =>{
+				this.dialogRef.close()
+				this.matSnackBar.open(error.msg,'Close',{
+					duration: 3000
+				})
 			})
-		})
+		}
 	}
-
 }

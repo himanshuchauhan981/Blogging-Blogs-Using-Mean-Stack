@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { UserService } from '../service/user.service'
+import { Title } from '@angular/platform-browser'
 
 @Component({
 	selector: 'app-main',
@@ -8,10 +9,10 @@ import { UserService } from '../service/user.service'
 })
 export class MainComponent implements OnInit {
 
-	constructor(private userService: UserService) { }
+	constructor(private titleService: Title) { }
 
 	ngOnInit() {
-		this.userService.titleObservable.next('Blogging Blogs')
+		this.titleService.setTitle('Blogging Blogs')
 	}
 
 }

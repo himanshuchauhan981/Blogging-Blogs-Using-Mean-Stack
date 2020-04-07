@@ -46,7 +46,8 @@ export class SignupFormComponent {
 		})
 
 	signupdata(signupForm) {
-		this.userService.saveUser(signupForm.value)
+		if(!this.signupForm.invalid){
+			this.userService.saveUser(signupForm.value)
 			.subscribe((res: any) => {
 				this.userService.signUpObservable.next(true)
 				this.idEmitter.emit(res.json().data)
@@ -54,5 +55,6 @@ export class SignupFormComponent {
 				this.userService.signUpObservable.next(false)
 				this.signupError = error['msg']
 			})
+		}
 	}
 }
