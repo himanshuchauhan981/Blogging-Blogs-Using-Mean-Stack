@@ -48,8 +48,8 @@ export class SignupFormComponent {
 	signupdata(signupForm) {
 		this.userService.saveUser(signupForm.value)
 			.subscribe((res: any) => {
-				// this.userService.signUpObservable.next(true)
-				// this.idEmitter.emit(res.json().data)
+				this.userService.signUpObservable.next(true)
+				this.idEmitter.emit(res.json().data)
 			}, (error) => {
 				this.userService.signUpObservable.next(false)
 				this.signupError = error['msg']
