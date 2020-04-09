@@ -41,11 +41,16 @@ export class NavbarComponent implements OnInit{
 		this.userService.loginObservable.subscribe(value =>{
 			this.loginStatus = value
 			this.username = this.authGuardService.currentUser
-		})	
+		})
 	}
 
-	redirectToUser(event){
-		let userId = event.item._id
-		this.profileService.redirectToProfilePage(userId)
+	redirectToUser($event,input){
+		let userId = $event.item._id
+		this.profileService.username(userId).subscribe(
+			(response:any) => {
+				this.router.navigate([`/profile/${response.username}`])
+				input.value = ''
+			}
+		)
 	}
 }

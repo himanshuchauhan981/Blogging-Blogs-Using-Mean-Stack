@@ -14,6 +14,7 @@
             <li class="nav-item">
                 <input 
                     type="text"
+                    #input
                     placeholder="Search"
                     class="searchUser"
                     [ngbTypeahead]="profileService.typeahead"
@@ -21,7 +22,7 @@
                     [inputFormatter]="profileService.formatter"
                     [resultFormatter]="profileService.formatter"
                     [editable]="false"
-                    (selectItem)="redirectToUser($event)"
+                    (selectItem)="redirectToUser($event,input)"
                 >
             </li>
         </ul>
