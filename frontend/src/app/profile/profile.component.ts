@@ -5,6 +5,7 @@ import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/prof
 import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
 import { ProfileService } from '../service/profile.service'
 import { UserService } from '../service/user.service'
+import { Router, NavigationEnd } from '@angular/router'
 
 @Component({
 	selector: 'profile',
@@ -25,7 +26,8 @@ export class ProfileComponent implements OnInit {
 	constructor(
 		public matDialog: MatDialog,
 		private profileService: ProfileService,
-		private userService: UserService
+		private userService: UserService,
+		private router: Router
 	) { }
 
 	ngOnInit() {
@@ -33,11 +35,12 @@ export class ProfileComponent implements OnInit {
 		this.profileService.getProfile()
 
 		this.profileService.emailValue()
-			.subscribe(data => {
-				if (data != undefined) {
-					this.user.email = data
-				}
-			})
+		.subscribe(data => {
+			if (data != undefined) {
+				this.user.email = data
+			}
+		})
+
 		this.defaultProfileImage = this.profileService.defaultProfileImage
 	}
 

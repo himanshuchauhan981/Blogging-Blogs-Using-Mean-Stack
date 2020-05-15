@@ -9,11 +9,11 @@
                     <div class="list-group">
                         <span class="fa-size mb-2">
                             <i class="fa fa-user fa-fw mr-3 -text-theme" aria-hidden="true"></i>
-                            <span class="fontSize">&nbsp; {{ profileService.user?.name }}</span>
+                            <span class="fontSize">&nbsp; {{ user?.name }}</span>
                         </span>
                         <span class="fa-size mb-2">
                             <i class="fa fa-envelope fa-fw mr-3 -text-theme" aria-hidden="true"></i>
-                            <span class="fontSize">&nbsp; {{ profileService.user?.email }}</span>
+                            <span class="fontSize">&nbsp; {{ user?.email }}</span>
                             <i *ngIf="profileService.authorized === true" class="fa fa-edit float-right mt-1"
                                 (click)="openDialogBox('email')"></i>
                         </span>
