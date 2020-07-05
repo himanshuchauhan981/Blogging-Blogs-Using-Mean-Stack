@@ -102,9 +102,12 @@ export class ProfileService {
 	}
 
 	prepareProfileNames(){
-		this._nameList().subscribe((res:any) =>{
-			this._profileNames = res
-		})
+		let title = this.titleService.getTitle()
+		if(title != ''){
+			this._nameList().subscribe((res:any) =>{
+				this._profileNames = res
+			})
+		}
 	}
 
 	typeahead  = (text$: Observable<string>) => text$.pipe(

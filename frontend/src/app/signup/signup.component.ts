@@ -12,8 +12,6 @@ import { Title } from '@angular/platform-browser'
 
 export class SignupComponent implements OnInit {
 
-	@ViewChild(SignupFormComponent,{static: false}) child
-
 	signUpSuccess : Boolean
 
 	constructor(private userService: UserService,private titleService: Title){ }

@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "blogging-blogs"
+  "defaultProject": "blogging-blogs",
+  "cli": {
+    "analytics": false
+  }
 }
