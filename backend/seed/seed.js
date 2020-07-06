@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const faker = require('faker')
 const bcrypt = require('bcryptjs')
 const { users, blogPosts, postLikes, comments } = require('../models')
-const posts = require('../models/posts')
 
 mongoose.set('useNewUrlParser', true)
 mongoose.set('useUnifiedTopology', true)
@@ -21,9 +20,6 @@ mongoose.connect(url, (err, conn) => {
 
 async function createUsersAndPostsMockData() {
     let totalUsers = 15
-    let salt = bcrypt.genSaltSync(10)
-    let hash = bcrypt.hashSync('Sample@12', salt)
-
     await users.remove()
     await blogPosts.remove()
     for (let i = 0; i < totalUsers; i++) {
@@ -32,6 +28,8 @@ async function createUsersAndPostsMockData() {
         let lastName = faker.name.lastName()
         let username = faker.internet.userName().toLocaleLowerCase().replace('.', '')
         let email = `${firstName.toLocaleLowerCase()}${faker.random.number().toString().substr(0, 2)}@${faker.internet.domainWord()}.com`
+        let salt = bcrypt.genSaltSync(10)
+        let hash = bcrypt.hashSync('Sample@12', salt)
         let userObject = new users({
             firstName: firstName,
             lastName: lastName,
@@ -55,6 +53,7 @@ async function createUsersAndPostsMockData() {
         }
     }
     console.log('Users and blog posts data created')
+    createLikeAndCommentMockData()
 }
 
 
@@ -86,4 +85,4 @@ async function createLikeAndCommentMockData() {
     console.log('Like and comment data created')
 }
 
-createLikeAndCommentMockData()
+createUsersAndPostsMockData()
