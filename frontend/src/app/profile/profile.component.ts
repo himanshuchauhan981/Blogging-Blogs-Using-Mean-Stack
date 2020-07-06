@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/profile-dialog-box.component'
 import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
 import { ProfileService, User } from '../service/profile.service'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
 	selector: 'profile',
@@ -23,12 +24,13 @@ export class ProfileComponent implements OnInit {
 
 	constructor(
 		public matDialog: MatDialog,
-		private profileService: ProfileService
+		private profileService: ProfileService,
+		private activatedRoute: ActivatedRoute
 	) { }
 
 	ngOnInit() {
 
-		this.profileService.getProfile()
+		// this.profileService.getProfile()
 
 		this.profileService.emailValue()
 		.subscribe(data => {
@@ -38,6 +40,10 @@ export class ProfileComponent implements OnInit {
 		})
 
 		this.defaultProfileImage = this.profileService.defaultProfileImage
+
+		this.activatedRoute.params.subscribe(params =>{
+			this.profileService.getProfile()
+		})
 	}
 
 	openDialogBox(heading) {

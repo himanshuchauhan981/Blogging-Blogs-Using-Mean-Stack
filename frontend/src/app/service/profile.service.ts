@@ -1,14 +1,13 @@
 import { Injectable, Output, EventEmitter } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
-
-import { AuthGuardService } from './auth-guard.service'
-import { UserService } from './user.service'
-import { environment } from '../../environments/environment'
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 
+import { AuthGuardService } from './auth-guard.service'
+import { UserService } from './user.service'
+import { environment } from '../../environments/environment'
 
 @Injectable({
 	providedIn: 'root'
@@ -44,9 +43,7 @@ export class ProfileService {
 		private userService: UserService,
 		private router: Router,
 		private titleService: Title
-	){ 
-		this.prepareProfileNames()
-	}
+	){ }
 
 	getProfile() {
 		let headers = this.userService.appendHeaders()
@@ -56,7 +53,7 @@ export class ProfileService {
 		})
 		.subscribe((res:any) =>{
 			let profileData = res.userDetails
-			profileData.name = profileData.firstName + ' '+profileData.lastName
+			profileData.name = `${profileData.firstName} ${profileData.lastName}`
 			this.titleService.setTitle(`${profileData.name} - Blogging Blogs`)
 			if(profileData.profileImage != null){
 				profileData.profileImage = `${environment.basicUrl}/api/image/${profileData.profileImage}`
@@ -90,7 +87,7 @@ export class ProfileService {
 		return this.fire
 	}
 
-	username(id){
+	username(id: string){
 		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/profile/id`,{
@@ -102,12 +99,9 @@ export class ProfileService {
 	}
 
 	prepareProfileNames(){
-		let title = this.titleService.getTitle()
-		if(title != ''){
-			this._nameList().subscribe((res:any) =>{
-				this._profileNames = res
-			})
-		}
+		this._nameList().subscribe((res:any) =>{
+			this._profileNames = res
+		})
 	}
 
 	typeahead  = (text$: Observable<string>) => text$.pipe(

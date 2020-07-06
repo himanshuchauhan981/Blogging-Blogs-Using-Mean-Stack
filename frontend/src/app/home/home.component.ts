@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
 
 import { PostService, Blogs } from '../service/post.service'
 import { ProfileService } from '../service/profile.service'
-import { UserService } from '../service/user.service'
 import { environment } from '../../environments/environment'
 import { Title } from '@angular/platform-browser'
 
@@ -17,7 +15,6 @@ export class HomeComponent implements OnInit {
 	constructor(
 		private postService: PostService,
 		private profileService: ProfileService,
-		private userService: UserService,
 		private titleService: Title
 	) { }
 
@@ -46,6 +43,7 @@ export class HomeComponent implements OnInit {
 			})
 		
 		this.titleService.setTitle('Home - Blogging Blogs')
+		this.profileService.prepareProfileNames()
 	}
 
 	onScroll() {

@@ -30,11 +30,13 @@ export class ViewAllPostsComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		let username = this.activatedRoute.snapshot.params.id
-		this.postService.userPosts(username)
+		this.activatedRoute.params.subscribe(params =>{
+			let username = params.id
+			this.postService.userPosts(username)
 			.subscribe((res: any) => {
 				let resData = res.userPosts
 				let userDetails = res.userDetails
+				this.userPost = []
 				for (let i = 0; i < resData.length; i++) {
 					if (resData[i].postImage != null) {
 						let imageUrl = `${this.basicUrl}/api/image/${resData[i].postImage}`
@@ -51,8 +53,10 @@ export class ViewAllPostsComponent implements OnInit {
 					userDetails.profileImage = this.profileService.defaultProfileImage
 					this.userDetails = userDetails
 				}
+				console.log(this.userDetails)
 				this.authenticated = res.authenticated
 			})
+		})
 	}
 
 	editPost(postAuthor, postId) {
