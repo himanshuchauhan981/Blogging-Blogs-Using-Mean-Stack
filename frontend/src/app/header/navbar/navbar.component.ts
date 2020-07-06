@@ -3,7 +3,6 @@ import { Router } from '@angular/router'
 
 import { AuthGuardService } from '../../service/auth-guard.service'
 import { ProfileService } from 'src/app/service/profile.service'
-import { FormGroup, FormControl } from '@angular/forms'
 import { UserService } from 'src/app/service/user.service'
 
 @Component({
