@@ -3,9 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 
 import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/profile-dialog-box.component'
 import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
-import { ProfileService } from '../service/profile.service'
-import { UserService } from '../service/user.service'
-import { Router, NavigationEnd } from '@angular/router'
+import { ProfileService, User } from '../service/profile.service'
 
 @Component({
 	selector: 'profile',
@@ -15,7 +13,7 @@ import { Router, NavigationEnd } from '@angular/router'
 
 export class ProfileComponent implements OnInit {
 
-	user : { id: string, username: string, email: string, profileImage: string, name:string } = null
+	user : User = null
 
 	authorized: Boolean = false
 
@@ -25,9 +23,7 @@ export class ProfileComponent implements OnInit {
 
 	constructor(
 		public matDialog: MatDialog,
-		private profileService: ProfileService,
-		private userService: UserService,
-		private router: Router
+		private profileService: ProfileService
 	) { }
 
 	ngOnInit() {
@@ -57,12 +53,4 @@ export class ProfileComponent implements OnInit {
 		})
 	}
 
-}
-
-export interface Profile{
-	id: string
-	username: string
-	email: string
-	profileImage: string
-	name:string
 }
