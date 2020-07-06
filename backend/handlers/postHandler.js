@@ -114,7 +114,7 @@ const posts = {
     getAllPosts: async (req, res) => {
         let pageIndex = parseInt(req.query.pageIndex)
         let pageSize = parseInt(req.query.pageSize)
-        pageIndex = pageIndex * pageSize + 1
+        pageIndex = pageIndex * pageSize
         let allBlogs = await blogPosts.aggregate([
             {
                 "$project": {
@@ -134,7 +134,8 @@ const posts = {
                     "comments._id": 1,"postContent":1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1
                 }
             }
-        ]).skip(pageIndex).limit(pageSize).sort({postDate:-1})
+        
+        ]).sort({postDate:-1}).limit(pageSize).skip(pageIndex)
         allBlogs = await calculateComments(allBlogs)
         res.status(200).json({ blogs: allBlogs })
     },
@@ -177,7 +178,7 @@ const posts = {
         let authenticated = false
         let pageIndex = parseInt(req.query.pageIndex)
         let pageSize = parseInt(req.query.pageSize)
-
+        pageIndex = pageIndex * pageSize
         if(req.user.username === req.params.username){
             authenticated = true
         }
