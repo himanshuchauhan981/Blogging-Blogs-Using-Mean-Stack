@@ -62,11 +62,15 @@ export class PostService {
 		})
 	}
 
-	userPosts = (username)=>{
+	userPosts = (username: string, pageSize: number, pageIndex: number)=>{
 		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/${username}/posts`,{
-			headers: headers
+			headers: headers,
+			params: {
+				pageIndex: pageIndex.toLocaleString(),
+				pageSize: pageSize.toLocaleString()
+			}
 		})
 	}
 

@@ -21,6 +21,12 @@ export class ViewAllPostsComponent implements OnInit {
 
 	basicUrl: string = environment.basicUrl
 
+	pageSize : number  = 3
+
+	pageIndex : number  = 0
+
+	username: string
+
 	constructor(
 		private postService: PostService,
 		private profileService: ProfileService,
@@ -31,8 +37,8 @@ export class ViewAllPostsComponent implements OnInit {
 
 	ngOnInit() {
 		this.activatedRoute.params.subscribe(params =>{
-			let username = params.id
-			this.postService.userPosts(username)
+			this.username = params.id
+			this.postService.userPosts(this.username, this.pageSize, this.pageIndex)
 			.subscribe((res: any) => {
 				let resData = res.userPosts
 				let userDetails = res.userDetails
@@ -53,7 +59,6 @@ export class ViewAllPostsComponent implements OnInit {
 					userDetails.profileImage = this.profileService.defaultProfileImage
 					this.userDetails = userDetails
 				}
-				console.log(this.userDetails)
 				this.authenticated = res.authenticated
 			})
 		})
@@ -77,6 +82,21 @@ export class ViewAllPostsComponent implements OnInit {
 	openSnackBar(msg){
 		this.matSnackBar.open(msg,'Close',{
 			duration: 2000
+		})
+	}
+
+	onScroll(){
+		this.pageIndex = this.pageIndex + 1
+		this.postService.userPosts(this.username, this.pageSize, this.pageIndex)
+		.subscribe((res: any) =>{
+			let resData = res.userPosts
+			for (let i = 0; i < resData.length; i++) {
+				if (resData[i].postImage != null) {
+					let imageUrl = `${this.basicUrl}/api/image/${resData[i].postImage}`
+					resData[i].postImage = imageUrl
+				}
+				this.userPost.push(resData[i])
+			}
 		})
 	}
 

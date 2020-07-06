@@ -175,11 +175,14 @@ const posts = {
 
     getAllParticularUserPost: async (req, res) => {
         let authenticated = false
+        let pageIndex = parseInt(req.query.pageIndex)
+        let pageSize = parseInt(req.query.pageSize)
+
         if(req.user.username === req.params.username){
             authenticated = true
         }
         let userDetails = await users.findOne({username: req.params.username}).select({_id:1,profileImage:1,username:1})
-        let userPosts = await blogPosts.find({userId: userDetails._id}).sort({ postDate: -1 })
+        let userPosts = await blogPosts.find({userId: userDetails._id}).skip(pageIndex).limit(pageSize).sort({ postDate: -1 })
 
         res.status(200).json({ userPosts, authenticated,userDetails })
     },
