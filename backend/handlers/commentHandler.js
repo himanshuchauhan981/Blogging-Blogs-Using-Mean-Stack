@@ -3,6 +3,15 @@ const { comments } = require('../models')
 const comment = {
     getParticularPostComments: async (req, res) => {
         let postId = req.query.postId
+        let index = parseInt(req.query.index)
+        let size = parseInt(req.query.size)
+        let lastDocument = false
+        index = index * size
+        let commentLength  = await (await comments.find({postId: postId})).length
+        if(index+size >= commentLength){
+            console.log(`comment length ${commentLength} index ${index}`)
+            lastDocument = true
+        }
         let commentData = await comments.aggregate([
             { $match: {postId: postId} },
             { $project: {'createdBy':1,'text':1} },
@@ -18,8 +27,8 @@ const comment = {
             },
             { "$unwind":"$user" },
             { "$project":{ 'user.firstName':1,'user.lastName':1,'user.profileImage':1,'text':1 } }
-        ])
-        res.status(200).send(commentData)
+        ]).skip(index).limit(size)
+        res.status(200).send({commentData: commentData, lastDocument: lastDocument})
     },
 
     saveNewPostComment: async (req, res) => {

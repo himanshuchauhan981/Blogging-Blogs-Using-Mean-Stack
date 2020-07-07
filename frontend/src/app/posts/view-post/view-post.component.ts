@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
+import { Title } from '@angular/platform-browser'
 
 import { PostService, Blogs } from '../../service/post.service'
 import { CommentService,Comment } from '../../service/comment.service'
@@ -10,7 +10,6 @@ import { DeleteCommentDialogBoxComponent } from '../../dialog-box/delete-comment
 import { ProfileService } from 'src/app/service/profile.service'
 import { LikeService } from 'src/app/service/like.service'
 import { environment } from   '../../../environments/environment'
-import { Title } from '@angular/platform-browser'
 
 @Component({
 	selector: 'app-view-post',
@@ -32,6 +31,12 @@ export class ViewPostComponent implements OnInit {
 	userImage: String
 
 	commentsList: Array<Comment> = []
+
+	commentIndex : number = 0
+
+	commentSize : number = 3
+
+	lastDocument : boolean
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -85,14 +90,27 @@ export class ViewPostComponent implements OnInit {
 			})
 	}
 
-	postComments(postId) {
-		this.commentService.get(postId)
-			.subscribe((res:any) => {
-				for(let i=0;i<res.length;i++){
-					res[i].createdBy = res[i].user.firstName + " "+ res[i].user.lastName
-					this.commentsList.push(res[i])
-				}
-			})
+	getComments(postId: string) {
+		let length = this.commentsList.length
+		if(length == 0){
+			this.paginateComments(postId, this.commentIndex, this.commentSize)
+		}
+	}
+
+	paginateComments(postId: string, index: number, size: number){
+		this.commentService.get(postId, index, size)
+		.subscribe((res:any) => {
+			this.lastDocument = res['lastDocument']
+			for(let i=0;i<res['commentData'].length;i++){
+				res['commentData'][i].createdBy = `${res['commentData'][i].user.firstName} ${res['commentData'][i].user.lastName}`
+				this.commentsList.push(res['commentData'][i])
+			}
+		})
+	}
+
+	previousComments(postId: string){
+		this.commentIndex  = this.commentIndex + 1
+		this.paginateComments(postId, this.commentIndex, this.commentSize)
 	}
 
 	dialogBox(commentId) {

@@ -31,12 +31,18 @@ export class CommentService {
 		})
 	}
 
-	get(postId: string) {
+	get(postId: string, commentIndex: number, commentSize: number) {
+		let index = commentIndex.toLocaleString()
+		let size = commentSize.toLocaleString()
 		let headers = this.userService.appendHeaders()
 
 		return this.http.get(`${this.basicUrl}/api/comment`, {
 			headers: headers,
-			params: { postId: postId }
+			params: {
+				postId: postId,
+				index: index,
+				size: size
+			}
 		})
 	}
 

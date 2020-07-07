@@ -27,8 +27,11 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="like-comment-box" (click)="postComments(post._id)">View Comments ({{ commentCount }})</div>
+                            <div class="like-comment-box" (click)="getComments(post._id)">View Comments ({{ commentCount }})</div>
                         </div>
+                    </div>
+                    <div *ngIf="!lastDocument && commentsList.length != 0">
+                        <p (click)="previousComments(post._id)" class="cursor-pointer">View previous comments</p>
                     </div>
                     <div class="comment-section">
                         <div class="mt-2" *ngFor="let comment of commentsList">
