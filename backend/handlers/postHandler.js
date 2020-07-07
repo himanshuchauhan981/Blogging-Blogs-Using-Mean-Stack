@@ -135,7 +135,7 @@ const posts = {
                 }
             }
         
-        ]).sort({postDate:-1}).limit(pageSize).skip(pageIndex)
+        ]).sort({postDate:-1}).skip(pageIndex).limit(pageSize)
         allBlogs = await calculateComments(allBlogs)
         res.status(200).json({ blogs: allBlogs })
     },
