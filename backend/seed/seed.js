@@ -77,7 +77,7 @@ async function createLikeAndCommentMockData() {
             let commentObject = new comments({
                 postId: allBlogPosts[i]._id,
                 text: faker.lorem.words(commentWordsLength),
-                createdBy: `${allUsers[j].firstName} ${allUsers[j].lastName}`
+                createdBy: allUsers[j]._id
             })
             await commentObject.save()
         }
