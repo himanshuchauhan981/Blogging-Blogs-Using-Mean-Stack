@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+import { SESSION_STORAGE, WebStorageService } from 'ngx-webstorage-service'
 import { Subject } from 'rxjs'
 
 import {environment } from '../../environments/environment'
