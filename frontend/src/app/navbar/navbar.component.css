@@ -1,0 +1,14 @@
+.searchUser {
+    height: 30px;
+    width: 300px;
+    border: 0;
+    outline: none;
+    padding: 12px;
+}
+
+::ng-deep ngb-typeahead-window.dropdown-menu {
+    position: absolute;
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
