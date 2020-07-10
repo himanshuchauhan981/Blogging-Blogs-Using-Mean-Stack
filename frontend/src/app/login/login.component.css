@@ -1,27 +1,18 @@
 .login-background{
-    background-image: url('../../assets/20.jpg');
+    background: url('../../assets/20.jpg') no-repeat;
     background-size: cover;
-    background-repeat: no-repeat;
-    height: 80%;
+    /* background: linear-gradient(#020024, #238c98, #00d4ff) no-repeat center center fixed; */
+    height: 93%;
+}
+
+.card-width{
+    width: 26rem;
 }
 
 .login-heading{
     font-family: 'Roboto Mono', monospace;
-    font-size:45px;
-    position: relative;
-    bottom: 90px;
-}
-
-.centered{
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-mat-icon{
-    cursor: pointer;
+    font-size:40px;
+    padding: 70px;
 }
 
 .red-error{
@@ -30,4 +21,21 @@ mat-icon{
     font-weight: 500;
     text-align: center;
     margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 468px){
+    .card-width{
+        width: 20rem;
+    }
+}
+
+@media only screen and (max-width: 330px){
+    .card-width{
+        width: 15rem;
+    }
+
+    .login-heading{
+        font-size: 16px;
+        padding: 40px;
+    }
 }

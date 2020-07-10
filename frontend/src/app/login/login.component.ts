@@ -31,8 +31,10 @@ export class LoginComponent implements OnInit {
 		this.titleService.setTitle('Login - Blogging Blogs')
 	}
 
-	loginUser(loginForm) {
-		this.userService.login(loginForm.value)
+	loginUser(loginForm: FormGroup) {
+		let validState = this.loginForm.valid
+		if(validState){
+			this.userService.login(loginForm.value)
 			.subscribe((res:any) => {
 				let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
 				this.userService.storeJWTToken(res.token)
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
 			error =>{
 				this.loginError = error.msg
 			})
+		}
 	}
 
 
