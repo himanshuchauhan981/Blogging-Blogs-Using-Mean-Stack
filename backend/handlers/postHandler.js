@@ -192,9 +192,11 @@ const posts = {
         let id = req.params.id
         let userPost = await blogPosts.findById(id)
         if(userPost){
-            let authorizedUser = Object.toString(req.user._id) === Object.toString(userPost.userId)
+            let authorizedUser = req.user._id.toString() === userPost.userId.toString()
             if(authorizedUser){
-                await blogPosts.remove(id)
+                let data = await blogPosts.findByIdAndRemove(id)
+                let gfs = Grid(mongoose.connection.db, mongoose.mongo)
+                let postImageData = await gfs.collection('photos').findOneAndDelete({'filename':data['postImage']})
                 res.status(200).json({msg:'Post deleted'})
             }
             else res.status(404).json('Something wrong happened, Try again')

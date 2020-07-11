@@ -64,22 +64,23 @@ export class ViewAllPostsComponent implements OnInit {
 		})
 	}
 
-	editPost(postAuthor, postId) {
+	editPost(postAuthor: string, postId: string) {
 		this.router.navigate([`/${postAuthor}/${postId}/edit`])
 	}
 
-	deletePost(id) {
+	deletePost(id: string) {
+		console.log(id)
 		this.postService.delete(id)
-			.subscribe((res: any) => {
-				this.userPost = this.userPost.filter(post => post._id != id)
-				this.openSnackBar(res.msg)
-			},
-			error =>{
-				this.openSnackBar(error.msg)
-			})
+		.subscribe((res: any) => {
+			this.userPost = this.userPost.filter(post => post._id != id)
+			this.openSnackBar(res.msg)
+		},
+		error =>{
+			this.openSnackBar(error.msg)
+		})
 	}
 
-	openSnackBar(msg){
+	openSnackBar(msg: string){
 		this.matSnackBar.open(msg,'Close',{
 			duration: 2000
 		})
