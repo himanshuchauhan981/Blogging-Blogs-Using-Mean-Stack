@@ -1,11 +1,9 @@
-<div class="profile-form">
+<div class="d-flex flex-column justify-content-between text-center">
     <form [formGroup]="profilePhotoForm" ngSubmit="saveProfilePhoto($event)" enctype="multipart/form-data">
         <h4 class="profile-heading">Insert Profile Photo</h4>
         <img src="{{ defaultImgSrc }}" class="profile-image">
-        <div class="insert-image">
-            <input type="file" hidden id="upload" name="profileImage" (change)="fileChange($event)">
-        </div>
-        <div class="float-right">
+        <input type="file" hidden id="upload" name="profileImage" (change)="fileChange($event)">
+        <div class="d-flex justify-content-end py-3">
             <button mat-raised-button color="primary" (click)="uploadFile()" color="{{ fileUploadColor }}"
                 class="mr-2" type="button">{{ uploadFileText }}</button>
             <button mat-raised-button color="primary" class="mr-2" (click)="saveProfilePhoto()">Save</button>
