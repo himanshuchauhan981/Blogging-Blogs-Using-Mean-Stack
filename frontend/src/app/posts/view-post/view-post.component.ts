@@ -100,6 +100,7 @@ export class ViewPostComponent implements OnInit {
 	paginateComments(postId: string, index: number, size: number){
 		this.commentService.get(postId, index, size)
 		.subscribe((res:any) => {
+			this.commentsList = []
 			this.lastDocument = res['lastDocument']
 			for(let i=0;i<res['commentData'].length;i++){
 				res['commentData'][i].createdBy = `${res['commentData'][i].user.firstName} ${res['commentData'][i].user.lastName}`

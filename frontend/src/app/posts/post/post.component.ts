@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
 
 	uploadedFiles: Array<File>
 
-	uploadFileText: String = 'Upload File'
+	uploadFileText: String = 'Upload Image'
 
 	fileUploadColor: String = "accent"
 

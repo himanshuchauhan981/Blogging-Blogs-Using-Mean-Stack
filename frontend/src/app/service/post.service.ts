@@ -13,7 +13,7 @@ export class PostService {
 
 	private basicUrl : string = environment.basicUrl
 
-	imageUrl : string = 'http://textiletrends.in/gallery/1547020644No_Image_Available.jpg'
+	imageUrl : string
 	
 	constructor(
 		private http: HttpClient,
