@@ -3,7 +3,7 @@ const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const bcrypt = require('bcryptjs')
 
-const { users } = require('../models')
+const { users } = require('../schemas')
 
 module.exports = (passport)=>{
     passport.use(new LocalStrategy(

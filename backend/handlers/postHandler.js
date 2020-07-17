@@ -2,7 +2,7 @@ const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId
 
-const { blogPosts, users, postLikes } = require('../models')
+const { blogPosts, users, postLikes } = require('../schemas')
 const { getFirstNameAndLastName }  = require('./userHandler')
 
 async function capitalizeUsername(username){

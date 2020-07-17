@@ -1,4 +1,4 @@
-const { users } = require('../models')
+const { users } = require('../schemas')
 const bcrypt = require('bcryptjs')
 
 const profile = {

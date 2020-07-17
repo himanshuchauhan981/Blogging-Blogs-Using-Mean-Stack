@@ -1,4 +1,4 @@
-const { comments } = require('../models')
+const { comments } = require('../schemas')
 
 const comment = {
     getParticularPostComments: async (req, res) => {

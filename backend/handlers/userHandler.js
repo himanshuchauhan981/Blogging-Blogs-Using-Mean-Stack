@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
 
 const { createToken } = require('../auth').token
-const { users } = require('../models')
+const { users } = require('../schemas')
 
 const user = {
     saveUserDetails: async (req, res) => {

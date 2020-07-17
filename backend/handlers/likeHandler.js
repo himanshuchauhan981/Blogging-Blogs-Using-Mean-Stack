@@ -1,4 +1,4 @@
-const { postLikes } = require('../models')
+const { postLikes } = require('../schemas')
 
 let likes = {
     saveOrDeletePostLike : async(req,res)=>{
