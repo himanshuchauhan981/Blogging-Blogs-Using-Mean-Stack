@@ -39,7 +39,6 @@ import { ProfilePhotoFormComponent } from './signup/profile-photo-form/profile-p
 import { MainComponent } from './main/main.component';
 import { PostComponent } from './posts/post/post.component';
 import { ErrorIntercept } from './error.interceptor';
-import { PostCarousalComponent } from './carousal/post-carousal/post-carousal.component'
 
 @NgModule({
 	declarations: [
@@ -59,8 +58,7 @@ import { PostCarousalComponent } from './carousal/post-carousal/post-carousal.co
 		SignupFormComponent,
 		ProfilePhotoFormComponent,
 		MainComponent,
-		PostComponent,
-		PostCarousalComponent
+		PostComponent
 	],
 	imports: [
 		BrowserModule,
