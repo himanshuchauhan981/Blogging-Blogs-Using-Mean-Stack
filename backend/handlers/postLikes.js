@@ -1,18 +1,21 @@
-const { postLikes } = require('../schemas')
+const { likeModel, postModel } = require('../models')
 
 let likes = {
     saveOrDeletePostLike : async(req,res)=>{
-        const existingLike = await postLikes.findOne({postId: req.params.postId,userId: req.user._id})
+        let postId = req.params.postId
+        let userId = req.user._id
+        let existingLike = await likeModel.getById(postId, userId)
         if(existingLike === null){
-            const likeObject = new postLikes({
-                postId : req.params.postId,
-                userId : req.user._id
+            await likeModel.save({
+                postId : postId,
+                userId : userId
             })
-            await likeObject.save()
+            await postModel.increaseLikeCount(postId)
             res.status(200).send(true)
         }
         else{
-            await postLikes.findOneAndRemove({postId: req.params.postId,userId: req.user._id})
+            await likeModel.deleteById(postId, userId)
+            await postModel.decreaseLikeCount(postId)
             res.status(200).send(false)
         }
     }

@@ -27,6 +27,10 @@ const posts = new Schema({
     lastModifiedAt: {
         type: Date,
         default: null
+    },
+    likeCount: {
+        type: Number,
+        default: 0
     }
 })
 
