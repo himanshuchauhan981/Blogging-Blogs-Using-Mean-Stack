@@ -23,7 +23,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { NavbarComponent } from './navbar/navbar.component'
-import { CarousalComponent } from './carousal/carousal.component'
+import { MainCarousalComponent } from './carousal/main-carousal/main-carousal.component'
 import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 import { HomeComponent } from './home/home.component'
@@ -38,13 +38,14 @@ import { SignupFormComponent } from './signup/signup-form/signup-form.component'
 import { ProfilePhotoFormComponent } from './signup/profile-photo-form/profile-photo-form.component';
 import { MainComponent } from './main/main.component';
 import { PostComponent } from './posts/post/post.component';
-import { ErrorIntercept } from './error.interceptor'
+import { ErrorIntercept } from './error.interceptor';
+import { PostCarousalComponent } from './carousal/post-carousal/post-carousal.component'
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		NavbarComponent,
-		CarousalComponent,
+		MainCarousalComponent,
 		LoginComponent,
 		SignupComponent,
 		HomeComponent,
@@ -58,7 +59,8 @@ import { ErrorIntercept } from './error.interceptor'
 		SignupFormComponent,
 		ProfilePhotoFormComponent,
 		MainComponent,
-		PostComponent
+		PostComponent,
+		PostCarousalComponent
 	],
 	imports: [
 		BrowserModule,

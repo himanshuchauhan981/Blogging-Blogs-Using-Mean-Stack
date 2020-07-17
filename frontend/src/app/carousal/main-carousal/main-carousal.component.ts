@@ -2,11 +2,11 @@ import { Component,ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-	selector: 'carousal',
-	templateUrl: './carousal.component.html',
-	styleUrls: ['./carousal.component.css']
+	selector: 'main-carousal',
+	templateUrl: './main-carousal.component.html',
+	styleUrls: ['./main-carousal.component.css']
 })
-export class CarousalComponent{
+export class MainCarousalComponent{
 
 	images = ['../../../assets/1.jpg','../../../assets/2.jpg','../../../assets/3.jpg']
 
@@ -37,6 +37,9 @@ export class CarousalComponent{
 		}
 	}
 
-	constructor() { }
+	constructor() { 
+		console.log(`Height ${window.innerHeight}`)
+		console.log(`Width ${window.innerWidth}`)
+	}
 
 }
