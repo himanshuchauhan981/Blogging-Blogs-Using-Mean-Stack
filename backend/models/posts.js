@@ -28,7 +28,7 @@ class Post {
     }
 
     delete = (id) =>{
-        return await this.postModel.findByIdAndRemove(id)
+        return this.postModel.findByIdAndRemove(id)
     }
 
     findById = (postId) =>{
