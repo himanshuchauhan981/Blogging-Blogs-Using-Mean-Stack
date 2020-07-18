@@ -33,6 +33,11 @@ module.exports = ()=>{
         postController.getAllPosts
     )
 
+    router.get('/post/top',
+        passport.authenticate('jwt'),
+        postController.getTopPosts
+    )
+
     router.get('/post/:id',
         passport.authenticate('jwt'),
         postController.getParticularPost

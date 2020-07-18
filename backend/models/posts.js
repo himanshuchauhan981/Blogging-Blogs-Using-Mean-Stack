@@ -80,7 +80,7 @@ class Post {
     }
 
     find = (pageIndex, pageSize) =>{
-        return blogPosts.aggregate([
+        return this.postModel.aggregate([
             {
                 "$project": {
                     "_id": {
@@ -99,8 +99,11 @@ class Post {
                     "comments._id": 1,"postContent":1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1
                 }
             }
-        
         ]).sort({postDate:-1}).skip(pageIndex).limit(pageSize)
+    }
+
+    topPosts = () =>{
+        return this.postModel.find().sort({likeCount:-1}).limit(3)
     }
 }
 

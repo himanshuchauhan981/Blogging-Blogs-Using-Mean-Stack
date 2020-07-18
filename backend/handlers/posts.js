@@ -84,10 +84,18 @@ const posts = {
     getAllPosts: async (req, res) => {
         let pageIndex = parseInt(req.query.pageIndex)
         let pageSize = parseInt(req.query.pageSize)
+        
         pageIndex = pageIndex * pageSize
+
         let allBlogs = await postModel.find(pageIndex, pageSize)
         allBlogs = await calculateComments(allBlogs)
+        
         res.status(200).json({ blogs: allBlogs })
+    },
+
+    getTopPosts : async (req,res) => {
+        let topBlogs = await postModel.topPosts().select({lastModifiedAt: 0, likeCount: 0})
+        res.status(200).json({ topBlogs: topBlogs})
     },
 
     getPostImage: async (req, res) => {

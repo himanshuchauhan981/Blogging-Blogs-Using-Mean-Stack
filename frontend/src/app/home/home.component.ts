@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
 
 	blogArray: Array<Blogs> = []
 
+	topBlogs : Array<Blogs> = []
+
 	ngOnInit() {
 		this.postService.allPosts(this.pageIndex, this.pageSize)
 			.subscribe((res:any) => {
@@ -44,6 +46,19 @@ export class HomeComponent implements OnInit {
 		
 		this.titleService.setTitle('Home - Blogging Blogs')
 		this.profileService.prepareProfileNames()
+
+		this.postService.topPosts()
+		.subscribe((res:any) =>{
+			let resData = res.topBlogs
+			for(let i=0; i< resData.length; i++){
+				if(resData[i].postImage != null){
+					let imageUrl = `${environment.basicUrl}/api/image/${resData[i].postImage}`
+					resData[i].postImage = imageUrl
+				}
+			}
+			this.topBlogs = resData
+			console.log(this.topBlogs[0])
+		})
 	}
 
 	onScroll() {

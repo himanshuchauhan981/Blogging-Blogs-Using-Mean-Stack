@@ -34,6 +34,10 @@ const post = {
     editPost : async (req,res)=>{
         const response = await postHandler.editPost(req,res)
         return response
+    },
+    getTopPosts: async (req,res) =>{
+        const response = await postHandler.getTopPosts(req,res)
+        return response
     }
 
 }

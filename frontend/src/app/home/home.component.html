@@ -1,3 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+        <div *ngFor="let blog of topBlogs" class="col-md-4 pt-3 cursor-pointer">
+            <div class="card">
+                <div class="card-header d-flex">
+                    <img src= '{{ blog?.postImage }}' width="50px" height="50px" class="rounded-circle align-text-top">
+                    <div class="text-truncate d-block pl-2 align-text-bottom">
+                        <a class="mb-0 text-primary">{{ blog?.postAuthor }}</a>
+                        <p class="mb-0">{{ blog?.postTitle }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="p-3" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
     <div class="row">
         <div class="col-md-8">

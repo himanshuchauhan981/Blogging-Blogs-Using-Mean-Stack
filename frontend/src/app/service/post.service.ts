@@ -74,7 +74,7 @@ export class PostService {
 		})
 	}
 
-	delete = (postId) =>{
+	delete = (postId: string) =>{
 		let headers = this.userService.appendHeaders()
 
 		return this.http.delete(`${this.basicUrl}/api/post/${postId}`,{
@@ -96,7 +96,7 @@ export class PostService {
 		})
 	}
 
-	openSnackBar(status,msg){
+	openSnackBar(status: number,msg: string){
 		let snackBarRef = this.matSnackBar.open(msg,'Close',{
 			duration: 2000
 		})
@@ -105,6 +105,14 @@ export class PostService {
 			if(status === 200){
 				this.router.navigate(['home'])
 			}
+		})
+	}
+
+	topPosts = () =>{
+		let headers = this.userService.appendHeaders()
+
+		return this.http.get(`${this.basicUrl}/api/post/top`,{
+			headers: headers
 		})
 	}
 }
@@ -117,9 +125,5 @@ export interface Blogs{
 	postDate: Date,
 	userId: string,
 	postAuthor: string,
-	comments : Comments[]
-}
-
-export interface Comments{
-
+	comments : Number
 }
