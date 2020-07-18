@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const faker = require('faker')
 const bcrypt = require('bcryptjs')
-const { users, blogPosts, postLikes, comments } = require('../models')
+const { users, blogPosts, postLikes, comments } = require('../schemas')
 
 mongoose.set('useNewUrlParser', true)
 mongoose.set('useUnifiedTopology', true)
@@ -70,6 +70,7 @@ async function createLikeAndCommentMockData() {
                 userId: allUsers[j]._id
             })
             await likeObject.save()
+            await blogPosts.findByIdAndUpdate(allBlogPosts[i]._id,{ $inc: {"likeCount": 1}})
         }
         totalComments = Math.floor(Math.random() * 10) + 1
         for(j=0;j<totalComments;j++){
