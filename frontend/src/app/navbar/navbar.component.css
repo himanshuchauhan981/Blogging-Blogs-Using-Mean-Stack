@@ -12,3 +12,11 @@
     max-height: 300px;
     overflow-y: auto;
 }
+
+@media only screen and (min-width: 768px) and (max-width: 950px){
+    .searchUser{ width: 200px; }
+
+    .nav-link{ font-size: 12px; }
+
+    .navbar-brand{ margin-right: 6px; }
+}
