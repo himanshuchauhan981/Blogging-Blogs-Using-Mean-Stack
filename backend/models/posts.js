@@ -96,8 +96,8 @@ class Post {
             },
             {
                 "$project": {
-                    "comments._id": 1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1,"postTitle":1
-                }
+                    "comments._id": 1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1,"postTitle":1, 'postContent':1
+                }   
             }
         ]).sort({postDate:-1}).skip(pageIndex).limit(pageSize)
     }

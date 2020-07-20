@@ -5,6 +5,7 @@ const Grid = require('gridfs-stream')
 
 const { createToken } = require('../auth').token
 const { users } = require('../schemas')
+const { userModel } = require('../models')
 
 const user = {
     saveUserDetails: async (req, res) => {
@@ -36,9 +37,10 @@ const user = {
         passport.authenticate('local', (err, user, info) => {
             if (err) return next(err)
             if (!user) return res.status(401).send('Invalid Credentials')
-            req.logIn(user, (err) => {
+            req.logIn(user, async(err) => {
                 if (err) { return next(err); }
                 let token = createToken(user._id)
+                await userModel.updateLastLogin(user._id)
                 return res.status(200).json({ token: token })
             })
         })(req, res, next)
