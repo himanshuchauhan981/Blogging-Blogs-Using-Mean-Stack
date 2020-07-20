@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core'
+import { Title } from '@angular/platform-browser'
+import { Router } from '@angular/router'
 
 import { PostService, Blogs } from '../service/post.service'
 import { ProfileService } from '../service/profile.service'
 import { environment } from '../../environments/environment'
-import { Title } from '@angular/platform-browser'
 
 @Component({
 	selector: 'home',
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
 	constructor(
 		private postService: PostService,
 		private profileService: ProfileService,
-		private titleService: Title
+		private titleService: Title,
+		private router: Router
 	) { }
 
 	pageSize : number  = 3
@@ -25,6 +27,8 @@ export class HomeComponent implements OnInit {
 	blogArray: Array<Blogs> = []
 
 	topBlogs : Array<Blogs> = []
+
+	cardBorder: Array<String> = ['card border-primary','card border-info','card border-success']
 
 	ngOnInit() {
 		this.postService.allPosts(this.pageIndex, this.pageSize)
@@ -51,13 +55,15 @@ export class HomeComponent implements OnInit {
 		.subscribe((res:any) =>{
 			let resData = res.topBlogs
 			for(let i=0; i< resData.length; i++){
-				if(resData[i].postImage != null){
-					let imageUrl = `${environment.basicUrl}/api/image/${resData[i].postImage}`
+				if(resData[i].users[0].profileImage != null){
+					let imageUrl = `${environment.basicUrl}/api/user/image/${resData.blogs[i].userId}`
 					resData[i].postImage = imageUrl
+				}
+				else{
+					resData[i].postImage = this.profileService.defaultProfileImage
 				}
 			}
 			this.topBlogs = resData
-			console.log(this.topBlogs[0])
 		})
 	}
 
@@ -75,5 +81,9 @@ export class HomeComponent implements OnInit {
 
 	profilePage(id) {
 		this.profileService.redirectToProfilePage(id)
+	}
+
+	showPost(postId: string){
+		this.router.navigate(['/post',postId])
 	}
 }

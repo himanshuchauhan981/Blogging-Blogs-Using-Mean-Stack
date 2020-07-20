@@ -96,14 +96,36 @@ class Post {
             },
             {
                 "$project": {
-                    "comments._id": 1,"postContent":1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1
+                    "comments._id": 1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1,"postTitle":1
                 }
             }
         ]).sort({postDate:-1}).skip(pageIndex).limit(pageSize)
     }
 
     topPosts = () =>{
-        return this.postModel.find().sort({likeCount:-1}).limit(3)
+        return this.postModel.aggregate([
+            {
+                $lookup :{
+                    "from": "users",
+                    "let": { "userObjId": { "$toObjectId": "$userId" } },
+                    "pipeline": [
+                        { 
+                            "$match": {
+                                "$expr": {
+                                    "$eq": [ "$_id", "$$userObjId" ]
+                                }
+                            }
+                        }
+                    ],
+                    "as": "users"
+                }
+            },
+            {
+                "$project":{
+                    postTitle: 1, postAuthor: 1, userId: 1,"users.profileImage" :1, postDate: 1
+                }
+            }
+        ]).sort({likeCount:-1}).limit(3)
     }
 }
 

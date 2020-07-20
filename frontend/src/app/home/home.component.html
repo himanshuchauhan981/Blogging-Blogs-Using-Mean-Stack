@@ -1,12 +1,13 @@
 <div class="container-fluid">
     <div class="row">
-        <div *ngFor="let blog of topBlogs" class="col-md-4 pt-3 cursor-pointer">
-            <div class="card">
-                <div class="card-header d-flex">
+        <div *ngFor="let blog of topBlogs,let i = index" class="col-md-4 pt-3 cursor-pointer">
+            <div [className]="cardBorder[i]">
+                <div class="card-header d-flex bg-white" (click)="showPost(blog._id)">
                     <img src= '{{ blog?.postImage }}' width="50px" height="50px" class="rounded-circle align-text-top">
                     <div class="text-truncate d-block pl-2 align-text-bottom">
-                        <a class="mb-0 text-primary">{{ blog?.postAuthor }}</a>
+                        <a class="mb-0 text-primary" (click)="profilePage(blog.userId)">{{ blog?.postAuthor }}</a>
                         <p class="mb-0">{{ blog?.postTitle }}</p>
+                        <p class="mb-0 text-muted">{{ blog?.postDate | amTimeAgo }}</p>
                     </div>
                 </div>
             </div>
@@ -25,7 +26,7 @@
                 <img mat-card-image *ngIf="blogs.postImage != null" src="{{ blogs.postImage }}" alt="">
                 <mat-card-content>
                     <b class="post-title">{{ blogs.postTitle }}</b>
-                    <p class="post-content">{{ (blogs.postContent.length > 195)? blogs.postContent.substring(0,195)+'.....' : blogs.postContent }}</p>
+                    <p class="post-content">{{ (blogs.postContent?.length > 195)? blogs.postContent.substring(0,195)+'.....' : blogs.postContent }}</p>
                     <div class="d-flex justify-content-between">
                         <a [routerLink]="['/post',blogs._id]">
                             <button mat-raised-button color="accent">Read More</button>

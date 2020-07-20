@@ -94,8 +94,9 @@ const posts = {
     },
 
     getTopPosts : async (req,res) => {
-        let topBlogs = await postModel.topPosts().select({lastModifiedAt: 0, likeCount: 0})
-        res.status(200).json({ topBlogs: topBlogs})
+        let topBlogs = await postModel.topPosts()
+        
+        res.status(200).json({ topBlogs: topBlogs })
     },
 
     getPostImage: async (req, res) => {
