@@ -44,6 +44,12 @@ class Users {
             ]
         )
     }
+
+    updateLastLogin = (id) => {
+        return this.userModel.findByIdAndUpdate(id,{
+            lastLogin: Date.now()
+        })
+    }
 }
 
 module.exports = new Users()

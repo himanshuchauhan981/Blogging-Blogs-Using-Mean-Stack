@@ -46,6 +46,9 @@ const users = new Schema({
     profileImage:{
         type: String,
         default: null
+    },
+    lastLogin:{
+        type: Date
     }
 })
 
