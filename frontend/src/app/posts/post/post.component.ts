@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 
-import { PostService } from 'src/app/service/post.service'
+import { PostService, Blogs } from 'src/app/service/post.service'
 import { environment } from '../../../environments/environment'
 import { Title } from '@angular/platform-browser';
 
@@ -46,7 +46,7 @@ export class PostComponent implements OnInit {
 		postImage: new FormControl('', Validators.required)
 	})
 
-	fileChange(element) {
+	fileChange(element: any) {
 		let filetype = element.target.files[0].type
 		let reader = new FileReader()
 
@@ -67,7 +67,7 @@ export class PostComponent implements OnInit {
 		}
 	}
 
-	submit(postValues) {
+	submit(postValues: Blogs, publishStatus: string) {
 		let formData = new FormData()
 		if (this.uploadedFiles != undefined) {
 			for (var i = 0; i < this.uploadedFiles.length; i++) {
@@ -77,6 +77,7 @@ export class PostComponent implements OnInit {
 
 		formData.append("postTitle", postValues.postTitle)
 		formData.append("postContent", postValues.postContent)
+		formData.append("publishStatus", publishStatus)
 		
 		let url = this.activatedRoute.snapshot.routeConfig.path
 		if (url == 'post/new') {

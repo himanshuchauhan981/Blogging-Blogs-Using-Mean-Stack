@@ -22,6 +22,8 @@ async function createUsersAndPostsMockData() {
     let totalUsers = 15
     await users.remove()
     await blogPosts.remove()
+    await postLikes.remove()
+    await comments.remove()
     for (let i = 0; i < totalUsers; i++) {
         // Creating new users
         let firstName = faker.name.firstName()
@@ -41,13 +43,17 @@ async function createUsersAndPostsMockData() {
 
         //Creating new blog posts per user
         let totalPosts = Math.floor(Math.random() * 10) + 1;
+        let publishedAt = Math.floor(Math.random() * 30) + 1;
         for (j = 0; j < totalPosts; j++) {
             let postObject = new blogPosts({
                 postTitle: faker.lorem.sentence().replace('.', ''),
                 postContent: faker.lorem.paragraphs(4),
                 postAuthor: `${firstName} ${lastName}`,
                 userId: userObject._id,
-                postImage: null
+                postImage: null,
+                publishedAt: Date.now() + publishedAt * 86400000,
+                publishStatus: 'submit',
+                draftedAt: null
             })
             await postObject.save()
         }
@@ -60,8 +66,6 @@ async function createUsersAndPostsMockData() {
 async function createLikeAndCommentMockData() {
     let allBlogPosts = await blogPosts.find()
     let allUsers = await users.find()
-    await postLikes.remove()
-    await comments.remove()
     for (i = 0; i < allBlogPosts.length; i++) {
         let totalLikes = Math.floor(Math.random() * allUsers.length) + 1
         for (j = 0; j < totalLikes; j++) {

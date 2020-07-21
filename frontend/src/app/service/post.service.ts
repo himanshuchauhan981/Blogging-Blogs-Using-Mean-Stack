@@ -122,7 +122,7 @@ export interface Blogs{
 	postTitle: string,
 	postContent: string,
 	postImage: string,
-	postDate: Date,
+	publishedAt: Date,
 	userId: string,
 	postAuthor: string,
 	comments : Number

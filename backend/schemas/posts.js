@@ -11,10 +11,6 @@ const posts = new Schema({
         type: String,
         required: [true,'Post Content is required']
     },
-    postDate : {
-        type: Date,
-        default: Date.now
-    },
     postAuthor:{
         type: String
     },
@@ -31,7 +27,17 @@ const posts = new Schema({
     likeCount: {
         type: Number,
         default: 0
+    },
+    publishStatus: {
+        type: String
+    },
+    publishedAt: {
+        type: Date
+    },
+    draftedAt: {
+        type: Date
     }
+
 })
 
 module.exports = mongoose.model('posts',posts)

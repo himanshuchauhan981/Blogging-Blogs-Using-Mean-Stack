@@ -7,7 +7,7 @@
                     <div class="text-truncate d-block pl-2 align-text-bottom">
                         <a class="mb-0 text-primary" (click)="profilePage(blog.userId)">{{ blog?.postAuthor }}</a>
                         <p class="mb-0">{{ blog?.postTitle }}</p>
-                        <p class="mb-0 text-muted">{{ blog?.postDate | amTimeAgo }}</p>
+                        <p class="mb-0 text-muted">{{ blog?.publishedAt | amTimeAgo }}</p>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <mat-card-header class="mb-2">
                     <img mat-card-avatar class="profile-img" *ngIf="blogs?.userImage != null; else userImage" src='{{ blogs.userImage }}'>
                     <mat-card-title class="profile-link mt-2"(click)="profilePage(blogs.userId)">{{ blogs.postAuthor }}</mat-card-title>
-                    <mat-card-subtitle class="mt-1">{{ blogs.postDate | amTimeAgo }}</mat-card-subtitle>
+                    <mat-card-subtitle class="mt-1">{{ blogs.publishedAt | amTimeAgo }}</mat-card-subtitle>
                 </mat-card-header>
                 <img mat-card-image *ngIf="blogs.postImage != null" src="{{ blogs.postImage }}" alt="">
                 <mat-card-content>
