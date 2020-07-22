@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
-import { MatExpansionModule } from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatTableModule } from '@angular/material/table'
@@ -39,6 +39,7 @@ import { ProfilePhotoFormComponent } from './signup/profile-photo-form/profile-p
 import { MainComponent } from './main/main.component';
 import { PostComponent } from './posts/post/post.component';
 import { ErrorIntercept } from './error.interceptor';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 @NgModule({
 	declarations: [
@@ -58,7 +59,8 @@ import { ErrorIntercept } from './error.interceptor';
 		SignupFormComponent,
 		ProfilePhotoFormComponent,
 		MainComponent,
-		PostComponent
+		PostComponent,
+		EditProfileComponent
 	],
 	imports: [
 		BrowserModule,

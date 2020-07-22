@@ -1,4 +1,40 @@
 <div class="profile-container">
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card card-shadow">
+                <div *ngIf="profileService.user?.profileImage != null else profileImg">
+                    <img src="{{ user.profileImage }}" class="img-card-top" alt="">
+                </div>
+                <div class="d-flex flex-row justify-content-between px-4">
+                    <h4 class="card-title"><i class="fa fa-user"> {{ profileService.user?.name}}</i></h4>
+                    <input type="button">
+                </div>
+                
+                <h4 class="card-title px-4"><i class="fa fa-envelope"> {{ profileService.user?.email }}</i></h4>
+                <div class="d-flex flex-column pb-3">
+                    <div class="d-flex flex-row justify-content-between cursor-pointer px-4" id="follower-id">
+                        <h4><i class="fa fa-users"></i> Followers</h4>
+                        <h4>18</h4>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between mb-3 cursor-pointer px-4" id="follower-id">
+                        <h4><i class="fa fa-users"></i> Following</h4>
+                        <div class="align-self end">
+                            <h4>18</h4>
+                        </div>
+                    </div>
+                    <div class="px-4">
+                        <button type="button" mat-raised-button color="primary" class="w-100" (click)="edit()">Edit details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="profile-container">
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -30,8 +66,8 @@
             <view-all-posts></view-all-posts>
         </div>
     </div>
-</div>
+</div> -->
 
 <ng-template #profileImg>
-    <img src="{{ profileService.defaultProfileImage }}" class="profile-img img-card-top" alt="">
+    <img src="{{ profileService.defaultProfileImage }}" class="img-card-top w-100 d-block" alt="">
 </ng-template>

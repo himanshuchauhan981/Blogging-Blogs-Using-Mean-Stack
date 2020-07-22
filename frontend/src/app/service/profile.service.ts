@@ -21,7 +21,7 @@ export class ProfileService {
 
 	authorized: Boolean = false
 
-	defaultProfileImage: string = 'https://pngimage.net/wp-content/uploads/2018/05/default-user-image-png-7.png'
+	defaultProfileImage : string = 'https://www.vikasanvesh.in/wp-content/themes/vaf/images/no-image-found-360x260.png'
 
 	private _profileNames: string[]
 

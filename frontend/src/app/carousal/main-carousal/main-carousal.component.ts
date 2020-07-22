@@ -37,9 +37,4 @@ export class MainCarousalComponent{
 		}
 	}
 
-	constructor() { 
-		console.log(`Height ${window.innerHeight}`)
-		console.log(`Width ${window.innerWidth}`)
-	}
-
 }

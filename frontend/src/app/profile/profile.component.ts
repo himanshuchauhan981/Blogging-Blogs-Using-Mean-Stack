@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/profile-dialog-box.component'
 import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
 import { ProfileService, User } from '../service/profile.service'
-import { ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
 	selector: 'profile',
@@ -22,15 +22,16 @@ export class ProfileComponent implements OnInit {
 
 	defaultProfileImage : string
 
+	profileId : string
+
 	constructor(
+		private router: Router,
 		public matDialog: MatDialog,
 		private profileService: ProfileService,
 		private activatedRoute: ActivatedRoute
 	) { }
 
 	ngOnInit() {
-
-		// this.profileService.getProfile()
 
 		this.profileService.emailValue()
 		.subscribe(data => {
@@ -42,21 +43,26 @@ export class ProfileComponent implements OnInit {
 		this.defaultProfileImage = this.profileService.defaultProfileImage
 
 		this.activatedRoute.params.subscribe(params =>{
+			this.profileId = params.id
 			this.profileService.getProfile()
 		})
 	}
 
-	openDialogBox(heading) {
-		this.matDialog.open(ProfileDialogBoxComponent, {
-			width: '350px',
-			data: { heading: heading }
-		})
-	}
+	// openDialogBox(heading) {
+	// 	this.matDialog.open(ProfileDialogBoxComponent, {
+	// 		width: '350px',
+	// 		data: { heading: heading }
+	// 	})
+	// }
 
-	openPasswordDialogBox() {
-		this.matDialog.open(PasswordDialogBoxComponent, {
-			width: '450px'
-		})
+	// openPasswordDialogBox() {
+	// 	this.matDialog.open(PasswordDialogBoxComponent, {
+	// 		width: '450px'
+	// 	})
+	// }
+
+	edit(){
+		this.router.navigate(['edit'],{relativeTo: this.activatedRoute})
 	}
 
 }
