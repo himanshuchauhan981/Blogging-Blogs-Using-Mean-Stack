@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../service/profile.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { signupValidators } from 'src/app/signup/signup-form/signup.validators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-profile',
@@ -9,27 +11,36 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class EditProfileComponent implements OnInit {
 
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService, private matSnackBar: MatSnackBar) { }
 
-  profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl('')
+  nameForm = new FormGroup({
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required)
   })
 
   emailForm = new FormGroup({
-    email: new FormControl('')
+    email: new FormControl('',[
+			Validators.required,
+			Validators.email
+		])
   })
 
   passwordForm = new FormGroup({
-    currentPassword: new FormControl(''),
-    newPassword: new FormControl(''),
-    confirmPassword: new FormControl('')
-  })
+    currentPassword: new FormControl('', Validators.required),
+    password: new FormControl('',[
+			Validators.required,
+			Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
+			Validators.minLength(6)
+		]),
+    confirmPassword: new FormControl('', Validators.required)
+  },{
+		validators: signupValidators.MustMatch
+	})
 
   ngOnInit() { }
 
   setUsername(){
-    this.profileForm.setValue({
+    this.nameForm.setValue({
       firstName: this.profileService.user.firstName,
       lastName: this.profileService.user.lastName
     })
@@ -41,24 +52,37 @@ export class EditProfileComponent implements OnInit {
     })
   }
 
-  changeUsername(profileForm: FormGroup){
-    let data = profileForm.value
+  changeUsername(nameForm: FormGroup){
+    let data = nameForm.value
     let type = 'name'
     let status = this.profileService.user.firstName == data.firstName && this.profileService.user.lastName == data.lastName
     if(!status){
-      this.profileService.sampleUpdateProfile(data,type).subscribe(res =>{
-        console.log(res)
+      this.profileService.sampleUpdateProfile(data,type).subscribe((res:any) =>{
+        this.profileService.user.name = `${res.firstName} ${res.lastName}`
+        this.matSnackBar.open(res.msg,'Close',{
+					duration: 3000
+				})
       })
     }
   }
 
   changeEmail(emailForm: FormGroup){
     let data = emailForm.value
+    let validEmail = emailForm.valid
     let type = 'email'
     let status = this.profileService.user.email == data.email
-    if(!status){
-      this.profileService.sampleUpdateProfile(data, type).subscribe(res =>{
-        console.log(res)
+    if(!status && validEmail){
+      this.profileService.sampleUpdateProfile(data, type)
+      .subscribe((res:any) =>{
+        this.profileService.user.email = res.email
+        this.matSnackBar.open(res.msg,'Close',{
+					duration: 3000
+				})
+      },
+      (error) =>{
+        this.matSnackBar.open(error.msg,'Close',{
+					duration: 3000
+				})
       })
     }
   }
@@ -66,9 +90,20 @@ export class EditProfileComponent implements OnInit {
   changePassword(passwordForm: FormGroup){
     let data = passwordForm.value
     let type = 'password'
-    this.profileService.sampleUpdateProfile(data,type).subscribe(res => {
-      console.log(res)
-    })
+    let validPassword = passwordForm.valid
+    if(validPassword){
+      this.profileService.sampleUpdateProfile(data,type)
+      .subscribe((res:any)=>{
+				this.matSnackBar.open(res.msg,'Close',{
+					duration: 3000
+				})
+			},
+			(error) =>{
+				this.matSnackBar.open(error.msg,'Close',{
+					duration: 3000
+				})
+			})
+    }
   }
 
 }

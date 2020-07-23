@@ -8,7 +8,7 @@ const profile = {
         let type = req.query.type
         if(type == 'name'){
             const updateStatus = await userModel.update(username, {firstName: req.body.firstName, lastName: req.body.lastName})
-            res.status(200).json({firstName: updateStatus.firstName, lastName: updateStatus.lastName})
+            res.status(200).json({msg: 'Name updated',firstName: updateStatus.firstName, lastName: updateStatus.lastName})
         }
         else if(type =='email'){
             let checkExistingEmail = await userModel.findByEmail(req.body.userdata)
@@ -16,7 +16,7 @@ const profile = {
                 const updateStatus = await userModel.update(username, {
                     email: email
                 })
-                res.status(200).json({msg:'Email ID updated',data: updateStatus.email})
+                res.status(200).json({msg:'Email ID updated',email: updateStatus.email})
             }
             else{
                 res.status(400).json('Email ID already existed')
@@ -28,9 +28,9 @@ const profile = {
                 let userStatus = bcrypt.compareSync(req.body.currentPassword,userDetails.password)
                 if(userStatus){
                     let salt = bcrypt.genSaltSync(10)
-                    let hash = bcrypt.hashSync(req.body.newPassword,salt)
+                    let hash = bcrypt.hashSync(req.body.password,salt)
                     await userModel.updatePassword(req.params.username, hash)
-                    res.status(200).json('Password Changed successfully')
+                    res.status(200).json({msg:'Password Changed successfully'})
                 }
                 else{
                     res.status(400).json('Incorrect Current Password')
