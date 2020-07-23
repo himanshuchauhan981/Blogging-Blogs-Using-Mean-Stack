@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../../service/profile.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { signupValidators } from 'src/app/signup/signup-form/signup.validators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { ProfileService } from '../../service/profile.service';
+import { signupValidators } from 'src/app/signup/signup-form/signup.validators';
 
 @Component({
   selector: 'app-edit-profile',

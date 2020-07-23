@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-
-import { ProfileDialogBoxComponent } from '../dialog-box/profile-dialog-box/profile-dialog-box.component'
-import { PasswordDialogBoxComponent } from '../dialog-box/password-dialog-box/password-dialog-box.component'
-import { ProfileService, User } from '../service/profile.service'
 import { Router, ActivatedRoute } from '@angular/router'
+
+import { ProfileService, User } from '../service/profile.service'
+
 
 @Component({
 	selector: 'profile',
@@ -47,19 +46,6 @@ export class ProfileComponent implements OnInit {
 			this.profileService.getProfile()
 		})
 	}
-
-	// openDialogBox(heading) {
-	// 	this.matDialog.open(ProfileDialogBoxComponent, {
-	// 		width: '350px',
-	// 		data: { heading: heading }
-	// 	})
-	// }
-
-	// openPasswordDialogBox() {
-	// 	this.matDialog.open(PasswordDialogBoxComponent, {
-	// 		width: '450px'
-	// 	})
-	// }
 
 	edit(){
 		this.router.navigate(['edit'],{relativeTo: this.activatedRoute})
