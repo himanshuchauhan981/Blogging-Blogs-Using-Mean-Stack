@@ -2,18 +2,41 @@ const { userModel } = require('../models')
 const bcrypt = require('bcryptjs')
 
 const profile = {
-    updateProfileEmail : async(req,res)=>{
+    updateProfileData : async(req,res)=>{
         let username = req.params.username
-        let email = req.body.userdata
-        let checkExistingEmail = await userModel.findByEmail(req.body.userdata)
-        if(checkExistingEmail.length == 0){
-            const updateStatus = await userModel.update(username, email)
-            res.status(200).json({msg:'Email ID updated',data: updateStatus.email})
+        let email = req.body.email
+        let type = req.query.type
+        if(type == 'name'){
+            const updateStatus = await userModel.update(username, {firstName: req.body.firstName, lastName: req.body.lastName})
+            res.status(200).json({msg: 'Name updated',firstName: updateStatus.firstName, lastName: updateStatus.lastName})
         }
-        else{
-            res.status(400).json('Email ID already existed')
+        else if(type =='email'){
+            let checkExistingEmail = await userModel.findByEmail(req.body.userdata)
+            if(checkExistingEmail.length == 0){
+                const updateStatus = await userModel.update(username, {
+                    email: email
+                })
+                res.status(200).json({msg:'Email ID updated',email: updateStatus.email})
+            }
+            else{
+                res.status(400).json('Email ID already existed')
+            }
         }
-        
+        else if(type =='password'){
+            if(req.user.username === req.params.username){
+                const userDetails = await userModel.findByUsername(req.params.username).select({password:1})
+                let userStatus = bcrypt.compareSync(req.body.currentPassword,userDetails.password)
+                if(userStatus){
+                    let salt = bcrypt.genSaltSync(10)
+                    let hash = bcrypt.hashSync(req.body.password,salt)
+                    await userModel.updatePassword(req.params.username, hash)
+                    res.status(200).json({msg:'Password Changed successfully'})
+                }
+                else{
+                    res.status(400).json('Incorrect Current Password')
+                }
+            }
+        }
     },
 
     getUserProfileData : async(req,res)=>{
@@ -24,22 +47,6 @@ const profile = {
         let userDetails = await userModel.findByUsername(req.params.username).select({email:1, firstName:1, lastName:1, profileImage:1})
         
         res.status(200).json({userDetails, authorized})
-    },
-
-    updateUserPassword : async(req,res)=>{
-        if(req.user.username === req.params.username){
-            const userDetails = await userModel.findByUsername(req.params.username).select({password:1})
-            let userStatus = bcrypt.compareSync(req.body.currentPassword,userDetails.password)
-            if(userStatus){
-                let salt = bcrypt.genSaltSync(10)
-                let hash = bcrypt.hashSync(req.body.password,salt)
-                await userModel.updatePassword(req.params.username, hash)
-                res.status(200).json('Password Changed successfully')
-            }
-            else{
-                res.status(400).json('Incorrect Current Password')
-            }
-        }   
     },
 
     getOtherUserProfileData : async (req,res)=>{

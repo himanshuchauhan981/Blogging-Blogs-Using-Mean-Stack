@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
-import { MatExpansionModule } from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatTableModule } from '@angular/material/table'
@@ -31,14 +31,13 @@ import { SidebarComponent } from './sidebar/sidebar.component'
 import { ViewPostComponent } from './posts/view-post/view-post.component'
 import { ViewAllPostsComponent } from './posts/view-all-posts/view-all-posts.component'
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileDialogBoxComponent } from './dialog-box/profile-dialog-box/profile-dialog-box.component';
-import { PasswordDialogBoxComponent } from './dialog-box/password-dialog-box/password-dialog-box.component';
 import { DeleteCommentDialogBoxComponent } from './dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component';
 import { SignupFormComponent } from './signup/signup-form/signup-form.component';
 import { ProfilePhotoFormComponent } from './signup/profile-photo-form/profile-photo-form.component';
 import { MainComponent } from './main/main.component';
 import { PostComponent } from './posts/post/post.component';
 import { ErrorIntercept } from './error.interceptor';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 @NgModule({
 	declarations: [
@@ -52,13 +51,12 @@ import { ErrorIntercept } from './error.interceptor';
 		ViewPostComponent,
 		ViewAllPostsComponent,
 		ProfileComponent,
-		ProfileDialogBoxComponent,
-		PasswordDialogBoxComponent,
 		DeleteCommentDialogBoxComponent,
 		SignupFormComponent,
 		ProfilePhotoFormComponent,
 		MainComponent,
-		PostComponent
+		PostComponent,
+		EditProfileComponent
 	],
 	imports: [
 		BrowserModule,
@@ -95,8 +93,6 @@ import { ErrorIntercept } from './error.interceptor';
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [
-		ProfileDialogBoxComponent,
-		PasswordDialogBoxComponent,
 		DeleteCommentDialogBoxComponent
 	]
 })

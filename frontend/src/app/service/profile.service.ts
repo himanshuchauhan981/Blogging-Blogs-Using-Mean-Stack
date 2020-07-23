@@ -21,7 +21,7 @@ export class ProfileService {
 
 	authorized: Boolean = false
 
-	defaultProfileImage: string = 'https://pngimage.net/wp-content/uploads/2018/05/default-user-image-png-7.png'
+	defaultProfileImage : string = 'https://www.vikasanvesh.in/wp-content/themes/vaf/images/no-image-found-360x260.png'
 
 	private _profileNames: string[]
 
@@ -47,8 +47,12 @@ export class ProfileService {
 
 	getProfile() {
 		let headers = this.userService.appendHeaders()
+		let username = this.router.url
+		if(username.endsWith('edit')){
+			username = username.substring(1,username.indexOf('edit')-1)
+		}
 
-		this.http.get(`${this.basicUrl}/api${this.router.url}`, {
+		this.http.get(`${this.basicUrl}/api/${username}`, {
 			headers: headers
 		})
 		.subscribe((res:any) =>{
@@ -67,6 +71,16 @@ export class ProfileService {
 		let headers = this.userService.appendHeaders()
 
 		return this.http.patch(`${this.basicUrl}/api/${this.authGuardService.currentUser}/${updateStatus}`, object, {
+			headers: headers
+		})
+	}
+
+	sampleUpdateProfile(object, type: string){
+		let headers  = this.userService.appendHeaders()
+		return this.http.patch(`${this.basicUrl}/api/${this.authGuardService.currentUser}`,object, {
+			params: {
+				type: type
+			},
 			headers: headers
 		})
 	}
@@ -125,6 +139,8 @@ export interface ProfileNames{
 }
 
 export interface User {
+	lastName: string,
+	firstName: string,
 	id: string,
 	username: string,
 	email: string,

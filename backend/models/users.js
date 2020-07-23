@@ -17,7 +17,7 @@ class Users {
         
         return this.userModel.findOneAndUpdate(
             { username: username },
-            { email: email },
+            email,
             { new: true }
         )
     }

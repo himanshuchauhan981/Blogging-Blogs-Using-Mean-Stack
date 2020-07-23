@@ -1,0 +1,71 @@
+<div class="container bg-white pt-4 pb-1">
+    <mat-accordion>
+        <mat-expansion-panel (opened)="setUsername()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Name</mat-panel-title>
+                <mat-panel-description>{{ profileService.user?.name }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="nameForm" (ngSubmit)="changeUsername(nameForm)">
+                <div class="d-flex flex-column">
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>First name</mat-label>
+                        <input matInput type="text" placeholder="Enter first name" formControlName="firstName"/>
+                        <mat-error *ngIf="nameForm.controls['firstName'].hasError('required')">Required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>Last name</mat-label>
+                        <input matInput type="text" placeholder="Enter last name" formControlName="lastName" />
+                        <mat-error *ngIf="nameForm.controls['lastName'].hasError('required')">Required</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="w-50 align-self-center">Change</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="setEmail()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Email</mat-panel-title>
+                <mat-panel-description>{{ profileService.user?.email }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="emailForm" (ngSubmit)="changeEmail(emailForm)">
+                <div class="d-flex flex-column">
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>New email</mat-label>
+                        <input matInput type="text" placeholder="Enter new email" formControlName="email" required/>
+                        <mat-error *ngIf="emailForm.controls['email'].hasError('required')">Email is required</mat-error>
+                        <mat-error *ngIf="!emailForm.controls['email'].hasError('required') && emailForm.controls['email'].hasError('email')">Invalid Email ID</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="w-50 align-self-center">Change</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Password</mat-panel-title>
+                <mat-panel-description>Last changed 12 months ago</mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="passwordForm" (ngSubmit)="changePassword(passwordForm)">
+                <div class="d-flex flex-column">
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>Current password</mat-label>
+                        <input matInput type="password" placeholder="Enter current password" formControlName="currentPassword"/>
+                        <mat-error *ngIf="passwordForm.controls['currentPassword'].hasError('required')">Required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>New password</mat-label>
+                        <input matInput type="password" placeholder="Enter new password" formControlName="password"/>
+                        <mat-error *ngIf="passwordForm.controls['password'].hasError('required')">Required</mat-error>
+                        <mat-error *ngIf="passwordForm.controls['password'].hasError('minlength')">Minimum password length is 8</mat-error>
+                        <mat-error *ngIf="!passwordForm.controls['password'].hasError('minlength') && passwordForm.controls['password'].hasError('pattern')">Must contain one lower &amp; uppercase letter and numerical character</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>Confirm password</mat-label>
+                        <input matInput type="password" placeholder="Enter confirm password" formControlName="confirmPassword" required/>
+                        <mat-error *ngIf="passwordForm.controls['confirmPassword'].hasError('required')">Required Field</mat-error>
+                        <mat-error *ngIf="passwordForm.controls['confirmPassword'].hasError('mustMatch')">Password not matched</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="w-50 align-self-center">Change</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
