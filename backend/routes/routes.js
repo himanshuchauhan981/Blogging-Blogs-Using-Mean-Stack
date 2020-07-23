@@ -86,19 +86,14 @@ module.exports = ()=>{
         profileController.getUserProfileData
     )
 
-    router.patch('/:username/email',
+    router.patch('/:username',
         passport.authenticate('jwt'),
-        profileController.updateProfileEmail
+        profileController.updateProfileData
     )
 
     router.get('/:username/posts',
         passport.authenticate('jwt'),
         postController.getAllParticularUserPost
-    )
-
-    router.patch('/:username/password',
-        passport.authenticate('jwt'),
-        profileController.updateUserPassword
     )
 
     router.post('/:postId/like',

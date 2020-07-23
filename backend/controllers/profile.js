@@ -2,18 +2,13 @@ const { profileHandler } = require('../handlers')
 
 const profiles = {
 
-    updateProfileEmail : async (req,res)=>{
-        const response = profileHandler.updateProfileEmail(req,res)
+    updateProfileData : async (req,res)=>{
+        const response = profileHandler.updateProfileData(req,res)
         return response
     },
 
     getUserProfileData : async (req,res)=>{
         const response = profileHandler.getUserProfileData(req,res)
-        return response
-    },
-
-    updateUserPassword : async (req,res)=>{
-        const response = profileHandler.updateUserPassword(req,res)
         return response
     },
 

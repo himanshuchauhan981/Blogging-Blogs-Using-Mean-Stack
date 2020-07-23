@@ -1,23 +1,61 @@
-<mat-accordion>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>Name</mat-panel-title>
-            <mat-panel-description>Himanshu Chauhan</mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>Edit name</p>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>Email</mat-panel-title>
-            <mat-panel-description>sampleEmail@email.com</mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>Edit email</p>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>Password</mat-panel-title>
-            <mat-panel-description>Last changed 12 months ago</mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>Edit password</p>
-    </mat-expansion-panel>
-</mat-accordion>
+<div class="container bg-white pt-4 pb-1">
+    <mat-accordion>
+        <mat-expansion-panel (opened)="setUsername()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Name</mat-panel-title>
+                <mat-panel-description>{{ profileService.user?.name }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="profileForm" (ngSubmit)="changeUsername(profileForm)">
+                <div class="d-flex flex-column">
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>First name</mat-label>
+                        <input matInput type="text" placeholder="Enter first name" formControlName="firstName"/>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>Last name</mat-label>
+                        <input matInput type="text" placeholder="Enter last name" formControlName="lastName" />
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="w-50 align-self-center">Change</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="setEmail()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Email</mat-panel-title>
+                <mat-panel-description>{{ profileService.user?.email }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="emailForm" (ngSubmit)="changeEmail(emailForm)">
+                <div class="d-flex flex-column">
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>New email</mat-label>
+                        <input matInput type="text" placeholder="Enter new email" formControlName="email"/>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="w-50 align-self-center">Change</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Password</mat-panel-title>
+                <mat-panel-description>Last changed 12 months ago</mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="passwordForm" (ngSubmit)="changePassword(passwordForm)">
+                <div class="d-flex flex-column">
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>Current password</mat-label>
+                        <input matInput type="text" placeholder="Enter current password" formControlName="currentPassword"/>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>New password</mat-label>
+                        <input matInput type="text" placeholder="Enter new password" formControlName="newPassword"/>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="align-self-center w-50">
+                        <mat-label>Confirm password</mat-label>
+                        <input matInput type="text" placeholder="Enter confirm password" formControlName="confirmPassword"/>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="w-50 align-self-center">Change</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
