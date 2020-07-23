@@ -31,8 +31,6 @@ import { SidebarComponent } from './sidebar/sidebar.component'
 import { ViewPostComponent } from './posts/view-post/view-post.component'
 import { ViewAllPostsComponent } from './posts/view-all-posts/view-all-posts.component'
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileDialogBoxComponent } from './dialog-box/profile-dialog-box/profile-dialog-box.component';
-import { PasswordDialogBoxComponent } from './dialog-box/password-dialog-box/password-dialog-box.component';
 import { DeleteCommentDialogBoxComponent } from './dialog-box/delete-comment-dialog-box/delete-comment-dialog-box.component';
 import { SignupFormComponent } from './signup/signup-form/signup-form.component';
 import { ProfilePhotoFormComponent } from './signup/profile-photo-form/profile-photo-form.component';
@@ -53,8 +51,6 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 		ViewPostComponent,
 		ViewAllPostsComponent,
 		ProfileComponent,
-		ProfileDialogBoxComponent,
-		PasswordDialogBoxComponent,
 		DeleteCommentDialogBoxComponent,
 		SignupFormComponent,
 		ProfilePhotoFormComponent,
@@ -97,8 +93,6 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [
-		ProfileDialogBoxComponent,
-		PasswordDialogBoxComponent,
 		DeleteCommentDialogBoxComponent
 	]
 })
