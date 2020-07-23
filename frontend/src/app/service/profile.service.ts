@@ -15,8 +15,6 @@ import { environment } from '../../environments/environment'
 export class ProfileService {
 	basicUrl : string = environment.basicUrl
 
-	@Output() fire: EventEmitter<any> = new EventEmitter()
-
 	user : User 
 
 	authorized: Boolean = false
@@ -67,15 +65,7 @@ export class ProfileService {
 		})
 	}
 
-	updateProfile(object, updateStatus) {
-		let headers = this.userService.appendHeaders()
-
-		return this.http.patch(`${this.basicUrl}/api/${this.authGuardService.currentUser}/${updateStatus}`, object, {
-			headers: headers
-		})
-	}
-
-	sampleUpdateProfile(object, type: string){
+	updateProfile(object, type: string){
 		let headers  = this.userService.appendHeaders()
 		return this.http.patch(`${this.basicUrl}/api/${this.authGuardService.currentUser}`,object, {
 			params: {
@@ -83,22 +73,6 @@ export class ProfileService {
 			},
 			headers: headers
 		})
-	}
-
-	updatePassword(object) {
-		let headers = this.userService.appendHeaders()
-
-		return this.http.patch(`${this.basicUrl}/api${this.router.url}/password`,object,{
-			headers: headers
-		})
-	}
-
-	changeEmailValue(data){
-		this.fire.emit(data);
-	}
-
-	emailValue(){
-		return this.fire
 	}
 
 	username(id: string){

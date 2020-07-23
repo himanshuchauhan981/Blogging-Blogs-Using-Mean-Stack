@@ -31,14 +31,6 @@ export class ProfileComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-
-		this.profileService.emailValue()
-		.subscribe(data => {
-			if (data != undefined) {
-				this.user.email = data
-			}
-		})
-
 		this.defaultProfileImage = this.profileService.defaultProfileImage
 
 		this.activatedRoute.params.subscribe(params =>{

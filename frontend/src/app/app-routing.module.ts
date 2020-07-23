@@ -17,7 +17,17 @@ const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
-	{ path: 'profile/:id', component: ProfileComponent, canActivate:[AuthGuardService] },
+	{
+		path: 'profile/:id',
+		component: ProfileComponent,
+		canActivate:[AuthGuardService],
+		children: [
+			{
+				path: '',
+				component: ViewAllPostsComponent
+			}
+		]
+	},
 	{ path: 'post/new', component: PostComponent, canActivate:[AuthGuardService]},
 	{ path: ':username/:postId/edit', component: PostComponent, canActivate:[AuthGuardService] },
 	{ path: 'post/:id', component: ViewPostComponent, canActivate:[AuthGuardService] },

@@ -2,8 +2,9 @@
     <div class="row mt-4">
         <div class="col-md-4">
             <div class="card card-shadow">
-                <div *ngIf="profileService.user?.profileImage != null else profileImg">
-                    <img src="{{ user.profileImage }}" class="img-card-top" alt="">
+                <img *ngIf="profileService.user?.profileImage != null else profileImg" src="{{ user.profileImage }}" class="img-card-top" alt="">
+                <div class="card-image-overlay">
+                    <button *ngIf="!profileService.authorized" class="btn btn-success">Follow</button>
                 </div>
                 <div class="d-flex flex-row justify-content-between px-4">
                     <h4 class="card-title px-1"><i class="fa fa-user"> {{ profileService.user?.name }}</i></h4>
@@ -22,7 +23,7 @@
                         </div>
                     </div>
                     <div class="px-4">
-                        <button type="button" mat-raised-button color="primary" class="w-100" (click)="edit()">Edit details</button>
+                        <button *ngIf="profileService.authorized" type="button" mat-raised-button color="primary" class="w-100" (click)="edit()">Edit details</button>
                     </div>
                 </div>
             </div>
