@@ -15,7 +15,7 @@
                     </h2>
                     <h5>By 
                         <span class="profile-link"(click)="userProfile(post.userId)">{{ post?.postAuthor }}</span>
-                        <span class="ml-2 post-author">{{ post?.postDate | amTimeAgo }}</span>
+                        <span class="ml-2 post-author">{{ post?.publishedAt | amTimeAgo }}</span>
                     </h5>
                     <div class="post-content">
                         <pre>{{ post?.postContent }}</pre>

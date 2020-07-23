@@ -7,7 +7,7 @@
                     <form 
                         [formGroup]="postForm"
                         enctype="multipart/form-data"
-                        (submit)="submit(postForm.value)"
+                        (submit)="submit(postForm.value,'submit')"
                     >
                         <mat-form-field class="w-100">
                             <input 
@@ -32,8 +32,21 @@
                         <button 
                             mat-raised-button 
                             color="primary"
-                            class="mt-2"
+                            class="mt-2 mr-2"
                         >{{ heading }}</button>
+                        <button
+                            type="button"
+                            *ngIf="heading == 'Create New Post'"
+                            mat-raised-button
+                            class="mr-2"
+                            color="accent"
+                            (click)="submit(postForm.value,'draft')"
+                        >Save as draft</button>
+                        <button 
+                            type="button"
+                            mat-raised-button
+                            color="warn"
+                        >Cancel</button>
                     </form>
                 </mat-card-content>
             </mat-card>

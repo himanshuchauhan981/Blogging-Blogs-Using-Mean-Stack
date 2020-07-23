@@ -39,7 +39,7 @@ class Post {
         
         return this.postModel.find({
             userId: userId
-        }).skip(pageIndex).limit(pageSize).sort({ postDate: -1 })
+        }).skip(pageIndex).limit(pageSize).sort({ publishedAt: 1 })
     }
 
     create = (data) =>{
@@ -50,10 +50,12 @@ class Post {
     viewPost = (postId, userId) =>{
         return this.postModel.aggregate([
             {
-                $match: { "_id":  ObjectId(postId) }
+                $match: {
+                    $and: [{ "_id":  ObjectId(postId) }, { publishStatus: 'submit' }]
+                }
             },
             {
-                $project: { postTitle :1, postContent: 1,postDate: 1, postAuthor:1,postImage:1,userId:1 }
+                $project: { postTitle :1, postContent: 1, publishedAt: 1, postAuthor:1,postImage:1,userId:1 }
             },
             {
                 $lookup: {
@@ -82,11 +84,16 @@ class Post {
     find = (pageIndex, pageSize) =>{
         return this.postModel.aggregate([
             {
+                $match: {
+                    publishStatus: 'submit'
+                }
+            },
+            {
                 "$project": {
                     "_id": {
                         "$toString": "$_id"
                     },
-                    "postContent": 1, "postTitle": 1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1,
+                    "postContent": 1, "postTitle": 1, "publishedAt": 1, "postAuthor": 1, "postImage": 1, "userId": 1,
                 }
             },
             {
@@ -96,10 +103,10 @@ class Post {
             },
             {
                 "$project": {
-                    "comments._id": 1, "postDate": 1, "postAuthor": 1, "postImage": 1, "userId": 1,"postTitle":1, 'postContent':1
+                    "comments._id": 1, "publishedAt": 1, "postAuthor": 1, "postImage": 1, "userId": 1,"postTitle": 1, 'postContent': 1
                 }   
             }
-        ]).sort({postDate:-1}).skip(pageIndex).limit(pageSize)
+        ]).sort({publishedAt:1}).skip(pageIndex).limit(pageSize)
     }
 
     topPosts = () =>{
@@ -122,7 +129,7 @@ class Post {
             },
             {
                 "$project":{
-                    postTitle: 1, postAuthor: 1, userId: 1,"users.profileImage" :1, postDate: 1
+                    postTitle: 1, postAuthor: 1, userId: 1,"users.profileImage" :1, publishedAt: 1
                 }
             }
         ]).sort({likeCount:-1}).limit(3)

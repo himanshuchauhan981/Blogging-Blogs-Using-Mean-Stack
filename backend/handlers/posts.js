@@ -64,20 +64,20 @@ async function viewPost(postId,userId){
 const posts = {
     createNewPost: async (req, res) => {
         let userData = await capitalizeUsername(req.user.username)
-        await postModel.create({
+        let publishStatus = req.body.publishStatus
+        postModel.create({
             postTitle: req.body.postTitle,
             postContent: req.body.postContent,
             postImage: typeof req.file === "undefined" || !req.file ? null : req.file.filename,
             postAuthor: userData.firstName+' '+userData.lastName,
-            userId: req.user._id
-        },(err, post) =>{
-            if (err) {
-                let error = Object.values(err.errors)[0].message
-                res.status(400).json('Something wrong happened, Try again!!!')
-            }
-            else {
-                res.status(200).json('New post created')
-            }
+            userId: req.user._id,
+            publishStatus: publishStatus,
+            publishedAt: publishStatus == 'submit' ?  Date.now() : null,
+            draftedAt: publishStatus == 'draft' ? Date.now(): null
+        }).then( post => {
+            res.status(200).json('New post created')
+        }).catch( err =>{
+            res.status(400).json('Something wrong happened, Try again!!!')
         })
     },
 
@@ -142,7 +142,7 @@ const posts = {
             authenticated = true
         }
         let userDetails = await userModel.findByUsername(req.params.username).select({_id:1,profileImage:1,username:1})
-        let userPosts = await postModel.findByUsername(userDetails._id, pageIndex, pageSize)
+        let userPosts = await postModel.findByUsername(userDetails._id, pageIndex, pageSize).select({draftedAt: 0, lastModifiedAt: 0, likeCount: 0, publishStatus: 0})
 
         res.status(200).json({ userPosts, authenticated, userDetails })
     },
