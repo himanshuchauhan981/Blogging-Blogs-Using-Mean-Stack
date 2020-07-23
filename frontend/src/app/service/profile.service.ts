@@ -19,6 +19,8 @@ export class ProfileService {
 
 	authorized: Boolean = false
 
+	follower: Boolean = false
+
 	defaultProfileImage : string = 'https://www.vikasanvesh.in/wp-content/themes/vaf/images/no-image-found-360x260.png'
 
 	private _profileNames: string[]
@@ -62,6 +64,8 @@ export class ProfileService {
 			}
 			this.user = profileData
 			this.authorized = res.authorized
+			this.follower = res.followerStatus
+			console.log(res)
 		})
 	}
 
@@ -83,6 +87,22 @@ export class ProfileService {
 			params: {
 				id: id
 			}
+		})
+	}
+
+	followProfileUser(profileId: string){
+		let headers  = this.userService.appendHeaders()
+
+		return this.http.post(`${this.basicUrl}/api/${profileId}/follower`,{profileId: profileId}, {
+			headers: headers
+		})
+	}
+
+	unfollowProfileUser(profileId: string){
+		let headers = this.userService.appendHeaders()
+
+		return this.http.delete(`${this.basicUrl}/api/${profileId}/follower`, {
+			headers: headers
 		})
 	}
 

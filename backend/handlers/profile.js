@@ -1,4 +1,4 @@
-const { userModel } = require('../models')
+const { userModel, followerModel } = require('../models')
 const bcrypt = require('bcryptjs')
 
 const profile = {
@@ -45,8 +45,9 @@ const profile = {
             authorized = true
         }
         let userDetails = await userModel.findByUsername(req.params.username).select({email:1, firstName:1, lastName:1, profileImage:1})
-        
-        res.status(200).json({userDetails, authorized})
+        let followerData = await followerModel.find(req.params.username,req.user.username)
+        let followerStatus = followerData !== null
+        res.status(200).json({userDetails, authorized, followerStatus})
     },
 
     getOtherUserProfileData : async (req,res)=>{
@@ -57,6 +58,27 @@ const profile = {
     getAllProfileName : async(req,res)=>{
         const profileName = await userModel.find()
         res.status(200).json(profileName)
+    },
+
+    addNewFollower : async (req,res)=>{
+        let followedBy = req.user.username
+        let followedTo = req.body.profileId
+ 
+        await followerModel.post({
+            followedBy: followedBy,
+            followedTo: followedTo
+        }).then((response) =>{
+            res.status(200).json({followStatus: true})
+        }).catch((err) => {
+            res.status(400).json({followStatus: false})
+        })
+    },
+
+    removeFollower : async (req,res) =>{
+        let followedTo = req.params.username
+        let followedBy = req.user.username
+        let deleteStatus = await followerModel.delete(followedTo, followedBy)
+        res.status(200).json({removeStatus: deleteStatus != null })
     }
 }
 

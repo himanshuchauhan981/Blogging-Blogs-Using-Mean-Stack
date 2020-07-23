@@ -58,7 +58,7 @@ export class EditProfileComponent implements OnInit {
     let type = 'name'
     let status = this.profileService.user.firstName == data.firstName && this.profileService.user.lastName == data.lastName
     if(!status){
-      this.profileService.sampleUpdateProfile(data,type).subscribe((res:any) =>{
+      this.profileService.updateProfile(data,type).subscribe((res:any) =>{
         this.profileService.user.name = `${res.firstName} ${res.lastName}`
         this.matSnackBar.open(res.msg,'Close',{
 					duration: 3000
@@ -73,7 +73,7 @@ export class EditProfileComponent implements OnInit {
     let type = 'email'
     let status = this.profileService.user.email == data.email
     if(!status && validEmail){
-      this.profileService.sampleUpdateProfile(data, type)
+      this.profileService.updateProfile(data, type)
       .subscribe((res:any) =>{
         this.profileService.user.email = res.email
         this.matSnackBar.open(res.msg,'Close',{
@@ -93,7 +93,7 @@ export class EditProfileComponent implements OnInit {
     let type = 'password'
     let validPassword = passwordForm.valid
     if(validPassword){
-      this.profileService.sampleUpdateProfile(data,type)
+      this.profileService.updateProfile(data,type)
       .subscribe((res:any)=>{
 				this.matSnackBar.open(res.msg,'Close',{
 					duration: 3000

@@ -1,5 +1,4 @@
 const { comments } = require('../schemas')
-const comment = require('../handlers/comments')
 
 class Comments {
     constructor(){

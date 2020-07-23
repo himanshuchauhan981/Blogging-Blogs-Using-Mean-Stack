@@ -96,6 +96,16 @@ module.exports = ()=>{
         postController.getAllParticularUserPost
     )
 
+    router.post('/:username/follower',
+        passport.authenticate('jwt'),
+        profileController.addNewFollower
+    )
+
+    router.delete('/:username/follower',
+        passport.authenticate('jwt'),
+        profileController.removeFollower
+    )
+
     router.post('/:postId/like',
         passport.authenticate('jwt'),
         likeController.saveOrDeletePostLike

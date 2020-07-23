@@ -20,6 +20,16 @@ const profiles = {
     getAllProfileName : async (req,res)=>{
         const response = profileHandler.getAllProfileName(req,res)
         return response
+    },
+
+    addNewFollower : async (req,res)=>{
+        const response = profileHandler.addNewFollower(req,res)
+        return response
+    },
+
+    removeFollower : async (req,res) =>{
+        const response = profileHandler.removeFollower(req,res)
+        return response
     }
 }
 

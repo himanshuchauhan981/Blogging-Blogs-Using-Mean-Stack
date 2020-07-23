@@ -43,4 +43,27 @@ export class ProfileComponent implements OnInit {
 		this.router.navigate(['edit'],{relativeTo: this.activatedRoute})
 	}
 
+	addFollower(){
+		this.profileService.followProfileUser(this.profileId)
+		.subscribe((res:any) =>{
+			this.profileService.follower = res.followStatus
+		})
+	}
+
+	updateFollower(){
+		if(this.profileService.follower){
+			this.removeFollower()
+		}
+		else{
+			this.addFollower()
+		}
+	}
+
+	removeFollower(){
+		this.profileService.unfollowProfileUser(this.profileId)
+		.subscribe((res:any) =>{
+			this.profileService.follower = !res.removeStatus
+		})
+	}
+
 }

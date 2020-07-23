@@ -4,7 +4,16 @@
             <div class="card card-shadow">
                 <img *ngIf="profileService.user?.profileImage != null else profileImg" src="{{ user.profileImage }}" class="img-card-top" alt="">
                 <div class="card-image-overlay">
-                    <button *ngIf="!profileService.authorized" class="btn btn-success">Follow</button>
+                    <button 
+                        *ngIf="!profileService.authorized" 
+                        class="btn" 
+                        [ngClass]="{
+                            'btn-success': !profileService.follower,
+                            'btn-primary': profileService.follower
+                        }" 
+                        (click)="updateFollower()"
+                        >{{ profileService.follower ? 'Following':'Follow' }}
+                    </button>
                 </div>
                 <div class="d-flex flex-row justify-content-between px-4">
                     <h4 class="card-title px-1"><i class="fa fa-user"> {{ profileService.user?.name }}</i></h4>
@@ -33,40 +42,6 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="profile-container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div *ngIf="profileService.user?.profileImage != null else profileImg">
-                    <img src="{{ user.profileImage }}" class="profile-img img-card-top" alt="">
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        <span class="fa-size mb-2">
-                            <i class="fa fa-user fa-fw mr-3 -text-theme" aria-hidden="true"></i>
-                            <span class="fontSize">&nbsp; {{ profileService.user?.name }}</span>
-                        </span>
-                        <span class="fa-size mb-2">
-                            <i class="fa fa-envelope fa-fw mr-3 -text-theme" aria-hidden="true"></i>
-                            <span class="fontSize">&nbsp; {{ profileService.user?.email }}</span>
-                            <i *ngIf="profileService.authorized === true" class="fa fa-edit float-right mt-1"
-                                (click)="openDialogBox('email')"></i>
-                        </span>
-                        <span class="fa-size mb-2" *ngIf="profileService.authorized">
-                            <i class="fa fa-key fa-fw mr-3 -text-theme" aria-hidden="true"></i>
-                            <span class="fontSize">&nbsp; *********</span>
-                            <i class="fa fa-edit float-right mt-1" (click)="openPasswordDialogBox()"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <view-all-posts></view-all-posts>
-        </div>
-    </div>
-</div> -->
 
 <ng-template #profileImg>
     <img src="{{ profileService.defaultProfileImage }}" class="img-card-top w-100 d-block" alt="">
