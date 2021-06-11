@@ -1,4 +1,9 @@
 .mat-accordion .mat-expansion-panel:not(.mat-expanded),
 .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
-   margin-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.heading {
+  font-size: 20px;
+  font-weight: 500;
 }

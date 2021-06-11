@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatTableModule } from '@angular/material/table'
 import { MomentModule } from 'angular2-moment'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
+import { MatListModule } from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -38,6 +39,7 @@ import { MainComponent } from './main/main.component';
 import { PostComponent } from './posts/post/post.component';
 import { ErrorIntercept } from './error.interceptor';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { FollowerListComponent } from './profile/follower-list/follower-list.component';
 
 @NgModule({
 	declarations: [
@@ -56,7 +58,8 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 		ProfilePhotoFormComponent,
 		MainComponent,
 		PostComponent,
-		EditProfileComponent
+		EditProfileComponent,
+		FollowerListComponent
 	],
 	imports: [
 		BrowserModule,
@@ -81,7 +84,8 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 		MatExpansionModule,
 		MatDialogModule,
 		MatTableModule,
-		NgbTypeaheadModule
+		NgbTypeaheadModule,
+		MatListModule
 	],
 	providers: [
 		HomeComponent,

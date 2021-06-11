@@ -1,29 +1,29 @@
-.profile-container{
-    padding: 15px 50px;
+.profile-container {
+  padding: 15px 50px;
 }
 
-.profile-img{
-    display: block;
-    margin: auto;
+.profile-img {
+  display: block;
+  margin: auto;
 }
 
-.card-shadow{ 
-    box-shadow: 0px 0px 5px 2px rgba(130,126,130,1);
+.card-shadow {
+  box-shadow: 0px 0px 5px 2px rgba(130, 126, 130, 1);
 }
 
-#follower-id:hover{
-    background: #555251;
-    color: white;
-    border-radius: 20px;
+#follower-id:hover {
+  background: #555251;
+  color: white;
+  border-radius: 20px;
 }
 
-.follow-btn{
-    font-size: 10px;
-    border: none;
+.follow-btn {
+  font-size: 10px;
+  border: none;
 }
 
-.card-image-overlay{
-    position: absolute;
-    right: 0;
-    padding: 1.5rem;
+.card-image-overlay {
+  position: absolute;
+  right: 0;
+  padding: 1.5rem;
 }

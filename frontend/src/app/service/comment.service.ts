@@ -1,72 +1,68 @@
-import { Injectable, Output, EventEmitter } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { Injectable, Output, EventEmitter } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-import { environment } from '../../environments/environment'
-import { UserService } from './user.service'
+import { environment } from "../../environments/environment";
+import { UserService } from "./user.service";
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: "root",
 })
 export class CommentService {
+  private basicUrl: string = environment.basicUrl;
 
-	private basicUrl : string = environment.basicUrl
+  @Output() deleteCommentEvent: EventEmitter<any> = new EventEmitter();
 
-	@Output() deleteCommentEvent: EventEmitter<any> = new EventEmitter()
+  constructor(private http: HttpClient, private userService: UserService) {}
 
-	constructor(
-		private http: HttpClient,
-		private userService: UserService
-	) { }
+  post(values, postId) {
+    let commentObject = {
+      postId: postId,
+      text: values.comment,
+      createdBy: null,
+    };
+    let headers = this.userService.appendHeaders();
 
-	post(values, postId) {
-		let commentObject = {
-			postId: postId,
-			text: values.comment,
-			createdBy: null
-		}
-		let headers = this.userService.appendHeaders()
+    return this.http.post(`${this.basicUrl}/api/comment`, commentObject, {
+      headers: headers,
+    });
+  }
 
-		return this.http.post(`${this.basicUrl}/api/comment`, commentObject, {
-			headers: headers
-		})
-	}
+  get(postId: string, commentIndex: number, commentSize: number) {
+    let index = commentIndex.toLocaleString();
+    let size = commentSize.toLocaleString();
+    let headers = this.userService.appendHeaders();
 
-	get(postId: string, commentIndex: number, commentSize: number) {
-		let index = commentIndex.toLocaleString()
-		let size = commentSize.toLocaleString()
-		let headers = this.userService.appendHeaders()
+    return this.http.get(`${this.basicUrl}/api/comment`, {
+      headers: headers,
+      params: {
+        postId: postId,
+        index: index,
+        size: size,
+      },
+    });
+  }
 
-		return this.http.get(`${this.basicUrl}/api/comment`, {
-			headers: headers,
-			params: {
-				postId: postId,
-				index: index,
-				size: size
-			}
-		})
-	}
+  delete(id: string) {
+    let headers = this.userService.appendHeaders();
 
-	delete(id: string){
-		let headers = this.userService.appendHeaders()
+    return this.http.delete(`${this.basicUrl}/api/comment/${id}`, {
+      headers: headers,
+    });
+  }
 
-		return this.http.delete(`${this.basicUrl}/api/comment/${id}`,{
-			headers: headers
-		})
-	}
+  changeComment(data) {
+    this.deleteCommentEvent.emit(data);
+  }
 
-	changeComment(data){
-		this.deleteCommentEvent.emit(data)
-	}
-
-	getEmittedComment(){
-		return this.deleteCommentEvent
-	}
+  getEmittedComment() {
+    return this.deleteCommentEvent;
+  }
 }
 
-export interface Comment{
-	_id: string
-	postId: string
-	text: string
-	createdBy: string
-	createdAt: Date
+export interface Comment {
+  _id: string;
+  postId: string;
+  text: string;
+  createdBy: string;
+  createdAt: Date;
 }

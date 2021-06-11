@@ -4,8 +4,8 @@
         <img src="{{ defaultImgSrc }}" class="profile-image">
         <input type="file" hidden id="upload" name="profileImage" (change)="fileChange($event)">
         <div class="d-flex justify-content-end py-3">
-            <button mat-raised-button color="primary" (click)="uploadFile()" color="{{ fileUploadColor }}"
-                class="mr-2" type="button">{{ uploadFileText }}</button>
+            <button mat-raised-button color="primary" (click)="uploadFile()" color="{{ fileUploadColor }}" class="mr-2"
+                type="button">{{ uploadFileText }}</button>
             <button mat-raised-button color="primary" class="mr-2" (click)="saveProfilePhoto()">Save</button>
             <button mat-raised-button color="primary" type="button" (click)="skipProfilePhoto()">Skip</button>
         </div>

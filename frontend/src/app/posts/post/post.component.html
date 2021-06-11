@@ -4,49 +4,22 @@
             <mat-card class="mx-auto">
                 <h3 class="text-center">{{ heading }}</h3>
                 <mat-card-content>
-                    <form 
-                        [formGroup]="postForm"
-                        enctype="multipart/form-data"
-                        (submit)="submit(postForm.value,'submit')"
-                    >
+                    <form [formGroup]="postForm" enctype="multipart/form-data"
+                        (submit)="submit(postForm.value,'submit')">
                         <mat-form-field class="w-100">
-                            <input 
-                                matInput
-                                placeholder="Enter Post Title"
-                                formControlName="postTitle"
-                                name="postTitle"
-                                required
-                            >
+                            <input matInput placeholder="Enter Post Title" formControlName="postTitle" name="postTitle"
+                                required>
                             <mat-error *ngIf="postForm.controls['postTitle'].invalid">Required Field</mat-error>
                         </mat-form-field>
                         <mat-form-field class="w-100">
-                            <textarea 
-                                matInput
-                                placeholder="Write Something"
-                                formControlName="postContent"
-                                name="postContent"
-                                rows="12"
-                                required></textarea>
+                            <textarea matInput placeholder="Write Something" formControlName="postContent"
+                                name="postContent" rows="12" required></textarea>
                             <mat-error *ngIf="postForm.controls['postContent'].invalid">Required Field</mat-error>
                         </mat-form-field>
-                        <button 
-                            mat-raised-button 
-                            color="primary"
-                            class="mt-2 mr-2"
-                        >{{ heading }}</button>
-                        <button
-                            type="button"
-                            *ngIf="heading == 'Create New Post'"
-                            mat-raised-button
-                            class="mr-2"
-                            color="accent"
-                            (click)="submit(postForm.value,'draft')"
-                        >Save as draft</button>
-                        <button 
-                            type="button"
-                            mat-raised-button
-                            color="warn"
-                        >Cancel</button>
+                        <button mat-raised-button color="primary" class="mt-2 mr-2">{{ heading }}</button>
+                        <button type="button" *ngIf="heading == 'Create New Post'" mat-raised-button class="mr-2"
+                            color="accent" (click)="submit(postForm.value,'draft')">Save as draft</button>
+                        <button type="button" mat-raised-button color="warn">Cancel</button>
                     </form>
                 </mat-card-content>
             </mat-card>
@@ -58,20 +31,9 @@
                     <img mat-card-image src="{{ postService.imageUrl }}" alt="image" class="mt-1">
                 </div>
                 <mat-card-actions class="text-center">
-                    <input
-                        type="file"
-                        hidden
-                        id="upload"
-                        name="postImage"
-                        (change)="fileChange($event)"
-                    >
-                    <button 
-                        type="button" 
-                        mat-raised-button 
-                        color="{{ fileUploadColor }}" 
-                        class="mb-3" 
-                        (click)="uploadFile()"
-                    >{{ uploadFileText }}</button>
+                    <input type="file" hidden id="upload" name="postImage" (change)="fileChange($event)">
+                    <button type="button" mat-raised-button color="{{ fileUploadColor }}" class="mb-3"
+                        (click)="uploadFile()">{{ uploadFileText }}</button>
                 </mat-card-actions>
             </mat-card>
         </div>

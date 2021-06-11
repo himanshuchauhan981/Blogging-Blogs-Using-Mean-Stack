@@ -1,22 +1,28 @@
 .searchUser {
-    height: 30px;
-    width: 300px;
-    border: 0;
-    outline: none;
-    padding: 12px;
+  height: 30px;
+  width: 300px;
+  border: 0;
+  outline: none;
+  padding: 12px;
 }
 
 ::ng-deep ngb-typeahead-window.dropdown-menu {
-    position: absolute;
-    width: 300px;
-    max-height: 300px;
-    overflow-y: auto;
+  position: absolute;
+  width: 300px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 950px){
-    .searchUser{ width: 200px; }
+@media only screen and (min-width: 768px) and (max-width: 950px) {
+  .searchUser {
+    width: 200px;
+  }
 
-    .nav-link{ font-size: 12px; }
+  .nav-link {
+    font-size: 12px;
+  }
 
-    .navbar-brand{ margin-right: 6px; }
+  .navbar-brand {
+    margin-right: 6px;
+  }
 }

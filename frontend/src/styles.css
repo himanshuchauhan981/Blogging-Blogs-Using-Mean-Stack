@@ -1,12 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-
-body { 
-    margin: 0;
-    background-color: #F5F7F8;
+html,
+body {
+  height: 100%;
 }
 
-.cursor-pointer{
-    cursor: pointer;
+body {
+  margin: 0;
+  background-color: #f5f7f8;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

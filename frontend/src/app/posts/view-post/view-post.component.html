@@ -2,19 +2,14 @@
     <div class="row">
         <div class="col-md-8">
             <mat-card>
-                <img 
-                    mat-card-image
-                    style="height: 300px;"
-                    *ngIf="post?.postImage != null"
-                    src="{{ post.postImage }}" 
-                    alt="Photo of a Shiba Inu"
-                >
+                <img mat-card-image style="height: 300px;" *ngIf="post?.postImage != null" src="{{ post.postImage }}"
+                    alt="Photo of a Shiba Inu">
                 <mat-card-content>
                     <h2>
                         <b class="post-title">{{ post?.postTitle }}</b>
                     </h2>
-                    <h5>By 
-                        <span class="profile-link"(click)="userProfile(post.userId)">{{ post?.postAuthor }}</span>
+                    <h5>By
+                        <span class="profile-link" (click)="userProfile(post.userId)">{{ post?.postAuthor }}</span>
                         <span class="ml-2 post-author">{{ post?.publishedAt | amTimeAgo }}</span>
                     </h5>
                     <div class="post-content">
@@ -27,7 +22,8 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="like-comment-box" (click)="getComments(post._id)">View Comments ({{ commentCount }})</div>
+                            <div class="like-comment-box" (click)="getComments(post._id)">View Comments ({{ commentCount
+                                }})</div>
                         </div>
                     </div>
                     <div *ngIf="!lastDocument && commentsList.length != 0">
@@ -42,35 +38,18 @@
                                     <div class="userComment">{{ comment.text }}</div>
                                 </div>
                             </div>
-                            <i 
-                                class="fa fa-trash pull-right"
-                                matTooltip="Delete Comment"
-                                matTooltipPosition="above"
-                                aria-label="Action"
-                                (click)="dialogBox(comment._id)"
-                            ></i>
+                            <i class="fa fa-trash pull-right" matTooltip="Delete Comment" matTooltipPosition="above"
+                                aria-label="Action" (click)="dialogBox(comment._id)"></i>
                         </div>
                         <form [formGroup]="commentForm" (ngSubmit)="submit(commentForm.value,post._id)">
                             <div class="d-flex w-100">
                                 <img class="rounded-circle comment-section-img" src="{{ userImage }}">
                                 <div class="input-group">
-                                    <input
-                                        #focusComment
-                                        type="text"
-                                        name="comment" 
-                                        class="comment-section-input"
-                                        placeholder="Write a comment..."
-                                        formControlName="comment"
-                                        [value]="clearComment"
-                                        autocomplete="off"
-                                        required
-                                    >
-                                    <i
-                                        class="fa fa-smile-o"
-                                        matTooltip="Insert an Emoji"
-                                        matTooltipPosition="above"
-                                        aria-label="Action"
-                                    ></i>
+                                    <input #focusComment type="text" name="comment" class="comment-section-input"
+                                        placeholder="Write a comment..." formControlName="comment"
+                                        [value]="clearComment" autocomplete="off" required>
+                                    <i class="fa fa-smile-o" matTooltip="Insert an Emoji" matTooltipPosition="above"
+                                        aria-label="Action"></i>
                                 </div>
                             </div>
                         </form>

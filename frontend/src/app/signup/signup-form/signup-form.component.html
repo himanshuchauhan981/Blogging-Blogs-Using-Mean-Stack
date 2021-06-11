@@ -6,106 +6,59 @@
             <div class="col-lg-6 col-md-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>First name</mat-label>
-                    <input 
-                        matInput 
-                        placeholder="Enter First Name" 
-                        formControlName="firstName"
-                        name="firstName"
-                        required
-                    >
-                    <mat-error 
-                        *ngIf="signupForm.controls['firstName'].hasError('required')"
-                    >Required First name</mat-error>
+                    <input matInput placeholder="Enter First Name" formControlName="firstName" name="firstName"
+                        required>
+                    <mat-error *ngIf="signupForm.controls['firstName'].hasError('required')">Required First name
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-lg-6 col-md-6">
                 <mat-form-field appearance="outline" class="float-right w-100">
                     <mat-label>Last name</mat-label>
-                    <input 
-                        matInput 
-                        placeholder="Enter Last Name"
-                        formControlName="lastName"
-                        name="lastName"
-                        required
-                    >
-                    <mat-error 
-                        *ngIf="signupForm.controls['lastName'].hasError('required')"
-                    >Required Last name</mat-error>
+                    <input matInput placeholder="Enter Last Name" formControlName="lastName" name="lastName" required>
+                    <mat-error *ngIf="signupForm.controls['lastName'].hasError('required')">Required Last name
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
 
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Username</mat-label>
-            <input 
-                matInput
-                placeholder="Enter Username"
-                formControlName="username"
-                name="username"
-                [type]="email"
-                required
-            >
-            <mat-error 
-                *ngIf="signupForm.controls['username'].hasError('required')"
-            >Username is required</mat-error>
-            <mat-error 
-                *ngIf="signupForm.controls['username'].hasError('minlength')"
-            >Minimum length should be 5 characters long</mat-error>
+            <input matInput placeholder="Enter Username" formControlName="username" name="username" [type]="email"
+                required>
+            <mat-error *ngIf="signupForm.controls['username'].hasError('required')">Username is required</mat-error>
+            <mat-error *ngIf="signupForm.controls['username'].hasError('minlength')">Minimum length should be 5
+                characters long</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Email</mat-label>
-            <input 
-                matInput
-                placeholder="Enter Email"
-                formControlName="email"
-                name="email" 
-                required
-            >
-            <mat-error 
-                *ngIf="signupForm.controls['email'].hasError('required')"
-            >Email is required</mat-error>
-            <mat-error 
-                *ngIf="!signupForm.controls['email'].hasError('required') && signupForm.controls['email'].hasError('email')"
-            >Invalid Email ID
+            <input matInput placeholder="Enter Email" formControlName="email" name="email" required>
+            <mat-error *ngIf="signupForm.controls['email'].hasError('required')">Email is required</mat-error>
+            <mat-error
+                *ngIf="!signupForm.controls['email'].hasError('required') && signupForm.controls['email'].hasError('email')">
+                Invalid Email ID
             </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Password</mat-label>
-            <input 
-                matInput
-                placeholder="Enter your password" 
-                formControlName="password"
-                required 
-                type="password"
-            >
-            <mat-error 
-                *ngIf="signupForm.controls['password'].hasError('required')"
-            >Password is required</mat-error>
+            <input matInput placeholder="Enter your password" formControlName="password" required type="password">
+            <mat-error *ngIf="signupForm.controls['password'].hasError('required')">Password is required</mat-error>
+            <mat-error *ngIf="signupForm.controls['password'].hasError('minlength')">Minimum password length is 8
+            </mat-error>
             <mat-error
-                *ngIf="signupForm.controls['password'].hasError('minlength')"
-            >Minimum password length is 8</mat-error>
-            <mat-error
-                *ngIf="!signupForm.controls['password'].hasError('minlength') && signupForm.controls['password'].hasError('pattern')"
-            >Must contain one lower &amp; uppercase letter and one non-alpha character</mat-error>
+                *ngIf="!signupForm.controls['password'].hasError('minlength') && signupForm.controls['password'].hasError('pattern')">
+                Must contain one lower &amp; uppercase letter and one non-alpha character</mat-error>
         </mat-form-field>
-        
+
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Confirm Password</mat-label>
-            <input 
-                matInput
-                placeholder="retype your password"
-                formControlName="confirmPassword"
-                name="confirmPassword"
-                required
-                type="password"
-            >
-            <mat-error 
-                *ngIf="signupForm.controls['confirmPassword'].hasError('required')"
-            >Confirm Password is required</mat-error>
-            <mat-error 
-                *ngIf="signupForm.controls['confirmPassword'].hasError('mustMatch')"
-            >Password does not matched</mat-error>
+            <input matInput placeholder="retype your password" formControlName="confirmPassword" name="confirmPassword"
+                required type="password">
+            <mat-error *ngIf="signupForm.controls['confirmPassword'].hasError('required')">Confirm Password is required
+            </mat-error>
+            <mat-error *ngIf="signupForm.controls['confirmPassword'].hasError('mustMatch')">Password does not matched
+            </mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" class="float-right mb-3">Sign Up</button>
     </form>

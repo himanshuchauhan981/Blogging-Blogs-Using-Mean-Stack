@@ -1,0 +1,17 @@
+<div class="container bg-white pt-4 pb-1 px-5">
+    <p class="heading">{{ endingPoint | titlecase }}</p>
+    <mat-list>
+        <mat-list-item *ngFor="let item of userList">
+            <div class="d-flex flex-row">
+                <div *ngIf="item.user.profileImage != null else profileImage" mat-line>Hello</div>
+                <div mat-line>{{ item.fullName }}</div>
+            </div>
+
+        </mat-list-item>
+    </mat-list>
+</div>
+
+<ng-template #profileImg>
+    <p>je</p>
+    <img src="{{ profileService.defaultProfileImage }}" class="img-card-top w-100 d-block" alt="">
+</ng-template>

@@ -1,103 +1,104 @@
-.post-author{
-    font-size:16px;
+.post-author {
+  font-size: 16px;
 }
 
-.post-content pre{
-    font-family:'Acme';
-    font-size:19px;
-    white-space: pre-wrap;
+.post-content pre {
+  font-family: "Acme";
+  font-size: 19px;
+  white-space: pre-wrap;
 }
 
-.post-title{
-    font-family:'ABeeZee'
+.post-title {
+  font-family: "ABeeZee";
 }
 
-.like-comment-box{
-    padding: 10px 0px;
-    cursor: pointer;
-    width: 150px;
-    margin: 0 auto;
+.like-comment-box {
+  padding: 10px 0px;
+  cursor: pointer;
+  width: 150px;
+  margin: 0 auto;
 }
 
-.like-comment-box:hover{
-    text-decoration: underline;
+.like-comment-box:hover {
+  text-decoration: underline;
 }
 
-.comment-section{
-    justify-content: space-between;
+.comment-section {
+  justify-content: space-between;
 }
 
-.comment-section-img{
-    height: 45px !important;
-    width: 46px !important;
+.comment-section-img {
+  height: 45px !important;
+  width: 46px !important;
 }
 
-.comment-section-input{
-    border: none;
-    background-color: #F2F3F5;
-    width: 100%;
-    border-radius: 20px;
-    outline: none;
-    padding: 0px 35px 0px 20px;
+.comment-section-input {
+  border: none;
+  background-color: #f2f3f5;
+  width: 100%;
+  border-radius: 20px;
+  outline: none;
+  padding: 0px 35px 0px 20px;
 }
 
-.fa-smile-o{
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    font-size: 25px;
-    cursor: pointer;
+.fa-smile-o {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 25px;
+  cursor: pointer;
 }
 
-.fa-trash{
-    position: relative;
-    bottom: 40px;
-    font-size: 20px;
-    right: 26px;
-    cursor: pointer;
-
+.fa-trash {
+  position: relative;
+  bottom: 40px;
+  font-size: 20px;
+  right: 26px;
+  cursor: pointer;
 }
 
-.fa-edit{
-    position: relative;
-    font-size: 20px;
-    bottom: 38px;
-    right: 30px;
+.fa-edit {
+  position: relative;
+  font-size: 20px;
+  bottom: 38px;
+  right: 30px;
 }
 
-.media{
-    width: 55px;
-    height: 55px;
+.media {
+  width: 55px;
+  height: 55px;
 }
 
-.userName{ font-size: 13px; }
-
-.userComment{
-    font-size: 12px;
+.userName {
+  font-size: 13px;
 }
 
-.profile-link{
-    color: #3F51B5;
-    cursor: pointer;
+.userComment {
+  font-size: 12px;
 }
 
-.profile-link:hover{
-    text-decoration: underline;
+.profile-link {
+  color: #3f51b5;
+  cursor: pointer;
 }
 
-.likeColor{
-    color: blue;
+.profile-link:hover {
+  text-decoration: underline;
 }
 
-.unlikeColor{
-    color: none;
+.likeColor {
+  color: blue;
 }
 
-.cursor-pointer{
-    cursor: pointer;
+.unlikeColor {
+  color: none;
 }
 
-.cursor-pointer:hover{
-    color: blue;
-    text-decoration: underline;
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-pointer:hover {
+  color: blue;
+  text-decoration: underline;
 }

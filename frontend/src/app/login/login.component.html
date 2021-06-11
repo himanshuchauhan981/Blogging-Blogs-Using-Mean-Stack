@@ -10,26 +10,16 @@
                     <span class="red-error">{{ loginError }}</span>
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Username</mat-label>
-                        <input 
-                            matInput 
-                            placeholder="Enter Username" 
-                            formControlName="username"
-                            name="username"
-                            required
-                        >
+                        <input matInput placeholder="Enter Username" formControlName="username" name="username"
+                            required>
                         <mat-error *ngIf="loginForm.controls['username'].invalid">Required Field</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Password</mat-label>
-                        <input
-                            matInput
-                            [type]="hidePassword ? 'password' : 'text'"
-                            placeholder="Enter Password"
-                            formControlName="password"
-                            name="password"
-                            required
-                        >
-                        <mat-icon class="cursor-pointer" matSuffix (click)="hidePassword = !hidePassword">remove_red_eye</mat-icon>
+                        <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Enter Password"
+                            formControlName="password" name="password" required>
+                        <mat-icon class="cursor-pointer" matSuffix (click)="hidePassword = !hidePassword">remove_red_eye
+                        </mat-icon>
                         <mat-error *ngIf="loginForm.controls['password'].invalid">Required Field</mat-error>
                     </mat-form-field>
                     <div class="px-4">

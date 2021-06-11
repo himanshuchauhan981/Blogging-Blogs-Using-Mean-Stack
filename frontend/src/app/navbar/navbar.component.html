@@ -18,18 +18,10 @@
             </li>
         </ul>
         <ul *ngIf="loginStatus" class="navbar-nav">
-            <input 
-                type="text"
-                #input
-                placeholder="Search"
-                class="searchUser mt-1 rounded"
-                [ngbTypeahead]="profileService.typeahead"
-                [(ngModel)]="profileService.model"
-                [inputFormatter]="profileService.formatter"
-                [resultFormatter]="profileService.formatter"
-                [editable]="false"
-                (selectItem)="redirectToUser($event,input)"ss
-            >
+            <input type="text" #input placeholder="Search" class="searchUser mt-1 rounded"
+                [ngbTypeahead]="profileService.typeahead" [(ngModel)]="profileService.model"
+                [inputFormatter]="profileService.formatter" [resultFormatter]="profileService.formatter"
+                [editable]="false" (selectItem)="redirectToUser($event,input)" ss>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                 <a class="nav-link" routerLink="/home" (click)="isMenuCollapsed=true">Home</a>
             </li>
@@ -48,6 +40,6 @@
             <li class="nav-item mr-2 cursor-pointer"><a class="nav-link"><i class="fa fa-instagram"></i></a></li>
             <li class="nav-item mr-2 cursor-pointer"><a class="nav-link"><i class="fa fa-google"></i></a></li>
             <li class="nav-item mr-2 cursor-pointer"><a class="nav-link"><i class="fa fa-linkedin"></i></a></li>
-        </ul>   
+        </ul>
     </div>
 </nav>
