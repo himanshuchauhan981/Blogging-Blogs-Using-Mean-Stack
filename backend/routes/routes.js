@@ -96,6 +96,16 @@ module.exports = ()=>{
         postController.getAllParticularUserPost
     )
 
+    router.get('/:username/following',
+        passport.authenticate('jwt'),
+        profileController.getUserFollowing
+    )
+
+    router.get('/:username/followers',
+        passport.authenticate('jwt'),
+        profileController.getUserFollower
+    )
+
     router.post('/:username/follower',
         passport.authenticate('jwt'),
         profileController.addNewFollower

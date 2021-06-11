@@ -1,1 +1,1 @@
-exports.routes = require('./routes')
+exports.routes = require('./routes');

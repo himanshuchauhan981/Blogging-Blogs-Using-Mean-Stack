@@ -1,18 +1,18 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const likes = new Schema({
-    postId: {
-        type: String,
-    },
-    userId: {
-        type: String,
-    },
-    likedAt: {
-        type: Date,
-        default: Date.now
-    }
-})
+	postId: {
+		type: String,
+	},
+	userId: {
+		type: String,
+	},
+	likedAt: {
+		type: Date,
+		default: Date.now,
+	},
+});
 
-module.exports = mongoose.model('likes',likes)
+module.exports = mongoose.model('likes', likes);
